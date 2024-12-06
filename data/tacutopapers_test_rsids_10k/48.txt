@@ -1,0 +1,57 @@
+The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. R Tacutu, A Budovsky, V E Fraifeld, Biogerontology. 11Tacutu R, Budovsky A, Fraifeld VE. The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. Biogerontology. 2010; 11: 513-522.
+
+MicroRNAregulated protein-protein interaction networks: how could they help in searching for pro-longevity targets?. R Tacutu, A Budovsky, M Wolfson, V E Fraifeld, Rejuvenation Res. 13Tacutu R, Budovsky A, Wolfson M, Fraifeld VE. MicroRNA- regulated protein-protein interaction networks: how could they help in searching for pro-longevity targets? Rejuvenation Res. 2010; 13: 373-377.
+
+Lifespan regulation by evolutionarily conserved genes essential for viability. S P Curran, G Ruvkun, PLoS Genet. 356Curran SP, Ruvkun G. Lifespan regulation by evolutionarily conserved genes essential for viability. PLoS Genet. 2007; 3: e56.
+
+The BioGRID Interaction Database: 2011 update. C Stark, B J Breitkreutz, A Chatr-Aryamontri, L Boucher, R Oughtred, M S Livstone, J Nixon, K Van Auken, X Wang, X Shi, T Reguly, J M Rust, A Winter, K Dolinski, M Tyers, Nucleic Acids Res. 39Database issueStark C, Breitkreutz BJ, Chatr-Aryamontri A, Boucher L, Oughtred R, Livstone MS, Nixon J, Van Auken K, Wang X, Shi X, Reguly T, Rust JM, Winter A, Dolinski K, Tyers M. The BioGRID Interaction Database: 2011 update. Nucleic Acids Res. 2011; 39(Database issue): D698-704.
+
+The human disease network. K I Goh, M E Cusick, D Valle, B Childs, M Vidal, A L Barabási, Proc Natl Acad Sci U S A. 104Goh KI, Cusick ME, Valle D, Childs B, Vidal M, Barabási AL. The human disease network. Proc Natl Acad Sci U S A. 2007; 104: 8685-8690.
+
+Lethality and centrality in protein networks. H Jeong, S P Mason, A L Barabási, Z N Oltvai, Nature. 411Jeong H, Mason SP, Barabási AL, Oltvai ZN. Lethality and centrality in protein networks. Nature. 2001; 411: 41-42.
+
+Why do hubs in the yeast protein interaction network tend to be essential: reexamining the connection between the network topology and essentiality. E Zotenko, J Mestre, D P O&apos;leary, T M Przytycka, PLoS Comput Biol. 4Evolution.Zotenko E, Mestre J, O'Leary DP, Przytycka TM. Why do hubs in the yeast protein interaction network tend to be essential: reexamining the connection between the network topology and essentiality. PLoS Comput Biol. 2008; 4: e1000140. 31. Williams GC. Pleiotropy, natural selection, and the evolution of senescence. Evolution. 1957; 11: 398-411.
+
+Essential genes are more evolutionarily conserved than are nonessential genes in bacteria. I K Jordan, I B Rogozin, Y I Wolf, E V Koonin, Genome Res. 12Jordan IK, Rogozin IB, Wolf YI, Koonin EV. Essential genes are more evolutionarily conserved than are nonessential genes in bacteria. Genome Res. 2002; 12: 962-968.
+
+Correlating traits of gene retention, sequence divergence, duplicability and essentiality in vertebrates, arthropods, and fungi. R M Waterhouse, E M Zdobnov, E V Kriventseva, Genome Biol Evol. 3Waterhouse RM, Zdobnov EM, Kriventseva EV. Correlating traits of gene retention, sequence divergence, duplicability and essentiality in vertebrates, arthropods, and fungi. Genome Biol Evol. 2011; 3: 75-86.
+
+InParanoid 7: new algorithms and tools for eukaryotic orthology analysis. G Ostlund, T Schmitt, K Forslund, T Köstler, D N Messina, S Roopra, O Frings, E L Sonnhammer, Nucleic Acids Res. 38Ostlund G, Schmitt T, Forslund K, Köstler T, Messina DN, Roopra S, Frings O, Sonnhammer EL. InParanoid 7: new algorithms and tools for eukaryotic orthology analysis. Nucleic Acids Res. 2010; 38(Database issue): D196-203.
+
+The naked mole-rat: a new long-living model for human aging research. R Buffenstein, J Gerontol A Biol Sci Med Sci. 60Buffenstein R. The naked mole-rat: a new long-living model for human aging research. J Gerontol A Biol Sci Med Sci. 2005; 60: 1369-1377.
+
+Hypersensitivity to contact inhibition provides a clue to cancer resistance of naked mole-rat. A Seluanov, C Hine, J Azpurua, M Feigenson, M Bozzella, Z Mao, K C Catania, V Gorbunova, Proc Natl Acad Sci. 106Seluanov A, Hine C, Azpurua J, Feigenson M, Bozzella M, Mao Z, Catania KC, Gorbunova V. Hypersensitivity to contact inhibition provides a clue to cancer resistance of naked mole-rat. Proc Natl Acad Sci U S A. 2009; 106: 19352-19357.
+
+Spontaneous tumors of small mammals. C B Greenacre, Vet Clin North Am Exot Anim Pract. 7Greenacre CB. Spontaneous tumors of small mammals. Vet Clin North Am Exot Anim Pract. 2004; 7: 627-651.
+
+Human microRNA oncogenes and tumor suppressors show significantly different biological patterns: from functions to targets. D Wang, C Qiu, H Zhang, J Wang, Q Cui, Y Yin, PLoS One. 513067Wang D, Qiu C, Zhang H, Wang J, Cui Q, Yin Y. Human microRNA oncogenes and tumor suppressors show significantly different biological patterns: from functions to targets. PLoS One. 2010; 5. pii: e13067.
+
+The oncogenic RNA-binding protein Musashi1 is regulated by tumor suppressor miRNAs. D T Vo, M Qiao, A D Smith, S C Burns, A J Brenner, L O Penalva, RNA Biol. 8Vo DT, Qiao M, Smith AD, Burns SC, Brenner AJ, Penalva LO. The oncogenic RNA-binding protein Musashi1 is regulated by tumor suppressor miRNAs. RNA Biol. 2011; 8: 817-828.
+
+Regulatory mechanisms of microRNAs involvement in cancer. M Fabbri, M Ivan, A Cimmino, M Negrini, G A Calin, Expert Opin Biol Ther. 7Fabbri M, Ivan M, Cimmino A, Negrini M, Calin GA. Regulatory mechanisms of microRNAs involvement in cancer. Expert Opin Biol Ther. 2007; 7: 1009-1019.
+
+The guardians of the genome (p53, TA-p73, and TA-p63) are regulators of tumor suppressor miRNAs network. L Boominathan, Cancer Metastasis Rev. 29Boominathan L. The guardians of the genome (p53, TA-p73, and TA-p63) are regulators of tumor suppressor miRNAs network. Cancer Metastasis Rev. 2010; 29: 613-639.
+
+Stress-induced premature senescence and tissue ageing. O Toussaint, V Royer, M Salmon, J Remacle, Biochem Pharmacol. 64Toussaint O, Royer V, Salmon M, Remacle J. Stress-induced premature senescence and tissue ageing. Biochem Pharmacol. 2002; 64: 1007-1009.
+
+The signals and pathways activating cellular senescence. I Ben-Porath, R A Weinberg, Int J Biochem Cell Biol. 37Ben-Porath I, Weinberg RA. The signals and pathways activating cellular senescence. Int J Biochem Cell Biol. 2005; 37: 961-976.
+
+Vascular cell senescence: contribution to atherosclerosis. T Minamino, I Komuro, Circ Res. 100Minamino T, Komuro I. Vascular cell senescence: contribution to atherosclerosis. Circ Res. 2007; 100: 15-26.
+
+Vascular endothelial senescence: from mechanisms to pathophysiology. J D Erusalimsky, J Appl Physiol. 106Erusalimsky JD. Vascular endothelial senescence: from mechanisms to pathophysiology. J Appl Physiol. 2009; 106: 326- 332.
+
+Evidence that aging and amyloid promote microglial cell senescence. B E Flanary, N W Sammons, C Nguyen, D Walker, W J Streit, Rejuvenation Res. 10Flanary BE, Sammons NW, Nguyen C, Walker D, Streit WJ. Evidence that aging and amyloid promote microglial cell senescence. Rejuvenation Res. 2007; 10: 61-74.
+
+Growth stimulation leads to cellular senescence when the cell cycle is blocked. Z N Demidenko, M V Blagosklonny, Cell Cycle. 7Demidenko ZN, Blagosklonny MV. Growth stimulation leads to cellular senescence when the cell cycle is blocked. Cell Cycle. 2008; 7: 3355-3361.
+
+mTOR: from growth signal integration to cancer, diabetes and ageing. R Zoncu, A Efeyan, D M Sabatini, Nat Rev Mol Cell Biol. 12Zoncu R, Efeyan A, Sabatini DM. mTOR: from growth signal integration to cancer, diabetes and ageing. Nat Rev Mol Cell Biol. 2011; 12: 21-35.
+
+Senescent fibroblasts promote epithelial cell growth and tumorigenesis: A link between cancer and aging. A Krtolica, S Parrinello, S Lockett, P Desprez, J Campisi, Proc Natl Acad Sci U S A. 98Krtolica A, Parrinello S, Lockett S, Desprez P, Campisi J. Senescent fibroblasts promote epithelial cell growth and tumorigenesis: A link between cancer and aging. Proc Natl Acad Sci U S A. 2001; 98: 12072-12077.
+
+Senescence-associated secretory phenotypes reveal cell-nonautonomous functions of oncogenic RAS and the p53 tumor suppressor. J P Coppé, C K Patil, F Rodier, Y Sun, D P Muñoz, J Goldstein, P S Nelson, P Y Desprez, J Campisi, PLoS Biol. 6Coppé JP, Patil CK, Rodier F, Sun Y, Muñoz DP, Goldstein J, Nelson PS, Desprez PY, Campisi J. Senescence-associated secretory phenotypes reveal cell-nonautonomous functions of oncogenic RAS and the p53 tumor suppressor. PLoS Biol. 2008; 6: 2853-2868.
+
+Separating cause from effect: how does insulin/IGF signalling control lifespan in worms, flies and mice?. M D Piper, C Selman, J J Mcelwee, L Partridge, J Intern Med. 263Piper MD, Selman C, McElwee JJ, Partridge L. Separating cause from effect: how does insulin/IGF signalling control lifespan in worms, flies and mice? J Intern Med. 2008; 263: 179- 191.
+
+Differential expression of thymosin beta-10 by early passage and senescent vascular endothelium is modulated by VPF/VEGF: evidence for senescent endothelial cells in vivo at sites of atherosclerosis. E Vasile, Y Tomita, L F Brown, O Kocher, H F Dvorak, FASEB J. 15Vasile E, Tomita Y, Brown LF, Kocher O, Dvorak HF. Differential expression of thymosin beta-10 by early passage and senescent vascular endothelium is modulated by VPF/VEGF: evidence for senescent endothelial cells in vivo at sites of atherosclerosis. FASEB J. 2001; 15: 458-466.
+
+The role of chondrocyte senescence in osteoarthritis. J S Price, J G Waters, C Darrah, C Pennington, D R Edwards, S T Donell, I M Clark, Aging Cell. 1Price JS, Waters JG, Darrah C, Pennington C, Edwards DR, Donell ST, Clark IM. The role of chondrocyte senescence in osteoarthritis. Aging Cell. 2002; 1: 57-65.

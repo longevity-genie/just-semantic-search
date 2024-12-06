@@ -1,0 +1,55 @@
+Balancing Training Data for Automated Annotation of Keywords: A Case Study. G E Batista, A L C Bazzan, M C Monard, WOB. Porto Alegre, BrazilUFRGSBatista, G.E. ; Bazzan, A.L.C. ; Monard, M.C. Balancing Training Data for Automated Annotation of Keywords: A Case Study. In WOB; UFRGS: Porto Alegre, Brazil, 2003; pp. 10-18.
+
+A study of the behavior of several methods for balancing machine learning training data. G E Batista, R C Prati, M C Monard, 10.1145/1007730.1007735ACM SIGKDD Explor. Newsl. 6Batista, G.E. ; Prati, R.C. ; Monard, M.C. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explor. Newsl. 2004, 6, 20-29. [CrossRef]
+
+Scikit-learn: Machine Learning in Python. F Pedregosa, G Varoquaux, A Gramfort, V Michel, B Thirion, O Grisel, M Blondel, J. Mach. Learn. Res. 12Pedregosa, F.; Varoquaux, G.; Gramfort, A.; Michel, V.; Thirion, B.; Grisel, O.; Blondel, M. Scikit-learn: Machine Learning in Python. J. Mach. Learn. Res. 2011, 12, 2825-2830.
+
+On the limited memory BFGS method for large scale optimization. D C Liu, J Nocedal, 10.1007/BF01589116Math. Program. 45Liu, D.C.; Nocedal, J. On the limited memory BFGS method for large scale optimization. Math. Program. 1989, 45, 503-528. [CrossRef]
+
+A method for stochastic optimization. D P Kingma, J L Ba, Adam, Proceedings of the 3rd International Conference on Learning Representations, ICLR 2015-Conference Track Proceedings; International Conference on Learning Representations. the 3rd International Conference on Learning Representations, ICLR 2015-Conference Track Proceedings; International Conference on Learning RepresentationsSan Diego, CA, USAICLRKingma, D.P. ; Ba, J.L. Adam: A method for stochastic optimization. In Proceedings of the 3rd International Conference on Learning Representations, ICLR 2015-Conference Track Proceedings; International Conference on Learning Representations; ICLR: San Diego, CA, USA, 2015.
+
+. H Robbins, S Monro, 10.1214/aoms/1177729586A Stochastic Approximation Method. Ann. Math. Stat. 22Robbins, H.; Monro, S. A Stochastic Approximation Method. Ann. Math. Stat. 1951, 22, 400-407. [CrossRef]
+
+Digital selection and analogue amplification coexist in a cortex-inspired silicon circuit. R H R Hahnioser, R Sarpeshkar, M A Mahowald, R J Douglas, H S Seung, 10.1038/35016072Nature. 405Hahnioser, R.H.R. ; Sarpeshkar, R.; Mahowald, M.A. ; Douglas, R.J.; Seung, H.S. Digital selection and analogue amplification coexist in a cortex-inspired silicon circuit. Nature 2000, 405, 947-951. [CrossRef]
+
+Imbalanced-learn: A Python Toolbox to Tackle the Curse of Imbalanced Datasets in Machine Learning. G Lemaitre, F Nogueira, C K Aridas, J. Mach. Learn. Res. 18Lemaitre, G.; Nogueira, F.; Aridas, C.K. Imbalanced-learn: A Python Toolbox to Tackle the Curse of Imbalanced Datasets in Machine Learning. J. Mach. Learn. Res. 2017, 18, 1-5.
+
+A combined transmembrane topology and signal peptide prediction method. L Käll, A Krogh, E L L Sonnhammer, 10.1016/j.jmb.2004.03.016J. Mol. Biol. 338Käll, L.; Krogh, A.; Sonnhammer, E.L.L. A combined transmembrane topology and signal peptide prediction method. J. Mol. Biol. 2004, 338, 1027-1036. [CrossRef]
+
+Detecting protein sequence conservation via metric embeddings. E Halperin, J Buhler, R Karp, R Krauthgamer, B Westover, 10.1093/bioinformatics/btg1016Bioinformatics. 19Halperin, E.; Buhler, J.; Karp, R.; Krauthgamer, R.; Westover, B. Detecting protein sequence conservation via metric embeddings. Bioinformatics 2003, 19, 122-129. [CrossRef]
+
+RBLOSUM performs better than CorBLOSUM with lesser error per query. R Govindarajan, B C Leela, A S Nair, 10.1186/s13104-018-3415-5BMC Res. Notes. 11PubMedGovindarajan, R.; Leela, B.C. ; Nair, A.S. RBLOSUM performs better than CorBLOSUM with lesser error per query. BMC Res. Notes 2018, 11, 328. [CrossRef] [PubMed]
+
+BLOSUM62 miscalculations improve search performance. M P Styczynski, K L Jensen, I Rigoutsos, G Stephanopoulos, 10.1038/nbt0308-274Nat. Biotechnol. 26PubMedStyczynski, M.P. ; Jensen, K.L. ; Rigoutsos, I.; Stephanopoulos, G. BLOSUM62 miscalculations improve search performance. Nat. Biotechnol. 2008, 26, 274-275. [CrossRef] [PubMed]
+
+Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. P J Rousseeuw, 10.1016/0377-0427(87)90125-7J. Comput. Appl. Math. 20Rousseeuw, P.J. Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. J. Comput. Appl. Math. 1987, 20, 53-65. [CrossRef]
+
+Multidimensional scaling by optimizing goodness of fit to a nonmetric hypothesis. J B Kruskal, 10.1007/BF02289565Psychometrika. 29Kruskal, J.B. Multidimensional scaling by optimizing goodness of fit to a nonmetric hypothesis. Psychometrika 1964, 29, 1-27. [CrossRef]
+
+A Sequence Logo Generator. G E Crooks, G Hon, J.-M Chandonia, S E Brenner, Weblogo, 10.1101/gr.849004Genome Res. 14Crooks, G.E. ; Hon, G.; Chandonia, J.-M.; Brenner, S.E. WebLogo: A Sequence Logo Generator. Genome Res. 2004, 14, 1188-1190. [CrossRef]
+
+The PyMOL Molecular Graphics System, Version 2.2.3. L L C Schrödinger, 10Schrödinger, L.L.C. The PyMOL Molecular Graphics System, Version 2.2.3. Available online: https: //pymol.org/2/ (accessed on 10 November 2019).
+
+Matplotlib: A 2D graphics environment. J D Hunter, 10.1109/MCSE.2007.55Comput. Sci. Eng. 9Hunter, J.D. Matplotlib: A 2D graphics environment. Comput. Sci. Eng. 2007, 9, 99-104. [CrossRef]
+
+Structural diversity of leucine-rich repeat proteins. A V Kajava, 10.1006/jmbi.1998.1643J. Mol. Biol. 277Kajava, A.V. Structural diversity of leucine-rich repeat proteins. J. Mol. Biol. 1998, 277, 519-527. [CrossRef]
+
+Modern Multidimensional Scaling. I Borg, P J Groenen, SpringerBerlin, GermanyMDS Models and Measures of FitBorg, I.; Groenen, P.J.F. Modern Multidimensional Scaling, 2nd ed. ; Chapter: MDS Models and Measures of Fit; Springer: Berlin, Germany, 2005; pp. 37-61.
+
+The relationship between the L1 and L2 domains of the insulin and epidermal growth factor receptors and leucine-rich repeat modules. C W Ward, T P Garrett, 10.1186/1471-2105-2-4BMC Bioinform. 2001, 2, 4. [CrossRefWard, C.W. ; Garrett, T.P.J. The relationship between the L1 and L2 domains of the insulin and epidermal growth factor receptors and leucine-rich repeat modules. BMC Bioinform. 2001, 2, 4. [CrossRef]
+
+The leucine-rich repeat domain in plant innate immunity: A wealth of possibilities. M Padmanabhan, P Cournoyer, S P Dinesh-Kumar, 10.1111/j.1462-5822.2008.01260.xCell. Microbiol. 11Padmanabhan, M.; Cournoyer, P.; Dinesh-Kumar, S.P. The leucine-rich repeat domain in plant innate immunity: A wealth of possibilities. Cell. Microbiol. 2009, 11, 191-198. [CrossRef]
+
+Plant immunity: Towards an integrated view of plantĝ€ pathogen interactions. P N Dodds, J P Rathjen, 10.1038/nrg2812Nat. Rev. Genet. 11Dodds, P.N. ; Rathjen, J.P. Plant immunity: Towards an integrated view of plantĝ€ pathogen interactions. Nat. Rev. Genet. 2010, 11, 539-548. [CrossRef]
+
+Co-evolutionary interactions between host resistance and pathogen effector genes in flax rust disease. M Ravensdale, A Nemri, P H Thrall, J G Ellis, P N Dodds, 10.1111/j.1364-3703.2010.00657.xMol. Plant Pathol. 12Ravensdale, M.; Nemri, A.; Thrall, P.H. ; Ellis, J.G. ; Dodds, P.N. Co-evolutionary interactions between host resistance and pathogen effector genes in flax rust disease. Mol. Plant Pathol. 2011, 12, 93-102. [CrossRef]
+
+Function of Nod-like receptors in microbial recognition and host defense. L Franchi, N Warner, K Viani, G Nuñez, 10.1111/j.1600-065X.2008.00734.xImmunol. Rev. 227Franchi, L.; Warner, N.; Viani, K.; Nuñez, G. Function of Nod-like receptors in microbial recognition and host defense. Immunol. Rev. 2009, 227, 106-128. [CrossRef]
+
+Regulation and evolution of NLR genes: A close interconnection for plant immunity. G M Borrelli, E Mazzucotelli, D Marone, C Crosatti, V Michelotti, G Valè, A M Mastrangelo, 10.3390/ijms19061662Int. J. Mol. Sci. Borrelli, G.M. ; Mazzucotelli, E.; Marone, D.; Crosatti, C.; Michelotti, V.; Valè, G.; Mastrangelo, A.M. Regulation and evolution of NLR genes: A close interconnection for plant immunity. Int. J. Mol. Sci. 2018, 19, 1662. [CrossRef]
+
+Molecular genetic evidence for the role of SGT1 in the intramolecular complementation of Bs2 protein activity in Nicotiana benthamiana. R T Leister, D Dahlbeck, B Day, Y Li, O Chesnokova, B J Staskawicz, 10.1105/tpc.104.029637Plant Cell. 17Leister, R.T.; Dahlbeck, D.; Day, B.; Li, Y.; Chesnokova, O.; Staskawicz, B.J. Molecular genetic evidence for the role of SGT1 in the intramolecular complementation of Bs2 protein activity in Nicotiana benthamiana. Plant Cell 2005, 17, 1268-1278. [CrossRef]
+
+The Arabidopsis ZED1 pseudokinase is required for ZAR1-mediated immunity induced by the Pseudomonas syringae type III effector HopZ1a. J D Lewis, A H Lee, .-Y Hassan, J A Wan, J Hurley, B Jhingree, J R Wang, P W Lo, T Youn, J.-Y Guttman, D S , 10.1073/pnas.1315520110Proc. Natl. Acad. Sci. Natl. Acad. SciUSA110Lewis, J.D. ; Lee, A.H.-Y. ; Hassan, J.A. ; Wan, J.; Hurley, B.; Jhingree, J.R.; Wang, P.W. ; Lo, T.; Youn, J.-Y. ; Guttman, D.S. ; et al. The Arabidopsis ZED1 pseudokinase is required for ZAR1-mediated immunity induced by the Pseudomonas syringae type III effector HopZ1a. Proc. Natl. Acad. Sci. USA 2013, 110, 18722-18727. [CrossRef]
+
+Elicitor-mediated oligomerization of the tobacco N disease resistance protein. P Mestre, D C Baulcombe, 10.1105/tpc.105.037234Plant Cell. 18Mestre, P.; Baulcombe, D.C. Elicitor-mediated oligomerization of the tobacco N disease resistance protein. Plant Cell 2006, 18, 491-501. [CrossRef]

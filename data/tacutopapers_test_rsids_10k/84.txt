@@ -1,0 +1,49 @@
+In this study, we performed a network analysis of LAGs and their interacting partners in worms and humans. We found that LAGs and their first-order partners form tightly interconnected networks. The partners of known LAGs in the worm and human longevity networks may participate in the intricate pathways and complexes that regulate lifespan, and are therefore candidate longevity genes. Essential genes are particularly interesting in this regard because known LAGs are enriched for developmental functions, consistent with the concept of antagonistic pleiotropy [7,16,22]. To functionally verify this prediction, we post-developmentally inactivated 374 of these genes or their orthologs in C. elegans. In our primary analysis, 156 of these inactivations resulted Figure 1. Worm Longevity Network. The worm longevity network (WLN) includes 205 previously identified LAGs (dark green) and their 666 firstorder protein interaction partners (light green). The graphical output of the network was generated using Cytoscape 2.8.0 [51]. Size of nodes is proportional with the number of PPIs in the BioGRID interactome. Genes in the network are more connected and more interconnected than would be expected by chance, suggesting shared functionality. Because many genes that influence longevity function in complexes, signaling networks or in conjunction with cofactors, the 666 first-order interacting LAG partners may be enriched with previously unidentified longevity genes.
+
+doi:10.1371/journal.pone.0048282.g001 in extended (101) or decreased (55) lifespan. We confirmed a subset (30 genes) of these phenotypes in rigorous longitudinal analyses. Our results are consistent with the idea that genes involved in development and translation have a role in longevity regulation. Collectively, this study presents a proof of concept that by combining a network-based approach with the selection of genes fitting antagonistic pleiotropy, new worm lifespan regulators could be identified with an unprecedentedly high predictive power.
+
+Materials and Methods
+
+Data Sources
+
+C. elegans LAGs were compiled from scientific literature and manually curated. The list of LAGs includes genes reported to promote longevity or cause premature aging following genetic intervention (partial or full loss-of-function mutations, gene overexpression) or RNA interference-induced gene silencing [17,22,29]. The collection contains 555 entries and is accessible in the Human Ageing Genomic Resources -GenAge database (build 14), http://genomics.senescence.info/genes/index.html [29]. This list of genes was used as a ''core set'' for the construction of the worm longevity network (WLN).
+
+In addition to established human LAGs -the number of which is still very limited -the ''core set'' for the construction of human longevity network (HLN) also included non-redundant orthologs of LAGs from model organisms (S. cerevisae, C. elegans, D. melanogaster, and M. musculus). In total, this list consists of 662 human genes. All LAG lists for model organisms were compiled using the same method described for C. elegans and are available in the GenAge database [29].
+
+PPI data used for the constructions of WLN and HLN were extracted from the BioGRID database, release 2.0.53 [30]. Orthology information was obtained from the InParanoid database -Eukaryotic Ortholog Groups, release 6.1 [47] and worm lethal phenotypes were retrieved from the WormBase database [48,49].
+
+Network Construction
+
+The approach for constructing the longevity networks was described in detail elsewhere [22,28]. The longevity networks for worms and humans were created using YABNA (Yet Another Biological Networks Analyzer), a flexible software program developed in Vadim Fraifeld's lab. Current versions of human and model organism longevity networks are available in the NetAge database [28]. For both worm and human gene sets, the network construction algorithm included: 1) keeping all genes (LAGs) with reported PPIs from the ''core set''; 2) adding all firstorder PPI partners of core genes; and 3) taking the largest interconnected sub-graph as a longevity network.
+
+Prediction of New Worm Longevity Regulators Based on WLN/HLN
+
+Prediction of new LAGs in C. elegans was based on all the following criteria: 1) belonging to the WLN or being the C. elegans ortholog of a gene from the HLN; 2) not reported previously as a LAG in C. elegans or other model organisms; 3) being essential for the development and growth of C. elegans (essential genes). Thus, there were two sources for selection of candidate genes_the firstorder partners of LAGs from WLN and HLN. In total, 500 essential worm genes were included as candidates for longevity analysis. Two hundred twenty-eight of these genes were derived from the WLN and the remainder from the HLN, with an overlap of 54. RNAi clones were available to target 374 of these 500 genes.
+
+Detection of Functional Enrichment
+
+To detect enriched functions and processes, the Database for Annotation, Visualization, and Integrated Discovery (DAVID) was employed using default settings [50]. For detecting functional Table 3. A network-based approach verifies new worm longevity genes at a greater frequency than genome-wide RNAi screens. enrichment in the genes tested, the worm genome was used as background. For detecting enrichment in genes resulting in a short-or long-lived phenotype, the genes tested were used as background.
+
+Strains and Culture Conditions
+
+C. elegans were cultured on Escherichia coli OP50 or HT115 by standard techniques. C. elegans N2 Bristol (WT) and GR1373 eri-1(mg366) IV were utilized in the described experiments.
+
+Post
+
+developmental RNAi
+
+Post-developmental RNAi lifespan analysis was performed as described by Curran and Ruvkun, 2007 [7]. RNAi clones were grown overnight in LB with carbenicillin and seeded to 6-well plates containing 5 mM isopropylthiogalactoside (IPTG). 400 ml bacteria were seeded to each well. Expression of double-stranded RNA was induced overnight. eri-1(mg366) worms raised to the L4 larval stage on HT115 E. coli were washed twice in M9 buffer with tetracycline, carbenicillin and streptomycin, resuspended in M9 carbenicillin buffer, and seeded onto the RNAi induced bacteria. Wells were treated with 80 mg/ml 5-fluorodeoxyuridine (FUDR) to inhibit progeny production. On the third day of adulthood, wells were supplemented with 50 ml of 10x concentrated RNAi bacteria grown overnight and induced for two hours at room temperature in LB with carbenicillin and 5 mM IPTG.
+
+Survival Analysis
+
+Post-developmental gene inactivation was carried out as described above. Primary survival analysis was accomplished by a thrashing assay in which replicate wells were flooded with M9 buffer on the 15 th , 17 th , 19 th and 21 st days of adulthood at 20uC [21]. One of four replicates was scored and subsequently discarded for each time point. Preliminary survival phenotypes were assigned to gene inactivations that produced a consistent 10% increase or decrease in survival on at least three of the four time points. Strong candidates were selected for longitudinal lifespan analysis. In each biological replicate and at each time point in the thrashing assay, at least 30 worms were scored for each condition.
+
+Adult Lifespan Analysis
+
+From the four biological replicates in the thrashing assay we selected RNAi clones that consistently yielded the strongest phenotypes (both long and short lived) at each of the time points screened. Post-developmental gene inactivation was carried out as described above. Longitudinal lifespan analyses were conducted as described with incubation at 20uC or 25uC. Survival was assayed by gently tapping worms with a thin length of platinum every other day from young adulthood onward. Statistical analyses were performed using the software SPSS (SPSS Inc.). Survival of each RNAi-treated population was compared with that of a population treated with control RNAi, and significance was determined by Kaplan-Meier analysis using the log-rank test. A significance threshold of p,0.05 was applied. On average, 90 animals were scored longitudinally across three biological replicates for each clone.
+
+Results and Discussion
+
+The C. elegans LAG set contains 555 previously identified positive and negative regulators of longevity [29]. Of these, 218 are present in the C. elegans interactome in the BioGRID database [30]. These LAGs display a higher degree of connectivity than would be expected by chance and more importantly, a very high degree of interconnectivity. Almost a quarter of worm LAGs found in the interactome are interconnected, whereas simulations with randomized gene sets of the same size predict only 5% interconnectivity (p,0.001). Because PPI databases are inherently incomplete, the distribution of interactions may change as entries accumulate. This does not detract from the significance of individual PPIs currently found within the database.
+
+To exploit LAG connectivity as a means to identify new candidate longevity genes, we explored the first-order partners of C. elegans LAGs. Taken together with their first-order partners, 94% of the LAGs in the interactome form a continuous Worm Longevity Network (WLN) (Figure 1). The network encompasses 871 genes, of which 205 are known LAGs at the core of the network and 666 are their first-order partners not previously associated with longevity. Because many longevity genes function within complex signaling pathways or functional groups, we propose that the 666 first-order partners of LAG network genes are likely to include factors that regulate longevity.

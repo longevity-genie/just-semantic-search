@@ -1,0 +1,59 @@
+Evolutionary conservation of CS genes was analyzed using the InParanoid7 -Eukaryotic Ortholog Groups database ( [34], http://inparanoid.sbc.su.se). To exclude inparalogs, we have used the default threshold score of 0.05. Essentiality of human genes was evaluated based on the data on mouse lethal phenotypes, which were retrieved from the Mouse Genome Informatics database ( [89], www.informatics.jax.org). Functional and pathway analyses were performed with the tools provided by DAVID Bioinformatics Resources 6.7 ( [90,91], http://david.abcc.ncifcrf.gov) using data from the KEGG database ( [92], http://www.genome.jp/kegg/ pathway.html) and Gene Ontology ( [93], http://www.geneontology.org). Protein-protein interacttion (PPI) data from the BioGRID database ( [27], http://thebiogrid.org), human interactome release 3.1.71, was used for the analysis of connectivity and interconnectivity. The largest fraction of proteins which forms a continuous network was used as a measure of interconnectivity. To generate control data, simulations with sets of randomly selected proteins from the interactome were performed. The size of protein sets ranged from 50 to 8000 genes, with a step of 50. In each case, one hundred simulations were run and the relation between the size of the set and the fraction of genes interconnected by chance was quantified. The simulations and the creation of the microRNA-regulated PPI CS network were done using YABNA (Yet Another Biological Networks Analyzer).
+
+The YABNA software program and the algorithm for the construction of miRNA-regulated PPI networks have been previously described in detail ( [24,25], http://www.netageproject.org). The graphical output of the CS miRNAregulated PPI network was generated using Cytoscape 2.8.0 ( [94], http://www.cytoscape.org/). The statistical package for the social sciences (SPSS, Inc., Chicago, IL) software was used for the statistical evaluation of the results. Significance of the difference between mean values was calculated using the Student's t-test. The difference between observed and expected values was evaluated using the chi-square test. Pearson's coefficient of correlation was used for pairwise correlative analysis. Differences were considered significant at p-value less than 0.05. Statistical analysis of the enrichment of GO categories and KEGG pathways was carried out using DAVID Bioinformatics Resources 6.7 ( [90,91], http://david.abcc.ncifcrf.gov), with Bonferroni correction.
+
+Figure 1 . 1Fraction of CS, longevity and ARD proteins forming a continuous PPI network. Values obtained from
+
+Figure 2 . 2MicroRNA-regulated cellular senescence PPI network. Genes are depicted as red circles and miRNAs as green squares.
+
+Figure 3 . 3Fraction of genes which are essential to growth and development in each of the gene sets under analysis. The difference between each set and all genes (control) was highly significant (p < E-25). Insert: The correlation between essentiality and average connectivity (R -Pearson's coefficient of correlation; p = 0.004).
+
+Figure 4 . 4Evolutionary conservation of human CS genes. The difference between CS genes and all genes in InParanoid was significant for D. rerio (p = 0.0001), X. tropicalis (p = 0.003), G. gallus (p = 0.002), R. norvegicus (p = 0.006) and M. musculus (p = 0.02).
+
+Figure 5 . 5Enrichment of genes involved in ARDs and agingassociated conditions among CS genes. The fold-increase was computed as the ratio between the number of observed genes vs. the expected value. In all cases, the fold-increase was highly significant (p < E-25).
+
+Figure 6 . 6Common pathways enriched across CS and ARDs. Pathways directly involved in specific pathologies were excluded in order to remove bias. See also Suppl. AGING, December 2011, Vol.3 No.12 ACKNOWLEDGEMENTSCONFLICT OF INTERESTS STATEMENTThe authors of this manuscript have no conflict of interest to declare.SUPPLEMENTARY TABLESTo see the Supplementary Tables please follow the links in Full Text version of this manuscript.www.impactaging.com The serial cultivation of human diploid cell strains. L Hayflick, P S Moorhead, Exp Cell Res. 25Hayflick L, Moorhead PS. The serial cultivation of human diploid cell strains. Exp Cell Res. 1961; 25: 585-621.
+
+Paradigms in aging research: a critical review and assessment. H Gershon, Gershon D , Mech Ageing Dev. 117Gershon H, Gershon D. Paradigms in aging research: a critical review and assessment. Mech Ageing Dev. 2000; 117: 21- 28.
+
+Cellular senescence and organismal aging. J C Jeyapalan, J M Sedivy, Mech Ageing Dev. 129Jeyapalan JC, Sedivy JM. Cellular senescence and organismal aging. Mech Ageing Dev. 2008; 129: 467-474.
+
+Cell aging in vivo and in vitro. H Rubin, Mech. Ageing Dev. 98Rubin H. Cell aging in vivo and in vitro. Mech. Ageing Dev. 1997; 98: 1-35.
+
+Aging cell culture: methods and observations. S M Phipps, J B Berletch, L G Andrews, T O Tollefsbol, Methods Mol Biol. 371Phipps SM, Berletch JB, Andrews LG, Tollefsbol TO. Aging cell culture: methods and observations. Methods Mol Biol. 2007; 371: 9-19.
+
+Senescent cells, tumor suppression, and organismal aging: good citizens, bad neighbors. J Campisi, Cell. 120Campisi J. Senescent cells, tumor suppression, and organismal aging: good citizens, bad neighbors. Cell. 2005; 120: 513-522.
+
+Cellular senescence: putting the paradoxes in perspective. J Campisi, Curr Opin Genet Dev. 21Campisi J. Cellular senescence: putting the paradoxes in perspective. Curr Opin Genet Dev. 2011; 21: 107-112.
+
+Aging and immortality: quasiprogrammed senescence and its pharmacologic inhibition. M V Blagosklonny, Cell Cycle. 5Blagosklonny MV. Aging and immortality: quasi- programmed senescence and its pharmacologic inhibition. Cell Cycle. 2006; 5: 2087-2102.
+
+Persistent DNA damage signalling triggers senescence-associated inflammatory cytokine secretion. F Rodier, J P Coppé, C K Patil, W A Hoeijmakers, D P Muñoz, S R Raza, A Freund, E Campeau, A R Davalos, J Campisi, Nat Cell Biol. 11Rodier F, Coppé JP, Patil CK, Hoeijmakers WA, Muñoz DP, Raza SR, Freund A, Campeau E, Davalos AR, Campisi J. Persistent DNA damage signalling triggers senescence-associated inflammatory cytokine secretion. Nat Cell Biol. 2009; 11: 973-979.
+
+Clearance of p16(Ink4a)-positive senescent cells delays ageing-associated disorders. D J Baker, T Wijshake, T Tchkonia, N K Lebrasseur, B G Childs, B Van De Sluis, J L Kirkland, J M Van Deursen, 10.1038/nature10600Nature. Baker DJ, Wijshake T, Tchkonia T, Lebrasseur NK, Childs BG, van de Sluis B, Kirkland JL, van Deursen JM. Clearance of p16(Ink4a)-positive senescent cells delays ageing-associated disorders. Nature. 2011; doi: 10.1038/nature10600.
+
+Impact of cellular senescence signature on ageing research. E Sikora, T Arendt, M Bennett, M Narita, Ageing Res Rev. 10Sikora E, Arendt T, Bennett M, Narita M. Impact of cellular senescence signature on ageing research. Ageing Res Rev. 2011; 10: 146-52.
+
+Cell cycle arrest is not senescence. M V Blagosklonny, Aging (Albany NY). 3Blagosklonny MV. Cell cycle arrest is not senescence. Aging (Albany NY). 2011; 3: 94-101.
+
+Growth and aging: a common molecular mechanism. M V Blagosklonny, M N Hall, Aging (Albany NY). 1Blagosklonny MV, Hall MN. Growth and aging: a common molecular mechanism. Aging (Albany NY). 2009; 1: 357-362.
+
+Cellular senescence: molecular mechanisms, in vivo redox considerations. M Muller, Antioxid Redox Signal. 11Muller M. Cellular senescence: molecular mechanisms, in vivo redox considerations. Antioxid Redox Signal. 2009; 11: 59- 98.
+
+Cellular senescence controls fibrosis in wound healing. J I Jun, L F Lau, Aging (Albany NY). 2Jun JI, Lau LF. Cellular senescence controls fibrosis in wound healing. Aging (Albany NY). 2010; 2: 627-631.
+
+How and Why We Age. L Hayflick, Ballantine BooksNew YorkHayflick L. (1994) How and Why We Age (Ballantine Books, New York).
+
+Cellular senescence in aging primates. U Herbig, M Ferreira, L Condel, D Carey, J M Sedivy, Science. 3111257Herbig U, Ferreira M, Condel L, Carey D, Sedivy JM. Cellular senescence in aging primates. Science. 2006; 311: 1257.
+
+Distinct tumor suppressor mechanisms evolve in rodent species that differ in size and lifespan. A Seluanov, C Hine, M Bozzella, A Hall, T H Sasahara, A A Ribeiro, K C Catania, D C Presgraves, V Gorbunova, Aging Cell. 7Seluanov A, Hine C, Bozzella M, Hall A, Sasahara TH, Ribeiro AA, Catania KC, Presgraves DC, Gorbunova V. Distinct tumor suppressor mechanisms evolve in rodent species that differ in size and lifespan. Aging Cell. 2008; 7: 813-823.
+
+Fat tissue, aging, and cellular senescence. T Tchkonia, D E Morbeck, Von Zglinicki, T Van Deursen, J Lustgarten, J Scrable, H Khosla, S Jensen, M D Kirkland, J L , Aging Cell. 9Tchkonia T, Morbeck DE, Von Zglinicki T, Van Deursen J, Lustgarten J, Scrable H, Khosla S, Jensen MD, Kirkland JL. Fat tissue, aging, and cellular senescence. Aging Cell. 2010; 9: 667- 684.
+
+Hormetic prevention of molecular damage during cellular aging of human skin fibroblasts and keratinocytes. S I Rattan, R E Ali, Ann N Y Acad Sci. 1100Rattan SI, Ali RE. Hormetic prevention of molecular damage during cellular aging of human skin fibroblasts and keratinocytes. Ann N Y Acad Sci. 2007; 1100: 424-430.
+
+Four faces of cellular senescence. F Rodier, J Campisi, J Cell Biol. 192Rodier F, Campisi J. Four faces of cellular senescence. J Cell Biol. 2011; 192: 547-556.
+
+Common gene signature of cancer and longevity. A Budovsky, R Tacutu, H Yanai, A Abramovich, M Wolfson, V Fraifeld, Mech Ageing Dev. 130Budovsky A, Tacutu R, Yanai H, Abramovich A, Wolfson M, Fraifeld V. Common gene signature of cancer and longevity. Mech Ageing Dev. 2009; 130: 33-39.
+
+The signaling hubs at the crossroad of longevity and age-related disease networks. M Wolfson, A Budovsky, R Tacutu, V Fraifeld, Int J Biochem Cell Biol. 41Wolfson M, Budovsky A, Tacutu R, Fraifeld V. The signaling hubs at the crossroad of longevity and age-related disease networks. Int J Biochem Cell Biol. 2009; 41: 516-520.

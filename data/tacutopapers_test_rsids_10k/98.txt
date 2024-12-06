@@ -1,0 +1,55 @@
+The Human Ageing Genomic Resources: online databases and tools for biogerontologists. J P De Magalhaes, A Budovsky, G Lehmann, J Costa, Y Li, V Fraifeld, G M Church, Aging Cell. 8de Magalhaes,J.P., Budovsky,A., Lehmann,G., Costa,J., Li,Y., Fraifeld,V. and Church,G.M. (2009) The Human Ageing Genomic Resources: online databases and tools for biogerontologists. Aging Cell, 8, 65-72.
+
+Hierarchical deterioration of body systems in Werner's syndrome: implications for normal ageing. M Goto, Mech. Ageing Dev. 98Goto,M. (1997) Hierarchical deterioration of body systems in Werner's syndrome: implications for normal ageing. Mech. Ageing Dev., 98, 239-254.
+
+Recurrent de novo point mutations in lamin a cause Hutchinson-Gilford progeria syndrome. M Eriksson, W T Brown, L B Gordon, M W Glynn, J Singer, L Scott, M R Erdos, C M Robbins, T Y Moses, P Berglund, Nature. 423Eriksson,M., Brown,W.T., Gordon,L.B., Glynn,M.W., Singer,J., Scott,L., Erdos,M.R., Robbins,C.M., Moses,T.Y., Berglund,P. et al. (2003) Recurrent de novo point mutations in lamin a cause Hutchinson-Gilford progeria syndrome. Nature, 423, 293-298.
+
+Calorie restriction, SIRT1 and metabolism: understanding longevity. L Bordone, L Guarente, Nat. Rev. Mol. Cell Biol. 6Bordone,L. and Guarente,L. (2005) Calorie restriction, SIRT1 and metabolism: understanding longevity. Nat. Rev. Mol. Cell Biol., 6, 298-305.
+
+Proteins of the Myc network: essential regulators of cell growth and differentiation. M Henriksson, B Luscher, Adv. Cancer Res. 68Henriksson,M. and Luscher,B. (1996) Proteins of the Myc network: essential regulators of cell growth and differentiation. Adv. Cancer Res., 68, 109-182.
+
+mTOR is a key modulator of ageing and age-related disease. S C Johnson, P S Rabinovitch, M Kaeberlein, Nature. 493Johnson,S.C., Rabinovitch,P.S. and Kaeberlein,M. (2013) mTOR is a key modulator of ageing and age-related disease. Nature, 493, 338-345.
+
+) p53: puzzle and paradigm. L J Ko, C Prives, Genes Dev. 10Ko,L.J. and Prives,C. (1996) p53: puzzle and paradigm. Genes Dev., 10, 1054-1072.
+
+Systems-level analysis of human aging genes shed new light on mechanisms of aging. Q Zhang, R Nogales-Cadenas, J R Lin, W Zhang, Y Cai, J Vijg, Z D Zhang, Hum. Mol. Genet. 25Zhang,Q., Nogales-Cadenas,R., Lin,J.R., Zhang,W., Cai,Y., Vijg,J. and Zhang,Z.D. (2016) Systems-level analysis of human aging genes shed new light on mechanisms of aging. Hum. Mol. Genet., 25, 2934-2947.
+
+A systematic investigation into aging related genes in brain and their relationship with Alzheimer's disease. G Meng, X Zhong, H Mei, PLoS One. 11150624Meng,G., Zhong,X. and Mei,H. (2016) A systematic investigation into aging related genes in brain and their relationship with Alzheimer's disease. PLoS One, 11, e0150624.
+
+A serum miRNA profile of human longevity: findings from the Baltimore Longitudinal Study of Aging (BLSA). T Smith-Vikos, Z Liu, C Parsons, M Gorospe, L Ferrucci, T M Gill, F J Slack, Aging (Albany NY). 8Smith-Vikos,T., Liu,Z., Parsons,C., Gorospe,M., Ferrucci,L., Gill,T.M. and Slack,F.J. (2016) A serum miRNA profile of human longevity: findings from the Baltimore Longitudinal Study of Aging (BLSA). Aging (Albany NY), 8, 2971-2987.
+
+AgeFactDB-the JenAge Ageing Factor Database-towards data integration in ageing research. R Huhne, T Thalheim, J Suhnel, Nucleic Acids Res. 42Huhne,R., Thalheim,T. and Suhnel,J. (2014) AgeFactDB-the JenAge Ageing Factor Database-towards data integration in ageing research. Nucleic Acids Res., 42, D892-D896.
+
+The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. R Tacutu, A Budovsky, V E Fraifeld, Biogerontology. 11Tacutu,R., Budovsky,A. and Fraifeld,V.E. (2010) The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. Biogerontology, 11, 513-522.
+
+Cats, "rats," and bats: the comparative biology of aging in the 21st century. S N Austad, Integr. Comp. Biol. 50Austad,S.N. (2010) Cats, "rats," and bats: the comparative biology of aging in the 21st century. Integr. Comp. Biol., 50, 783-792.
+
+Cats, "Rats. J R Carey, D S Judge, and Bats: the Comparative Biology of Aging in the 21st Century. OdenseOdense University PressCarey,J.R. and Judge,D.S. (2000) Cats, "Rats," and Bats: the Comparative Biology of Aging in the 21st Century. Odense University Press, Odense.
+
+A database of vertebrate longevity records and their relation to other life-history traits. J P De Magalhaes, J Costa, J. Evol. Biol. 22de Magalhaes,J.P. and Costa,J. (2009) A database of vertebrate longevity records and their relation to other life-history traits. J. Evol. Biol., 22, 1770-1774.
+
+Ecology and mode-of-life explain lifespan variation in birds and mammals. K Healy, T Guillerme, S Finlay, A Kane, S B Kelly, D Mcclean, D J Kelly, I Donohue, A L Jackson, N Cooper, Proc. Biol. Scie. 281Healy,K., Guillerme,T., Finlay,S., Kane,A., Kelly,S.B., McClean,D., Kelly,D.J., Donohue,I., Jackson,A.L. and Cooper,N. (2014) Ecology and mode-of-life explain lifespan variation in birds and mammals. Proc. Biol. Scie., 281, 20140298.
+
+A comparative cellular and molecular biology of longevity database. J A Stuart, P Liang, X Luo, M M Page, E J Gallagher, C A Christoff, E L Robb, Age (Dordr). 35Stuart,J.A., Liang,P., Luo,X., Page,M.M., Gallagher,E.J., Christoff,C.A. and Robb,E.L. (2013) A comparative cellular and molecular biology of longevity database. Age (Dordr), 35, 1937-1947.
+
+MitoAge: a database for comparative analysis of mitochondrial DNA, with a special focus on animal longevity. D Toren, T Barzilay, R Tacutu, G Lehmann, K K Muradian, V E Fraifeld, Nucleic Acids Res. 44Toren,D., Barzilay,T., Tacutu,R., Lehmann,G., Muradian,K.K. and Fraifeld,V.E. (2016) MitoAge: a database for comparative analysis of mitochondrial DNA, with a special focus on animal longevity. Nucleic Acids Res., 44, D1262-D1265.
+
+Extending healthy life span-from yeast to humans. L Fontana, L Partridge, V D Longo, Science. 328Fontana,L., Partridge,L. and Longo,V.D. (2010) Extending healthy life span-from yeast to humans. Science, 328, 321-326.
+
+Dissecting the gene network of dietary restriction to identify evolutionarily conserved pathways and new functional genes. D Wuttke, R Connor, C Vora, T Craig, Y Li, S Wood, O Vasieva, R Shmookler Reis, F Tang, J P De Magalhaes, PLoS Genet. 81002834Wuttke,D., Connor,R., Vora,C., Craig,T., Li,Y., Wood,S., Vasieva,O., Shmookler Reis,R., Tang,F. and de Magalhaes,J.P. (2012) Dissecting the gene network of dietary restriction to identify evolutionarily conserved pathways and new functional genes. PLoS Genet., 8, e1002834.
+
+A meta-analysis of caloric restriction gene expression profiles to infer common signatures and regulatory mechanisms. M Plank, D Wuttke, S Van Dam, S A Clarke, J P De Magalhaes, Mol. Biosyst. 8Plank,M., Wuttke,D., van Dam,S., Clarke,S.A. and de Magalhaes,J.P. (2012) A meta-analysis of caloric restriction gene expression profiles to infer common signatures and regulatory mechanisms. Mol. Biosyst., 8, 1339-1349.
+
+A network pharmacology approach reveals new candidate caloric restriction mimetics in C. elegans. S Calvert, R Tacutu, S Sharifi, R Teixeira, P Ghosh, J P De Magalhaes, Aging Cell. 15Calvert,S., Tacutu,R., Sharifi,S., Teixeira,R., Ghosh,P. and de Magalhaes,J.P. (2016) A network pharmacology approach reveals new candidate caloric restriction mimetics in C. elegans. Aging Cell, 15, 256-266.
+
+Towards understanding the lifespan extension by reduced insulin signaling: bioinformatics analysis of DAF-16/FOXO direct targets in Caenorhabditis elegans. Y H Li, G G Zhang, Oncotarget. 7Li,Y.H. and Zhang,G.G. (2016) Towards understanding the lifespan extension by reduced insulin signaling: bioinformatics analysis of DAF-16/FOXO direct targets in Caenorhabditis elegans. Oncotarget, 7, 19185-19192.
+
+The quest for genetic determinants of human longevity: challenges and insights. K Christensen, T E Johnson, J W Vaupel, Nat. Rev. Genet. 7Christensen,K., Johnson,T.E. and Vaupel,J.W. (2006) The quest for genetic determinants of human longevity: challenges and insights. Nat. Rev. Genet., 7, 436-448.
+
+LongevityMap: a database of human genetic variants associated with longevity. A Budovsky, T Craig, J Wang, R Tacutu, A Csordas, J Lourenco, V E Fraifeld, De Magalhaes, Trends Genet. 29J.P.Budovsky,A., Craig,T., Wang,J., Tacutu,R., Csordas,A., Lourenco,J., Fraifeld,V.E. and de Magalhaes,J.P. (2013) LongevityMap: a database of human genetic variants associated with longevity. Trends Genet., 29, 559-560.
+
+The business of anti-aging science. J P De Magalhaes, M Stevens, D Thornton, Trends Biotechnol. 35de Magalhaes,J.P., Stevens,M. and Thornton,D. (2017) The business of anti-aging science. Trends Biotechnol., 35, 1062-1073.
+
+Geroprotectors.org: a new, structured and curated database of current therapeutic interventions in aging and age-related disease. A Moskalev, E Chernyagina, J P De Magalhaes, D Barardo, H Thoppil, M Shaposhnikov, A Budovsky, V E Fraifeld, A Garazha, V Tsvetkov, Aging (Albany NY). 7Moskalev,A., Chernyagina,E., de Magalhaes,J.P., Barardo,D., Thoppil,H., Shaposhnikov,M., Budovsky,A., Fraifeld,V.E., Garazha,A., Tsvetkov,V. et al. (2015) Geroprotectors.org: a new, structured and curated database of current therapeutic interventions in aging and age-related disease. Aging (Albany NY), 7, 616-628.
+
+The DrugAge database of aging-related drugs. D Barardo, D Thornton, H Thoppil, M Walsh, S Sharifi, S Ferreira, A Anzic, M Fernandes, P Monteiro, T Grum, Aging Cell. 16Barardo,D., Thornton,D., Thoppil,H., Walsh,M., Sharifi,S., Ferreira,S., Anzic,A., Fernandes,M., Monteiro,P., Grum,T. et al. (2017) The DrugAge database of aging-related drugs. Aging Cell, 16, 594-597.

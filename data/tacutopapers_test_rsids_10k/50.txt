@@ -1,0 +1,19 @@
+Multiple microRNAs rescue from Rasinduced senescence by inhibiting p21(Waf1/Cip1). V Borgdorff, M E Lleonart, C L Bishop, D Fessart, A H Bergin, M G Overhoff, D H Beach, Oncogene. 29Borgdorff V, Lleonart ME, Bishop CL, Fessart D, Bergin AH, Overhoff MG, Beach DH. Multiple microRNAs rescue from Ras- induced senescence by inhibiting p21(Waf1/Cip1). Oncogene. 2010; 29: 2262-2271.
+
+MicroRNA profiling in human diploid fibroblasts uncovers miR-519 role in replicative senescence. B S Marasa, S Srikantan, J L Martindale, M M Kim, E K Lee, M Gorospe, K Abdelmohsen, Aging (Albany NY). 2Marasa BS, Srikantan S, Martindale JL, Kim MM, Lee EK, Gorospe M, Abdelmohsen K. MicroRNA profiling in human diploid fibroblasts uncovers miR-519 role in replicative senescence. Aging (Albany NY). 2010; 2: 333-343.
+
+An analysis of human microRNA and disease associations. M Lu, Q Zhang, M Deng, J Miao, Y Guo, W Gao, Q Cui, PLoS One. 33420Lu M, Zhang Q, Deng M, Miao J, Guo Y, Gao W, Cui Q. An analysis of human microRNA and disease associations. PLoS One. 2008; 3: e3420.
+
+Hatzigeorgiou AG The database of experimentally supported targets: a functional update of TarBase. G L Papadopoulos, M Reczko, V A Simossis, P Sethupathy, Nucleic Acids Res. 37Papadopoulos GL, Reczko M, Simossis VA, Sethupathy P, Hatzigeorgiou AG The database of experimentally supported targets: a functional update of TarBase. Nucleic Acids Res. 2009; 37: D155-158.
+
+Mouse mutants and phenotypes: Accessing information for the study of mammalian gene function. M Ringwald, J T Eppig, Methods. 5Ringwald M, Eppig JT. Mouse mutants and phenotypes: Accessing information for the study of mammalian gene function. Methods. 2011; 5 3: 405-410.
+
+G DennisJr, B T Sherman, D A Hosack, J Yang, W Gao, H C Lane, R A Lempicki, David, Database for Annotation, Visualization, and Integrated Discovery. 43Dennis G Jr, Sherman BT, Hosack DA, Yang J, Gao W, Lane HC, Lempicki RA. DAVID: Database for Annotation, Visualization, and Integrated Discovery. Genome Biol. 2003; 4: P3.
+
+Systematic and integrative analysis of large gene lists using DAVID bioinformatics resources. W Huang Da, B T Sherman, R A Lempicki, Nat Protoc. 4Huang da W, Sherman BT, Lempicki RA. Systematic and integrative analysis of large gene lists using DAVID bioinformatics resources. Nat Protoc. 2009; 4: 44-57.
+
+KEGG for representation and analysis of molecular networks involving diseases and drugs. M Kanehisa, S Goto, M Furumichi, M Tanabe, M Hirakawa, Nucleic Acids Res. 38Kanehisa M, Goto S, Furumichi M, Tanabe M, Hirakawa M. KEGG for representation and analysis of molecular networks involving diseases and drugs. Nucleic Acids Res. 2010; 38(Database issue): D355-360.
+
+Gene ontology: tool for the unification of biology. The Gene Ontology Consortium. M Ashburner, C A Ball, J A Blake, D Botstein, H Butler, J M Cherry, A P Davis, K Dolinski, S S Dwight, J T Eppig, M A Harris, D P Hill, L Issel-Tarver, A Kasarskis, S Lewis, J C Matese, J E Richardson, M Ringwald, G M Rubin, G Sherlock, Nat Genet. 25Ashburner M, Ball CA, Blake JA, Botstein D, Butler H, Cherry JM, Davis AP, Dolinski K, Dwight SS, Eppig JT, Harris MA, Hill DP, Issel-Tarver L, Kasarskis A, Lewis S, Matese JC, Richardson JE, Ringwald M, Rubin GM, Sherlock G. Gene ontology: tool for the unification of biology. The Gene Ontology Consortium. Nat Genet. 2000; 25: 25-29.
+
+Cytoscape: a software environment for integrated models of biomolecular interaction networks. P Shannon, A Markiel, O Ozier, N S Baliga, J T Wang, D Ramage, N Amin, B Schwikowski, T Ideker, Genome Res. 13Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, Ramage D, Amin N, Schwikowski B, Ideker T. Cytoscape: a software environment for integrated models of biomolecular interaction networks. Genome Res. 2003; 13: 2498-2504.

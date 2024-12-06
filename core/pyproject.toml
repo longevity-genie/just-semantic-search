@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "just-semantic-search-core"
+version = "0.0.17"
+description = "Core interfaces for hybrid search implementations"
+authors = ["Alex Karmazin <karmazinalex@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [{include = "just_semantic_search"}]
+keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: Unix",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+transformers = ">=4.44.2"
+meilisearch = ">=0.33.0"
+triton = "*"
+sentence-transformers = "*"
+typer = "*"
+pydantic = ">=2.10.3"
+pydantic-numpy = ">=7.0.0"
+scikit-learn = ">=1.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

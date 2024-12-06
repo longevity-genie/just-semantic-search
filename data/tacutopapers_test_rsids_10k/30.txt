@@ -1,0 +1,25 @@
+PanTHERIA: a species-level database of life history, ecology, and geography of extant and recently extinct mammals. K E Jones, J Bielby, M Cardillo, S A Fritz, J O&apos;dell, C D L Orme, K Safi, W Sechrest, E H Boakes, C Carbone, Ecology. 2648Jones,K.E., Bielby,J., Cardillo,M., Fritz,S.A., O'Dell,J., Orme,C.D.L., Safi,K., Sechrest,W., Boakes,E.H., Carbone,C. et al. (2009) PanTHERIA: a species-level database of life history, ecology, and geography of extant and recently extinct mammals. Ecology, 90, 2648.
+
+FishBase. World Wide Web electronic publication. www.fishbase.org, version. R Froese, D Pauly, date last accessedFroese,R. and Pauly,D. (eds), (2012) FishBase. World Wide Web electronic publication. www.fishbase.org, version (August 2012, date last accessed).
+
+Life history characteristics of placental non-volant mammals. S K M Ernest, Ecology. 84Ernest,S.K.M. (2003) Life history characteristics of placental non-volant mammals. Ecology, 84, 3402-3402.
+
+The Birds of North America Online. A Poole, date last accessedPoole,A. (ed. ), (2005) The Birds of North America Online. http:// bna.birds.cornell.edu/BNA/ (August 2012, date last accessed).
+
+. T Fransson, T Kolehmainen, C Kroon, L Jansson, T Wenninger, EURING List of Longevity Records for European BirdsFransson,T., Kolehmainen,T., Kroon,C., Jansson,L. and Wenninger,T. (2010) EURING List of Longevity Records for European Birds.
+
+Longevity Records of North American Birds, Version 2012.2. Bird Banding Laboratory. J A Lutmerding, A S Love, Patuxent Wildlife Research Center, Laurel, MDLutmerding,J.A. and Love,A.S. (2012) Longevity Records of North American Birds, Version 2012.2. Bird Banding Laboratory, Patuxent Wildlife Research Center, Laurel, MD.
+
+The influence of genes on the aging process of mice: a statistical assessment of the genetics of aging. J P De Magalha˜es, J A Cabral, D Magalha˜es, Genetics. 169de Magalha˜es,J.P., Cabral,J.A. and Magalha˜es,D. (2005) The influence of genes on the aging process of mice: a statistical assessment of the genetics of aging. Genetics, 169, 265-274.
+
+InParanoid 7: new algorithms and tools for eukaryotic orthology analysis. G Ostlund, T Schmitt, K Forslund, T Kostler, D N Messina, S Roopra, O Frings, E L L Sonnhammer, Nucleic Acids Res. 38Ostlund,G., Schmitt,T., Forslund,K., Kostler,T., Messina,D.N., Roopra,S., Frings,O. and Sonnhammer,E.L.L. (2009) InParanoid 7: new algorithms and tools for eukaryotic orthology analysis. Nucleic Acids Res., 38, D196-D203.
+
+The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. R Tacutu, A Budovsky, V E Fraifeld, Biogerontology. 11Tacutu,R., Budovsky,A. and Fraifeld,V.E. (2010) The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. Biogerontology, 11, 513-522.
+
+A comparative view at comprehensive information resources on three-dimensional structures of biological macro-molecules. R Hu¨hne, F T Koch, J Su¨hnel, Brief. Funct. Genomic. Proteomic. 6Hu¨hne,R., Koch,F.T. and Su¨hnel,J. (2007) A comparative view at comprehensive information resources on three-dimensional structures of biological macro-molecules. Brief. Funct. Genomic. Proteomic., 6, 220-239.
+
+Database resources of the National Center for Biotechnology Information. E W Sayers, T Barrett, D A Benson, E Bolton, S H Bryant, K Canese, V Chetvernin, D M Church, M Dicuccio, S Federhen, Nucleic Acids Res. 40Sayers,E.W., Barrett,T., Benson,D.A., Bolton,E., Bryant,S.H., Canese,K., Chetvernin,V., Church,D.M., Dicuccio,M., Federhen,S. et al. (2012) Database resources of the National Center for Biotechnology Information. Nucleic Acids Res., 40, D13-D25.
+
+A comparative cellular and molecular biology of longevity database. J A Stuart, P Liang, X Luo, M M Page, E J Gallagher, C A Christoff, E L Robb, 10.1007/s11357-012-9458-yAge (Dordr). 27epub ahead of printStuart,J.A., Liang,P., Luo,X., Page,M.M., Gallagher,E.J., Christoff,C.A. and Robb,E.L. (2012) A comparative cellular and molecular biology of longevity database. Age (Dordr), 27 July (doi:10.1007/s11357-012-9458-y; epub ahead of print).
+
+Next-generation sequencing in aging research: emerging applications, problems, pitfalls and possible solutions. J P De Magalha˜es, C E Finch, G Janssens, Ageing Res. Rev. 9de Magalha˜es,J.P., Finch,C.E. and Janssens,G. (2010) Next-generation sequencing in aging research: emerging applications, problems, pitfalls and possible solutions. Ageing Res. Rev., 9, 315-323.

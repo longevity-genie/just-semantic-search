@@ -1,0 +1,49 @@
+daf-16: An HNF-3/forkhead family member that can function to double the life-span of Caenorhabditis elegans. K Lin, J B Dorman, A Rodan, C Kenyon, 10.1126/science.278.5341.13199360933Science. 278Lin K, Dorman JB, Rodan A, Kenyon C. daf-16: An HNF- 3/forkhead family member that can function to double the life-span of Caenorhabditis elegans. Science. 1997; 278:1319-22. https://doi.org/10.1126/science.278.5341.1319 PMID:9360933
+
+The Fork head transcription factor DAF-16 transduces insulin-like metabolic and longevity signals in C. elegans. S Ogg, S Paradis, S Gottlieb, G I Patterson, L Lee, H A Tissenbaum, G Ruvkun, 10.1038/401949353126Nature. 389Ogg S, Paradis S, Gottlieb S, Patterson GI, Lee L, Tissenbaum HA, Ruvkun G. The Fork head transcription factor DAF-16 transduces insulin-like metabolic and longevity signals in C. elegans. Nature. 1997; 389:994-99. https://doi.org/10.1038/40194 PMID:9353126
+
+DAF-16: FOXO in the Context of C. elegans. H A Tissenbaum, 10.1016/bs.ctdb.2017.11.00729433733Curr Top Dev Biol. 127Tissenbaum HA. DAF-16: FOXO in the Context of C. elegans. Curr Top Dev Biol. 2018; 127:1-21. https://doi.org/10.1016/bs.ctdb.2017.11.007 PMID:29433733
+
+Odorantselective genes and neurons mediate olfaction in C. elegans. C I Bargmann, E Hartwieg, H R Horvitz, 10.1016/0092-8674(93)80053-h8348618Cell. 74Bargmann CI, Hartwieg E, Horvitz HR. Odorant- selective genes and neurons mediate olfaction in C. elegans. Cell. 1993; 74:515-27. https://doi.org/10.1016/0092-8674(93)80053-h PMID:8348618
+
+Regulation of C. elegans longevity by specific gustatory and olfactory neurons. J Alcedo, C Kenyon, 10.1016/s0896-6273(03)00816-x14715134Neuron. 41Alcedo J, Kenyon C. Regulation of C. elegans longevity by specific gustatory and olfactory neurons. Neuron. 2004; 41:45-55. https://doi.org/10.1016/s0896-6273(03)00816-x PMID:14715134
+
+The G alpha protein ODR-3 mediates olfactory and nociceptive function and controls cilium morphogenesis in C. elegans olfactory neurons. K Roayaie, J G Crump, A Sagasti, C I Bargmann, 10.1016/s0896-6273(00)80434-19459442Neuron. 20Roayaie K, Crump JG, Sagasti A, Bargmann CI. The G alpha protein ODR-3 mediates olfactory and nociceptive function and controls cilium morphogenesis in C. elegans olfactory neurons. Neuron. 1998; 20:55-67. https://doi.org/10.1016/s0896-6273(00)80434-1 PMID:9459442
+
+A network of stimulatory and inhibitory Galpha-subunits regulates olfaction in Caenorhabditis elegans. H Lans, S Rademakers, G Jansen, 10.1534/genetics.103.02478615342507Genetics. 167Lans H, Rademakers S, Jansen G. A network of stimulatory and inhibitory Galpha-subunits regulates olfaction in Caenorhabditis elegans. Genetics. 2004; 167:1677-87. https://doi.org/10.1534/genetics.103.024786 PMID:15342507
+
+Multiple sensory G proteins in the olfactory, gustatory and nociceptive neurons modulate longevity in Caenorhabditis elegans. H Lans, G Jansen, 10.1016/j.ydbio.2006.11.02817187771Dev Biol. 303Lans H, Jansen G. Multiple sensory G proteins in the olfactory, gustatory and nociceptive neurons modulate longevity in Caenorhabditis elegans. Dev Biol. 2007; 303:474-82. https://doi.org/10.1016/j.ydbio.2006.11.028 PMID:17187771
+
+Polygenic control of Caenorhabditis elegans fat storage. H Y Mak, L S Nelson, M Basson, C D Johnson, G Ruvkun, 10.1038/ng173916462744Nat Genet. 38Mak HY, Nelson LS, Basson M, Johnson CD, Ruvkun G. Polygenic control of Caenorhabditis elegans fat storage. Nat Genet. 2006; 38:363-68. https://doi.org/10.1038/ng1739 PMID:16462744
+
+Beneficial and Detrimental Effects of Reactive Oxygen Species on Lifespan: A Comprehensive Review of Comparative and Experimental Studies. H J Shields, A Traa, J M Van Raamsdonk, 10.3389/fcell.2021.62815733644065Front Cell Dev Biol. 9628157Shields HJ, Traa A, Van Raamsdonk JM. Beneficial and Detrimental Effects of Reactive Oxygen Species on Lifespan: A Comprehensive Review of Comparative and Experimental Studies. Front Cell Dev Biol. 2021; 9:628157. https://doi.org/10.3389/fcell.2021.628157 PMID:33644065
+
+eIF4E function in somatic cells modulates ageing in Caenorhabditis elegans. P Syntichaki, K Troulinaki, N Tavernarakis, 10.1038/nature0560317277769Nature. 445Syntichaki P, Troulinaki K, Tavernarakis N. eIF4E function in somatic cells modulates ageing in Caenorhabditis elegans. Nature. 2007; 445:922-26. https://doi.org/10.1038/nature05603 PMID:17277769
+
+A metabolic signature of long life in Caenorhabditis elegans. S Fuchs, J G Bundy, S K Davies, J M Viney, J S Swire, A M Leroi, 10.1186/1741-7007-8-1420146810BMC Biol. 814Fuchs S, Bundy JG, Davies SK, Viney JM, Swire JS, Leroi AM. A metabolic signature of long life in Caenorhabditis elegans. BMC Biol. 2010; 8:14. https://doi.org/10.1186/1741-7007-8-14 PMID:20146810
+
+Disruption of DNA-PK in Ku80 mutant xrs-6 and the implications in DNA double-strand break repair. F Chen, S R Peterson, M D Story, D J Chen, 10.1016/0921-8777(95)00026-78538653Mutat Res. 362Chen F, Peterson SR, Story MD, Chen DJ. Disruption of DNA-PK in Ku80 mutant xrs-6 and the implications in DNA double-strand break repair. Mutat Res. 1996; 362:9-19. https://doi.org/10.1016/0921-8777(95)00026-7 PMID:8538653
+
+Developmental modulation of nonhomologous end joining in Caenorhabditis elegans. I Clejan, J Boerckel, S Ahmed, 10.1534/genetics.106.05862816702421Genetics. 173Clejan I, Boerckel J, Ahmed S. Developmental modulation of nonhomologous end joining in Caenorhabditis elegans. Genetics. 2006; 173:1301-17. https://doi.org/10.1534/genetics.106.058628 PMID:16702421
+
+The C. elegans ortholog of mammalian Ku70, interacts with insulinlike signaling to modulate stress resistance and life span. G Mccoll, M C Vantipalli, G J Lithgow, 10.1096/fj.04-2447fje16099946FASEB J. 19McColl G, Vantipalli MC, Lithgow GJ. The C. elegans ortholog of mammalian Ku70, interacts with insulin- like signaling to modulate stress resistance and life span. FASEB J. 2005; 19:1716-18. https://doi.org/10.1096/fj.04-2447fje PMID:16099946
+
+DAF-16/FOXO Transcription Factor in Aging and Longevity. X Sun, W D Chen, Y D Wang, 10.3389/fphar.2017.0054828878670Front Pharmacol. 8548Sun X, Chen WD, Wang YD. DAF-16/FOXO Transcription Factor in Aging and Longevity. Front Pharmacol. 2017; 8:548. https://doi.org/10.3389/fphar.2017.00548 PMID:28878670
+
+Longevity Genes Revealed by Integrative Analysis of Isoform-Specific daf-16/FoxO Mutants of Caenorhabditis elegans. A T Chen, C Guo, O A Itani, B G Budaitis, T W Williams, C E Hopkins, R C Mceachin, M Pande, A R Grant, S Yoshina, S Mitani, P J Hu, 10.1534/genetics.115.17799826219299Genetics. 201Chen AT, Guo C, Itani OA, Budaitis BG, Williams TW, Hopkins CE, McEachin RC, Pande M, Grant AR, Yoshina S, Mitani S, Hu PJ. Longevity Genes Revealed by Integrative Analysis of Isoform-Specific daf-16/FoxO Mutants of Caenorhabditis elegans. Genetics. 2015; 201:613-29. https://doi.org/10.1534/genetics.115.177998 PMID:26219299
+
+The use of FUdR can cause prolonged longevity in mutant nematodes. L Aitlhadj, S R Stürzenbaum, 10.1016/j.mad.2010.03.00220236608Mech Ageing Dev. 131Aitlhadj L, Stürzenbaum SR. The use of FUdR can cause prolonged longevity in mutant nematodes. Mech Ageing Dev. 2010; 131:364-65. https://doi.org/10.1016/j.mad.2010.03.002 PMID:20236608
+
+FUdR causes a twofold increase in the lifespan of the mitochondrial mutant gas-1. J M Van Raamsdonk, S Hekimi, 10.1016/j.mad.2011.08.00621893079Mech Ageing Dev. 132Van Raamsdonk JM, Hekimi S. FUdR causes a twofold increase in the lifespan of the mitochondrial mutant gas-1. Mech Ageing Dev. 2011; 132:519-21. https://doi.org/10.1016/j.mad.2011.08.006 PMID:21893079
+
+Fluorodeoxyuridine affects the identification of metabolic responses to daf-2 status in Caenorhabditis elegans. S K Davies, A M Leroi, J G Bundy, 10.1016/j.mad.2011.11.00222116032Mech Ageing Dev. 133Davies SK, Leroi AM, Bundy JG. Fluorodeoxyuridine affects the identification of metabolic responses to daf- 2 status in Caenorhabditis elegans. Mech Ageing Dev. 2012; 133:46-49. https://doi.org/10.1016/j.mad.2011.11.002 PMID:22116032
+
+Measurements of agerelated changes of physiological processes that predict lifespan of Caenorhabditis elegans. C Huang, C Xiong, K Kornfeld, 10.1073/pnas.040084810115141086Proc Natl Acad Sci USA. 101Huang C, Xiong C, Kornfeld K. Measurements of age- related changes of physiological processes that predict lifespan of Caenorhabditis elegans. Proc Natl Acad Sci USA. 2004; 101:8084-89. https://doi.org/10.1073/pnas.0400848101 PMID:15141086
+
+Aging causes decreased resistance to multiple stresses and a failure to activate specific stress response pathways. D J Dues, E K Andrews, C E Schaar, A L Bergsma, M M Senchuk, J M Van Raamsdonk, 10.18632/aging.10093927053445Aging (Albany NY). 8Dues DJ, Andrews EK, Schaar CE, Bergsma AL, Senchuk MM, Van Raamsdonk JM. Aging causes decreased resistance to multiple stresses and a failure to activate specific stress response pathways. Aging (Albany NY). 2016; 8:777-95. https://doi.org/10.18632/aging.100939 PMID:27053445
+
+Hallmarks of Health. C López-Otín, G Kroemer, 10.1016/j.cell.2020.11.03433340459Cell. 184López-Otín C, Kroemer G. Hallmarks of Health. Cell. 2021; 184:33-63. https://doi.org/10.1016/j.cell.2020.11.034 PMID:33340459
+
+Evidence for a trade-off between survival and fitness caused by resveratrol treatment of Caenorhabditis elegans. J Gruber, S Y Tang, B Halliwell, 10.1196/annals.1395.05917460219Ann N Y Acad Sci. 1100Gruber J, Tang SY, Halliwell B. Evidence for a trade-off between survival and fitness caused by resveratrol treatment of Caenorhabditis elegans. Ann N Y Acad Sci. 2007; 1100:530-42. https://doi.org/10.1196/annals.1395.059 PMID:17460219
+
+The mysterious relationship between reproduction and longevity. H Aguilaniu, 10.1080/21624054.2015.102027626430561Worm. 41020276Aguilaniu H. The mysterious relationship between reproduction and longevity. Worm. 2015; 4:e1020276. https://doi.org/10.1080/21624054.2015.1020276 PMID:26430561

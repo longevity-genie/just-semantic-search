@@ -1,0 +1,49 @@
+The original list includes many diseases not relevant for the present analysis since our interest focuses on complex ARDs. To select relevant ARDs, diseases with fewer than 20 genes associated and diseases of non-age-related disease classes were excluded. We chose a threshold of 20 genes because it captures the major age-related diseases yet not so many diseases that our findings end up being diluted (Supplementary Material, Table S19). The original list also includes processes and conditions, for example, insulin resistance and hyperlipidemia, which are dysfunctions, and for that reason were also excluded. The following analysed classes were described as age-related in the literature: cardiovascular diseases, eye diseases, immune system diseases, musculoskeletal diseases, nervous system diseases, nutritional and metabolic diseases and neoplasms (2,31). Respiratory tract diseases were considered as negative controls since the two diseases (after application of the described selection criteria) in this class are asthma, which is not considered an age-related disease (32), and chronic obstruction pulmonary disease, which is primarily environmental.
+
+Selection of individually studied ARDs was made based on two criteria: first, the number of genes, to have larger sample sizes and increase statistical power. The second criterion was how often and common was each disease. An example of selection is the case of ovarian neoplasm, which presents a smaller number of genes and is better known than head and neck neoplasms. In order to have a representative selection, seven diseases classes were included in the individual age-related disease analysis; for classes with a large number of diseases, we selected the top five or six most representative individual diseases of the class. Eye diseases were excluded from the individual disease analysis, since they include only non-common diseases with a small number of genes. Diseases that are primarily driven by environmental factors, like chronic obstruction pulmonary disease, were also not studied.
+
+In total, 893 different genes associated with ARDs were considered. Figure 8 shows the number of genes per ARD class and the number of genes shared with each one of the remaining classes. The list of ARDs used in the present analysis is summarized in Supplementary Material,
+
+Protein-protein interaction and gene co-expression data
+
+Protein-protein interactions were obtained using the BioGRID plug-in available in Cytoscape, on 16-04-2015, by downloading the available node and edge tables. The two main types of interactions ('physical association' and 'direct interaction') represent 124,238 of 140,891 interactions, involving 14,721 of 15,000 proteins. As such, the interactome analysis was performed using the full interactome. To obtain the first-order partners of agingrelated genes, a Python script was used to compile connections between all genes in the interactome and return the merged list of seed genes and genes connected to them.
+
+Co-expression data from RNA-Seq was obtained using GeneFriends (22) on 03-06-2015. To obtain the co-expressed genes, a significance threshold of 2.5E-06 was applied to the pvalue retrieved from GeneFriends. The threshold was defined by correction of standard a (0.05) using a Bonferroni correction where N represents the genome size (20183 genes).
+
+Publication bias correction (PBC)
+
+The number of publications was compiled from the Swiss-Prot PubMed annotation list, downloaded on 23-04-2015. Only human and reviewed genes were considered for this analysis. Although PubMed publications annotated in Swiss-Prot are not the total number of publications for each entry, they represent a curated selection. Thus, Swiss-Prot was selected as the source for the number of publications due to its curated nature, which makes it a reliable source of annotated data for protein coding genes.
+
+Gene features
+
+The list of all human genes was collected from GenBank on 31-01-2015. For this analysis, only human annotated and protein-coding genes were considered, which represent a set of 20,183 genes.
+
+Molecular evolutionary rate (dN/dS) was calculated from the number of synonymous (dN) and non-synonymous (dS) substitutions downloaded from Ensembl BioMart, selecting the Ensembl Genes 80 database and Homo sapiens genes (GRCh38.p2) dataset on 17-05-2015. Of all the model organisms considered in the present work, only mouse orthologs present dN and dS values, due to the great evolutionary distance shown by the other organisms. Thus, all dN/dS ratio comparisons consider the evolution between mice and humans.
+
+Feature selection method
+
+We used a recently proposed feature selection method, from the area of data mining (or machine learning) to select the relevant Gene Ontology (GO) terms for predicting the pro-longevity or antilongevity effect of a gene on a model organism (8). In essence, we addressed the classification task of data mining, where the goal is to predict the class (pro-or anti-longevity effect) of an instance (a gene) based on predictive features (GO terms) associated with that gene. The used feature selection method differs from other feature selection methods typically used in data mining in two important ways, as follows. First, it selects a specific set of features relevant for the classification of each instance, instead of selecting the same set of features for all instances, as usual in data mining. This increases the flexibility of the feature selection process, recognizing that the optimal set of GO terms for predicting the proor anti-longevity effect of a gene varies across different genes. Second, the used method performs 'hierarchical' feature selection, in the sense that it takes into account the hierarchical structure of the GO in order to improve the feature selection process; unlike conventional ('flat') feature selection methods.
+
+That feature selection method was applied to datasets with data about aging-related genes from the four traditional model organisms, namely: mouse, fly, roundworm and yeast. The results of the feature selection method were transformed into a rank of GO terms as follows. For each dataset (model organism), for each GO term, we counted the number of instances (genes) where that GO term was one of the relevant features selected by the feature selection method for predicting the pro-or anti-longevity effect of the gene. Then, we ranked the GO terms in decreasing order of this frequency of selection. We also used a statistical test of significance based on the binomial distribution to detect which GO terms were significantly associated with the class being predicted. A detailed description of the feature selection method and how its results were used to rank the GO terms can be found in (8).
+
+Overlap analysis
+
+A significant overlap between aging-related genes and ARDs is defined as: i) an observed number of CAD-genes above the number of CAD-genes expected by chance; and ii) a p-value below 0.05 (Fisher's exact test). Genome and interactome analysis used whole genome and interactome as background, respectively. The background for the first order partners analysis was the seed list plus the interactome and was adjusted for each aging gene set since the seed list varies between different aging sets. In this analysis, the interactome was added to the background since the first order partners were selected from that group.
+
+Functional enrichment analysis
+
+Functional enrichment analysis using the Database of Annotation Visualization and Integrated Discovery (DAVID) (33) was performed to identify overrepresented categories. The analysis was done by running the Functional Annotation Clustering module under default parameters. Unless otherwise stated, the whole genome was used as background. Enrichment scores (E. Score) above 1.3 (which corresponds to P ¼ 0.05) are widely accepted as relevant (33); however, in this analysis a threshold of 2.5 (corresponding to P ¼ 0.003) was used for more significant results. A Benjamini correction was applied for correcting for multiple hypothesis testing.
+
+Candidate drugs from GenAge targets
+
+To identify candidate drugs with possible anti-aging properties, the Drug Gene Interaction Database (DGIdb) version 2 (34) was used. We classified all 44 types of drug-gene interactions in DGIDB into either 'Anti' (decrease gene expression or activity) or 'Pro' (increase gene expression or activity) or 'Neither' (non-applicable or undefined effects), so that they can be matched with GenAge genes to obtain a putative lifespan-extending effect (Supplementary Material, Table S5). Drugs were obtained by considering if they interact with GenAge genes in a way that would be predicted to extend lifespan. That is, for an 'Anti' drug, only the interactions with anti-longevity genes are scored; and vice-versa for 'Pro' drugs.
+
+In total, 376 drugs were obtained which were ordered based on ascending P-value obtained using a one-tailed hypergeometric test. After Bonferroni correction (a ¼ 0.05), 20 statistically significant drugs were obtained.
+
+Supplementary Material
+
+Supplementary Material is available at HMG online.
+
+Figure 1 . 1Protein-protein interactions between worm aging-related genes. Pro-longevity genes are depicted in red and anti-longevity genes in green. For each of the two gene sets, the smaller inside ellipse indicates genes that form a continuously connected network. Left right straight and curved arrows are used to summarize undirected interactions between genes from different and the same gene set, respectively.
+
+Figure 3 . 3Overlapping aging-related genes for various organisms with age-related disease genes sets. Green means significant overlap between aging-related and agerelated disease genes and red means there is no significant overlap. Model organisms are in descending order of their proximity to humans.

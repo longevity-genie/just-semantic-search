@@ -1,0 +1,31 @@
+Disease-Aging Network Reveals Significant Roles of Aging Genes in Connecting Genetic Diseases. J G Wang, S H Zhang, Y Wang, L N Chen, X S Zhang, Plos Comput. Biol. 51000521Wang, J.G., Zhang, S.H., Wang, Y., Chen, L.N.,. and Zhang, X.S. (2009) Disease-Aging Network Reveals Significant Roles of Aging Genes in Connecting Genetic Diseases. Plos Comput. Biol., 5, e1000521.
+
+LongevityMap: a database of human genetic variants associated with longevity. A Budovsky, T Craig, J Wang, R Tacutu, A Csordas, J Lourenco, V E Fraifeld, De Magalhaes, Trends Genet. 29J.P.Budovsky, A., Craig, T., Wang, J., Tacutu, R., Csordas, A., Lourenco, J., Fraifeld, V.E. and de Magalhaes, J.P. (2013) LongevityMap: a database of human genetic variants associ- ated with longevity. Trends Genet., 29, 559-560.
+
+J De Magalhães, R Tacutu, Handbook of the Biology of Aging. Kaeberlein, M. and Martin, G.London, UKAcademic Press8th editionde Magalhães, J. and Tacutu, R. (2016) Kaeberlein, M. and Martin, G. (eds. ), In Handbook of the Biology of Aging, 8th edi- tion. Academic Press, London, UK, pp. 263-285.
+
+GeneFriends: a human RNA-seq-based gene and transcript co-expression database. S Van Dam, T Craig, J P De Magalhaes, Nucleic Acids Res. 43van Dam, S., Craig, T. and de Magalhaes, J.P. (2015) GeneFriends: a human RNA-seq-based gene and transcript co-expression database. Nucleic Acids Res., 43, D1124-D1132.
+
+Genome-environment interactions that modulate aging: powerful targets for drug discovery. J P De Magalhaes, D Wuttke, S H Wood, M Plank, C Vora, Pharmacol. Rev. 64de Magalhaes, J.P., Wuttke, D., Wood, S.H., Plank, M. and Vora, C. (2012) Genome-environment interactions that mod- ulate aging: powerful targets for drug discovery. Pharmacol. Rev., 64, 88-101.
+
+Cell divisions and mammalian aging: integrative biology insights from genes that regulate longevity. J P De Magalhaes, R G Faragher, Bioessays. 30de Magalhaes, J.P. and Faragher, R.G. (2008) Cell divisions and mammalian aging: integrative biology insights from genes that regulate longevity. Bioessays, 30, 567-578.
+
+Genetic evidence for common pathways in human age-related diseases. S C Johnson, X Dong, J Vijg, Y Suh, Aging Cell. 14Johnson, S.C., Dong, X., Vijg, J. and Suh, Y. (2015) Genetic evi- dence for common pathways in human age-related dis- eases. Aging Cell, 14, 809-817.
+
+Age-dependent paraoxonase 1 (PON1) activity and LDL oxidation in Wistar rats during their entire lifespan. D Kumar, S I Rizvi, Scientific World Journal. 538049Kumar, D. and Rizvi, S.I. (2014) Age-dependent paraoxonase 1 (PON1) activity and LDL oxidation in Wistar rats during their entire lifespan. Scientific World Journal, 2014, 538049.
+
+Vascular endothelial growth factor (VEGF) plasma concentrations in coronary artery disease. H F Alber, M Frick, J Dulak, J Dorler, R H Zwick, W Dichtl, O Pachinger, F Weidinger, Heart. 91Alber, H.F., Frick, M., Dulak, J., Dorler, J., Zwick, R.H., Dichtl, W., Pachinger, O. and Weidinger, F. (2005) Vascular endothe- lial growth factor (VEGF) plasma concentrations in coronary artery disease. Heart, 91, 365-366.
+
+Analyses of human-chimpanzee orthologous gene pairs to explore evolutionary hypotheses of aging. J P De Magalhaes, G M Church, Mech Ageing Dev. 128de Magalhaes, J.P. and Church, G.M. (2007) Analyses of human-chimpanzee orthologous gene pairs to explore evolutionary hypotheses of aging. Mech Ageing Dev., 128, 355-364.
+
+Human disease genes: patterns and predictions. N G C Smith, A Eyre-Walker, Gene. 318Smith, N.G.C. and Eyre-Walker, A. (2003) Human disease genes: patterns and predictions. Gene, 318, 169-175.
+
+Systematic analysis, comparison, and integration of disease based human genetic association data and mouse genetic phenotypic information. Y Zhang, S De, J R Garner, K Smith, S A Wang, K G Becker, BMC Med Genomics. 31Zhang, Y., De, S., Garner, J.R., Smith, K., Wang, S.A. and Becker, K.G. (2010) Systematic analysis, comparison, and integration of disease based human genetic association data and mouse ge- netic phenotypic information. BMC Med Genomics, 3, 1.
+
+Age-related changes in the musculoskeletal system and the development of osteoarthritis. R F Loeser, Clin. Geriatr. Med. 26Loeser, R.F. (2010) Age-related changes in the musculoskele- tal system and the development of osteoarthritis. Clin. Geriatr. Med., 26, 371-386.
+
+Differences in incidence of reported asthma related to age in men and women -A retrospective analysis of the data of the European Respiratory Health Survey. R De Marco, F Locatelli, J Sunyer, P Burney, E C R H Surve, Am. J. Respir. Crit. Care Med. 162de Marco, R., Locatelli, F., Sunyer, J., Burney, P. and Surve, E.C.R.H. (2000) Differences in incidence of reported asthma related to age in men and women -A retrospective analysis of the data of the European Respiratory Health Survey. Am. J. Respir. Crit. Care Med., 162, 68-74.
+
+Systematic and integrative analysis of large gene lists using DAVID bioinformatics resources. D W Huang, B T Sherman, R A Lempicki, Nat. Protoc. 4Huang, D.W., Sherman, B.T. and Lempicki, R.A. (2009) Systematic and integrative analysis of large gene lists using DAVID bioinformatics resources. Nat. Protoc., 4, 44-57.
+
+DGIdb: mining the druggable genome. M Griffith, O L Griffith, A C Coffman, J V Weible, J F Mcmichael, N C Spies, J Koval, I Das, M B Callaway, J M Eldred, Nature Methods. 10Griffith, M., Griffith, O.L., Coffman, A.C., Weible, J.V., McMichael, J.F., Spies, N.C., Koval, J., Das, I., Callaway, M.B., Eldred, J.M., et al. (2013) DGIdb: mining the druggable ge- nome. Nature Methods, 10, 1209-1210.

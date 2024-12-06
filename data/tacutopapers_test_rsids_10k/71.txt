@@ -1,0 +1,17 @@
+Protein-protein interactions in the RPS4/RRS1 immune receptor complex. S U Huh, V Cevik, P Ding, Z Duxbury, Y Ma, L Tomlinson, P F Sarris, J D G Jones, 10.1371/journal.ppat.1006376PLoS Pathog. 13Huh, S.U. ; Cevik, V.; Ding, P.; Duxbury, Z.; Ma, Y.; Tomlinson, L.; Sarris, P.F. ; Jones, J.D.G. Protein-protein interactions in the RPS4/RRS1 immune receptor complex. PLoS Pathog. 2017, 13, e1006376. [CrossRef]
+
+Crystal structure of NLRC4 reveals its autoinhibition mechanism. Z Hu, C Yan, P Liu, Z Huang, R Ma, C Zhang, R Wang, Y Zhang, F Martinon, D Miao, 10.1126/science.1236381Science. 341Hu, Z.; Yan, C.; Liu, P.; Huang, Z.; Ma, R.; Zhang, C.; Wang, R.; Zhang, Y.; Martinon, F.; Miao, D.; et al. Crystal structure of NLRC4 reveals its autoinhibition mechanism. Science 2013, 341, 172-175. [CrossRef]
+
+Structural basis for flg22-induced activation of the Arabidopsis FLS2-BAK1 immune complex. Y Sun, L Li, A P Macho, Z Han, Z Hu, C Zipfel, J.-M Zhou, J Chai, 10.1126/science.1243825Science. 342Sun, Y.; Li, L.; Macho, A.P. ; Han, Z.; Hu, Z.; Zipfel, C.; Zhou, J.-M.; Chai, J. Structural basis for flg22-induced activation of the Arabidopsis FLS2-BAK1 immune complex. Science 2013, 342, 624-628. [CrossRef]
+
+Crystal structure of human toll-like receptor 3. J Choe, M S Kelker, I A Wilson, 10.1126/science.1115253Science. 22Choe, J.; Kelker, M.S. ; Wilson, I.A. Crystal structure of human toll-like receptor 3. Science 2005, 22, 581-585. [CrossRef]
+
+The structure of Bacillus subtilis pectate lyase in complex with calcium. R Pickersgill, J Jenkins, G Harris, W Nasser, J Robert-Baudouy, 10.1038/nsb1094-717Nat. Struct. Biol. 1Pickersgill, R.; Jenkins, J.; Harris, G.; Nasser, W.; Robert-Baudouy, J. The structure of Bacillus subtilis pectate lyase in complex with calcium. Nat. Struct. Biol. 1994, 1, 717-723. [CrossRef]
+
+Crystal structure and catalytic mechanism of PglD from Campylobacter jejuni. N B Olivier, B Imperiali, 10.1074/jbc.M801207200J. Biol. Chem. 283Olivier, N.B. ; Imperiali, B. Crystal structure and catalytic mechanism of PglD from Campylobacter jejuni. J. Biol. Chem. 2008, 283, 27937-27946. [CrossRef]
+
+Three-dimensional structure of the armadillo repeat region of β-catenin. A H Huber, W J Nelson, W I Weis, 10.1016/S0092-8674(00)80352-9Cell. 90Huber, A.H.; Nelson, W.J. ; Weis, W.I. Three-dimensional structure of the armadillo repeat region of β-catenin. Cell 1997, 90, 871-882. [CrossRef]
+
+. N Takahashi, S Hamada-Nakahara, Y Itoh, K Takemura, A Shimada, Y Ueda, M Kitamata, R Matsuoka, K Hanawa-Suetsugu, Y Senju, 10.1038/ncomms5994Nat. Commun. 5et al. TRPV4 channel activity is modulated by direct interaction of the ankyrin domain to PI(4,5)P 2Takahashi, N.; Hamada-Nakahara, S.; Itoh, Y.; Takemura, K.; Shimada, A.; Ueda, Y.; Kitamata, M.; Matsuoka, R.; Hanawa-Suetsugu, K.; Senju, Y.; et al. TRPV4 channel activity is modulated by direct interaction of the ankyrin domain to PI(4,5)P 2 . Nat. Commun. 2014, 5, 4994. [CrossRef]
+
+This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license. © 2020 by the authors. Licensee MDPI. Basel, Switzerland© 2020 by the authors. Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (http://creativecommons.org/licenses/by/4.0/).

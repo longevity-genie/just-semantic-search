@@ -1,0 +1,53 @@
+Human Ageing Genomic Resources: Integrated databases and tools for the biology and genetics of ageing
+
+Robi Tacutu Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool L69 7ZBLiverpoolUK
+
+Thomas Craig Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool L69 7ZBLiverpoolUK
+
+Arie Budovsky The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 84105Beer-ShevaIsrael
+
+Judea Regional Research & Development Center 90404CarmelIsrael
+
+Daniel Wuttke Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool L69 7ZBLiverpoolUK
+
+Gilad Lehmann The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 84105Beer-ShevaIsrael
+
+Dmitri Taranukha The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 84105Beer-ShevaIsrael
+
+Joana Costa
+
+Department of Genetics
+
+Liverpool Women's Hospital
+
+L8 7SSLiverpoolUK
+
+Vadim E Fraifeld The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 84105Beer-ShevaIsrael
+
+Joã Pedro De Magalhã Es Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool L69 7ZBLiverpoolUK
+
+Human Ageing Genomic Resources: Integrated databases and tools for the biology and genetics of ageing 10.1093/nar/gks1155Received September 19, 2012; Revised October 24, 2012; Accepted October 25, 2012 The Human Ageing Genomic Resources (HAGR, http://genomics.senescence.info) is a freely available online collection of research databases and tools for the biology and genetics of ageing. HAGR features now several databases with high-quality manually curated data: (i) GenAge, a database of genes associated with ageing in humans and model organisms; (ii) AnAge, an extensive collection of longevity records and complementary traits for >4000 vertebrate species; and (iii) GenDR, a newly incorporated database, containing both gene mutations that interfere with dietary restrictionmediated lifespan extension and consistent gene expression changes induced by dietary restriction. Since its creation about 10 years ago, major efforts have been undertaken to maintain the quality of data in HAGR, while further continuing to develop, improve and extend it. This article briefly describes the content of HAGR and details the major updates since its previous publications, in terms of both structure and content. The completely redesigned interface, more intuitive and more integrative of HAGR resources, is also presented.
+
+Altogether, we hope that through its improvements, the current version of HAGR will continue to provide users with the most comprehensive and accessible resources available today in the field of biogerontology.
+
+INTRODUCTION
+
+The Human Ageing Genomic Resources (HAGR, http:// genomics.senescence.info) is a web portal encompassing several online databases and tools, aiming to organize the increasing amount of data and information relevant to the biology of ageing, and make them accessible to the research community. Since its first publication in 2005 (1), HAGR has been the leading online resource for biogerontologists, acting as a reference point for various studies and in particular for genetic and evolutionary studies of longevity and ageing.
+
+Initially, HAGR was established around two manually curated databases: GenAge, a database of genes potentially associated with human ageing, and AnAge, a database of ageing, longevity and life history traits in animals. While the goal of GenAge is to function as a compilation of genetic observations reflecting our current knowledge about human ageing, AnAge contains an extensive collection of longevity records, developmental, reproductive and metabolic traits and other key observations related to ageing in >4000 vertebrate species. Since then, the GenAge and AnAge databases have been continuously curated, and new data have been incorporated. Moreover, entire new data sets have also been included. In the update published in 2009 (2), a new list of human genes tested for their possible association with human longevity and a data set of genes associated with longevity and/or ageing in the most studied model organisms were added to GenAge. Although the latter does not include human genes, it was included to serve as a tool for researchers studying ageing in model organisms and because many ageing-related discoveries in model organisms could provide important insights into human ageing (3,4).
+
+With the emergence of new high-throughput technologies, many genes associated with ageing and longevity are still being identified, in particular in model organisms (5)(6)(7)(8)(9)(10). Although the field of biogerontology is rapidly evolving, we are still relatively far from having a complete picture of the human ageing process (11), and the need to continue collecting and systematically organizing what we know about the genetics and comparative biology of ageing is more important than ever. In particular, extracting quantitative data from the scientific literature is especially important for performing bioinformatics and systems biology analyses and for guiding experiments. Of note, some genes related to ageing are already being targeted for drug discovery, and translating findings from the genetics of ageing into clinical interventions is an emerging prospect (12).
+
+This article describes the major updates in HAGR since its previous publication in 2009. After a brief introduction to each database, general statistics on content and descriptions of the new types of annotations introduced in HAGR are presented, and a newly added database-GenDR, which focuses on dietary restriction (DR)-associated genes-is then described. Finally, the new HAGR interface, completely redesigned to be more intuitive and user friendly, with an improved cross-integration of our different databases and tools, is presented.
+
+DATABASE CONTENT
+
+New content and features in GenAge
+
+The main aim of the GenAge database (http://genomics. senescence.info/genes/) is to host high-quality curated gene-centric information relevant to human ageing. Although initially GenAge was designed to include only human genes potentially associated with ageing, the database has significantly grown since, and several new gene sets have been added to it. For example, GenAge includes, since 2008, a list of genes from model organisms based on genetic manipulation experiments (2).
+
+Currently, the database is divided into three main sections intertwined through weblinks and crossreferences: (i) the set of human ageing-associated genes, which includes the few genes directly related to ageing in humans, and the best candidate human genes, supported by evidence from model organisms, cellular experiments and functional analyses; (ii) the set of longevity-associated genes in model organisms, based on lifespan-modulating genetic interventions; and (iii) a list of genes whose expression is commonly altered during ageing in multiple tissues of mammalian species, inferred from microarray data (Table 1). In addition to these data sets, a workin-progress list of genes analysed for their possible association with human longevity in population studies is also available in GenAge (http://genomics.senescence.info/ genes/longevity.html).
+
+Since our last update in 2009, we have made numerous improvements in terms of both the quantity and the quality of the content in GenAge. The data set of human genes in GenAge has grown only slightly, accounting now for 288 genes, an increase of 27 genes. As mentioned before, the data set contains a list of genes potentially associated with human ageing. For each gene, a description compiled from the studies that link the gene to ageing is provided. It should be noted that our focus is on genes that might affect the ageing process, rather than individual age-related pathologies; genes affecting multiple, even if not all, age-related processes or pathologies may be selected. Besides containing genes directly linked to human ageing (mostly those genes in which mutations result in segmental progeroid syndromes), the homologous genes with the strongest evidence from model organisms, especially from mammals, will typically be found in the human data set.
+
+More formally, genes were included in the human gene data set, and annotated accordingly, if one or more of the following criteria were met, the gene was directly linked: (i) to ageing in humans; (ii) to ageing in a mammalian model organism; (iii) to human longevity and/or multiple age-related phenotypes (the only new criteria since our last update); (iv) to ageing in a non-mammalian model organism; (v) to ageing in a cellular model system; (vi) to the regulation or control of genes previously linked to ageing; (vii) to a pathway or mechanism linked to ageing; or (viii) if the gene was acting downstream of a pathway, mechanism or other gene product linked to ageing. As these data are under continuous curation, and new observations are being actively added to existing entries, the quality of the data set has also been improved since our previous update; for example, the bibliography for this data set has increased significantly, and it currently comprises >2200 references.

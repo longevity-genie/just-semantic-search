@@ -1,0 +1,111 @@
+Longevity
+
+Anti
+
+fibrotic
+
+Tert
+
+Pro
+
+Longevity
+
+Pro
+
+fibrotic
+
+Txn1
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Zmpste24
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic (in old age)
+
+https://doi.org/10.1038/s41598
+
+021
+
+98674
+
+6Scientific Reports
+
+|
+
+(2021) 11:19269 |
+
+© The Author(s) 2021 Author contributionsThis study was carried out by the V.E.F. and R.T. research groups. Data collection and processing were done by R.A.T., D.T. and V.E.F. V.E.F., R.T., H.Y. and D.T. conceptually designed the analyses. EvolutionaryCompeting interestsThe authors declare no competing interests.Additional informationSupplementary InformationThe online version contains supplementary material available at https:// doi. org/ 10. 1038/ s41598-021-98674-6.Correspondence and requests for materials should be addressed to R.T. or V.E.F.Reprints and permissions information is available at www.nature.com/reprints.Publisher's note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.Scientific Reports Aging, antagonistic pleiotropy and fibrotic disease. V J Thannickal, Int. J. Biochem. Cell Biol. 42Thannickal, V. J. Aging, antagonistic pleiotropy and fibrotic disease. Int. J. Biochem. Cell Biol. 42, 1398-1400 (2010).
+
+The aging lung: Physiology, disease, and immunity. J L Schneider, Cell. 184Schneider, J. L. et al. The aging lung: Physiology, disease, and immunity. Cell 184, 1990-2019 (2021).
+
+The RESOLVE concept: approaching pathophysiology of fibroproliferative disease in aged individuals. R Ziesche, M Golec, E Samaha, Biogerontology. 14Ziesche, R., Golec, M. & Samaha, E. The RESOLVE concept: approaching pathophysiology of fibroproliferative disease in aged individuals. Biogerontology 14, 679-685 (2013).
+
+The aging lung and idiopathic pulmonary fibrosis. S Gulati, V J Thannickal, Am. J. Med. Sci. 357Gulati, S. & Thannickal, V. J. The aging lung and idiopathic pulmonary fibrosis. Am. J. Med. Sci. 357, 384-389 (2019).
+
+Idiopathic pulmonary fibrosis: Aging, mitochondrial dysfunction, and cellular bioenergetics. D C Zank, M Bueno, A L Mora, M Rojas, Front. Med (Lausanne). 510Zank, D. C., Bueno, M., Mora, A. L. & Rojas, M. Idiopathic pulmonary fibrosis: Aging, mitochondrial dysfunction, and cellular bioenergetics. Front. Med (Lausanne) 5, 10 (2018).
+
+Emerging therapies for idiopathic pulmonary fibrosis, a progressive age-related disease. A L Mora, M Rojas, A Pardo, M Selman, Nat. Rev. Drug Discov. 16810Mora, A. L., Rojas, M., Pardo, A. & Selman, M. Emerging therapies for idiopathic pulmonary fibrosis, a progressive age-related disease. Nat. Rev. Drug Discov. 16, 810 (2017).
+
+Animal models of fibrotic lung disease. B Moore, Am. J. Respir. Cell Mol. Biol. 49Moore, B. et al. Animal models of fibrotic lung disease. Am. J. Respir. Cell Mol. Biol. 49, 167-179 (2013).
+
+Expression profiling suggests loss of surface integrity and failure of regenerative repair as major driving forces for COPD progression. E Samaha, Am. J. Respir. Cell Mol. Biol. 64Samaha, E. et al. Expression profiling suggests loss of surface integrity and failure of regenerative repair as major driving forces for COPD progression. Am. J. Respir. Cell Mol. Biol. 64, 441-452. (2021).
+
+Mechanistic links between aging and lung fibrosis. V J Thannickal, Biogerontology. 14Thannickal, V. J. Mechanistic links between aging and lung fibrosis. Biogerontology 14, 609-615 (2013).
+
+The bleomycin model of pulmonary fibrosis. T Liu, F G De Los Santos, S H Phan, Methods Mol. Biol. 1627Liu, T., De Los Santos, F. G. & Phan, S. H. The bleomycin model of pulmonary fibrosis. Methods Mol. Biol. 1627, 27-42 (2017).
+
+The bleomycin animal model: a useful tool to investigate treatment options for idiopathic pulmonary fibrosis?. A Moeller, K Ask, D Warburton, J Gauldie, M Kolb, Int. J. Biochem. Cell Biol. 40Moeller, A., Ask, K., Warburton, D., Gauldie, J. & Kolb, M. The bleomycin animal model: a useful tool to investigate treatment options for idiopathic pulmonary fibrosis?. Int. J. Biochem. Cell Biol. 40, 362-382 (2008).
+
+Human ex vivo lung perfusion: A novel model to study human lung diseases. N Cárdenes, Sci. Rep. 11490Cárdenes, N. et al. Human ex vivo lung perfusion: A novel model to study human lung diseases. Sci. Rep. 11, 490 (2021).
+
+Bleomycin in the setting of lung fibrosis induction: From biological mechanisms to counteractions. V Della Latta, A Cecchettini, S Del Ry, M A Morales, Pharmacol. Res. 97Della Latta, V., Cecchettini, A., Del Ry, S. & Morales, M. A. Bleomycin in the setting of lung fibrosis induction: From biological mechanisms to counteractions. Pharmacol. Res. 97, 122-130 (2015).
+
+The importance of interventional timing in the bleomycin model of pulmonary fibrosis. P Kolb, Eur. Respir. J. 551901105Kolb, P. et al. The importance of interventional timing in the bleomycin model of pulmonary fibrosis. Eur. Respir. J. 55, 1901105 (2020).
+
+Tissue repair genes: The TiRe database and its implication for skin wound healing. H Yanai, Oncotarget. 7Yanai, H. et al. Tissue repair genes: The TiRe database and its implication for skin wound healing. Oncotarget 7, 21145-21155 (2016).
+
+Orthology analysis between 273 proteomes, mostly eukaryotic. E L L Sonnhammer, G Östlund, Nucleic Acids Res. 8Sonnhammer, E. L. L. & Östlund, G. InParanoid 8: Orthology analysis between 273 proteomes, mostly eukaryotic. Nucleic Acids Res. 43, D234-D239 (2015).
+
+Building your own mash-up of gene annotations and expression profiles. C Wu, X Jin, G Tsueng, C Afrasiabi, A I Su, Biogps, Nucleic Acids Res. 44Wu, C., Jin, X., Tsueng, G., Afrasiabi, C. & Su, A. I. BioGPS: Building your own mash-up of gene annotations and expression profiles. Nucleic Acids Res. 44, D313-D316 (2016).
+
+A web server for exploration of mouse and human single-cell RNA sequencing data. O Franzén, L.-M Gan, J L M Björkegren, Panglaodb, Database (Oxford). 19Franzén, O., Gan, L.-M. & Björkegren, J. L. M. PanglaoDB: A web server for exploration of mouse and human single-cell RNA sequencing data. Database (Oxford) 1, 9 (2019).
+
+Genome-wide prediction and functional characterization of the genetic basis of autism spectrum disorder. A Krishnan, Nat. Neurosci. 19Krishnan, A. et al. Genome-wide prediction and functional characterization of the genetic basis of autism spectrum disorder. Nat. Neurosci. 19, 1454-1462 (2016).
+
+The BioGRID interaction database: 2019 update. R Oughtred, Nucleic Acids Res. 47Oughtred, R. et al. The BioGRID interaction database: 2019 update. Nucleic Acids Res. 47, D529-D541 (2019).
+
+Human Ageing Genomic Resources: New and updated databases. R Tacutu, Nucleic Acids Res. 46Tacutu, R. et al. Human Ageing Genomic Resources: New and updated databases. Nucleic Acids Res. 46, D1083-D1090 (2018).
+
+Met as a new marker of cellular senescence. M Boichuck, J Zorea, M Elkabets, M Wolfson, V E Fraifeld, Aging. 11Boichuck, M., Zorea, J., Elkabets, M., Wolfson, M. & Fraifeld, V. E. c-Met as a new marker of cellular senescence. Aging (Albany, NY) 11, 2889-2897 (2019).
+
+Wide-scale comparative analysis of longevity genes and interventions. H Yanai, A Budovsky, T Barzilay, R Tacutu, V E Fraifeld, Aging Cell. 16Yanai, H., Budovsky, A., Barzilay, T., Tacutu, R. & Fraifeld, V. E. Wide-scale comparative analysis of longevity genes and interven- tions. Aging Cell 16, 1267-1275 (2017).
+
+. 10.1038/s41598-021-98674-6Scientific Reports |. 11Scientific Reports | (2021) 11:19269 | https://doi.org/10.1038/s41598-021-98674-6
+
+Machine learning analysis of longevity-associated gene expression landscapes in mammals. A Y Kulaga, Int. J. Mol. Sci. 221073Kulaga, A. Y. et al. Machine learning analysis of longevity-associated gene expression landscapes in mammals. Int. J. Mol. Sci. 22, 1073 (2021).
+
+An official American thoracic society workshop report: Use of animal models for the preclinical assessment of potential therapies for pulmonary fibrosis. R G Jenkins, Am. J. Respir. Cell Mol. Biol. 56Jenkins, R. G. et al. An official American thoracic society workshop report: Use of animal models for the preclinical assessment of potential therapies for pulmonary fibrosis. Am. J. Respir. Cell Mol. Biol. 56, 667-679 (2017).
+
+Long live FOXO: Unraveling the role of FOXO proteins in aging and longevity. R Martins, G J Lithgow, W Link, Aging Cell. 15Martins, R., Lithgow, G. J. & Link, W. Long live FOXO: Unraveling the role of FOXO proteins in aging and longevity. Aging Cell 15, 196-207 (2016).
+
+Cellular senescence-like features of lung fibroblasts derived from idiopathic pulmonary fibrosis patients. H Yanai, Aging. 7Yanai, H. et al. Cellular senescence-like features of lung fibroblasts derived from idiopathic pulmonary fibrosis patients. Aging (Albany, NY) 7, 664-672 (2015).
+
+Plasminogen activator inhibitor 1, fibroblast apoptosis resistance, and aging-related susceptibility to lung fibrosis. W.-T Huang, Exp. Gerontol. 61Huang, W.-T. et al. Plasminogen activator inhibitor 1, fibroblast apoptosis resistance, and aging-related susceptibility to lung fibrosis. Exp. Gerontol. 61, 62-75 (2015).
+
+Reversal of persistent fibrosis in aging by targeting Nox4-Nrf2 redox imbalance. L Hecker, Sci. Transl. Med. 6Hecker, L. et al. Reversal of persistent fibrosis in aging by targeting Nox4-Nrf2 redox imbalance. Sci. Transl. Med. 6, 231ra47 (2014).
+
+The role of cellular senescence in aging through the prism of Koch-like criteria. H Yanai, V E Fraifeld, Ageing Res. Rev. 41Yanai, H. & Fraifeld, V. E. The role of cellular senescence in aging through the prism of Koch-like criteria. Ageing Res. Rev. 41, 18-33 (2018).
+
+Transcriptomic profile of the mice aging lung is associated with inflammation and apoptosis as important pathways. J Calyeca, Y I Balderas-Martínez, M Selman, A Pardo, Aging. 13Calyeca, J., Balderas-Martínez, Y. I., Selman, M. & Pardo, A. Transcriptomic profile of the mice aging lung is associated with inflammation and apoptosis as important pathways. Aging (Albany, NY) 13, 12378-12394 (2021).

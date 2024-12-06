@@ -1,0 +1,41 @@
+Why is aging conserved and what can we do about it?. J N Pitt, M Kaeberlein, PLoS Biol. 131002131Pitt JN, Kaeberlein M (2015) Why is aging conserved and what can we do about it? PLoS Biol. 13, e1002131.
+
+Protein networks, pleiotropy and the evolution of senescence. D E Promislow, Proc. Biol. Sci. 271Promislow DE (2004) Protein networks, pleiotropy and the evolution of senes- cence. Proc. Biol. Sci. 271, 1225-1234.
+
+. S Pundir, M J Martin, C O&apos;donovan, UniProt Protein Knowledgebase. Methods Mol. Biol. 1558Pundir S, Martin MJ, O'Donovan C (2017) UniProt Protein Knowledgebase. Methods Mol. Biol. 1558, 41-55.
+
+. D C Rubinsztein, G Marino, G Kroemer, Autophagy and aging. Cell. 146Rubinsztein DC, Marino G, Kroemer G (2011) Autophagy and aging. Cell 146, 682-695.
+
+Autophagy and human disease: emerging themes. J L Schneider, A M Cuervo, Curr. Opin. Genet. Dev. 26Schneider JL, Cuervo AM (2014) Autophagy and human disease: emerging themes. Curr. Opin. Genet. Dev. 26, 16-23.
+
+Quantitative evidence for conserved longevity pathways between divergent eukaryotic species. E D Smith, M Tsuchiya, L A Fox, N Dang, D Hu, E O Kerr, E D Johnston, B N Tchao, D N Pak, K L Welton, D E Promislow, J H Thomas, M Kaeberlein, B K Kennedy, Genome Res. 18Smith ED, Tsuchiya M, Fox LA, Dang N, Hu D, Kerr EO, Johnston ED, Tchao BN, Pak DN, Welton KL, Promislow DE, Thomas JH, Kaeberlein M, Kennedy BK (2008) Quantitative evidence for conserved longevity pathways between divergent eukaryotic species. Genome Res. 18, 564-570.
+
+InParanoid 8: orthology analysis between 273 proteomes, mostly eukaryotic. E L Sonnhammer, G Ostlund, Nucleic Acids Res. 43Sonnhammer EL, Ostlund G (2015) InParanoid 8: orthology analysis between 273 proteomes, mostly eukaryotic. Nucleic Acids Res. 43, D234-D239.
+
+The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. R Tacutu, A Budovsky, V E Fraifeld, Biogerontology. 11Tacutu R, Budovsky A, Fraifeld VE (2010a) The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. Biogeron- tology 11, 513-522.
+
+MicroRNA-regulated protein-protein interaction networks: how could they help in searching for prolongevity targets?. R Tacutu, A Budovsky, M Wolfson, V E Fraifeld, Rejuvenation Res. 13Tacutu R, Budovsky A, Wolfson M, Fraifeld VE (2010b) MicroRNA-regulated protein-protein interaction networks: how could they help in searching for pro- longevity targets? Rejuvenation Res. 13, 373-377.
+
+Molecular links between cellular senescence, longevity and age-related diseases -a systems biology perspective. R Tacutu, A Budovsky, H Yanai, V E Fraifeld, Aging (Albany NY). 3Tacutu R, Budovsky A, Yanai H, Fraifeld VE (2011) Molecular links between cellular senescence, longevity and age-related diseases -a systems biology perspective. Aging (Albany NY) 3, 1178-1191.
+
+Prediction of C. elegans longevity genes by human and worm longevity networks. R Tacutu, D E Shore, A Budovsky, J P De Magalhaes, G Ruvkun, V E Fraifeld, S P Curran, PLoS ONE. 748282Tacutu R, Shore DE, Budovsky A, de Magalhaes JP, Ruvkun G, Fraifeld VE, Curran SP (2012) Prediction of C. elegans longevity genes by human and worm longevity networks. PLoS ONE 7, e48282.
+
+Human Ageing Genomic Resources: integrated databases and tools for the biology and genetics of ageing. R Tacutu, T Craig, A Budovsky, D Wuttke, G Lehmann, D Taranukha, J Costa, V E Fraifeld, J P De Magalhaes, Nucleic Acids Res. 41Tacutu R, Craig T, Budovsky A, Wuttke D, Lehmann G, Taranukha D, Costa J, Fraifeld VE, de Magalhaes JP (2013) Human Ageing Genomic Resources: integrated databases and tools for the biology and genetics of ageing. Nucleic Acids Res. 41, D1027-D1033.
+
+The endocrine regulation of aging by insulinlike signals. M Tatar, A Bartke, A Antebi, Science. 299Tatar M, Bartke A, Antebi A (2003) The endocrine regulation of aging by insulin- like signals. Science 299, 1346-1351.
+
+Genetics of longevity and aging. J Vijg, Y Suh, Annu. Rev. Med. 56Vijg J, Suh Y (2005) Genetics of longevity and aging. Annu. Rev. Med. 56, 193-212.
+
+WEB-based GEne SeT AnaLysis Toolkit (WebGestalt): update 2013. J Wang, D Duncan, Z Shi, B Zhang, Nucleic Acids Res. 41Wang J, Duncan D, Shi Z, Zhang B (2013) WEB-based GEne SeT AnaLysis Toolkit (WebGestalt): update 2013. Nucleic Acids Res. 41, W77-W83.
+
+Longevity genes: from primitive organisms to humans. H R Warner, Mech. Ageing Dev. 126Warner HR (2005) Longevity genes: from primitive organisms to humans. Mech. Ageing Dev. 126, 235-242.
+
+Pleiotropy, natural selection, and the evolution of senescence. G C Williams, 10.2307/2406060Evolution. 11Williams GC (1957) Pleiotropy, natural selection, and the evolution of senescence. Evolution 11, 398-411. https://doi.org/10.2307/2406060.
+
+The signaling hubs at the crossroad of longevity and age-related disease networks. M Wolfson, A Budovsky, R Tacutu, V Fraifeld, Int. J. Biochem. Cell Biol. 41Wolfson M, Budovsky A, Tacutu R, Fraifeld V (2009) The signaling hubs at the crossroad of longevity and age-related disease networks. Int. J. Biochem. Cell Biol. 41, 516-520.
+
+Genome-Wide RNAi Longevity Screens in Caenorhabditis elegans. M E Yanos, C F Bennett, M Kaeberlein, Curr. Genomics. 13Yanos ME, Bennett CF, Kaeberlein M (2012) Genome-Wide RNAi Longevity Screens in Caenorhabditis elegans. Curr. Genomics 13, 508-518.
+
+Tissue-specific insulin signaling in the regulation of metabolism and aging. J Zhang, F Liu, IUBMB Life. 66Zhang J, Liu F (2014) Tissue-specific insulin signaling in the regulation of metabolism and aging. IUBMB Life 66, 485-495.
+
+Genetic variation in insulin/IGF-1 signaling pathways and longevity. E Ziv, D Hu, Ageing Res. Rev. 10Ziv E, Hu D (2011) Genetic variation in insulin/IGF-1 signaling pathways and longevity. Ageing Res. Rev. 10, 201-204.

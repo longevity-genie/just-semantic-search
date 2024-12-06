@@ -1,0 +1,55 @@
+Reconstitution and structure of a plant NLR resistosome conferring immunity. J Wang, M Hu, J Wang, J Qi, Z Han, G Wang, Y Qi, H.-W Wang, J.-M Zhou, J Chai, 10.1126/science.aav5870Science. 364Wang, J.; Hu, M.; Wang, J.; Qi, J.; Han, Z.; Wang, G.; Qi, Y.; Wang, H.-W.; Zhou, J.-M.; Chai, J. Reconstitution and structure of a plant NLR resistosome conferring immunity. Science 2019, 364, eaav5870. [CrossRef]
+
+Ligand-triggered allosteric ADP release primes a plant NLR complex. J Wang, J Wang, M Hu, S Wu, J Qi, G Wang, Z Han, Y Qi, N Gao, H W Wang, 10.1126/science.aav5868Science. 364eaav5868. [CrossRefWang, J.; Wang, J.; Hu, M.; Wu, S.; Qi, J.; Wang, G.; Han, Z.; Qi, Y.; Gao, N.; Wang, H.W. ; et al. Ligand-triggered allosteric ADP release primes a plant NLR complex. Science 2019, 364, eaav5868. [CrossRef]
+
+Modeling of the three-dimensional structure of proteins with the typical leucine-rich repeats. A V Kajava, G Vassart, S J Wodak, 10.1016/S0969-2126(01)00222-2Structure. 3Kajava, A.V. ; Vassart, G.; Wodak, S.J. Modeling of the three-dimensional structure of proteins with the typical leucine-rich repeats. Structure 1995, 3, 867-877. [CrossRef]
+
+LRR conservation mapping to predict functional sites within protein leucine-rich repeat domains. L Helft, V Reddy, X Chen, T Koller, L Federici, J Fernández-Recio, R Gupta, A Bent, 10.1371/journal.pone.0021614PLoS ONE. 6Helft, L.; Reddy, V.; Chen, X.; Koller, T.; Federici, L.; Fernández-Recio, J.; Gupta, R.; Bent, A. LRR conservation mapping to predict functional sites within protein leucine-rich repeat domains. PLoS ONE 2011, 6, e21614. [CrossRef]
+
+Out of Water: The Origin and Early Diversification of Plant R-Genes. Y Gao, W Wang, T Zhang, Z Gong, H Zhao, G Z Han, 10.1104/pp.18.00185Plant Physiol. 177Gao, Y.; Wang, W.; Zhang, T.; Gong, Z.; Zhao, H.; Han, G.Z. Out of Water: The Origin and Early Diversification of Plant R-Genes. Plant Physiol. 2018, 177, 82-89. [CrossRef]
+
+0: A webserver for the prediction of leucine-rich repeats. V Offord, D Werling, Lrrfinder2, 10.1177/1753425912465661Innate Immun. 19Offord, V.; Werling, D. LRRfinder2.0: A webserver for the prediction of leucine-rich repeats. Innate Immun. 2013, 19, 398-402. [CrossRef]
+
+LRRsearch: An asynchronous server-based application for the prediction of leucine-rich repeat motifs and an integrative database of NOD-like receptors. A Bej, B R Sahoo, B Swain, M Basu, P Jayasankar, M Samanta, 10.1016/j.compbiomed.2014.07.016Comput. Biol. Med. 53Bej, A.; Sahoo, B.R. ; Swain, B.; Basu, M.; Jayasankar, P.; Samanta, M. LRRsearch: An asynchronous server-based application for the prediction of leucine-rich repeat motifs and an integrative database of NOD-like receptors. Comput. Biol. Med. 2014, 53, 164-170. [CrossRef]
+
+CATH: An expanded resource to predict protein function through structure and sequence. N L Dawson, T E Lewis, S Das, J G Lees, D Lee, P Ashford, C A Orengo, I Sillitoe, 10.1093/nar/gkw1098Nucleic Acids Res. 45Dawson, N.L. ; Lewis, T.E. ; Das, S.; Lees, J.G. ; Lee, D.; Ashford, P.; Orengo, C.A. ; Sillitoe, I. CATH: An expanded resource to predict protein function through structure and sequence. Nucleic Acids Res. 2017, 45, D289-D295. [CrossRef]
+
+The Pfam protein families database in 2019. S El-Gebali, J Mistry, A Bateman, S R Eddy, A Luciani, S C Potter, M Qureshi, L J Richardson, G A Salazar, A Smart, 10.1093/nar/gky995Nucleic Acids Res. 47El-Gebali, S.; Mistry, J.; Bateman, A.; Eddy, S.R. ; Luciani, A.; Potter, S.C.; Qureshi, M.; Richardson, L.J. ; Salazar, G.A. ; Smart, A.; et al. The Pfam protein families database in 2019. Nucleic Acids Res. 2019, 47, D427-D432. [CrossRef]
+
+InterPro in 2019: Improving coverage, classification and access to protein sequence annotations. A L Mitchell, T K Attwood, P C Babbitt, M Blum, P Bork, A Bridge, S D Brown, H Y Chang, S El-Gebali, M I Fraser, 10.1093/nar/gky1100Nucleic Acids Res. 47Mitchell, A.L. ; Attwood, T.K. ; Babbitt, P.C. ; Blum, M.; Bork, P.; Bridge, A.; Brown, S.D. ; Chang, H.Y. ; El-Gebali, S.; Fraser, M.I. ; et al. InterPro in 2019: Improving coverage, classification and access to protein sequence annotations. Nucleic Acids Res. 2019, 47, D351-D360. [CrossRef]
+
+PISCES: A protein sequence culling server. G Wang, R L Dunbrack, 10.1093/bioinformatics/btg224Bioinformatics. 19Wang, G.; Dunbrack, R.L. PISCES: A protein sequence culling server. Bioinformatics 2003, 19, 1589-1591. [CrossRef]
+
+Predicting functionally important residues from sequence conservation. J A Capra, M Singh, 10.1093/bioinformatics/btm270Bioinformatics. 23Capra, J.A. ; Singh, M. Predicting functionally important residues from sequence conservation. Bioinformatics 2007, 23, 1875-1882. [CrossRef]
+
+ETE 3: Reconstruction, Analysis, and Visualization of Phylogenomic Data. J Huerta-Cepas, F Serra, P Bork, 10.1093/molbev/msw046Mol. Biol. Evol. 33Huerta-Cepas, J.; Serra, F.; Bork, P. ETE 3: Reconstruction, Analysis, and Visualization of Phylogenomic Data. Mol. Biol. Evol. 2016, 33, 1635-1638. [CrossRef]
+
+RaptorX-Property: A web server for protein structure property prediction. S Wang, W Li, S Liu, J Xu, 10.1093/nar/gkw306Nucleic Acids Res. 44Wang, S.; Li, W.; Liu, S.; Xu, J. RaptorX-Property: A web server for protein structure property prediction. Nucleic Acids Res. 2016, 44, W430-W435. [CrossRef]
+
+AUC-maximized deep convolutional neural fields for protein sequence labeling. S Wang, S Sun, J Xu, Proceedings of the Lecture Notes in Computer Science. the Lecture Notes in Computer ScienceWang, S.; Sun, S.; Xu, J. AUC-maximized deep convolutional neural fields for protein sequence labeling. In Proceedings of the Lecture Notes in Computer Science (Including Subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics);
+
+. Springer, 9852Berlin, GermanySpringer: Berlin, Germany, 2016; Volume 9852 LNAI, pp. 1-16.
+
+Proteome-level protein disorder prediction by AUC-maximized deep convolutional neural fields. S Wang, J Ma, J Xu, Aucpred, Proceedings of the Bioinformatics. the BioinformaticsOxford, UKOxford University Press32Wang, S.; Ma, J.; Xu, J. AUCpreD: Proteome-level protein disorder prediction by AUC-maximized deep convolutional neural fields. In Proceedings of the Bioinformatics; Oxford University Press: Oxford, UK, 2016; Volume 32, pp. i672-i679.
+
+Protein Secondary Structure Prediction Using Deep Convolutional Neural Fields. S Wang, J Peng, J Ma, J Xu, 10.1038/srep18962Sci. Rep. Wang, S.; Peng, J.; Ma, J.; Xu, J. Protein Secondary Structure Prediction Using Deep Convolutional Neural Fields. Sci. Rep. 2016, 6, 18962. [CrossRef]
+
+Lightning-fast iterative protein sequence searching by HMM-HMM alignment. M Remmert, A Biegert, A Hauser, J Söding, Hhblits, 10.1038/nmeth.1818Nat. Methods. 9Remmert, M.; Biegert, A.; Hauser, A.; Söding, J. HHblits: Lightning-fast iterative protein sequence searching by HMM-HMM alignment. Nat. Methods 2012, 9, 173-175. [CrossRef]
+
+HH-suite3 for fast remote homology detection and deep protein annotation. M Steinegger, M Meier, M Mirdita, H Vöhringer, S J Haunsberger, J Söding, 10.1186/s12859-019-3019-7BMC Bioinform. 20Steinegger, M.; Meier, M.; Mirdita, M.; Vöhringer, H.; Haunsberger, S.J. ; Söding, J. HH-suite3 for fast remote homology detection and deep protein annotation. BMC Bioinform. 2019, 20, 473. [CrossRef]
+
+Support-vector networks. C Cortes, V Vapnik, 10.1007/BF00994018Mach. Learn. 20Cortes, C.; Vapnik, V. Support-vector networks. Mach. Learn. 1995, 20, 273-297. [CrossRef]
+
+Fuzzy Sets, and Classification. S K Pal, S Mitra, Multilayer Perceptron, 10.1109/72.159058IEEE Trans. Neural Netw. 3Pal, S.K. ; Mitra, S. Multilayer Perceptron, Fuzzy Sets, and Classification. IEEE Trans. Neural Netw. 1992, 3, 683-697. [CrossRef]
+
+The perceptron: A probabilistic model for information storage and organization in the brain. F Rosenblatt, 10.1037/h0042519Psychol. Rev. 65Rosenblatt, F. The perceptron: A probabilistic model for information storage and organization in the brain. Psychol. Rev. 1958, 65, 386-408. [CrossRef]
+
+A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting. Y Freund, R E Schapire, 10.1006/jcss.1997.1504J. Comput. Syst. Sci. 55Freund, Y.; Schapire, R.E. A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting. J. Comput. Syst. Sci. 1997, 55, 119-139. [CrossRef]
+
+Adaptive synthetic sampling approach for imbalanced learning. H He, Y Bai, E A Garcia, S Li, Adasyn, Proceedings of the 2008 IEEE International Joint Conference on Neural Networks. the 2008 IEEE International Joint Conference on Neural NetworksPiscataway, NJ, USAIEEEHe, H.; Bai, Y.; Garcia, E.A. ; Li, S. ADASYN: Adaptive synthetic sampling approach for imbalanced learning. In Proceedings of the 2008 IEEE International Joint Conference on Neural Networks; IEEE: Piscataway, NJ, USA, 2008; pp. 1322-1328.
+
+Borderline-SMOTE: A New Over-Sampling Method in Imbalanced Data Sets Learning. H Han, W.-Y Wang, B.-H Mao, Springer3644Berlin/Heidelberg, GermanyHan, H.; Wang, W.-Y. ; Mao, B.-H. Borderline-SMOTE: A New Over-Sampling Method in Imbalanced Data Sets Learning; Springer: Berlin/Heidelberg, Germany, 2005; Volume 3644.
+
+Synthetic minority over-sampling technique. N V Chawla, K W Bowyer, L O Hall, W P Kegelmeyer, Smote, 10.1613/jair.953J. Artif. Intell. Res. 16Chawla, N.V.; Bowyer, K.W. ; Hall, L.O. ; Kegelmeyer, W.P. SMOTE: Synthetic minority over-sampling technique. J. Artif. Intell. Res. 2002, 16, 321-357. [CrossRef]
+
+Borderline Over-sampling for Imbalanced Data Classification. H M Nguyen, E W Cooper, K Kamei, Proceedings: Fifth International Workshop on Computational Intelligence & Applications. Fifth International Workshop on Computational Intelligence & ApplicationsPiscataway, NJ, USAIEEENguyen, H.M.; Cooper, E.W. ; Kamei, K. Borderline Over-sampling for Imbalanced Data Classification. In Proceedings: Fifth International Workshop on Computational Intelligence & Applications; IEEE: Piscataway, NJ, USA, 2009; Volume 2009, pp. 24-29.

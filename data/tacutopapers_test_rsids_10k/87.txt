@@ -1,0 +1,57 @@
+Table S2 S2First-order interactors of LAGs in the HLN (without shared genes with WLN) assayed in C. elegans. (DOCX)Table S3 Shared first-order interactors of LAGs found in WLN and HLN assayed in C. elegans. (DOCX) PLOS ONE | www.plosone.org October 2012 | Volume 7 | Issue 10 | e48282 AcknowledgmentsWe thank the Ellison Medical Foundation and the Biology of Aging Woods Hole summer course participants for assistance in screening the candidate longevity regulators. We are thankful to Lori E. Thomas and the members of the Curran laboratory for technical assistance in lifespan experiments and Jacqueline Y. Lo for critical reading of the manuscript. SPC is an Ellison Medical Foundation New Scholar in Aging.Author Contributions Whole genome RNAi screens for increased longevity: important new insights but not the whole story. S S Lee, Exp Gerontol. 41Lee SS (2006) Whole genome RNAi screens for increased longevity: important new insights but not the whole story. Exp Gerontol 41: 968-973.
+
+A method for the isolation of longevity mutants in the nematode Caenorhabditis elegans and initial results. M R Klass, Mech Ageing Dev. 22Klass MR (1983) A method for the isolation of longevity mutants in the nematode Caenorhabditis elegans and initial results. Mech Ageing Dev 22: 279- 286.
+
+A C. elegans mutant that lives twice as long as wild type. C Kenyon, J Chang, E Gensch, A Rudner, R Tabtiang, Nature. 366Kenyon C, Chang J, Gensch E, Rudner A, Tabtiang R (1993) A C. elegans mutant that lives twice as long as wild type. Nature 366: 461-464.
+
+Different dietary restriction regimens extend lifespan by both independent and overlapping genetic pathways in C. elegans. E L Greer, A Brunet, Aging Cell. 8Greer EL, Brunet A (2009) Different dietary restriction regimens extend lifespan by both independent and overlapping genetic pathways in C. elegans. Aging Cell 8: 113-127.
+
+New Genes Tied to Endocrine, Metabolic, and Dietary Regulation of Lifespan from a Caenorhabditis elegans Genomic RNAi Screen. M Hansen, A L Hsu, A Dillin, C Kenyon, PLoS Genet. 117Hansen M, Hsu AL, Dillin A, Kenyon C (2005) New Genes Tied to Endocrine, Metabolic, and Dietary Regulation of Lifespan from a Caenorhabditis elegans Genomic RNAi Screen. PLoS Genet 1: e17.
+
+A systematic RNAi screen for longevity genes in C. elegans. B Hamilton, Y Dong, M Shindo, W Liu, I Odell, Genes Dev. 19Hamilton B, Dong Y, Shindo M, Liu W, Odell I, et al. (2005) A systematic RNAi screen for longevity genes in C. elegans. Genes Dev 19: 1544-1555.
+
+Lifespan regulation by evolutionarily conserved genes essential for viability. S Curran, G Ruvkun, PLoS Genet. 356Curran S, Ruvkun G (2007) Lifespan regulation by evolutionarily conserved genes essential for viability. PLoS Genet 3: e56.
+
+Longevity genes in the nematode Caenorhabditis elegans also mediate increased resistance to stress and prevent disease. T E Johnson, S Henderson, S Murakami, E De Castro, S H De Castro, Journal Inherit Metab Dis. 25Johnson TE, Henderson S, Murakami S, de Castro E, de Castro SH, et al. (2002) Longevity genes in the nematode Caenorhabditis elegans also mediate increased resistance to stress and prevent disease. Journal Inherit Metab Dis 25: 197-206.
+
+Relationship between increased longevity and stress resistance as assessed through gerontogene mutations in Caenorhabditis elegans. T E Johnson, E De Castro, Hegi De Castro, S Cypser, J Henderson, S , Exp Gerontol. 36Johnson TE, de Castro E, Hegi de Castro S, Cypser J, Henderson S, et al. (2001) Relationship between increased longevity and stress resistance as assessed through gerontogene mutations in Caenorhabditis elegans. Exp Gerontol 36: 1609-1617.
+
+SMK-1, an essential regulator of DAF-16-mediated longevity. S Wolff, H Ma, D Burch, G Maciel, T Hunter, Cell. 124Wolff S, Ma H, Burch D, Maciel G, Hunter T, et al. (2006) SMK-1, an essential regulator of DAF-16-mediated longevity. Cell 124: 1039-1053.
+
+Direct inhibition of the longevity-promoting factor SKN-1 by insulin-like signaling in C. elegans. J M Tullet, M Hertweck, J H An, J Baker, J Y Hwang, Cell. 132Tullet JM, Hertweck M, An JH, Baker J, Hwang JY, et al. (2008) Direct inhibition of the longevity-promoting factor SKN-1 by insulin-like signaling in C. elegans. Cell 132: 1025-1038.
+
+PHA-4/Foxa mediates diet-restriction-induced longevity of C. elegans. S Panowski, S Wolff, H Aguilaniu, J Durieux, A Dillin, Nature. 447Panowski S, Wolff S, Aguilaniu H, Durieux J, Dillin A (2007) PHA-4/Foxa mediates diet-restriction-induced longevity of C. elegans. Nature 447: 550-555.
+
+JNK regulates lifespan in Caenorhabditis elegans by modulating nuclear translocation of forkhead transcription factor/DAF-16. S W Oh, A Mukhopadhyay, N Svrzikapa, F Jiang, R J Davis, Proc Natl Acad Sci U S A. 102Oh SW, Mukhopadhyay A, Svrzikapa N, Jiang F, Davis RJ, et al. (2005) JNK regulates lifespan in Caenorhabditis elegans by modulating nuclear translocation of forkhead transcription factor/DAF-16. Proc Natl Acad Sci U S A 102: 4494- 4499.
+
+A conserved MST-FOXO signaling pathway mediates oxidative-stress responses and extends life span. M K Lehtinen, Z Yuan, P R Boag, Y Yang, J Villen, Cell. 125Lehtinen MK, Yuan Z, Boag PR, Yang Y, Villen J, et al. (2006) A conserved MST-FOXO signaling pathway mediates oxidative-stress responses and extends life span. Cell 125: 987-1001.
+
+Regulation of aging and age-related disease by DAF-16 and heat-shock factor. A L Hsu, C T Murphy, C Kenyon, Science. 300Hsu AL, Murphy CT, Kenyon C (2003) Regulation of aging and age-related disease by DAF-16 and heat-shock factor. Science 300: 1142-1145.
+
+MicroRNA-regulated protein-protein interaction networks: how could they help in searching for prolongevity targets?. R Tacutu, A Budovsky, M Wolfson, V E Fraifeld, Rejuvenation Res. 13Tacutu R, Budovsky A, Wolfson M, Fraifeld VE (2010) MicroRNA-regulated protein-protein interaction networks: how could they help in searching for pro- longevity targets? Rejuvenation Res 13: 373-377.
+
+Common gene signature of cancer and longevity. A Budovsky, R Tacutu, H Yanai, A Abramovich, M Wolfson, Mech Ageing Dev. 130Budovsky A, Tacutu R, Yanai H, Abramovich A, Wolfson M, et al. (2009) Common gene signature of cancer and longevity. Mech Ageing Dev 130: 33-39.
+
+GenAge: a genomic and proteomic network map of human ageing. J P De Magalhaes, O Toussaint, FEBS Lett. 571de Magalhaes JP, Toussaint O (2004) GenAge: a genomic and proteomic network map of human ageing. FEBS Lett 571: 243-247.
+
+Molecular links between cellular senescence, longevity and age-related diseases -a systems biology perspective. R Tacutu, A Budovsky, H Yanai, V E Fraifeld, Aging (Albany NY). 3Tacutu R, Budovsky A, Yanai H, Fraifeld VE (2011) Molecular links between cellular senescence, longevity and age-related diseases -a systems biology perspective. Aging (Albany NY) 3: 1178-1191.
+
+Pleiotropy, natural selection, and the evolution of senescence. Gc W, Evolution. 11GC W (1957) Pleiotropy, natural selection, and the evolution of senescence. Evolution 11: 398-809.
+
+Gene activities that mediate increased life span of C. elegans insulin-like signaling mutants. A V Samuelson, C E Carr, G Ruvkun, Genes Dev. 21Samuelson AV, Carr CE, Ruvkun G (2007) Gene activities that mediate increased life span of C. elegans insulin-like signaling mutants. Genes Dev 21: 2976-2994.
+
+Longevity network: construction and implications. A Budovsky, A Abramovich, R Cohen, V Chalifa-Caspi, V Fraifeld, Mech Ageing Dev. 128Budovsky A, Abramovich A, Cohen R, Chalifa-Caspi V, Fraifeld V (2007) Longevity network: construction and implications. Mech Ageing Dev 128: 117- 124.
+
+Interaction networks as a tool to investigate the mechanisms of aging. E Chautard, N Thierry-Mieg, Ricard - Blum, S , Biogerontology. 11Chautard E, Thierry-Mieg N, Ricard-Blum S (2010) Interaction networks as a tool to investigate the mechanisms of aging. Biogerontology 11: 463-473.
+
+Network medicine: a networkbased approach to human disease. A L Barabasi, N Gulbahce, J Loscalzo, Nat Rev Genet. 12Barabasi AL, Gulbahce N, Loscalzo J (2011) Network medicine: a network- based approach to human disease. Nat Rev Genet 12: 56-68.
+
+A gene expression map for Caenorhabditis elegans. S K Kim, J Lund, M Kiraly, K Duke, M Jiang, Science. 293Kim SK, Lund J, Kiraly M, Duke K, Jiang M, et al. (2001) A gene expression map for Caenorhabditis elegans. Science 293: 2087-2092.
+
+Cataloging the relationships between proteins: a review of interaction databases. C Rohl, Y Price, T B Fischer, M Paczkowski, M F Zettel, Mol Biotechnol. 34Rohl C, Price Y, Fischer TB, Paczkowski M, Zettel MF, et al. (2006) Cataloging the relationships between proteins: a review of interaction databases. Mol Biotechnol 34: 69-93.
+
+A single gene network accurately predicts phenotypic effects of gene perturbation in Caenorhabditis elegans. I Lee, B Lehner, C Crombie, W Wong, A G Fraser, Nat Genet. 40Lee I, Lehner B, Crombie C, Wong W, Fraser AG, et al. (2008) A single gene network accurately predicts phenotypic effects of gene perturbation in Caenorhabditis elegans. Nat Genet 40: 181-188.
+
+The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. R Tacutu, A Budovsky, V E Fraifeld, Biogerontology. 11Tacutu R, Budovsky A, Fraifeld VE (2010) The NetAge database: a compendium of networks for longevity, age-related diseases and associated processes. Biogerontology 11: 513-522.
+
+The Human Ageing Genomic Resources: online databases and tools for biogerontologists. J P De Magalhaes, A Budovsky, G Lehmann, J Costa, Y Li, Aging Cell. 8de Magalhaes JP, Budovsky A, Lehmann G, Costa J, Li Y, et al. (2009) The Human Ageing Genomic Resources: online databases and tools for bioger- ontologists. Aging Cell 8: 65-72.

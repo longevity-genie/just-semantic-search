@@ -1,0 +1,47 @@
+To evaluate the genes selected by different models, the lists of the most predictive genes for linear, tree-based, and Bayesian networks models were combined, and a composite ranking was implemented (Supplementary Table S6). For this, each gene was assigned with a particular rank within each performance metric, and multiple ranks were aggregated (for detailed criteria, please see Methods).
+
+The composite ranking was then used to determine core gene signatures (as parsimonious as possible in terms of size) with as high an impact on the MLS as possible. Two approaches were used for this-one linear and one non-linear.
+
+For the linear approach, to study the final selection of genes and their ability to explain the variability in MLS, an organ-wise Bayesian multilevel linear model with random coefficients was used. The top 11 genes were selected based on the penalized deviance criterion. This can be interpreted as "sharing" information across regressions fitted for each organ-a reasonable assumption since we only have so many samples and we can safely assume that information about a particular organ can help us model the regressions done on other organs. As can be seen in Table 1, the genes considered to fit the regression were able to explain more than 70% of the MLS variability for each organ, the brain being the one with the greatest R 2 = 0.79 (liver displayed the smallest R 2 = 0.71). In the non-linear approach, to explain how the genes with the highest composite ranking impact MLS, multiple LightGBM-SHAP models were built with different numbers of top-ranked genes. According to the threshold criteria described in the methods, the top-six genes model was considered most significant, having the lowest number of genes, while having the highest increase in model performance. Upon the training of this stage III LightGBM-SHAP model, average Huber loss = 6.41, MAE = 7.45, MSE = 233.6 and R 2 = 0.67 were achieved in a five-fold cross-validation with genes CEL, SPATA20, C6orf89, NOXA1, CALCOCO2 and PPP1CA.
+
+Unlike the top genes of the stage II model (Figure 3a), the SHAP distribution of the six genes was more balanced, all genes having both positive and negative SHAP impacts, while better separated clustered samples for pro-MLS (CEL, SPATA20, NOXA1, CALCOCO2) and anti-MLS (C6orf89, PPP1CA) genes could be visually observed (Figure 4a,b). As shown in Figure 4c, the top six genes from the multi-model analysis correlate with systemic features. Remarkably, all six genes, in all five organs, correlate with body temperature, which was previously shown to be an independent determinant of mammalian longevity [17].
+
+the SHAP distribution of the six genes was more balanced, all genes having both positive and negative SHAP impacts, while better separated clustered samples for pro-MLS (CEL, SPATA20, NOXA1, CALCOCO2) and anti-MLS (C6orf89, PPP1CA) genes could be visually observed (Figure 4a,b). As shown in Figure 4c, the top six genes from the multi-model analysis correlate with systemic features. Remarkably, all six genes, in all five organs, correlate with body temperature, which was previously shown to be an independent determinant of mammalian longevity [17].
+
+Materials and Methods
+
+Bioinformatic Workflow and Analysis Design
+
+The comparison of expression levels for different species involves tackling many degrees of uncertainty and potential errors due to technical issues (discussed in detail by Toren et al., 2020). With this in mind, we approached the problem as a feature reduction problem, i.e., finding a small set of genes that is highly predictive for MLS variation between species in different organs. The designed bioinformatic pipeline includes processing expression data from multiple species and selecting potential LAGs based on three distinct approaches: linear based models to investigate organ-specific patterns, LightGBM-SHAP explanations models to research the impacts of individual genes and their interactions, and Bayesian networks models to identify potential causality relationships with MLS.
+
+Samples Selection and Data Quality
+
+All mammalian species with transcriptome annotations in the 99th release of the Ensembl Compara Database [61], for which RNA-Seq samples of healthy liver, kidney, lung, brain, or heart organs were available in the NCBI Sequence Read Archive, were selected in this study. The full list of species and sequencing run IDs can be found in Supplementary  Table S1. For each species, samples from juvenile, diseased, and very old animals were discarded in order to control for signals pertaining to the developmental or potentially pathological state of the included organisms. Only species that had at least two RNA-Seq samples were kept. In addition, to account for the heterogeneity in expression values, each dataset has been checked for anomalous distributions by exploratory analysis; extreme outliers were manually analyzed and removed. Overall, 408 samples from 38 species and five organs have been selected and processed using the same RNA-Seq quantification pipeline to avoid heterogeneity in the data processing. Linear models were fitted on a reduced dataset in which 5 species were removed: 4 species that contributed with samples to a single organ and 1 species with outlier sample distribution (Canis lupus familiaris).
+
+Orthology
+
+Orthology relationships and transcriptome annotations have been obtained from Ensembl, release 99th, preprocessed, and imported to GraphDB, which was further used for the analysis of orthology and for expression value extraction. The preprocessing scripts have been developed in-house and are available as notebooks in our group's repository at https://github.com/antonkulaga/species-notebooks.
+
+For the linear models, expression values for genes in species with more than one paralog were considered as missing values to reduce ambiguity. The final dataset for linear models included 11,831 genes. For the LightGBM models, 12,323 orthologous coding genes were selected by combining one-to-one and high-confidence one-to-many orthologs. For this analysis, genes for which orthologs were not present in more than 90% of the species were excluded.
+
+Species Life
+
+History Data
+
+Maximum lifespan, body mass, temperature, metabolic rate, and gestation period data have been obtained from the AnAge database, build 14 [3], and mitochondrial GC has been obtained from the MitoAge database, version 1.0 [62].
+
+RNA
+
+Seq Pipeline
+
+For quality control, adapter cutting and trimming, Fastp (version 0.20.1) [63] was used. Transcript quantification was done with salmon (version 1.4.0) [64]. Transcript expressions were aggregated at the gene level with tximport (version 3.12). Raw read counts were normalized on a per-sample basis, using the transcript per million (TPM) normalization. For performing the comparative analysis, the gene expression levels were normalized with TPM, which accounts for potential gene length differences across species.
+
+Linear Models
+
+The linear models' analysis was performed in Python (version 3.8), using several libraries, including statsmodels (version 0.11.1) [65], pandas (version 1.1.1), seaborn (version 0.10.1), pyUpsetPlots (version 0.4.0), Venn (version 0.1.3), etc. The code necessary to reproduce the analysis can be found at https://github.com/ursueugen/cross-specieslinear-models.
+
+To investigate the association between gene expression and MLS, organ-specific linear models were built, allowing for the selection of genes highly associated with MLS, in each organ. Single-variable linear models of the form GeneExpression~β 0 + β 1 x SpeciesTrait were fitted independently for every gene and every life-history trait. For this analysis, the variables were log 2 -transformed and normalized to z-scores, prior to fitting. For each model, missing data (species missing one-to-one ortholog, species with no samples in one of the organs, missing life-history trait) were ignored. Since the number of human samples/data points might bias the analysis and result in much higher leverage for the human species samples (outliers in terms of MLS), we decided to perform the linear analysis while excluding the human samples, since linear regression is sensitive to high leverage points. The p-values for β 1 were used as the statistical significance of the associations and the signs for the direction of the association, and R 2 as the goodness-of-fit metric. All obtained p-values were adjusted using the Benjamini-Hochberg multiple testing correction. Associations with adjusted p-values < 0.05 and R 2 > 0.3 were considered significant. For all results, please see Supplementary Table S2.
+
+The expression activity across pathways was evaluated by using the single-sample gene set enrichment analysis (ssGSEA), also known as the signature projection method, as was first described by Barbie et al. [66]. For pathways data, we used the KEGG pathway database [67]. The signature projection method was applied using the ssgsea function from the gseapy Python package (version 0.9.18) [68][69][70]. After obtaining the enrichment score for each pathway, linear models of the form EnrichmentScore~β 0 + β 1 x SpeciesTrait were fitted and interpreted following the same approach as described for single genes. For the full pathway results, please see Supplementary Table S3.
+
+Light GBM Models with SHAP Explanations

@@ -1,0 +1,51 @@
+Wide-scale comparative analysis of longevity genes and interventions
+
+Hagai Yanai The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev POB 6538410501Beer ShevaIsrael
+
+Arie Budovsky The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev POB 6538410501Beer ShevaIsrael
+
+Biotechnology Unit
+
+Technological Center
+
+8489101Beer ShevaIsrael
+
+Thomer Barzilay The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev POB 6538410501Beer ShevaIsrael
+
+Robi Tacutu Computational Biology of Aging Group Institute of Biochemistry Romanian Academy 060031BucharestRomania
+
+Chronos Biosystems SRL
+
+BucharestRomania
+
+Vadim E Fraifeld The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev POB 6538410501Beer ShevaIsrael
+
+Wide-scale comparative analysis of longevity genes and interventions 10.1111/acel.12659comparative analysisevolutionary conservationgene enrichmentgene orthologylongevity genespro- teomepublic and private mechanisms of aging/longevity Hundreds of genes, when manipulated, affect the lifespan of model organisms (yeast, worm, fruit fly, and mouse) and thus can be defined as longevity-associated genes (LAGs). A major challenge is to determine whether these LAGs are model-specific or may play a universal role as longevity regulators across diverse taxa. A wide-scale comparative analysis of the 1805 known LAGs across 205 species revealed that (i) LAG orthologs are substantially overrepresented, from bacteria to mammals, compared to the entire genomes or interactomes, and this was especially noted for essential LAGs; (ii) the effects on lifespan, when manipulating orthologous LAGs in different model organisms, were mostly concordant, despite a high evolutionary distance between them; (iii) LAGs that have orthologs across a high number of phyla were enriched in translational processes, energy metabolism, and DNA repair genes; (iv) LAGs that have no orthologs out of the taxa in which they were discovered were enriched in autophagy (Ascomycota/Fungi), G proteins (Nematodes), and neuroactive ligand-receptor interactions (Chordata).
+
+The results also suggest that antagonistic pleiotropy might be a conserved principle of aging and highlight the importance of overexpression studies in the search for longevity regulators.
+
+Introduction
+
+The role of genetic factors in determination of longevity and aging patterns is an intensively studied issue (Vijg & Suh, 2005;Kenyon, 2010). Hundreds of genes, when manipulated, have been shown to affect the lifespan of model organisms (yeast, worm, fruit fly, and mouse) (Tacutu et al., 2013). These genes (further denoted as longevity-associated genes, LAGs) could be defined as those whose modulation of function or expression (such as gene knockout, overexpression, partial or full loss-offunction mutations, RNA interference, and genetic polymorphisms) results in noticeable changes in longevity-lifespan extension or accelerated aging (Budovsky et al., 2007;Tacutu et al., 2013).
+
+We have previously investigated the characteristic features of LAGs and found that (i) they display a marked diversity in their basic function and primary cellular location of the encoded proteins (Budovsky et al., 2007); and (ii) LAG-encoded proteins display a high connectivity and interconnectivity. As a result, they form a scale-free protein-protein interaction network ('longevity network'), indicating that LAGs could act in a cooperative manner (Budovsky et al., 2007;Wolfson et al., 2009;Tacutu et al., 2010aTacutu et al., , 2011Tacutu et al., , 2012. (iii) Many LAGs, particularly those that are hubs in the 'longevity network', are involved in age-related diseases (including atherosclerosis, type 2 diabetes, cancer, and Alzheimer's disease), and in aging-associated conditions (such as oxidative stress, chronic inflammation, and cellular senescence) (Budovsky et al., 2007Wolfson et al., 2009;Tacutu et al., 2010aTacutu et al., , 2011. (iv) The majority of LAGs established by that time in yeast, worms, flies, and mice have human orthologs, indicating their conservation 'from yeast to humans' (Budovsky et al., 2007).
+
+This assumption was also supported by studies on specific LAGs or pathways such as Foxo (Martins et al., 2016), insulin/IGF1/mTOR signaling (Tatar et al., 2003;Warner, 2005;Piper et al., 2008;Ziv & Hu, 2011;Gems & Partridge, 2013;Zhang & Liu, 2014;Pitt & Kaeberlein, 2015), Gadd45 (Moskalev et al., 2012), and cell-cell and cell-extracellular matrix interaction proteins . Again, the above studies were limited only to the four model organisms and humans. Now, the existing databases on orthologs allow for an essential extension of the analysis of LAG orthology, far beyond the traditional model organisms and humans. In particular, the data deposited in the InParanoid database-Eukaryotic Ortholog Groups (http://inparanoid. sbc.su.se/, Sonnhammer & Ostlund, 2015) include orthologs for the complete proteomes of 273 species. Here, we report the results of an unprecedentedly wide-scale analysis of 1805 LAGs established in model organisms (available at Human Ageing Genomic Resources (HAGR)-GenAge database; http://genomics.senescence.info/genes/longevity. html, Tacutu et al., 2013), with regard to their putative relevance to public and private mechanisms of aging.
+
+Results
+
+Orthology of longevity
+
+associated genes
+
+Our first question was how LAGs orthologs are distributed across diverse taxonomic groups. For that purpose, we extracted the LAG orthologs for all the species in the InParanoid database, using a software developed in our laboratory (see Methods). For each gene of interest, the evolutionary conservation was evaluated as the presence or absence of orthologs across 205 proteomes (all species available excluding parasites) for a high InParanoid score of 1.0. Parasites were excluded from the analysis because they usually keep the minimal set of genes required for survival in the hosts, and thus, their inclusion could bias the results into overstating the conservation of these genes and diminish the conservation of others.
+
+As seen in Fig. 1, for the vast majority of InParanoid species, the fraction of conserved genes was significantly higher for LAGs than for the entire proteome of the same model organism. The few exceptions were fringe cases where the baseline orthology was either very high (phylogenetically very close species, for example, Caenorhabditis elegans and Caenorhabditis briggsae), or very low (phylogenetically very distant species, for example, Mus musculus and Korarchaeum cryptofilum) (Table S1).
+
+Remarkably, despite the high diversity of the species under analysis, the ratio between the LAG orthologs and the orthologs of the entire proteome was relatively constant along the evolutionary axis (Fig. 2). This could indicate that the high conservation of LAGs is relatively independent of evolutionary distance.
+
+As lifespan extension experiments can be regarded as more robust, we placed a special focus on LAGs that extended lifespan, when manipulated (LSE-LAGs). The results indicate that the major principles still hold (Fig. 1). For the three lower model organisms (S. cerevisiae, C. elegans, D. melanogaster), the distribution of the LSE-LAGs orthologs was almost identical to all LAGs; a clear trend was also observed for M. musculus, although it did not reach a statistically significant value, most likely because of the relatively low number of lifespan-extending interventions in this model.
+
+It should be taken into account that genes which a priori have orthologs in humans and are involved in basic biological processes or major diseases are more often tested for their potential effect on lifespan. Despite this obvious bias, an important point is that among the model organisms examined, the highest conservation ratio was observed for C. elegans (P < E-8 for all comparisons; Fig. 2a), where the majority of LAGs were identified by means of an unbiased genome-wide RNA interference (RNAi) screens (Lee et al., 2003;Hamilton et al., 2005;Hansen et al., 2005;Yanos et al., 2012).
+
+Postdevelopmental gene inactivation using RNAi is of special interest. This is because it allows for discovering longevity regulators that could not be discovered otherwise, because their predevelopmental inactivation causes a lethal phenotype . According to WormBase (http://www.wormbase.org/; Howe et al., 2016), 127 of the 733 known C. elegans LAGs are essential for development and growth, which means that worm LAGs are enriched in essential genes by approximately fivefold compared to the entire genome . This is even more pronounced among LAGs that extend worm lifespan by more than 20% when inactivated: They are enriched 15-fold in essential genes. As essential genes are generally more evolutionary conserved than nonessential ones (Tacutu et al., 2011), we looked at the ortholog distribution of the 127 essential worm LAGs and found that they are indeed dramatically more conserved than all LAGs (Fig. 1b). The same is also true for essential LAGs where the postdevelopmental RNAi resulted in lifespan extension (Fig. 1b). Remarkably, postdevelopmental inactivation of worm essential LAGs has been shown to predominantly Fig. 1 Percentage of orthologs of longevity-associated genes (LAGs) from the four model organisms across 205 species. Each graph represents one of the four model organisms and the LAGs discovered for that species.

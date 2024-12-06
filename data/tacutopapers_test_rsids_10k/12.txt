@@ -1,0 +1,50 @@
+Increased mitochondrial fusion allows the survival of older animals in diverse C. elegans longevity pathways. S N Chaudhari, E Kipreos, 10.1038/s41467-017-00274-4Nat. Commun. 8182PubMedChaudhari, S.N. ; Kipreos, E.T. Increased mitochondrial fusion allows the survival of older animals in diverse C. elegans longevity pathways. Nat. Commun. 2017, 8, 182. [CrossRef] [PubMed]
+
+Meiosis-specific cohesin component, Stag3 is essential for maintaining centromere chromatid cohesion, and required for DNA repair and synapsis between homologous chromosomes. J Hopkins, G Hwang, J Jacob, N Sapp, R Bedigian, K Oka, P Overbeek, S Murray, P W Jordan, 10.1371/journal.pgen.1004413PLoS Genet. 10PubMedHopkins, J.; Hwang, G.; Jacob, J.; Sapp, N.; Bedigian, R.; Oka, K.; Overbeek, P.; Murray, S.; Jordan, P.W. Meiosis-specific cohesin component, Stag3 is essential for maintaining centromere chromatid cohesion, and required for DNA repair and synapsis between homologous chromosomes. PLoS Genet. 2014, 10, e1004413. [CrossRef] [PubMed]
+
+Splice variants of the dual specificity tyrosine phosphorylation-regulated kinase 4 (DYRK4) differ in their subcellular localization and catalytic activity. C Papadopoulos, K Arato, E Lilienthal, J Zerweck, M Schutkowski, N Chatain, G Müller-Newen, W Becker, S De La Luna, 10.1074/jbc.M110.157909J. Biol. Chem. 286PubMedPapadopoulos, C.; Arato, K.; Lilienthal, E.; Zerweck, J.; Schutkowski, M.; Chatain, N.; Müller-Newen, G.; Becker, W.; de la Luna, S. Splice variants of the dual specificity tyrosine phosphorylation-regulated kinase 4 (DYRK4) differ in their subcellular localization and catalytic activity. J. Biol. Chem. 2011, 286, 5494-5505. [CrossRef] [PubMed]
+
+Selective DYRK1A inhibitor for the treatment of neurodegenerative diseases: Alzheimer, parkinson, huntington, and down syndrome. R B Kargbo, 10.1021/acsmedchemlett.0c00346ACS Med. Chem. Lett. 11Kargbo, R.B. Selective DYRK1A inhibitor for the treatment of neurodegenerative diseases: Alzheimer, parkinson, huntington, and down syndrome. ACS Med. Chem. Lett. 2020, 11, 1795-1796. [CrossRef]
+
+Bombesin Receptor-Activated Protein (BRAP) Modulates NF-κB Activation in Bronchial Epithelial Cells by Enhancing HDAC Activity. Y Liu, X.-Q Qin, H C Weber, Y Xiang, C Liu, H.-J Liu, H Yang, J Jiang, X Qu, 10.1002/jcb.25406J. Cell. Biochem. 117Liu, Y.; Qin, X.-Q. ; Weber, H.C.; Xiang, Y.; Liu, C.; Liu, H.-J. ; Yang, H.; Jiang, J.; Qu, X. Bombesin Receptor-Activated Protein (BRAP) Modulates NF-κB Activation in Bronchial Epithelial Cells by Enhancing HDAC Activity. J. Cell. Biochem. 2016, 117, 1069-1077. [CrossRef]
+
+Genetics vs. entropy: Longevity factors suppress the NF-kappaB-driven entropic aging process. A Salminen, K Kaarniranta, 10.1016/j.arr.2009.11.001Age. Res. Rev. 9Salminen, A.; Kaarniranta, K. Genetics vs. entropy: Longevity factors suppress the NF-kappaB-driven entropic aging process. Age. Res. Rev. 2010, 9, 298-314. [CrossRef]
+
+The PPP1CA Gene and Its Putative Association with Human Ageing. 11The PPP1CA Gene and Its Putative Association with Human Ageing. Available online: https://genomics.senescence.info/genes/ entry.php?hgnc=PPP1CA (accessed on 11 December 2020).
+
+SynergyAge: A curated database for synergistic and antagonistic interactions of longevity-associated genes. G Bunu, D Toren, C F Ion, D Barardo, L Sarghie, L G Grigore, J P De Magalhaes, V Fraifeld, R Tacutu, 10.1038/s41597-020-00710-zSci. Data 2020, 7, 366. [CrossRefBunu, G.; Toren, D.; Ion, C.F. ; Barardo, D.; Sarghie, L.; Grigore, L.G. ; de Magalhaes, J.P.; Fraifeld, V.; Tacutu, R. SynergyAge: A curated database for synergistic and antagonistic interactions of longevity-associated genes. Sci. Data 2020, 7, 366. [CrossRef]
+
+The antioxidant effects of ribonuclease inhibitor. X Y Cui, P F Fu, D N Pan, Y Zhao, J Zhao, B C Zhao, 10.1080/10715760310001600408Free Radic. Res. 37Cui, X.Y. ; Fu, P.F. ; Pan, D.N. ; Zhao, Y.; Zhao, J.; Zhao, B.C. The antioxidant effects of ribonuclease inhibitor. Free Radic. Res. 2003, 37, 1079-1085. [CrossRef]
+
+Practical approaches to causal relationship exploration. J Li, L Liu, T D Le, In Springerbriefs in Electrical and Computer Engineering. Li, J.; Liu, L.; Le, T.D. Practical approaches to causal relationship exploration. In Springerbriefs in Electrical and Computer Engineering;
+
+Feature Selection with the R PackageMXM: Discovering Statistically Equivalent Feature Subsets. V Lagani, G Athineou, A Farcomeni, M Tsagris, I Tsamardinos, 10.18637/jss.v080.i07J. Stat. Softw. 80Lagani, V.; Athineou, G.; Farcomeni, A.; Tsagris, M.; Tsamardinos, I. Feature Selection with the R PackageMXM: Discovering Sta- tistically Equivalent Feature Subsets. J. Stat. Softw. 2017, 80. [CrossRef]
+
+Unable to find information for 10168452. Unable to find information for 10168452.
+This text is about rs123456789 and their influence on living organisms. Despite it do not exist in real life, it is very important for our tests.
+
+P Spirtes, C Glymour, Scheines, R. Causation, Prediction, and Search. Cambridge, MA, USAMIT Press97802625279272nd ed.Spirtes, P.; Glymour, C.; Scheines, R. Causation, Prediction, and Search, 2nd ed. ; MIT Press: Cambridge, MA, USA, 2001; ISBN 9780262527927.
+
+Overexpression of cytosolic sialidase Neu2 induces myoblast differentiation in C2C12 cells. A Fanzani, R Giuliani, F Colombo, D Zizioli, M Presta, A Preti, S Marchesini, 10.1016/S0014-5793(03)00709-9FEBS Lett. 547Fanzani, A.; Giuliani, R.; Colombo, F.; Zizioli, D.; Presta, M.; Preti, A.; Marchesini, S. Overexpression of cytosolic sialidase Neu2 induces myoblast differentiation in C2C12 cells. FEBS Lett. 2003, 547, 183-188. [CrossRef]
+
+Effect of aging on mitochondrial energetics in the human atria. L Emelyanova, C Preston, A Gupta, M Viqar, U Negmadjanov, S Edwards, K Kraft, K Devana, E Holmuhamedov, D O&apos;hair, 10.1093/gerona/glx160J. Gerontol. A Biol. Sci. Med. Sci. 73PubMedEmelyanova, L.; Preston, C.; Gupta, A.; Viqar, M.; Negmadjanov, U.; Edwards, S.; Kraft, K.; Devana, K.; Holmuhamedov, E.; O'Hair, D.; et al. Effect of aging on mitochondrial energetics in the human atria. J. Gerontol. A Biol. Sci. Med. Sci. 2018, 73, 608-616. [CrossRef] [PubMed]
+
+Bi-allelic mutations in NDUFA6 establish its role in early-onset isolated mitochondrial complex I deficiency. C L Alston, J Heidler, M G Dibley, L S Kremer, L S Taylor, C Fratter, C E French, R I C Glasgow, R G Feichtinger, I Delon, 10.1016/j.ajhg.2018.08.013Am. J. Hum. Genet. 103PubMedAlston, C.L. ; Heidler, J.; Dibley, M.G. ; Kremer, L.S. ; Taylor, L.S. ; Fratter, C.; French, C.E. ; Glasgow, R.I.C. ; Feichtinger, R.G. ; Delon, I.; et al. Bi-allelic mutations in NDUFA6 establish its role in early-onset isolated mitochondrial complex I deficiency. Am. J. Hum. Genet. 2018, 103, 592-601. [CrossRef] [PubMed]
+
+Low abundance of the matrix arm of complex I in mitochondria predicts longevity in mice. S Miwa, H Jow, K Baty, A Johnson, R Czapiewski, G Saretzki, A Treumann, T Von Zglinicki, 10.1038/ncomms4837Nat. Commun. 5PubMedMiwa, S.; Jow, H.; Baty, K.; Johnson, A.; Czapiewski, R.; Saretzki, G.; Treumann, A.; von Zglinicki, T. Low abundance of the matrix arm of complex I in mitochondria predicts longevity in mice. Nat. Commun. 2014, 5, 3837. [CrossRef] [PubMed]
+
+Rbm46 regulates mouse embryonic stem cell differentiation by targeting β-Catenin mRNA for degradation. L Zhai, C Wang, Y Chen, S Zhou, L Li, 10.1371/journal.pone.0172420PLoS ONE. 12Zhai, L.; Wang, C.; Chen, Y.; Zhou, S.; Li, L. Rbm46 regulates mouse embryonic stem cell differentiation by targeting β-Catenin mRNA for degradation. PLoS ONE 2017, 12, e0172420. [CrossRef]
+
+Polyunsaturated fatty acids modulate the association between PIK3CA-KCNMB3 genetic variants and insulin resistance. J.-S Zheng, D K Arnett, L D Parnell, Y.-C Lee, Y Ma, C E Smith, K Richardson, D Li, I B Borecki, K L Tucker, 10.1371/journal.pone.0067394PLoS ONE. 8e67394. [CrossRefZheng, J.-S.; Arnett, D.K. ; Parnell, L.D. ; Lee, Y.-C.; Ma, Y.; Smith, C.E. ; Richardson, K.; Li, D.; Borecki, I.B. ; Tucker, K.L. ; et al. Polyunsaturated fatty acids modulate the association between PIK3CA-KCNMB3 genetic variants and insulin resistance. PLoS ONE 2013, 8, e67394. [CrossRef]
+
+. Int. J. Mol. Sci. 22Int. J. Mol. Sci. 2021, 22, 1073 21 of 21
+
+Mitophagy: An emerging role in aging and age-associated diseases. G Chen, G Kroemer, O Kepp, 10.3389/fcell.2020.00200Front. Cell Dev. Biol. Chen, G.; Kroemer, G.; Kepp, O. Mitophagy: An emerging role in aging and age-associated diseases. Front. Cell Dev. Biol. 2020, 8, 200. [CrossRef]
+
+Atlas on substrate recognition subunits of CRL2 E3 ligases. S Wang, W Xia, M Qiu, X Wang, F Jiang, R Yin, L Xu, 10.18632/oncotarget.8732Oncotarget. 7Wang, S.; Xia, W.; Qiu, M.; Wang, X.; Jiang, F.; Yin, R.; Xu, L. Atlas on substrate recognition subunits of CRL2 E3 ligases. Oncotarget 2016, 7, 46707-46716. [CrossRef]
+
+LRRpredictor-A New LRR Motif Detection Method for Irregular Motifs of Plant NLR Proteins Using an Ensemble of Classifiers. E C Martin, O C A Sukarta, L Spiridon, L G Grigore, V Constantinescu, R Tacutu, A Goverse, A.-J Petrescu, 10.3390/genes11030286Genes. 2020Martin, E.C. ; Sukarta, O.C.A. ; Spiridon, L.; Grigore, L.G. ; Constantinescu, V.; Tacutu, R.; Goverse, A.; Petrescu, A.-J. LRRpredictor-A New LRR Motif Detection Method for Irregular Motifs of Plant NLR Proteins Using an Ensemble of Classifiers. Genes 2020, 11, 286. [CrossRef]
+
+FIGNL1-containing protein complex is required for efficient homologous recombination repair. J Yuan, J Chen, 10.1073/pnas.1220662110Proc. Natl. Acad. Sci. Natl. Acad. SciUSA110Yuan, J.; Chen, J. FIGNL1-containing protein complex is required for efficient homologous recombination repair. Proc. Natl. Acad. Sci. USA 2013, 110, 10640-10645. [CrossRef]
+
+Histamime receptor H4 as a new therapeutic target for age-related macular degeneration. H Kaneko, Nippon Ganka Gakkai Zasshi. 120Kaneko, H. Histamime receptor H4 as a new therapeutic target for age-related macular degeneration. Nippon Ganka Gakkai Zasshi 2016, 120, 747-753.

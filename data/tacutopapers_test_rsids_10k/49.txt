@@ -1,0 +1,61 @@
+Morphological adjustment of senescent cells by modulating caveolin-1 status. K A Cho, S J Ryu, Y S Oh, J H Park, J W Lee, H P Kim, K T Kim, I S Jang, S C Park, J Biol Chem. 279Cho KA, Ryu SJ, Oh YS, Park JH, Lee JW, Kim HP, Kim KT, Jang IS, Park SC. Morphological adjustment of senescent cells by modulating caveolin-1 status. J Biol Chem. 2004; 279: 42270- 42278.
+
+Senescent phenotype can be reversed by reduction of caveolin status. K A Cho, S J Ryu, J S Park, I S Jang, J S Ahn, K T Kim, S C Park, J Biol Chem. 278Cho KA, Ryu SJ, Park JS, Jang IS, Ahn JS, Kim KT, Park SC. Senescent phenotype can be reversed by reduction of caveolin status. J Biol Chem. 2003; 278: 27789-27795.
+
+Gadd45 proteins: Relevance to aging, longevity and age-related pathologies. A A Moskalev, Z Smit-Mcbride, M V Shaposhnikov, E N Plyusnina, A Zhavoronkov, A Budovsky, R Tacutu, V E Fraifeld, 10.1016/j.arr.2011.09.003Ageing Res Rev. Moskalev AA, Smit-McBride Z, Shaposhnikov MV, Plyusnina EN, Zhavoronkov A, Budovsky A, Tacutu R, Fraifeld VE. Gadd45 proteins: Relevance to aging, longevity and age-related pathologies. Ageing Res Rev. 2011; doi:10.1016/j.arr.2011.09.003.
+
+Deciphering the intricate regulatory mechanisms for the cellular choice between cell repair, apoptosis or senescence in response to damaging signals. A Erol, Cell Signal. 23Erol A. Deciphering the intricate regulatory mechanisms for the cellular choice between cell repair, apoptosis or senescence in response to damaging signals. Cell Signal. 2011; 23: 1076- 1081.
+
+Coordination and communication between the p53 and IGF-1-AKT-TOR signal transduction pathways. A J Levine, Z Feng, T W Mak, H You, Jin S , Genes Dev. 20Levine AJ, Feng Z, Mak TW, You H, Jin S. Coordination and communication between the p53 and IGF-1-AKT-TOR signal transduction pathways. Genes Dev. 2006; 20: 267-275.
+
+The coordinate regulation of the p53 and mTOR pathways in cells. Z Feng, H Zhang, A J Levine, Jin S , Proc Natl Acad Sci U S A. 102Feng Z, Zhang H, Levine AJ, Jin S. The coordinate regulation of the p53 and mTOR pathways in cells. Proc Natl Acad Sci U S A. 2005; 102: 8204-8209.
+
+p53 target genes sestrin1 and sestrin2 connect genotoxic stress and mTOR signaling. A V Budanov, M Karin, Cell. 134Budanov AV, Karin M. p53 target genes sestrin1 and sestrin2 connect genotoxic stress and mTOR signaling. Cell. 2008; 134: 451-460.
+
+Paradoxical suppression of cellular senescence by p53. Z N Demidenko, L G Korotchkina, A V Gudkov, M V Blagosklonny, Proc Natl Acad Sci U S A. 107Demidenko ZN, Korotchkina LG, Gudkov AV, Blagosklonny MV. Paradoxical suppression of cellular senescence by p53. Proc Natl Acad Sci U S A. 2010; 107: 9660-9664.
+
+The choice between p53-induced senescence and quiescence is determined in part by the mTOR pathway. L G Korotchkina, O V Leontieva, E I Bukreeva, Z N Demidenko, A V Gudkov, M V Blagosklonny, Aging (Albany NY). 2Korotchkina LG, Leontieva OV, Bukreeva EI, Demidenko ZN, Gudkov AV, Blagosklonny MV. The choice between p53-induced senescence and quiescence is determined in part by the mTOR pathway. Aging (Albany NY). 2010; 2: 344-352.
+
+Decision-making by p53 and mTOR. C G Maki, Aging (Albany NY). 2Maki CG. Decision-making by p53 and mTOR. Aging (Albany NY). 2010; 2: 324-326.
+
+Shifting senescence into quiescence by turning up p53. M Serrano, Cell Cycle. 9Serrano M. Shifting senescence into quiescence by turning up p53. Cell Cycle. 2010; 9: 4256-4257.
+
+Weak p53 permits senescence during cell cycle arrest. O V Leontieva, A V Gudkov, M V Blagosklonny, Cell Cycle. 9Leontieva OV, Gudkov AV, Blagosklonny MV. Weak p53 permits senescence during cell cycle arrest. Cell Cycle. 2010; 9: 4323-4327.
+
+p53 and senescence: a little goes a long way. J S Long, K M Ryan, Cell Cycle. 9Long JS, Ryan KM. p53 and senescence: a little goes a long way. Cell Cycle. 2010; 9: 4050-4051.
+
+TP53 and MTOR crosstalk to regulate cellular senescence. L Galluzzi, O Kepp, G Kroemer, Aging (Albany NY). 2Galluzzi L, Kepp O, Kroemer G. TP53 and MTOR crosstalk to regulate cellular senescence. Aging (Albany NY). 2010; 2: 535- 537.
+
+DNA damaging agents and p53 do not cause senescence in quiescent cells, while consecutive re-activation of mTOR is associated with conversion to senescence. O V Leontieva, M V Blagosklonny, Aging (Albany NY). 2Leontieva OV, Blagosklonny MV. DNA damaging agents and p53 do not cause senescence in quiescent cells, while consecutive re-activation of mTOR is associated with conversion to senescence. Aging (Albany NY). 2010; 2: 924-935.
+
+mTOR and its link to the picture of Dorian Gray -re-activation of mTOR promotes aging. J Wesierska-Gadek, Aging (Albany NY). 2Wesierska-Gadek J. mTOR and its link to the picture of Dorian Gray -re-activation of mTOR promotes aging. Aging (Albany NY). 2010; 2: 892-893.
+
+Aging: ROS or TOR. M V Blagosklonny, Cell Cycle. 7Blagosklonny MV. Aging: ROS or TOR. Cell Cycle. 2008; 7: 3344-3354.
+
+TOR and ageing: a complex pathway for a complex process. M A Mccormick, S Y Tsai, B K Kennedy, Philos Trans R Soc Lond B Biol Sci. 366McCormick MA, Tsai SY, Kennedy BK. TOR and ageing: a complex pathway for a complex process. Philos Trans R Soc Lond B Biol Sci. 2011; 366: 17-27.
+
+Rapamycin decelerates cellular senescence. Z N Demidenko, S G Zubova, E I Bukreeva, V A Pospelov, T V Pospelova, M V Blagosklonny, Cell Cycle. 8Demidenko ZN, Zubova SG, Bukreeva EI, Pospelov VA, Pospelova TV, Blagosklonny MV. Rapamycin decelerates cellular senescence. Cell Cycle. 2009; 8: 1888-1895.
+
+Rapamycin fed late in life extends lifespan in genetically heterogeneous mice. D E Harrison, R Strong, Z D Sharp, J F Nelson, C M Astle, K Flurkey, N L Nadon, J E Wilkinson, K Frenkel, C S Carter, M Pahor, M A Javors, E Fernandez, R A Miller, Nature. 460Harrison DE, Strong R, Sharp ZD, Nelson JF, Astle CM, Flurkey K, Nadon NL, Wilkinson JE, Frenkel K, Carter CS, Pahor M, Javors MA, Fernandez E, Miller RA. Rapamycin fed late in life extends lifespan in genetically heterogeneous mice. Nature. 2009; 460: 392-395.
+
+Restoration of senescent human diploid fibroblasts by modulation of the extracellular matrix. H R Choi, K A Cho, H T Kang, J B Lee, M Kaeberlein, Y Suh, I K Chung, S C Park, Aging Cell. 10Choi HR, Cho KA, Kang HT, Lee JB, Kaeberlein M, Suh Y, Chung IK, Park SC. Restoration of senescent human diploid fibroblasts by modulation of the extracellular matrix. Aging Cell. 2011; 10: 148-157.
+
+The senescence-associated secretory phenotype: the dark side of tumor suppression. J P Coppé, P Y Desprez, A Krtolica, J Campisi, Annu Rev Pathol. 5Coppé JP, Desprez PY, Krtolica A, Campisi J. The senescence-associated secretory phenotype: the dark side of tumor suppression. Annu Rev Pathol. 2010; 5: 99-118.
+
+Senescence and tumor clearance is triggered by p53 restoration in murine liver carcinomas. J Xue, L Zender, C Miething, Hernando E Krizhanovsky, V Cordon-Cardo, C Lowe, S W , Nature. 445Xue J, Zender L, Miething C, Hernando E, Krizhanovsky V, Cordon-Cardo C, Lowe SW. Senescence and tumor clearance is triggered by p53 restoration in murine liver carcinomas. Nature. 2007; 445: 656-660.
+
+Prosenescence therapy for cancer treatment. C Nardella, J G Clohessy, A Alimonti, P P Pandolfi, Nat Rev Cancer. 11Nardella C, Clohessy JG, Alimonti A, Pandolfi PP. Pro- senescence therapy for cancer treatment. Nat Rev Cancer. 2011; 11: 503-511.
+
+Senescence of activated stellate cells limits liver fibrosis. V Krizhanovsky, Yon M Dickins, R A Hearn, S Simon, J Miething, C Yee, H Zender, L Lowe, S W , Cell. 134Krizhanovsky V, Yon M, Dickins RA, Hearn S, Simon J, Miething C, Yee H, Zender L, Lowe SW. Senescence of activated stellate cells limits liver fibrosis. Cell. 2008; 134: 657-667.
+
+Rejuvenating senescent and centenarian human cells by reprogramming through the pluripotent state. L Lapasset, O Milhavet, A Prieur, E Besnard, A Babled, N Aït-Hamou, J Leschik, F Pellestor, J M Ramirez, De Vos, J Lehmann, S Lemaitre, J M , Genes Dev. 25Lapasset L, Milhavet O, Prieur A, Besnard E, Babled A, Aït- Hamou N, Leschik J, Pellestor F, Ramirez JM, De Vos J, Lehmann S, Lemaitre JM. Rejuvenating senescent and centenarian human cells by reprogramming through the pluripotent state. Genes Dev. 2011; 25: 2248-2253.
+
+Have we reached the point for in vivo rejuvenation?. A Abramovich, K K Muradian, V E Fraifeld, Rejuvenation Res. 11Abramovich A, Muradian KK, Fraifeld VE. Have we reached the point for in vivo rejuvenation? Rejuvenation Res. 2008; 11: 489-492.
+
+The Human Ageing Genomic Resources: online databases and tools for biogerontologists. J P De Magalhaes, A Budovsky, G Lehmann, J Costa, Y Li, V Fraifeld, G M Church, Aging Cell. 8de Magalhaes JP, Budovsky A, Lehmann G, Costa J, Li Y, Fraifeld V, Church GM The Human Ageing Genomic Resources: online databases and tools for biogerontologists. Aging Cell. 2009; 8: 65-72.
+
+Stepwise up-regulation of microRNA expression levels from replicating to reversible and irreversible growth arrest states in WI-38 human fibroblasts. O C Maes, H Sarojini, E Wang, J Cell Physiol. 221Maes OC, Sarojini H, Wang E. Stepwise up-regulation of microRNA expression levels from replicating to reversible and irreversible growth arrest states in WI-38 human fibroblasts. J Cell Physiol. 2009; 221: 109-119.
+
+Alterations in microRNA expression in stress-induced cellular senescence. G Li, C Luna, J Qiu, D L Epstein, P Gonzalez, Mech Ageing Dev. 130Li G, Luna C, Qiu J, Epstein DL, Gonzalez P. Alterations in microRNA expression in stress-induced cellular senescence. Mech Ageing Dev. 2009; 130: 731-741.
+
+MiRNA profile associated with replicative senescence, extended cell culture, and ectopic telomerase expression in human foreskin fibroblasts. L N Bonifacio, M B Jarstfer, PLoS One. 512519Bonifacio LN, Jarstfer MB. MiRNA profile associated with replicative senescence, extended cell culture, and ectopic telomerase expression in human foreskin fibroblasts. PLoS One. 2010; 5. pii: e12519.

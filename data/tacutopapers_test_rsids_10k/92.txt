@@ -1,0 +1,203 @@
+An important observation in our study was that the majority of manipulations on LAG orthologs in more than one model animal resulted in concordant effects on longevity (Fig. 5). This strengthens the paradigm of 'public' longevity pathways and of using model animals to study longevity, even across a large evolutionary distance. This notion is further strengthened when combined with the observation of Smith et al. (2008) who demonstrated that the existence of an ortholog is probably accompanied by a preserved role in longevity. Yet, we also observed LAGs with ortholog presence only in a limited number of taxa, or that displayed discordant effects when tested in more than one species (Fig. 5), which could, at least in part, be attributed to 'private' mechanisms of aging. Definitely, more comparative studies are warranted to better discriminate between private and public mechanisms, with unified methods of intervention and evaluation in mind. A recent study by Harel et al. (2015) could serve as a step in that direction by offering a new model of short-lived vertebrate species. In perspective, the combination of the existing data on LAGs with the emerging data on their expression throughout lifespan could bring about a deeper understanding of the role of genetic factors in aging and longevity.
+
+Experimental procedures Gene lists
+
+Longevity-associated genes The longevity-associated genes (LAGs) are defined as genes whose genetic manipulation in model organisms (M. musculus, D. melanogaster, C. elegans and S. cerevisiae) was shown to significantly affect their lifespan. The list was obtained from Human Ageing Genomic Resources (HAGR)-GenAge database (http://genomics.senescence.info/gene s/longevity.html; Tacutu et al., 2013).
+
+Interactome genes
+
+Interactome genes were extracted from the BioGrid database (http:// www.thebiogrid.org; Chatr-Aryamontri et al., 2015) and were used as additional, high quality control for a more rigorous testing of the evolutionary conservation of LAGs.
+
+Essential genes
+
+Genes essential for the development and growth of C. elegans were extracted from WormBase (http://www.wormbase.org/; Howe et al., 2016).
+
+Stress response genes
+
+Genes classified under the category of 'stress response' were extracted by the UniProt Retrieve ID/Mapping service (http://www.uniprot.org/ uploadlists/; Pundir et al., 2017) Determination of orthology Ortholog determination for each gene was based on the InParanoid database-Eukaryotic Ortholog Groups (http://inparanoid.sbc.su.se/; Sonnhammer & Ostlund, 2015). The analysis was performed for 205 species (all species available excluding parasites; for a full list, see Table S1). The ortholog extraction was performed automatically using software developed in our laboratory. The taxonomy of the species examined was based on the ITIS database (http://www.itis.gov/). The statistical significance of conservation for a group of genes was evaluated with the chi-squared goodness of fit test.
+
+Gene set enrichment
+
+Enrichment analysis was performed using David Bioinformatics Resources 6.8 (https://david-d.ncifcrf.gov/; Huang et al., 2009), Web-Gestalt (http://www.webgestalt.org/; Wang et al., 2013), and EnrichR (http://amp.pharm.mssm.edu/Enrichr/; Kuleshov et al., 2016). The enrichment analysis was performed against three different backgrounds, including the whole genome, all LAGs, and the genes of the model organism under the same conservation criteria depicted in Tables S4-S6.
+
+Supporting Information
+
+Additional Supporting Information may be found online in the supporting information tab for this article. Table S1 List of species used for orthology analysis.
+
+(a) Saccharomyces cerevisiae, n = 6590 for control, 824 for all LAGs, and 277 for LSE-LAGs. (b) C. elegans, n = 20 325 for control, 733 for all LAGs, 491 for LSE-LAGs, 127 for PD RNAi LAGs, and 107 for PD RNAi LSE-LAGs. (c) Drosophila melanogaster, n = 13 250 for control, 136 for all LAGs, and 85 for LSE-LAGs. (d) Mus musculus, n = 21 895 for control, 112 for all LAGs, and 42 for LSE-LAGs. The vast majority of pairwise differences between LAGs and the entire proteome are significant (P < 0.05), with a few exceptions of fringe cases as described in the text. For most M. musculus LSE-LAGs, the pairwise differences are insignificant (P > 0.05), with a few exceptions where the number of orthologs was relatively high. Longevity genes and interventions, H. Yanai et al.
+
+(a) Saccharomyces cerevisiae, n = 6590 for control and 824 for LAGs; (b) Caenorhabditis elegans, n = 20 325 for control and 733 for LAGs; (c) Drosophila melanogaster, n = 13 250 for control and 136 for LAGs; (d) Mus musculus, n = 21 895 for control and 112 for LAGs.
+
+Fig. 3 3Distribution of LAGs according to the number of phyla in which LAGs have orthologs. Each graph represents the distribution of LAGs (gray area) discovered in the indicated model species. The entire proteome was used as a control (dotted line). X-axis depicts the number of phyla in which the genes have orthologs. The medians of the distributions are presented as vertical lines: dotted line for all genes and smooth black line for LAGs. Longevity genes and interventions, H. Yanai et al.
+
+Fig. S1 S1Percentage of Interactome LAG orthologs from the four model species.
+
+Fig. S2 S2Percentage of LAG orthologs from the four model species after exclusion of proteins from enriched categories.
+
+Fig. S3 S3GO Slim summary and enrichment analysis.
+
+Fig. S4 S4Conservation index (CI) compared to concordancy of longevity effects.
+
+Fig. S5 S5Method similarity score compared to concordancy of longevity effects.
+
+Table 1 ' 1Public' and 'private' enriched categories. The table depicts the most enriched categories for lists of proteins of all longevity-associated genes (all LAGs) and LAGs discovered by either lifespan extension (LSE-LAGs) or lifespan reduction (LSD-LAGs), under different evolutionary conservation criteria (defined as the presence of orthologs across a listed number of phyla). For a detailed enrichment analysis, seeTables S4-S6Public/Private Saccharomyces cerevisiae Caenorhabditis elegans Drosophila melanogaster Mus musculus
+
+Public
+
+Taxa groups
+
+where orthologs
+
+are present
+
+at least 12 phyla
+
+at least 12 phyla
+
+at least 10 phyla
+
+at least 10 phyla
+
+All LAGs
+
+Ribosome and translation
+
+Mitochondria
+
+Citrate cycle (TCA cycle)
+
+Ribosome and translation
+
+Mitochondria
+
+Oxidative phosphorylation
+
+NADH activity
+
+FoxO signaling
+
+Autophagy
+
+DNA repair, especially
+
+Nucleotide excision repair
+
+LSE
+
+LAGs
+
+Ribosome and translation
+
+Ribosome and translation
+
+Mitochondria
+
+Oxidative phosphorylation
+
+Development
+
+Oxidoreductase
+
+No enrichment
+
+LSD
+
+LAGs
+
+Ribosome and translation
+
+Mitochondria
+
+Citrate cycle (TCA cycle)
+
+Autophagy
+
+DNA repair
+
+Autophagy
+
+Autophagy
+
+FoxO signaling
+
+DNA repair, especially
+
+Nucleotide excision repair
+
+Private
+
+(indicated taxa)
+
+Taxa groups
+
+where orthologs
+
+are present
+
+only in Fungi/Ascomycota
+
+only in Nematoda
+
+only in Arthropoda
+
+only in Chordata
+
+All LAGs
+
+Autophagy
+
+G protein related
+
+No enrichment
+
+Neuroactive ligand
+
+receptor interaction
+
+LSE
+
+LAGs
+
+Meiosis
+
+G protein related
+
+No enrichment
+
+Neuroactive ligand
+
+receptor interaction
+
+LSD
+
+LAGs
+
+Autophagy
+
+Mitochondrion
+
+Mitophagy
+
+Transcription regulation
+
+No enrichment
+
+No enrichment
+
+Table S2 S2Enrichment of KEGG and GOCC pathways in Longevity Associated Genes (LAGs) from different species.
+
+Table S3 S3List of proteins under different evolutionary conservation criteria.
+
+Table S4 S4Enrichment analysis of Longevity-associated genes (LAGs) under different criteria and backgrounds.
+
+Table S5 S5Enrichment analysis of lifespan decreasing Longevity-associated genes (LAGs) under different criteria and backgrounds.
+
+Table S6 S6Enrichment analysis of lifespan extending Longevity-associated genes (LAGs) under different criteria and backgrounds.
+
+Table S7 S7List of LAGs that are listed as stress response genes under the GO classification system.
+
+Table S8 S8Pairwise concordance of LAG manipulation. Longevity genes and interventions, H. Yanai et al. 1275 ª 2017 The Authors. Aging Cell published by the Anatomical Society and John Wiley & Sons Ltd. AcknowledgmentsWe would like to thank Prof. Marina Wolfson for her helpful suggestions and insightful comments. We also thank the anonymous reviewers for their valuable comments and suggestions which allowed us to greatly improve the manuscript.Conflict of interestNone declared.Author contributionsAll authors participated in data collection and analysis. In addition, TB wrote all the programs for data extraction from the databases used and, in particular, the ortholog extraction for large sets of genes and species and the calculation of the conservation index. HY wrote the manuscript and prepared the figures and tables. AB participated in writing the manuscript. RT was involved in the computational aspects of analysis. VEF coordinated the study.Aging Cell M(o)TOR of aging: MTOR as a universal molecular hypothalamus. M V Blagosklonny, Aging (Albany NY). 5Blagosklonny MV (2013) M(o)TOR of aging: MTOR as a universal molecular hypothalamus. Aging (Albany NY) 5, 490-494.
+
+Longevity network: construction and implications. A Budovsky, A Abramovich, R Cohen, V Chalifa-Caspi, V Fraifeld, Mech. Ageing Dev. 128Budovsky A, Abramovich A, Cohen R, Chalifa-Caspi V, Fraifeld V (2007) Longevity network: construction and implications. Mech. Ageing Dev. 128, 117-124.
+
+Common gene signature of cancer and longevity. A Budovsky, R Tacutu, H Yanai, A Abramovich, M Wolfson, V Fraifeld, Mech. Ageing Dev. 130Budovsky A, Tacutu R, Yanai H, Abramovich A, Wolfson M, Fraifeld V (2009) Common gene signature of cancer and longevity. Mech. Ageing Dev. 130, 33-39.

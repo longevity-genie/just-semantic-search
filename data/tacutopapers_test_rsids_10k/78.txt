@@ -1,0 +1,219 @@
+The values within brackets represent the distribution of motion stages during the lifespan. (A-E) WT(EV) and odr-3 denote worms fed with RNAi(EV). (C, D) ife-2 and odr-3; ife-2 denote worms fed with ife-2 RNAi bacteria. (F) The pharyngeal pumping rate (average number of contractions per minute) of WT, odr-3(n1605), ife-2(ok306) and odr-3(n1605); ife-2(ok306) mutants were recorded on days 1, 5, 10 and 15 post-L4 moult. odr-3(n1605); ife-2(ok306) worms show a significantly slower decline of pharyngeal pumping with age, compared to WT. For simplicity, only significant differences among groups are indicated (one way ANOVA with Dunnett's test); ** denotes p < 0.01; *** denotes p < 0.001. AGING motility data of odr-3(n1605); ife-2(ok306) mutants, see Supplementary Figure 3A-3H; for the daf-16(mu86); odr-3(n1605); ife-2(ok306) mutants see Supplementary Figure 3I-3L).
+
+. Overall, our findings show that the ife-2 RNAi treatment and the double intervention odr-3(n1605); ife-2(RNAi) have a beneficial effect on motility-assessed healthspan, significantly increasing the period of full motility (SupplementaryFigure 5C; p < 2.0E-16) and exhibiting a decrease in the decrepit period of life. Similar data for the odr-3(n1605); ife-2(ok306) double mutant can be seen in SupplementaryFigure 5D, 5E and for the daf-16(mu86); odr-3(n1605); ife-2(ok306) triple mutant in SupplementaryFigure 5F.
+
+Figure 5 . 5Loss of odr-3 and ife-2 activity enhances oxidative stress tolerance. (A) Survival fraction of the indicated L4 larvae upon 5 days exposure to 0.2M paraquat (the experiment was repeated independently three times). (B) Survival fraction of the indicated strains upon 1 hour treatment with 0.5M NaN3 (the experiment was repeated independently four times). (C) Survival fraction of the indicated strains upon 4h heat stress at 35° C. Each strain was scored on three replicate plates and the experiment was repeated independently four times. (D) Egg-laying rate of the indicated strains. The average number of eggs laid by each strain was determined by transferring worms to new E. coli plates every 12 hours from L4 stage. (E) Brood size of the indicated strains at 20° C. Each point represents the total brood of one hermaphrodite. (A-E) Bars indicate the mean ± SEM. For simplicity, only significant differences among groups are indicated (one way ANOVA with Dunnett's test); * denotes p < 0.05; ** denotes p < 0.01.
+
+, the time spent by odr-3; ife-2 animals (in absolute values) in a frail state does not increase, although their lifespan increases compared to both WT and single mutants. Together with the fact that the double intervention extends both mean and maximum lifespan (Supplementary
+
+Figure 1 . 1, RT and SG; methodology, SG; lab work and validations, IVM, VNCS, SG; bioinformatics and programmatic tools, GB; all authors have participated to the analysis of results and to the writing Kaplan-Meier survival curves for worms fed bacteria expressing the target dsRNA or an equal mix of target dsRNA and EV. All survival plots represent pooled populations from 3 independent experiments. (A, B) Lifespan comparison of WT (A) or odr-3(n1605) (B) worms fed bacteria expressing ife-2 dsRNA or a 1:1 mixture of ife-2 dsRNA and empty-vector (EV). (C, D) Lifespan comparison of WT (C) or odr-3(n1605) (D) worms fed bacteria expressing cku-70 dsRNA or a mixture of cku-70 dsRNA and EV. Lifespan values are given in Supplementary Table 1. AGING Supplementary Figure 2. DAF-16::GFP nuclear translocation in odr-3; ife-2 (RNAi) mutant worms. Worms expressing daf-16 (ot971 [daf-16::GFP]) fluorescent marker in WT animals and odr-3(n1605), ife-2(RNAi) or odr-3(n1605); ife-2(RNAi) mutant background show nuclear accumulation of DAF-16::GFP in odr-3(n1605) mutants but not in WT, ife-2 or odr-3; ife-2 animals. Left panels show GFP images and right panels show Differential Interference Contrast (DIC) images captured with a confocal microscope. The arrow points to the nuclear accumulation of DAF-16::GFP in intestinal cells of odr-3 mutant. Images were obtained using the same confocal settings and exposure adjustments were uniformly applied in all images for better visualization.
+
+AGINGSupplementary Figure 4 . 4Network schematic representation of the strains analyzed in this study and of the effects of each genetic intervention. Nodes represent the strains as follows: diamond for WT, circle for single gene interventions, square for double gene interventions, hexagon for triple gene interventions, and octagon for quadruple gene interventions. Nodes are positioned on the vertical axis according to their respective mean healthspan. Edges between worm strains are colored depending on the gain (or loss) in lifespan extension: increase (green), decrease (red) and small or non-significant change (gray). The extent of the change is included on the edge as a percentage increase/decrease between the origin and destination nodes of the edge. odr-3 and daf-16 denote mutants containing the odr-3(n1605) and daf-16(mu86) mutations; ife-2 and cku-70 denote animals in which these genes were modulated by RNAi bacteria. The white bars inside of the nodes indicate the mean ± SEM. AGING Supplementary Figure 5. Method of quantifying the statistical significance for the healthspan difference between two worm populations. Kaplan Meier curves of survival (A) and healthspan (B), showing the probability of an event occurring over time. The events
+
+Table 1 . 1Mean lifespan of C. elegans strains with genetic interventions in the odr-3, ife-2 and cku-70.Strain RNAi* Mean lifespan days ± SD Effect vs control p-value Strain RNAi* Mean lifespan days ± SD Effect vs control p-value
+
+WT
+
+EV
+
+20.6±0.2
+
+[control]
+
+WT
+
+EV
+
+20.6±0.2
+
+[control]
+
+odr
+
+3
+
+26.0±0.3
+
+26.2 %
+
+<2.0E
+
+16 odr
+
+3
+
+26.0±0.3
+
+26.2 %
+
+<2.00E
+
+16
+
+WT
+
+ife
+
+2
+
+24.3±0.2
+
+18.0 %
+
+<2.0E
+
+16 WT
+
+ife
+
+2;EV
+
+22.9±0.3
+
+11.2 %
+
+1.00E
+
+10
+
+WT
+
+cku
+
+70
+
+21.5±0.2
+
+4.4 %
+
+7.00E
+
+03
+
+WT cku
+
+70;EV
+
+21.9±0.2
+
+6.3 %
+
+1.00E
+
+04
+
+odr
+
+3
+
+ife
+
+2
+
+28.9±0.4
+
+40.3 %
+
+<2.0E
+
+16 odr
+
+3 ife
+
+2;EV
+
+30.1±0.5
+
+46.1 %
+
+<2.00E
+
+16
+
+odr
+
+3
+
+cku
+
+70
+
+23.4±0.5
+
+13.6 %
+
+4.00E
+
+11 odr
+
+3 cku
+
+70;EV
+
+26.5±0.4
+
+28.6 %
+
+<2.00E
+
+16
+
+WT ife
+
+2;cku
+
+70
+
+23.7±0.3
+
+15.0 %
+
+3.00E
+
+16
+
+odr
+
+3 ife
+
+2;cku
+
+70
+
+27.9±0.3
+
+35.4 %
+
+<2.00E
+
+16
+
+ife
+
+2 denotes animals fed only with ife
+
+2 RNAi bacteria, whereas ife
+
+2;EV denotes animals fed with a mixture of ife
+
+2RNAi/RNAi(EV). Similar for cku
+
+70. odr
+
+3 denotes animals fed with RNAi(EV).
+
+(mu86) background. Similar to the RNAi experiments, the ok306 extended the lifespan of daf-16 single mutants (Figure 3C, 6.25% increase), while the double daf-16(mu86); odr-3(n1605) ACKNOWLEDGMENTSSome of the strains used in this study were provided by the CGC, which is funded by NIH Office of Research Infrastructure Programs (P40 OD010440). The authors would like to thank Anton Kulaga for helping with the development of the time-lapse conversion script.CONFLICTS OF INTERESTThe authors declare that they have no conflicts of interest.Please browse FullText version to see the data of Supplementary Tables 1, 2 The Mechanobiology of Aging. J M Phillip, I Aifuwa, J Walston, D Wirtz, 10.1146/annurev-bioeng-071114-04082926643020Annu Rev Biomed Eng. 17Phillip JM, Aifuwa I, Walston J, Wirtz D. The Mechanobiology of Aging. Annu Rev Biomed Eng. 2015; 17:113-41. https://doi.org/10.1146/annurev-bioeng-071114- 040829 PMID:26643020
+
+Defining aging. M Lemoine, 10.1007/s10539-020-09765-zBiol Philos. 3546Lemoine M. Defining aging. Biol Philos. 2020; 35:46. https://doi.org/10.1007/s10539-020-09765-z
+
+New model of health promotion and disease prevention for the 21st century. R N Butler, R A Miller, D Perry, B A Carnes, T F Williams, C Cassel, J Brody, M A Bernard, L Partridge, T Kirkwood, G M Martin, S J Olshansky, 10.1136/bmj.a39918614506BMJ. 337399Butler RN, Miller RA, Perry D, Carnes BA, Williams TF, Cassel C, Brody J, Bernard MA, Partridge L, Kirkwood T, Martin GM, Olshansky SJ. New model of health promotion and disease prevention for the 21st century. BMJ. 2008; 337:a399. https://doi.org/10.1136/bmj.a399 PMID:18614506
+
+Dividends" from research on aging--can biogerontologists, at long last, find something useful to do?. R A Miller, 10.1093/gerona/gln06219225032J Gerontol A Biol Sci Med Sci. 64Miller RA. "Dividends" from research on aging--can biogerontologists, at long last, find something useful to do? J Gerontol A Biol Sci Med Sci. 2009; 64:157-60. https://doi.org/10.1093/gerona/gln062 PMID:19225032
+
+Infrastructure and resources for an aging population: embracing complexity in translational research. K P High, 10.1016/j.trsl.2013.09.00124095640Transl Res. 163High KP. Infrastructure and resources for an aging population: embracing complexity in translational research. Transl Res. 2014; 163:446-55. https://doi.org/10.1016/j.trsl.2013.09.001 PMID:24095640
+
+The genetics of ageing. C J Kenyon, 10.1038/nature0898020336132Nature. 464Kenyon CJ. The genetics of ageing. Nature. 2010; 464:504-12. https://doi.org/10.1038/nature08980 PMID:20336132 AGING
+
+Facing up to the global challenges of ageing. L Partridge, J Deelen, P E Slagboom, 10.1038/s41586-018-0457-830185958Nature. 561Partridge L, Deelen J, Slagboom PE. Facing up to the global challenges of ageing. Nature. 2018; 561:45-56. https://doi.org/10.1038/s41586-018-0457-8 PMID:30185958
+
+Developmental drift as a mechanism for aging: lessons from nematodes. M Lezzerini, R L Smith, Y Budovskaya, 10.1007/s10522-013-9462-3Biogerontology. 1424122213Lezzerini M, Smith RL, Budovskaya Y. Developmental drift as a mechanism for aging: lessons from nematodes. Biogerontology. 2013; 14:693-701. https://doi.org/10.1007/s10522-013-9462-3 PMID:24122213

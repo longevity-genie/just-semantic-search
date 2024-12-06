@@ -1,0 +1,49 @@
+R: A language and environment for statistical computing. Vienna: R Foundation for Statistical Computing. R Core Team, R Core Team. R: A language and environment for statistical computing. Vienna: R Foundation for Statistical Computing; 2018.
+
+Rentrez: an R package for the NCBI eUtils API. D J Winter, R J. 92Winter DJ. Rentrez: an R package for the NCBI eUtils API. R J. 2018;9(2):520-6.
+
+CD-HIT: accelerated for clustering the nextgeneration sequencing data. L Fu, B Niu, Z Zhu, S Wu, W Li, Bioinformatics. 2823Fu L, Niu B, Zhu Z, Wu S, Li W. CD-HIT: accelerated for clustering the next- generation sequencing data. Bioinformatics. 2012;28(23):3150-2.
+
+. B Haas, A Papanicolaou, Transdecoder, Haas B, Papanicolaou A. Transdecoder [Available from: https://transdecoder. github.io].
+
+Phylogenetic and functional assessment of orthologs inference projects and methods. A M Altenhoff, C Dessimoz, PLoS Comput Biol. 511000262Altenhoff AM, Dessimoz C. Phylogenetic and functional assessment of orthologs inference projects and methods. PLoS Comput Biol. 2009;5(1):e1000262.
+
+MAFFT multiple sequence alignment software version 7: improvements in performance and usability. K Katoh, D M Standley, Mol Biol Evol. 304Katoh K, Standley DM. MAFFT multiple sequence alignment software version 7: improvements in performance and usability. Mol Biol Evol. 2013; 30(4):772-80.
+
+Phyx: phylogenetic tools for unix. J W Brown, J F Walker, S A Smith, Bioinformatics. 3312Brown JW, Walker JF, Smith SA. Phyx: phylogenetic tools for unix. Bioinformatics. 2017;33(12):1886-8.
+
+AMAS: a fast tool for alignment manipulation and computing of summary statistics. M L Borowiec, PeerJ. 41660Borowiec ML. AMAS: a fast tool for alignment manipulation and computing of summary statistics. PeerJ. 2016;4:e1660.
+
+IQ-TREE: a fast and effective stochastic algorithm for estimating maximum-likelihood phylogenies. L T Nguyen, H A Schmidt, Von Haeseler, A Minh, B Q , Mol Biol Evol. 321Nguyen LT, Schmidt HA, von Haeseler A, Minh BQ. IQ-TREE: a fast and effective stochastic algorithm for estimating maximum-likelihood phylogenies. Mol Biol Evol. 2015;32(1):268-74.
+
+Conservation evaluation and phylogenetic diversity. D P Faith, Biol Conserv. 611Faith DP. Conservation evaluation and phylogenetic diversity. Biol Conserv. 1992;61(1):1-10.
+
+Picante: R tools for integrating phylogenies and ecology. S W Kembel, P D Cowan, M R Helmus, W K Cornwell, H Morlon, D D Ackerly, Bioinformatics. 2611Kembel SW, Cowan PD, Helmus MR, Cornwell WK, Morlon H, Ackerly DD, et al. Picante: R tools for integrating phylogenies and ecology. Bioinformatics. 2010;26(11):1463-4.
+
+Test and visualize gene overlaps. R package version 1. L Shen, M Sinai, Geneoverlap, 16.0. 2013Shen L, Sinai M. GeneOverlap: Test and visualize gene overlaps. R package version 1.16.0. 2013 [Available from: http://shenlab-sinai.github.io/shenlab-sinai/].
+
+ggplot2: elegant graphics for data analysis. H Wickham, Springer-VerlagNew YorkWickham H. ggplot2: elegant graphics for data analysis. New York: Springer- Verlag; 2016.
+
+limma powers differential expression analyses for RNA-sequencing and microarray studies. M E Ritchie, B Phipson, D Wu, Y Hu, C W Law, W Shi, Nucleic Acids Res. 43747Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W, et al. limma powers differential expression analyses for RNA-sequencing and microarray studies. Nucleic Acids Res. 2015;43(7):e47.
+
+M Tennekes, Treemap, Treemap Visualization. R package version. 22017Tennekes M. treemap: Treemap Visualization. R package version 2.4-2 2017 [Available from: https://CRAN.R-project.org/package=treemap].
+
+Cytoscape: a software environment for integrated models of biomolecular interaction networks. P Shannon, A Markiel, O Ozier, N S Baliga, J T Wang, D Ramage, Genome Res. 1311Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, Ramage D, et al. Cytoscape: a software environment for integrated models of biomolecular interaction networks. Genome Res. 2003;13(11):2498-504.
+
+Network propagation in the cytoscape cyberinfrastructure. D E Carlin, B Demchak, D Pratt, E Sage, T Ideker, PLoS Comput Biol. 13101005598Carlin DE, Demchak B, Pratt D, Sage E, Ideker T. Network propagation in the cytoscape cyberinfrastructure. PLoS Comput Biol. 2017;13(10):e1005598.
+
+Error and attack tolerance of complex networks. R Albert, H Jeong, A L Barabasi, Nature. 4066794Albert R, Jeong H, Barabasi AL. Error and attack tolerance of complex networks. Nature. 2000;406(6794):378-82.
+
+The BioGRID interaction database: 2017 update. A Chatr-Aryamontri, R Oughtred, L Boucher, J Rust, C Chang, N K Kolas, Nucleic Acids Res. 45D1Chatr-Aryamontri A, Oughtred R, Boucher L, Rust J, Chang C, Kolas NK, et al. The BioGRID interaction database: 2017 update. Nucleic Acids Res. 2017; 45(D1):D369-D79.
+
+Approaches for extracting practical information from gene co-expression networks in plant biology. K Aoki, Y Ogata, D Shibata, Plant Cell Physiol. 483Aoki K, Ogata Y, Shibata D. Approaches for extracting practical information from gene co-expression networks in plant biology. Plant Cell Physiol. 2007;48(3):381-90.
+
+The human blood metabolome-transcriptome interface. J Bartel, J Krumsiek, K Schramm, J Adamski, C Gieger, C Herder, PLoS Genet. 1161005274Bartel J, Krumsiek J, Schramm K, Adamski J, Gieger C, Herder C, et al. The human blood metabolome-transcriptome interface. PLoS Genet. 2015;11(6): e1005274.
+
+Metabolism of benzo [a] pyrene by human mammary epithelial cells: toxicity and DNA adduct formation. M R Stampfer, J C Bartholomew, H S Smith, J C Bartley, Proc Natl Acad Sci. 7810Stampfer MR, Bartholomew JC, Smith HS, Bartley JC. Metabolism of benzo [a] pyrene by human mammary epithelial cells: toxicity and DNA adduct formation. Proc Natl Acad Sci U S A. 1981;78(10):6251-5.
+
+CellAge_ supplementary: GitHub. R A Avelar, J G Ortega, R Tacutu, E Tyler, D Bennett, P Binetti, Avelar RA, Ortega JG, Tacutu R, Tyler E, Bennett D, Binetti P, et al. CellAge_ supplementary: GitHub; 2019 [Available from: https://github.com/maglab/ CellAge_supplementary].
+
+Publisher's Note. Publisher's Note
+
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations. Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.

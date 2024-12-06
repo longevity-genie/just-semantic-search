@@ -1,0 +1,51 @@
+The DAA is available at http://ageing-map.org with the data made available under the permissive Creative Commons licence, allowing data to be used in other analyses. There are options to either download the entire database or to download more focused data using the export tool. Feedback via email is welcome, as are submissions of new data, for which a submission form is provided to ensure that the relevant information is included.
+
+CONCLUSION
+
+The DAA is an integrated web resource for studying and visualizing human age-associated changes at various biological levels. It can aid researchers to perform integrative, system-level analysis of ageing. While target users are primarily fundamental researchers, it is anticipated that the DAA will also be useful to clinicians, students and the public in general. Other existing ageing-related resources such as GenAge (12), AgeFactDB (18) and SAGEWEB (http: //sageweb.org/) focus on genes and factors that alter lifespan and/or ageing. By providing a manually-curated and readily accessible source of age-related changes during the normal life course, the DAA is thus complementary to existing resources and offers a new approach to systemizing ageing resources. This brings numerous benefits, limiting duplication of efforts and maintaining the accuracy of data which is essential given the rapid pace at which the field of ageing is progressing. In conclusion, the DAA aims to become the most comprehensive source for data related to ageing changes, consistently providing high-quality data, covering a wide variety of different biological levels.
+
+Figure 1 . 1The DAA anatomical model. Moving the mouse over a given organ reveals the number of age-related changes in the DAA, along with a breakdown of the number of each specific type of change. Colours indicate the number of changes for each change type (orange: physiological, red: pathological, blue: molecular, green: psychological).
+
+Figure 3 . 3The details page for the gene GH1. This shows the two ageing changes associated with it and the links to external resources including GO terms, orthologs and various other databases.
+
+Figure 4 . 4Storing changes for later analysis. A combination of two screenshots showing how changes can be added to the saved list and then compared against each other using the graphing capabilities of the Digital Ageing Atlas. Filters allow for a narrowing of results based on the properties of each change; Multiple filters can be applied. The actions column provides the ability to add and remove changes to the stored list.
+
+Table 1 . 1The number of human age-related changes for each category in the Digital Ageing AtlasType of change Description
+
+ACKNOWLEDGEMENTWe would like to thank Ana Fonseca, Gerald Keil and Krishna Madireddy for useful suggestions, testing and contributions. Messages from mortality: the evolution of death rates in the old. L Partridge, M Mangel, Trends Ecol. Evol. 14Partridge,L. and Mangel,M. (1999) Messages from mortality: the evolution of death rates in the old. Trends Ecol. Evol., 14, 438-442.
+
+B Arking, Biology of Aging: Observations and Principles. USAOxford University PressArking,B. (2006) Biology of Aging: Observations and Principles. Oxford University Press, USA.
+
+Physiological Basis of Aging and Geriatrics. P S Timiras, CRC PressBoca Raton, FLTimiras,P. S. (1994) Physiological Basis of Aging and Geriatrics. CRC Press, Boca Raton, FL.
+
+Systems biology of ageing and longevity. T B Kirkwood, Philos. Trans. R. Soc. Lond. B. Biol. Sci. 366Kirkwood,T. B. (2011) Systems biology of ageing and longevity. Philos. Trans. R. Soc. Lond. B. Biol. Sci. 366, 64-70.
+
+Systems biology and longevity: an emerging approach to identify innovative anti-aging targets and strategies. E Cevenini, E Bellavista, P Tieri, G Castellani, F Lescai, M Francesconi, M Mishto, A Santoro, S Valensin, S Salvioli, Curr. Pharm. Des. 16Cevenini,E., Bellavista,E., Tieri,P., Castellani,G., Lescai,F., Francesconi,M., Mishto,M., Santoro,A., Valensin,S., Salvioli,S. et al. (2010) Systems biology and longevity: an emerging approach to identify innovative anti-aging targets and strategies. Curr. Pharm. Des. 16, 802-813.
+
+. J P De Magalhães, J Curado, G M Church, de Magalhães,J. P., Curado,J. and Church,G. M. (2009)
+
+Meta-analysis of age-related gene expression profiles identifies common signatures of aging. Bioinformatics. 25Meta-analysis of age-related gene expression profiles identifies common signatures of aging. Bioinformatics 25, 875-881.
+
+Gene expression profile of aging in human muscle. S Welle, A I Brooks, J M Delehanty, N Needler, C A Thornton, Physiol. Genomics. 14Welle,S., Brooks,A. I., Delehanty,J. M., Needler,N. and Thornton,C. A. (2003) Gene expression profile of aging in human muscle. Physiol. Genomics 14, 149-159.
+
+Gene regulation and DNA damage in the ageing human brain. T Lu, Y Pan, S Y Kao, C Li, I Kohane, J Chan, B A Yankner, Nature. 429Lu,T., Pan,Y., Kao,S. Y., Li,C., Kohane,I., Chan,J. and Yankner,B. A. (2004) Gene regulation and DNA damage in the ageing human brain. Nature 429, 883-891.
+
+NCBI GEO: archive for functional genomics data sets-update. T Barrett, S E Wilhite, P Ledoux, C Evangelista, I F Kim, M Tomashevsky, K A Marshall, K H Phillippy, P M Sherman, M Holko, Nucleic Acids Res. 41Barrett,T., Wilhite,S. E., Ledoux,P., Evangelista,C., Kim,I. F., Tomashevsky,M., Marshall,K. A., Phillippy,K. H., Sherman,P. M., Holko,M. et al. (2013) NCBI GEO: archive for functional genomics data sets-update. Nucleic Acids Res. 41, D991-D995.
+
+Finding the right questions: exploratory pathway analysis to enhance biological discovery in large datasets. T Kelder, B R Conklin, C T Evelo, A R Pico, PLoS Biol. 81000472Kelder,T., Conklin,B. R., Evelo,C. T. and Pico,A. R. (2010) Finding the right questions: exploratory pathway analysis to enhance biological discovery in large datasets. PLoS Biol. 8, e1000472.
+
+Visualizing information across multidimensional post-genomic structured and textual databases. Y Tao, C Friedman, Y A Lussier, Bioinformatics. 21Tao,Y., Friedman,C. and Lussier,Y. A. (2005) Visualizing information across multidimensional post-genomic structured and textual databases. Bioinformatics. 21, 1659-1667.
+
+Human ageing genomic resources: integrated databases and tools for the biology and genetics of ageing. R Tacutu, T Craig, A Budovsky, D Wuttke, G Lehmann, D Taranukha, J Costa, V E Fraifeld, De Magalhães, Nucleic Acids Res. 41J. P.Tacutu,R., Craig,T., Budovsky,A., Wuttke,D., Lehmann,G., Taranukha,D., Costa,J., Fraifeld,V. E. and de Magalhães,J. P. (2013) Human ageing genomic resources: integrated databases and tools for the biology and genetics of ageing. Nucleic Acids Res. 41, D1027-D1033.
+
+Simplified ontologies allowing comparison of developmental mammalian gene expression. A Kruger, O Hofmann, P Carninci, Y Hayashizaki, W Hide, Genome Biol. 8229Kruger,A., Hofmann,O., Carninci,P., Hayashizaki,Y. and Hide,W. (2007) Simplified ontologies allowing comparison of developmental mammalian gene expression. Genome Biol. 8, R229.
+
+The BRENDA Tissue Ontology (BTO): the first all-integrating ontology of all organisms for enzyme sources. M Gremse, A Chang, I Schomburg, A Grote, M Scheer, C Ebeling, D Schomburg, Nucleic Acids Res. 39Gremse,M., Chang,A., Schomburg,I., Grote,A., Scheer,M., Ebeling,C. and Schomburg,D. (2011) The BRENDA Tissue Ontology (BTO): the first all-integrating ontology of all organisms for enzyme sources. Nucleic Acids Res., 39, D507-D513.
+
+The Aging Body: Physiological Changes and Psychological Consequences. S K Whitbourne, Springer-VerlagNYWhitbourne,S. K. (1985) The Aging Body: Physiological Changes and Psychological Consequences. Springer-Verlag, NY.
+
+AGEMAP: a gene expression database for aging in mice. J M Zahn, S Poosala, A B Owen, D K Ingram, A Lustig, A Carter, A T Weeraratna, D D Taub, M Gorospe, K Mazan-Mamczarz, PLoS Genet. 3201Zahn,J. M., Poosala,S., Owen,A. B., Ingram,D. K., Lustig,A., Carter,A., Weeraratna,A. T., Taub,D. D., Gorospe,M., Mazan-Mamczarz,K. et al. (2007) AGEMAP: a gene expression database for aging in mice. PLoS Genet. 3, e201.
+
+Allen Brain Atlas: an integrated spatio-temporal portal for exploring the central nervous system. S M Sunkin, L Ng, C Lau, T Dolbeare, T L Gilbert, C L Thompson, M Hawrylycz, C Dang, Nucleic Acids Res. 41Sunkin,S. M., Ng,L., Lau,C., Dolbeare,T., Gilbert,T. L., Thompson,C. L., Hawrylycz,M. and Dang,C. (2012) Allen Brain Atlas: an integrated spatio-temporal portal for exploring the central nervous system. Nucleic Acids Res. 41, D996-D1008.
+
+AgeFactDB-the JenAge ageing factor database-towards data integration in ageing research. R Hühne, T Thalheim, J Sühnel, Nucleic Acids Res. 42Hühne,R., Thalheim,T. and Sühnel,J. (2014) AgeFactDB-the JenAge ageing factor database-towards data integration in ageing research. Nucleic Acids Res. 42, D892-D896.

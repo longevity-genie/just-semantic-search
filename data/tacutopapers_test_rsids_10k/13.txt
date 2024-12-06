@@ -1,0 +1,44 @@
+This text is about rs123456788 and their influence on living organisms. Despite it do not exist in real life, it is very important for our tests.
+Improving supervised prediction of aging-related genes via dynamic network analysis. Q Li, T Milenkovic, arXiv:2005.036592020Li, Q.; Milenkovic, T. Improving supervised prediction of aging-related genes via dynamic network analysis. arXiv 2020, arXiv:2005.03659.
+
+Key modulators in aging and age-related cardiovascular diseases?. S Sahoo, D N Meijles, P J Pagano, Oxidases, 10.1042/CS20150087Clin. Sci. 130PubMedSahoo, S.; Meijles, D.N. ; Pagano, P.J. NADPH oxidases: Key modulators in aging and age-related cardiovascular diseases? Clin. Sci. 2016, 130, 317-335. [CrossRef] [PubMed]
+
+C6orf89 encodes three distinct HDAC enhancers that function in the nucleolus, the golgi and the midbody. V S Lalioti, S Vergarajauregui, A Villasante, D Pulido, I V Sandoval, 10.1002/jcp.24355J. Cell. Physiol. 228PubMedLalioti, V.S. ; Vergarajauregui, S.; Villasante, A.; Pulido, D.; Sandoval, I.V. C6orf89 encodes three distinct HDAC enhancers that function in the nucleolus, the golgi and the midbody. J. Cell. Physiol. 2013, 228, 1907-1921. [CrossRef] [PubMed]
+
+Proteasomal degradation induced by DPP9-mediated processing competes with mitochondrial protein import. Y Finger, M Habich, S Gerlich, S Urbanczyk, E Van De Logt, J Koch, L Schu, K J Lapacz, M Ali, C Petrungaro, 10.15252/embj.2019103889EMBO J. 2020, 39, e103889. [CrossRefFinger, Y.; Habich, M.; Gerlich, S.; Urbanczyk, S.; van de Logt, E.; Koch, J.; Schu, L.; Lapacz, K.J. ; Ali, M.; Petrungaro, C.; et al. Proteasomal degradation induced by DPP9-mediated processing competes with mitochondrial protein import. EMBO J. 2020, 39, e103889. [CrossRef]
+
+J Herrero, M Muffato, K Beal, S Fitzgerald, L Gordon, M Pignatelli, A J Vilella, S M J Searle, R Amode, S Brent, 10.1093/database/bav096Ensembl comparative genomics resources. bav096. [CrossRefHerrero, J.; Muffato, M.; Beal, K.; Fitzgerald, S.; Gordon, L.; Pignatelli, M.; Vilella, A.J. ; Searle, S.M.J. ; Amode, R.; Brent, S.; et al. Ensembl comparative genomics resources. Database 2016, 2016, bav096. [CrossRef]
+
+A database for comparative analysis of mitochondrial DNA, with a special focus on animal longevity. D Toren, T Barzilay, R Tacutu, G Lehmann, K K Muradian, V E Fraifeld, Mitoage, 10.1093/nar/gkv1187Nucl. Acids Res. 44Toren, D.; Barzilay, T.; Tacutu, R.; Lehmann, G.; Muradian, K.K. ; Fraifeld, V.E. MitoAge: A database for comparative analysis of mitochondrial DNA, with a special focus on animal longevity. Nucl. Acids Res. 2016, 44, D1262-D1265. [CrossRef]
+
+An ultra-fast all-in-one FASTQ preprocessor. S Chen, Y Zhou, Y Chen, J Gu, Fastp, 10.1093/bioinformatics/bty560Bioinformatics. 34Chen, S.; Zhou, Y.; Chen, Y.; Gu, J. fastp: An ultra-fast all-in-one FASTQ preprocessor. Bioinformatics 2018, 34, i884-i890. [CrossRef]
+
+Salmon provides fast and bias-aware quantification of transcript expression. R Patro, G Duggal, M I Love, R A Irizarry, C Kingsford, 10.1038/nmeth.4197Nat. Methods. 14Patro, R.; Duggal, G.; Love, M.I. ; Irizarry, R.A.; Kingsford, C. Salmon provides fast and bias-aware quantification of transcript expression. Nat. Methods 2017, 14, 417-419. [CrossRef]
+
+Econometric and statistical modeling with python. S Seabold, J Perktold, Statsmodels, Proceedings of the 9th Python in Science Conference. the 9th Python in Science ConferenceAustin, TX, USASeabold, S.; Perktold, J. Statsmodels: Econometric and statistical modeling with python. In Proceedings of the 9th Python in Science Conference, Austin, TX, USA, 28 June-3 July 2010; pp. 92-96.
+
+Systematic RNA interference reveals that oncogenic KRAS-driven cancers require TBK1. D A Barbie, P Tamayo, J S Boehm, S Y Kim, S E Moody, I F Dunn, A C Schinzel, P Sandy, E Meylan, C Scholl, 10.1038/nature08460Nature. 462Barbie, D.A. ; Tamayo, P.; Boehm, J.S. ; Kim, S.Y. ; Moody, S.E. ; Dunn, I.F. ; Schinzel, A.C.; Sandy, P.; Meylan, E.; Scholl, C.; et al. Systematic RNA interference reveals that oncogenic KRAS-driven cancers require TBK1. Nature 2009, 462, 108-112. [CrossRef]
+
+KEGG for integration and interpretation of large-scale molecular data sets. M Kanehisa, S Goto, Y Sato, M Furumichi, M Tanabe, 10.1093/nar/gkr988Nucl. Acids Res. 40Kanehisa, M.; Goto, S.; Sato, Y.; Furumichi, M.; Tanabe, M. KEGG for integration and interpretation of large-scale molecular data sets. Nucl. Acids Res. 2012, 40, D109-D114. [CrossRef]
+
+Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. A Subramanian, P Tamayo, V K Mootha, S Mukherjee, B L Ebert, M A Gillette, A Paulovich, S L Pomeroy, T R Golub, E S Lander, 10.1073/pnas.0506580102Proc. Natl. Acad. Sci. Natl. Acad. SciUSA102PubMedSubramanian, A.; Tamayo, P.; Mootha, V.K. ; Mukherjee, S.; Ebert, B.L. ; Gillette, M.A. ; Paulovich, A.; Pomeroy, S.L. ; Golub, T.R. ; Lander, E.S. ; et al. Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. Proc. Natl. Acad. Sci. USA 2005, 102, 15545-15550. [CrossRef] [PubMed]
+
+Enrichr: Interactive and collaborative HTML5 gene list enrichment analysis tool. E Y Chen, C M Tan, Y Kou, Q Duan, Z Wang, G V Meirelles, N R Clark, A Ma&apos;ayan, 10.1186/1471-2105-14-128BMC Bioinformatics. 14PubMedChen, E.Y. ; Tan, C.M. ; Kou, Y.; Duan, Q.; Wang, Z.; Meirelles, G.V. ; Clark, N.R. ; Ma'ayan, A. Enrichr: Interactive and collaborative HTML5 gene list enrichment analysis tool. BMC Bioinformatics 2013, 14, 128. [CrossRef] [PubMed]
+
+Enrichr: A comprehensive gene set enrichment analysis web server 2016 update. M V Kuleshov, M R Jones, A D Rouillard, N F Fernandez, Q Duan, Z Wang, S Koplev, S L Jenkins, K M Jagodnik, A Lachmann, 10.1093/nar/gkw377Nucl. Acids Res. 44PubMedKuleshov, M.V. ; Jones, M.R. ; Rouillard, A.D.; Fernandez, N.F. ; Duan, Q.; Wang, Z.; Koplev, S.; Jenkins, S.L. ; Jagodnik, K.M. ; Lachmann, A.; et al. Enrichr: A comprehensive gene set enrichment analysis web server 2016 update. Nucl. Acids Res. 2016, 44, W90-W97. [CrossRef] [PubMed]
+
+Stratified Validation Splits for Regression Problems. S C Lowe, 11Lowe, S.C. Stratified Validation Splits for Regression Problems. Available online: https://scottclowe.com/2016-03-19-stratified- regression-partitions/ (accessed on 11 December 2020).
+
+Optuna: A next-generation hyperparameter optimization framework. T Akiba, S Sano, T Yanase, T Ohta, M Koyama, Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining-KDD '19. the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining-KDD '19Anchorage, AK, USA; New York, NY, USAACM PressAkiba, T.; Sano, S.; Yanase, T.; Ohta, T.; Koyama, M. Optuna: A next-generation hyperparameter optimization framework. In Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining-KDD '19, Anchorage, AK, USA, 3-7 August 2019; ACM Press: New York, NY, USA, 2019; pp. 2623-2631.
+
+Multiobjective tree-structured parzen estimator for computationally expensive optimization problems. Y Ozaki, Y Tanigaki, S Watanabe, M Onishi, Proceedings of the 2020 Genetic and Evolutionary Computation Conference. the 2020 Genetic and Evolutionary Computation ConferenceCancun, Mexico; New York, NY, USAACMOzaki, Y.; Tanigaki, Y.; Watanabe, S.; Onishi, M. Multiobjective tree-structured parzen estimator for computationally expensive optimization problems. In Proceedings of the 2020 Genetic and Evolutionary Computation Conference, Cancun, Mexico, 8-12 July 2020; ACM: New York, NY, USA, 2020; pp. 533-541.
+
+MissForest-non-parametric missing value imputation for mixed-type data. D J Stekhoven, P Bühlmann, 10.1093/bioinformatics/btr597Bioinformatics. 28Stekhoven, D.J. ; Bühlmann, P. MissForest-non-parametric missing value imputation for mixed-type data. Bioinformatics 2012, 28, 112-118. [CrossRef]
+
+Research Welcome to LightGBM's Documentation!-LightGBM 3.1.1.99 Documentation. K Guolin, Microsoft, 11Available online: githubGuolin, K. Microsoft Research Welcome to LightGBM's Documentation!-LightGBM 3.1.1.99 Documentation. 2016. Available online: github.com (accessed on 11 December 2020).
+
+Available online: github.com (accessed on. W Mckinney, Pandas, 11McKinney, W. Pandas. 2008. Available online: github.com (accessed on 11 December 2020).
+
+. Jags-Just Another Gibbs Sampler, 11JAGS-Just Another Gibbs Sampler. Available online: http://mcmc-jags.sourceforge.net/ (accessed on 11 December 2020).
+
+Ordered quantile normalization: A semiparametric transformation built for the cross-validation era. R A Peterson, J E Cavanaugh, 10.1080/02664763.2019.1630372J. Appl. Stat. 2020Peterson, R.A.; Cavanaugh, J.E. Ordered quantile normalization: A semiparametric transformation built for the cross-validation era. J. Appl. Stat. 2020, 47, 2312-2327. [CrossRef]

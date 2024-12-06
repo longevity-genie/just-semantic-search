@@ -1,0 +1,45 @@
+Although the two aforementioned methods work in very different ways, there is some overlap between their results. In particular, in the results for mice, both methods found terms related to insulin signalling or growth to be significantly associated with anti-longevity; and terms related to the cell cycle were found to be significantly associated with pro-longevity. In addition, some terms related to autophagy were found to be significantly associated with pro-longevity in C. elegans by both methods.
+
+These results mostly recapitulate current knowledge of pathways associated with longevity manipulation in model organisms. Nonetheless, our results highlight pathways with proand anti-longevity effects and allow us to classify such pathways in a more consistent, systematic way.
+
+Pro
+
+and anti
+
+longevity networks are interwined
+
+Next, we tested if aging-related genes interact with each other and if we can observe the differences between the ways that pro-and anti-longevity genes form protein interaction networks. To perform this analysis, we employed protein-protein interaction data from BioGRID (see Materials and Methods) and focused our attention on worm genes, as the dataset of agingrelated genes in worms is by far the largest among the animal models in GenAge ( Table 1).
+
+Out of all the worm genes classified as anti-or pro-longevity genes (n ¼ 719), 283 genes had interactions in the BioGRID interactome (109 pro-and 174 anti-longevity genes). The average connectivity degree of pro-longevity genes was slightly higher than that of anti-longevity genes (8.42 compared to 5.43), and on average, both sets of aging-associated genes included more connected genes than similarly-sized random sets from the interactome (the connectivity degree for the entire interactome is 3.8). The clustering coefficient of pro-longevity genes was also higher than that of anti-longevity genes (0.108 compared to 0.063), showing that on average pro-longevity genes tend to cluster better than anti-longevity genes.
+
+In addition, we found that pro-and anti-longevity genes are much intertwined, with almost as many protein-protein interactions between genes from opposite categories (80 interactions) as between genes from the same category (43 interactions between pro-longevity genes and 56 interactions between antilongevity genes) (Fig. 1). While pro-and anti-longevity genes can form two network cores by themselves (28 genes are interconnected for each set), they also form a much larger network when taken together (90 genes), suggesting that the way in which pro-and anti-longevity genes determine lifespan is in many cases dependent on one another.
+
+Various previous studies have shown aging-related genes to form strong networks (9,10,14), as is normal in biology, but our results expand these observations to pro-and anti-longevity subnetworks and support substantial interactions between proand anti-longevity genes.
+
+Comparison with longevity
+
+associated human genes
+
+In addition to genetic manipulations in model organisms, a number of genes have been associated with longevity in human populations (20). We therefore also performed a functional enrichment analysis of these genes using data from the LongevityMap, which consists of 755 human genes, 328 of which associated with longevity in at least one genetic association study (20). For a first functional enrichment analysis using DAVID (see Materials and Methods), with the background set as default, 49 clusters showed an enrichment score greater than 2.5 (Supplementary Dataset 3). With the background set as LongevityMap genes, 62 clusters with an enrichment score > 2.5 were obtained (Supplementary Material, Dataset 3). A similar functional annotation clustering pattern as seen in the first run was observed (Supplementary Material, Fig. S1), and major enriched clusters consisted of: regulation of apoptosis, regulation of phosphorylation, response to environment, regulation of locomotion and response to hormone stimulus.
+
+Results from human longevity-associated genes only modestly overlap with the above results for model organisms, although some pathways thought to be related to aging (e.g., apoptosis, response to oxidative stress and mTOR signalling) were found. Enriched clusters also included terms related to age-related diseases like cancer and diabetes mellitus (Supplementary Dataset 3). This may reflect how researchers choose candidate genes for longevity association studies, however. Perhaps researchers tend to select candidate genes for their studies that are suspected of playing important roles in human longevity, or in severe pathological processes that can significantly impair longevity.
+
+Overlap between aging
+
+related genes and age
+
+related diseases
+
+Next we aimed to study the genetic overlap between aging and age-related diseases (ARDs). For this analysis, we used human genes associated with ARDs from public databases (see Materials and Methods), human candidate aging-related genes and human homologs of genes associated with aging in model organisms from GenAge (6). Common or shared genes between ARDs and aging gene sets are referred to as common aging and disease (CAD) genes. In addition to an analysis focused on individual age-related diseases, a set named 'all diseases' and another named 'all classes' were created, composed of all genes considered in the analyses per individual age-related disease and per age-related disease class, respectively (Materials and Methods).
+
+As expected, the human aging-related gene set has the most associations with ARD genes. In addition, the immune system and respiratory tract disease classes only show a relation with aging in human aging-related genes ( Fig. 2A). Among the human homologs of genes associated with aging in model organisms, the musculoskeletal disease class only exhibits a significant overlap with aging-related genes in the mouse. A decrease in the overlap between aging and age-related diseases as evolutionary distance increases is also clear from our results ( Fig. 2A) with the mouse showing an overlap with more ARDs when compared with the other model organisms, even though fewer aging-related genes are known in mice than in flies or worms. This is also clear from looking at individual ARDs (Fig. 3) since in mice there is a significant overlap with 9 and 17 ARDs for anti-and pro-longevity sets, respectively, while the remaining model organisms present the following values: Drosophila -8 and 3; C. elegans -5 and 0; and finally S. Berevisiae -1 and 3.
+
+We also compared overlaps between anti-and pro-longevity genes. Pro-longevity genes present a higher number of overlapping age-related diseases than anti-longevity genes for all orthologs (i.e., combining human orthologs of all genes from model organisms), mouse and S. cerevisiae. The opposite is verified for Drosophila and C. elegans sets ( Fig. 2A).
+
+Supplementary Materials, Tables S6 and S7 include the P-values and the number of CAD-genes for, respectively, age-related disease classes and individual diseases. Neoplasms (1.35E-56), nutritional and metabolic (9.70E-34), cardiovascular (2.00E-23) and nervous system (1.78E-18) classes have the strongest associations with human aging. There is an additional class not considered in the individual ARD analysis, the eye diseases, which presents a positive association with aging only for human aging-related genes and mouse pro-longevity genes (Supplementary Materials, Table S6).
+
+Publication bias effects and correction
+
+The inclusion of more and less studied genes may reduce the accuracy of the results. This is an issue when using large datasets that may contain systematic biases. Indeed, we observed a moderate correlation between the number of publications associated with a gene and its number of annotated protein-protein interactions (Spearman correlation coefficient ¼ 0.67). While this is not unexpected, it could result in biases in systems biology analysis. To minimize this issue, a publication bias correction (PBC) based on the number of publications per gene was tested. The first step of the PBC was setting a threshold for differentiation between more and less studied genes. Table 1 shows the average and the median number of publications computed for the following gene sets: human genome, human interactome, human aging-related genes and human homologs of agingrelated genes from model organisms. The sets of aging-related genes have a higher average (range 13.0 to 30.3) and median (range 9 to 23) values when compared with the whole genome (average of 8.7 and median of 6) and the interactome (average of 10.4 and median of 8). This is expected but it shows that agingrelated genes are more studied than average.
+
+Thresholds between 8 and 20 publications were assessed in order to define the value with which the subsequent analyses were performed (see Supplementary Material, Fig. S2). Overall, we used 10 publications as a threshold.

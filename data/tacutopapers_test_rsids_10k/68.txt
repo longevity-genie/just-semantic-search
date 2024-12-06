@@ -1,0 +1,197 @@
+0.868
+
+35105
+
+1
+
+20
+
+7
+
+10
+
+2
+
+12
+
+109
+
+10
+
+0.916
+
+C6
+
+0.940
+
+0.901
+
+0.920
+
+0.928
+
+0.860
+
+0.893
+
+35116
+
+0
+
+10
+
+7
+
+12
+
+2
+
+12
+
+107
+
+10
+
+0.899
+
+C7
+
+0.990
+
+1.000
+
+0.995
+
+0.827
+
+0.827
+
+0.827
+
+35100
+
+4
+
+22
+
+7
+
+16
+
+3
+
+12
+
+103
+
+9
+
+0.866
+
+C8
+
+0.942
+
+0.874
+
+0.906
+
+0.920
+
+0.840
+
+0.878
+
+35115
+
+0
+
+11
+
+9
+
+13
+
+2
+
+10
+
+106
+
+10
+
+0.891
+
+LRRpredictor
+
+0.943
+
+0.928
+
+0.936
+
+0.928
+
+0.860
+
+0.893
+
+35116
+
+0
+
+10
+
+7
+
+12
+
+2
+
+12
+
+107
+
+10
+
+0.899
+
+Structural Principles of Leucine-Rich Repeat (LRR) Proteins. P Enkhbayar, M Kamiya, M Osaki, T Matsumoto, N Matsushima, 10.1002/prot.10605Proteins Struct. Funct. Bioinform. 54PubMedEnkhbayar, P.; Kamiya, M.; Osaki, M.; Matsumoto, T.; Matsushima, N. Structural Principles of Leucine-Rich Repeat (LRR) Proteins. Proteins Struct. Funct. Bioinform. 2004, 54, 394-403. [CrossRef] [PubMed]
+
+A mutation within the leucine-rich repeat domain of the arabidopsis disease resistance gene RPS5 partially suppresses multiple bacterial and downy mildew resistance genes. R F Warren, A Henk, P Mowery, E Holub, R W Innes, 10.1105/tpc.10.9.1439Plant Cell. 10PubMedWarren, R.F. ; Henk, A.; Mowery, P.; Holub, E.; Innes, R.W. A mutation within the leucine-rich repeat domain of the arabidopsis disease resistance gene RPS5 partially suppresses multiple bacterial and downy mildew resistance genes. Plant Cell 1998, 10, 1439-1452. [CrossRef] [PubMed]
+
+Direct interaction of resistance gene and avirulence gene products confers rice blast resistance. Y Jia, S A Mcadams, G T Bryan, H P Hershey, B Valent, 10.1093/emboj/19.15.4004EMBO J. 19PubMedJia, Y.; McAdams, S.A.; Bryan, G.T. ; Hershey, H.P. ; Valent, B. Direct interaction of resistance gene and avirulence gene products confers rice blast resistance. EMBO J. 2000, 19, 4004-4014. [CrossRef] [PubMed]
+
+Autoinflammatory mutation in NLRC4 reveals a leucine-rich repeat (LRR)-LRR oligomerization interface. F Moghaddas, P Zeng, Y Zhang, H Schützle, S Brenner, S R Hofmann, R Berner, Y Zhao, B Lu, X Chen, 10.1016/j.jaci.2018.04.033J. Allergy Clin. Immunol. 142PubMedMoghaddas, F.; Zeng, P.; Zhang, Y.; Schützle, H.; Brenner, S.; Hofmann, S.R. ; Berner, R.; Zhao, Y.; Lu, B.; Chen, X.; et al. Autoinflammatory mutation in NLRC4 reveals a leucine-rich repeat (LRR)-LRR oligomerization interface. J. Allergy Clin. Immunol. 2018, 142, 1956-1967.e6. [CrossRef] [PubMed]
+
+Cloning of the gene containing mutations that cause PARK8-linked Parkinson's disease. C Paisán-Ruíz, S Jain, E W Evans, W P Gilks, J Simón, M Van Der Brug, A L De Munain, S Aparicio, A M Gil, N Khan, 10.1016/j.neuron.2004.10.023Neuron. 44PubMedPaisán-Ruíz, C.; Jain, S.; Evans, E.W. ; Gilks, W.P. ; Simón, J.; Van Der Brug, M.; De Munain, A.L. ; Aparicio, S.; Gil, A.M.; Khan, N.; et al. Cloning of the gene containing mutations that cause PARK8-linked Parkinson's disease. Neuron 2004, 44, 595-600. [CrossRef] [PubMed]
+
+Mutations in LRRK2 cause autosomal-dominant parkinsonism with pleomorphic pathology. A Zimprich, S Biskup, P Leitner, P Lichtner, M Farrer, S Lincoln, J Kachergus, M Hulihan, R J Uitti, D B Calne, 10.1016/j.neuron.2004.11.005Neuron. 44PubMedZimprich, A.; Biskup, S.; Leitner, P.; Lichtner, P.; Farrer, M.; Lincoln, S.; Kachergus, J.; Hulihan, M.; Uitti, R.J.; Calne, D.B. ; et al. Mutations in LRRK2 cause autosomal-dominant parkinsonism with pleomorphic pathology. Neuron 2004, 44, 601-607. [CrossRef] [PubMed]
+
+The role of small leucine-rich proteoglycans in osteoarthritis pathogenesis. G X Ni, Z Li, Y Z Zhou, 10.1016/j.joca.2014.04.026Osteoarthritis Cartilage. 22Ni, G.X. ; Li, Z.; Zhou, Y.Z. The role of small leucine-rich proteoglycans in osteoarthritis pathogenesis. Osteoarthritis Cartilage. 2014, 22, 896-903. [CrossRef]
+
+. M Lewis, Collagen Prelp, Hutchinson-Gilford Progeria, 10.1016/S1568-1637(02)00044-2Ageing Res. Rev. 2Lewis, M. PRELP, collagen, and a theory of Hutchinson-Gilford progeria. Ageing Res. Rev. 2003, 2, 95-105. [CrossRef]
+
+Structure-informed insights for NLR functioning in plant immunity. O C A Sukarta, E J Slootweg, A Goverse, 10.1016/j.semcdb.2016.05.012Semin. Cell Dev. Biol. 56Sukarta, O.C.A. ; Slootweg, E.J. ; Goverse, A. Structure-informed insights for NLR functioning in plant immunity. Semin. Cell Dev. Biol. 2016, 56, 134-149. [CrossRef]
+
+The NBS-LRR architectures of plant R-proteins and metazoan NLRs evolved in independent events. J M Urbach, F M Ausubel, 10.1073/pnas.1619730114Proc. Natl. Acad. Sci. Natl. Acad. SciUSA114Urbach, J.M. ; Ausubel, F.M. The NBS-LRR architectures of plant R-proteins and metazoan NLRs evolved in independent events. Proc. Natl. Acad. Sci. USA 2017, 114, 1063-1068. [CrossRef]
+
+Comparative Geometrical Analysis of Leucine-Rich Repeat Structures in the Nod-Like and Toll-Like Receptors in Vertebrate Innate Immunity. N Matsushima, H Miyashita, P Enkhbayar, R H Kretsinger, 10.3390/biom5031955Biomolecules. 5PubMedMatsushima, N.; Miyashita, H.; Enkhbayar, P.; Kretsinger, R.H. Comparative Geometrical Analysis of Leucine-Rich Repeat Structures in the Nod-Like and Toll-Like Receptors in Vertebrate Innate Immunity. Biomolecules 2015, 5, 1955-1978. [CrossRef] [PubMed]
+
+Assessment of the ability to model proteins with leucine-rich repeats in light of the latest structural information. A V Kajava, B Kobe, 10.1110/ps.4010102Protein Sci. 11Kajava, A.V. ; Kobe, B. Assessment of the ability to model proteins with leucine-rich repeats in light of the latest structural information. Protein Sci. 2002, 11, 1082-1090. [CrossRef]
+
+Comparative sequence analysis of leucine-rich repeats (LRRs) within vertebrate toll-like receptors. N Matsushima, T Tanaka, P Enkhbayar, T Mikami, M Taga, K Yamada, Y Kuroki, 10.1186/1471-2164-8-124BMC Genom. 8PubMedMatsushima, N.; Tanaka, T.; Enkhbayar, P.; Mikami, T.; Taga, M.; Yamada, K.; Kuroki, Y. Comparative sequence analysis of leucine-rich repeats (LRRs) within vertebrate toll-like receptors. BMC Genom. 2007, 8, 124. [CrossRef] [PubMed]
+
+The leucine-rich repeat as a protein recognition motif. B Kobe, A V Kajava, 10.1016/S0959-440X(01)00266-4Curr. Opin. Struct. Biol. 11Kobe, B.; Kajava, A.V. The leucine-rich repeat as a protein recognition motif. Curr. Opin. Struct. Biol. 2001, 11, 725-732. [CrossRef]
+
+Human leucine-rich repeat proteins: A genome-wide bioinformatic categorization and functional analysis in innate immunity. A C Y Ng, J M Eisenberg, R J W Heath, A Huett, C M Robinson, G J Nau, R J Xavier, 10.1073/pnas.1000093107Proc. Natl. Acad. Sci. Natl. Acad. SciUSA108PubMedNg, A.C.Y. ; Eisenberg, J.M. ; Heath, R.J.W. ; Huett, A.; Robinson, C.M. ; Nau, G.J. ; Xavier, R.J. Human leucine-rich repeat proteins: A genome-wide bioinformatic categorization and functional analysis in innate immunity. Proc. Natl. Acad. Sci. USA 2011, 108, 4631-4638. [CrossRef] [PubMed]
+
+Ancient diversity of splicing motifs and protein surfaces in the wild emmer wheat (Triticum dicoccoides) LR10 coiled coil (CC) and leucine-rich repeat (LRR) domains. H Sela, L N Spiridon, A J Petrescu, M Akerman, Y Mandel-Gutfreund, E Nevo, C Loutre, B Keller, A H Schulman, T Fahima, 10.1111/j.1364-3703.2011.00744.xMol. Plant Pathol. 13Sela, H.; Spiridon, L.N. ; Petrescu, A.J. ; Akerman, M.; Mandel-Gutfreund, Y.; Nevo, E.; Loutre, C.; Keller, B.; Schulman, A.H.; Fahima, T. Ancient diversity of splicing motifs and protein surfaces in the wild emmer wheat (Triticum dicoccoides) LR10 coiled coil (CC) and leucine-rich repeat (LRR) domains. Mol. Plant Pathol. 2012, 13, 276-287. [CrossRef]
+
+Structural determinants at the interface of the ARC2 and leucine-rich repeat domains control the activation of the plant immune receptors Rx1 and Gpa2. E J Slootweg, L N Spiridon, J Roosien, P Butterbach, R Pomp, L Westerhof, R Wilbers, E Bakker, J Bakker, A J Petrescu, 10.1104/pp.113.218842Plant Physiol. 162Slootweg, E.J. ; Spiridon, L.N. ; Roosien, J.; Butterbach, P.; Pomp, R.; Westerhof, L.; Wilbers, R.; Bakker, E.; Bakker, J.; Petrescu, A.J. ; et al. Structural determinants at the interface of the ARC2 and leucine-rich repeat domains control the activation of the plant immune receptors Rx1 and Gpa2. Plant Physiol. 2013, 162, 1510-1528. [CrossRef]
+
+Three-Dimensional Modeling and Diversity Analysis Reveals Distinct AVR Recognition Sites and Evolutionary Pathways in Wild and Domesticated Wheat Pm3 R Genes. H Sela, L N Spiridon, H Ashkenazi, N K Bhullar, S Brunner, A.-J Petrescu, T Fahima, B Keller, T Jordan, 10.1094/MPMI-01-14-0009-RMol. Plant-Microbe Interact. 27Sela, H.; Spiridon, L.N. ; Ashkenazi, H.; Bhullar, N.K. ; Brunner, S.; Petrescu, A.-J. ; Fahima, T.; Keller, B.; Jordan, T. Three-Dimensional Modeling and Diversity Analysis Reveals Distinct AVR Recognition Sites and Evolutionary Pathways in Wild and Domesticated Wheat Pm3 R Genes. Mol. Plant-Microbe Interact. 2014, 27, 835-845. [CrossRef]
+
+An LRR/Malectin receptor-like kinase mediates resistance to non-adapted and adapted powdery mildew fungi in barley and wheat. J Rajaraman, D Douchkov, G Hensel, F L Stefanato, A Gordon, N Ereful, O F Caldararu, A J Petrescu, J Kumlehn, L A Boyd, 10.3389/fpls.2016.01836Front. Plant Sci. 7Rajaraman, J.; Douchkov, D.; Hensel, G.; Stefanato, F.L. ; Gordon, A.; Ereful, N.; Caldararu, O.F. ; Petrescu, A.J. ; Kumlehn, J.; Boyd, L.A.; et al. An LRR/Malectin receptor-like kinase mediates resistance to non-adapted and adapted powdery mildew fungi in barley and wheat. Front. Plant Sci. 2016, 7, 1836. [CrossRef]
+
+Structure-function analysis of ZAR1 immune receptor reveals key molecular interactions for activity. M Baudin, K J Schreiber, E C Martin, A J Petrescu, J D Lewis, 10.1111/tpj.14547Plant J. 101Baudin, M.; Schreiber, K.J. ; Martin, E.C. ; Petrescu, A.J. ; Lewis, J.D. Structure-function analysis of ZAR1 immune receptor reveals key molecular interactions for activity. Plant J 2020, 101, 352-370. [CrossRef]
