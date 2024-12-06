@@ -1,0 +1,31 @@
+Genome-environment interactions that modulate aging: powerful targets for drug discovery. J P De Magalhaes, D Wuttke, S H Wood, M Plank, C Vora, Pharmacol. Rev. 64de Magalhaes,J.P., Wuttke,D., Wood,S.H., Plank,M. and Vora,C. (2012) Genome-environment interactions that modulate aging: powerful targets for drug discovery. Pharmacol. Rev., 64, 88-101.
+
+Machine learning for predicting lifespan-extending chemical compounds. D G Barardo, D Newby, D Thornton, T Ghafourian, J P De Magalhaes, A A Freitas, Aging (Albany NY). 9Barardo,D.G., Newby,D., Thornton,D., Ghafourian,T., de Magalhaes,J.P. and Freitas,A.A. (2017) Machine learning for predicting lifespan-extending chemical compounds. Aging (Albany NY), 9, 1721-1737.
+
+Cellular senescence: when bad things happen to good cells. J Campisi, F Di Fagagna, Nat. Rev. Mol. Cell Biol. 8Campisi,J. and d'Adda di Fagagna,F. (2007) Cellular senescence: when bad things happen to good cells. Nat. Rev. Mol. Cell Biol., 8, 729-740.
+
+Stress, cell senescence and organismal ageing. J P De Magalhaes, J F Passos, 10.1016/j.mad.2017.07.001Mech. Ageing Dev. de Magalhaes,J.P. and Passos,J.F. (2017) Stress, cell senescence and organismal ageing. Mech. Ageing Dev., doi:10.1016/j.mad.2017.07.001.
+
+Markers of cellular senescence. A Carnero, Methods Mol. Biol. 965Carnero,A. (2013) Markers of cellular senescence. Methods Mol. Biol., 965, 63-81.
+
+HCSGD: an integrated database of human cellular senescence genes. Q Dong, H Han, X Liu, L Wei, W Zhang, Z Zhao, M Q Zhang, X Wang, J. Genet. Genomics. 44Dong,Q., Han,H., Liu,X., Wei,L., Zhang,W., Zhao,Z., Zhang,M.Q. and Wang,X. (2017) HCSGD: an integrated database of human cellular senescence genes. J. Genet. Genomics, 44, 227-234.
+
+Ageing as a risk factor for disease. T Niccoli, L Partridge, Curr. Biol. 22Niccoli,T. and Partridge,L. (2012) Ageing as a risk factor for disease. Curr. Biol., 22, R741-R752.
+
+Geroscience: linking aging to chronic disease. B K Kennedy, S L Berger, A Brunet, J Campisi, A M Cuervo, E S Epel, C Franceschi, G J Lithgow, R I Morimoto, J E Pessin, Cell. 159Kennedy,B.K., Berger,S.L., Brunet,A., Campisi,J., Cuervo,A.M., Epel,E.S., Franceschi,C., Lithgow,G.J., Morimoto,R.I., Pessin,J.E. et al. (2014) Geroscience: linking aging to chronic disease. Cell, 159, 709-713.
+
+Systematic analysis, comparison, and integration of disease based human genetic association data and mouse genetic phenotypic information. Y Zhang, S De, J R Garner, K Smith, S A Wang, K G Becker, BMC Med. Genomics. 31Zhang,Y., De,S., Garner,J.R., Smith,K., Wang,S.A. and Becker,K.G. (2010) Systematic analysis, comparison, and integration of disease based human genetic association data and mouse genetic phenotypic information. BMC Med. Genomics, 3, 1.
+
+Systematic analysis of the gerontome reveals links between aging and age-related diseases. M Fernandes, C Wan, R Tacutu, D Barardo, A Rajput, J Wang, H Thoppil, D Thornton, C Yang, A Freitas, Hum. Mol. Genet. 25Fernandes,M., Wan,C., Tacutu,R., Barardo,D., Rajput,A., Wang,J., Thoppil,H., Thornton,D., Yang,C., Freitas,A. et al. (2016) Systematic analysis of the gerontome reveals links between aging and age-related diseases. Hum. Mol. Genet., 25, 4804-4818.
+
+DGIdb 2.0: mining clinically relevant drug-gene interactions. A H Wagner, A C Coffman, B J Ainscough, N C Spies, Z L Skidmore, K M Campbell, K Krysiak, D Pan, J F Mcmichael, J M Eldred, Nucleic Acids Res. 44Wagner,A.H., Coffman,A.C., Ainscough,B.J., Spies,N.C., Skidmore,Z.L., Campbell,K.M., Krysiak,K., Pan,D., McMichael,J.F., Eldred,J.M. et al. (2016) DGIdb 2.0: mining clinically relevant drug-gene interactions. Nucleic Acids Res., 44, D1036-D1044.
+
+The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource. T Craig, C Smelick, R Tacutu, D Wuttke, S H Wood, H Stanley, G Janssens, E Savitskaya, A Moskalev, R Arking, Nucleic Acids Res. 43Craig,T., Smelick,C., Tacutu,R., Wuttke,D., Wood,S.H., Stanley,H., Janssens,G., Savitskaya,E., Moskalev,A., Arking,R. et al. (2015) The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource. Nucleic Acids Res., 43, D873-D878.
+
+The influence of genes on the aging process of mice: a statistical assessment of the genetics of aging. J P De Magalhaes, J A Cabral, D Magalhaes, Genetics. 169de Magalhaes,J.P., Cabral,J.A. and Magalhaes,D. (2005) The influence of genes on the aging process of mice: a statistical assessment of the genetics of aging. Genetics, 169, 265-274.
+
+Computational biology for ageing. D Wieser, I Papatheodorou, M Ziehm, J M Thornton, Philos. Trans. R. Soc. Lond. B. Biol. Sci. 366Wieser,D., Papatheodorou,I., Ziehm,M. and Thornton,J.M. (2011) Computational biology for ageing. Philos. Trans. R. Soc. Lond. B. Biol. Sci., 366, 51-63.
+
+A review of supervised machine learning applied to ageing research. F Fabris, J P Magalhaes, A A Freitas, Biogerontology. 18Fabris,F., Magalhaes,J.P. and Freitas,A.A. (2017) A review of supervised machine learning applied to ageing research. Biogerontology, 18, 171-188.
+
+Computational systems biology of aging. A Kriete, M Lechner, D Clearfield, D Bohmann, Wiley Interdiscip. Rev. Syst. Biol. Med. 3Kriete,A., Lechner,M., Clearfield,D. and Bohmann,D. (2011) Computational systems biology of aging. Wiley Interdiscip. Rev. Syst. Biol. Med., 3, 414-428.

@@ -1,0 +1,267 @@
+Figure 1 . 1Available leucine-rich-repeat (LRR) domains in structural data. (a) LRR structural dataset construction. (b) LRR domain horseshoe architecture illustrated on the only plant NLR cryo-EM structure available-ZAR1-from Arabidopsis thaliana (left) and zoom-in view of a LRR repeat (right) (PDB: 6J5W). The hydrophobic positions in the minimal 'L0xxL3xL5' motif are shown in orange. The first N-entry repeat (blue) and the last C-exit repeat (red) are also mapped on the structure. (c) Phyla distribution of the initial LRR motif set ID90, the 50% identity trimmed LRR motifs set (ID50), annotated LRR proteins and all proteins from the UniRef50 database (from left to right). Percent values corresponding to the mammals group are shown in red. (d) Frequency plot of amino acid composition of the N-entry, core and C-exit motifs on the 50% identity trimmed set. Amino acids are colored according to their properties as follows: hydrophobic (yellow), acidic (red), basic (blue), asparagine and glutamine (purple), proline and glycine (green), others (black). (e) Jensen-Shannon
+
+Figure 1 . 1Available leucine-rich-repeat (LRR) domains in structural data. (a) LRR structural dataset construction. (b) LRR domain horseshoe architecture illustrated on the only plant NLR cryo-EM structure available-ZAR1-from Arabidopsis thaliana (left) and zoom-in view of a LRR repeat (right)
+
+L -strictly leucine; Ł-hydrophobic without leucine (I, V, M, F, W, Y, C, A); L-hydrophobic (L, I, V, M, F, W, Y, C, A); x-any amino acid.
+
+Figure 2 . 2LRRpredictor training and testing workflow: (a) training and testing dataset construction. (b) schematic representation of the training and testing procedure, (c) selected features, and (d) selected classifiers aggregated into LRRpredictor.
+
+Figure 2 . 2LRRpredictor training and testing workflow: (a) training and testing dataset construction. (b) schematic representation of the training and testing procedure, (c) selected features, and (d) selected classifiers aggregated into LRRpredictor.
+
+Figure 3 . 3LRRpredictor performance analysis: (a) LRRpredictor performance across datasets: precision, recall, and F1 scores are shown either considering all the LRR motif types (N-entry, core, and C-exit types), either solely core motifs (L); also shown are the true negative (TN), false positive (FP), false negative (FN) and true positive (TP) counts. (b) F1 scores of LRRpredictor and its individual classifiers. (c) Comparison between LRRpredictor and other LRR motif predictors: LRRfinder
+
+Figure 3 . 3LRRpredictor performance analysis: (a) LRRpredictor performance across datasets: precision, recall, and F1 scores are shown either considering all the LRR motif types (N-entry, core, and C-exit types), either solely core motifs (L); also shown are the true negative (TN), false positive (FP), false negative (FN) and true positive (TP) counts. (b) F1 scores of LRRpredictor and its individual classifiers. (c) Comparison between LRRpredictor and other LRR motif predictors: LRRfinder
+
+Figure 4 . 4LRRpredictor behavior on Interpro annotated LRR domains from different classes. (a) Length distribution of the predicted repeats using LRRpredictor within each protein group. Cterminal motifs were not used in computing the distribution. Repeat lengths size prone to ambiguity-i.e., either too short (potential FP) or too long (potential FN)-are shaded in red. (b) Distributions of the Interpro annotated LRR domain length that is covered by Interpro LRR repeat annotations (grey) or by predicted repeats using LRRpredictor (blue), LRRfinder (green), and LRRsearch (purple). Coverage percent distributions are shown within each protein group.
+
+Figure 4 . 4LRRpredictor behavior on Interpro annotated LRR domains from different classes. (a) Length distribution of the predicted repeats using LRRpredictor within each protein group. C-terminal motifs were not used in computing the distribution. Repeat lengths size prone to ambiguity-i.e., either too short (potential FP) or too long (potential FN)-are shaded in red. (b) Distributions of the Interpro annotated LRR domain length that is covered by Interpro LRR repeat annotations (grey) or by predicted repeats using LRRpredictor (blue), LRRfinder (green), and LRRsearch (purple). Coverage percent distributions are shown within each protein group.
+
+Figure 5 . 5Consensuses of the LRR motifs predicted by LRRpredictor across different classes. Logo heights correspond to amino acid relative entropy (in bits), higher heights implying higher conservation. A consensus for each class is displayed bellow each logo, highly conserved positions being shown in black boxes, while less conserved in gray. Minimal motif 'L0xxL3xL5' (green line) and the extended motif (black line) are indicated below each logo. Amino acids are colored according to their properties as inFigure 1d.
+
+Figure 5 . 5Consensuses of the LRR motifs predicted by LRRpredictor across different classes. Logo heights correspond to amino acid relative entropy (in bits), higher heights implying higher conservation. A consensus for each class is displayed bellow each logo, highly conserved positions being shown in black boxes, while less conserved in gray. Minimal motif 'L 0 xxL 3 xL 5 ' (green line) and the extended motif (black line) are indicated below each logo. Amino acids are colored according to their properties as inFigure 1d.Genes 2019, 10, x FOR PEER REVIEW 13 of 24
+
+Figure 6 . 6Distribution of LRR motif types defined byKobe and Kajava (KK)
+
+Genes 2019 , 201910, x FOR PEER REVIEW 14 of 24
+
+Figure 7 . 7LRR motifs variability in different protein classes. (a) Intra-group all-vs.-all distances on the extended (left) and minimal (right) motif (b) Silhouette coefficients inter-groups extended (left) and minimal (right) motif. (c) Histogram of a 2D embedding approximating the true distances between points for the extended (left) and minimal (right) motif. Histograms were computed using a 20 × 20 bins grid. Extended and minimal motif histograms cannot be compared as they refer to different sequence spaces.
+
+Figure 7 . 7LRR motifs variability in different protein classes. (a) Intra-group all-vs.-all distances on the extended (left) and minimal (right) motif (b) Silhouette coefficients inter-groups extended (left) and minimal (right) motif. (c) Histogram of a 2D embedding approximating the true distances between points for the extended (left) and minimal (right) motif. Histograms were computed using a 20 × 20 bins grid. Extended and minimal motif histograms cannot be compared as they refer to different sequence spaces.
+
+Genes 2019 , 201910, x FOR PEER REVIEW 15 of 24
+
+Figure 8 . 8LRR motif and repeat indeterminacies onto a 150 aa stretch in Gpa2 potato NLR. Potential motifs that follow the minimal 'LxxLxL' pattern (where L is any hydrophobic amino acid) are illustrated above the sequence with black bars and yellow highlight, while LRRpredictor results are shown above with blue bars.
+
+Figure A1 . A1Available LRR domains structural data. (a) Identity cut-off versus loss of data: plots of the loss of samples (left) and increase in entropy (right) at different identity thresholds. Displayed is the Shannon entropy averaged over the 16 amino acid extended motif. (b) Composition of LRR motif types: N-entry (N), core (L), and C-exit (C) LRR motifs in the initial set (ID90) and in the 50% identity trimmed dataset (ID50). (c) LRR repeat length distribution at different identity thresholds. C-exit motifs were not used. (d) Structural superposition of the LRR repeats from a plant NLR, vertebrate NLR, plant RLK and vertebrate TLR structures[22,[77][78][79] (from left to right). Hydrophobic positions of the minimal 'L0xxL3xL5' motif are shown in orange and position N8 in purple.
+
+Figure A1 . A1Available LRR domains structural data. (a) Identity cut-off versus loss of data: plots of the loss of samples (left) and increase in entropy (right) at different identity thresholds. Displayed is the Shannon entropy averaged over the 16 amino acid extended motif. (b) Composition of LRR motif types: N-entry (N), core (L), and C-exit (C) LRR motifs in the initial set (ID90) and in the 50% identity trimmed dataset (ID50). (c) LRR repeat length distribution at different identity thresholds. C-exit motifs were not used. (d) Structural superposition of the LRR repeats from a plant NLR, vertebrate NLR, plant RLK and vertebrate TLR structures[22,[77][78][79] (from left to right). Hydrophobic positions of the minimal 'L 0 xxL 3 xL 5 ' motif are shown in orange and position N 8 in purple.
+
+Figure A2 . A2(a) LRRpredictor behavior on other solenoidal architectures. Shown are occurrence counts of LRR-like patterns versus LRRpredictor probabilities counts histogram. (b) Overall 3D structure of the four examined classes of solenoidal proteins[80][81][82][83].
+
+Figure A2 . A2(a) LRRpredictor behavior on other solenoidal architectures. Shown are occurrence counts of LRR-like patterns versus LRRpredictor probabilities counts histogram. (b) Overall 3D structure of the four examined classes of solenoidal proteins[80][81][82][83].
+
+Table 1 . 1Occurrence of LRR sequence patterns in the overall dataset used to train the machine learning (ML) estimators. Training & Testing Dataset (CV 1-4 and Test Sets)Full NonLRR Proteins LRR Proteins
+
+Table A1 .
+
+A1Cont.Dataset
+
+Classifier
+
+In
+
+Sample
+
+Out
+
+Of Sample
+
+Precision Recall F1
+
+Score
+
+Precision Recall F1
+
+Score
+
+TN
+
+FP
+
+FN
+
+TP
+
+Recall on Core(L) Only
+
+Non
+
+LRR
+
+Proteins
+
+LRR
+
+Proteins
+
+N
+
+Entry
+
+(N)
+
+Core
+
+(L)
+
+C
+
+Exit
+
+(C)
+
+N
+
+Entry
+
+(N)
+
+Core
+
+(L)
+
+C
+
+Exit
+
+(C)
+
+Test
+
+C1
+
+0.900
+
+0.997
+
+0.946
+
+0.874
+
+0.880
+
+0.877
+
+35107
+
+0
+
+19
+
+6
+
+10
+
+2
+
+13
+
+109
+
+10
+
+0.916
+
+C2
+
+0.962
+
+0.956
+
+0.959
+
+0.941
+
+0.847
+
+0.891
+
+35118
+
+0
+
+8
+
+8
+
+12
+
+3
+
+11
+
+107
+
+9
+
+0.899
+
+C3
+
+0.882
+
+0.896
+
+0.889
+
+0.852
+
+0.847
+
+0.850
+
+35104
+
+1
+
+21
+
+8
+
+13
+
+2
+
+11
+
+106
+
+10
+
+0.891
+
+C4
+
+0.940
+
+0.874
+
+0.906
+
+0.907
+
+0.840
+
+0.872
+
+35113
+
+1
+
+12
+
+8
+
+14
+
+2
+
+11
+
+105
+
+10
+
+0.882
+
+C5
+
+0.895
+
+0.934
+
+0.914
+
+0.862
+
+0.873

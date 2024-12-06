@@ -1,0 +1,167 @@
+Additionally, the motor system is closely connected with the ACG which mediates focusing attention on targets to select appropriate actions (Isomura et al., 2003). The increased FC between the ACG and PreCG may be interpreted as brain efforts to guide motor behavior. Notably, the process of goal-directed action is a main constituent of executive function. Moreover, for its motor speed component, the poor executive performance in TMT-B may be the behavioral level evidence of cognitive and motor system dysfunction. The GCA results may further suggest that the reorganization of the brain network in T2DM patients may be associated with the impaired visual information acquisition for executive function. The ACG serves an important role in the top-down control network (Petersen and Posner, 2012). The occipital cortex is an important brain area of vision-related information encoding for working memory which is the primary component of executive function (Bentley et al., 2004;Diamond, 2013). Furthermore, visual cortex can be mediated by the ACG which monitors and resolves conflict by enhancing the to-be-attended information and suppressing distracter stimuli (Petersen and Posner, 2012;Liu Y. et al., 2016). In this study, the disordered excitatory and inhibitory effects from the ACG to the visual cortex suggest that T2DM patients may experience a cognitive impairment in visual information acquisition that is indirectly related to the deficit in executive function.
+
+In addition, unlike the scale free organization of molecular networks (Budovsky et al., 2007;Tacutu et al., 2010), the human brain network was proposed to exhibit prominent small-world architecture which facilitates efficient information communication (Liao et al., 2017). The impacts of brain functional hubs and connectivity alterations on the small-world property remains to be further explored.
+
+GCA connections appear at where FC connections exist; however, we observed that there was no overlap of significant alterations between undirected and directed connectivity in the present study. On one hand, undirected FC is usually assessed with the correlation coefficient, which can be regarded as descriptive (Biswal et al., 1995). On the other hand, the directed FC depicted by GCA rests explicitly on the linear vector autoregressive models (Seth et al., 2015). It is difficult to make a direct comparison between correlation data and a model. The non-overlapping alterations between the undirected and directed connectivity may result from the distinction of mathematical theories. It is also reported that internet gaming disorder individuals without FC alterations exhibited impaired GCA connections (Guller et al., 2012). This phenomenon requires a further investigation.
+
+Our finding also suggested that the level of glycemic parameters may be linked to the reserve of normal brain function in T2DM patients. Elevated HbA 1c was negatively correlated  with spontaneous brain activity in the middle temporal gyrus (Xia et al., 2013) and with cognitive performance such as VFT . The higher insulin resistance has been associated with decreased FC between the posterior cingulate cortex and middle temporal gyrus Yang et al., 2016). With the higher elevation of C-peptide in this study, a greater deviation of directed FC was observed in patients than in the healthy controls. Additionally, the patients with lower HbA 1c levels obtained higher scores on the DST forwards. The results were similar to those of several previous studies, which indicated that T2DM patients with elevated glycemic parameters exhibited decreased/inverted brain functional activity and poor cognitive performance (Xia et al., 2013;Chen et al., 2014;Liu D. et al., 2016;Yang et al., 2016). However, the findings of this study did not provide sufficient information about the relationships between the altered brain function and cognitive performance. Additional studies are required to investigate these mysteries.
+
+The main limitations of the present investigation are as follows: First, the study comprised a relatively small population. The inter-group comparisons of FC and GCA were unable to bear the multiple corrections. These factors may restrict its statistical power and the explanation of the results. Second, we deduced the visually related cognition impairment in T2DM patients according to fMRI metrics. However, the lack of assessment on this cognitive domain weakened the basis of our inference. Third, the approach of GCA is controversial due to the poor temporal resolution in fMRI studies. However, the GCA method remains a powerful tool to explore the directed connectivity and helps elucidate the complexity of the brain (Seth et al., 2015). A large-sample study with comprehensive cognitive assessments and the application of new technology, such as compressed sensing (Lustig et al., 2008), to accelerate the sampling may solve these problems in the future. We are also considering the application of other network measurements, for instance, betweenness, closeness, path length (Rubinov and Sporns, 2010), which could be combined with the molecular networks to map the complex biological systems of T2DMrelated cognitive impairment in depth Vidal et al., 2011).
+
+CONCLUSIONS
+
+Our findings suggest that the DC of the left ACG, bilateral LOC and right PreCG, as well as the connectivity among them reflected by FC and GCA in different perspectives, are altered in T2DM patients. These alterations may be associated with the disruption of visual information acquisition and goal-directed action execution, both of which have previously proven to be related to executive function. Patients with lower glycemic parameters may reserve more normal brain functions. This study provides insight into the neurological underpinnings of T2DMrelated cognitive impairment using neuroimaging.
+
+AUTHOR CONTRIBUTIONS
+
+DL contributed to the experiments, data analysis and writing of the manuscript. SD contributed to performing the experiments and writing and revising the manuscript. CZ contributed to the data collection. PW designed the experiment and revised the manuscript. LC contributed to the data analysis and manuscript revision. XY contributed to the manuscript revision. JZ and JW are the guarantors of this study and had complete access to all data in the study. They accept responsibility for the integrity of the data and the accuracy of the data analysis.
+
+FUNDING
+
+The study was supported by the National Natural Science Foundation of China (81471647, 81771814) and the Innovation Fund for Younger Investigators of Southwest Hospital of the Third Military Medical University (SWH2013QN09).
+
+FIGURE 1 | 1DC value distribution of intra-group and inter-group comparisons. (A,B) The spatial distribution of the DC value in the HC group and T2DM group. (C) The significantly altered DC map in the T2DM group. (D) Comparison of DC value between the two groups. AlphaSim corrected (p < 0.001, cluster size > 20 voxels). The color bar denotes the t-value. Error bars define the SEM. ACG, anterior cingulate gyrus; LOC, lateral occipital cortices; PreCG, precentral gyrus; R, right; L, left.
+
+FIGURE 2 | 2FC pattern of intra-group and inter-group comparisons. (A,B) The FC pattern in the HC group and T2DM group. (C) The significantly altered FC in the T2DM group. (D) Comparison of FC z scores between the two groups. *p < 0.05, # p < 0.05/6 (Bonferroni correction). Error bars define the SEM. ACG, anterior cingulate gyrus; LOC, lateral occipital cortices; PreCG, precentral gyrus; R, right; L, left.
+
+FIGURE 3 | 3GCA pattern of intra-group and inter-group comparisons. (A,B) Causal effect patterns of the HC group and T2DM group. The red arrow indicates a positive casual effect and its direction. The blue arrow indicates a negative casual effect and its direction. (C) Comparison of signed-path coefficients between the two groups. *p < 0.05. Error bars define the SEM.
+
+FIGURE 4 | 4Correlations among the connectivity, neuropsychological performance and diabetes-related parameters. (A) Signed-path coefficients of the left ACG to the left LOC vs. C-peptide (ng/mL). (B) DST forwards vs. HbA 1c (%).
+
+The updated homeostasis model assessment of the insulin resistance (HOMA2-IR) index was calculated using the HOMA2 Calculator v2.2.3 software (http://www.dtu.ox.ac. uk/homacalculator/) to evaluate insulin resistance in all subjects.HbA 1c ]), lipoid parameters (total cholesterol, triglyceride, high-density lipoprotein [HDL] cholesterol, low-density lipoprotein [LDL] cholesterol), renal function parameters (blood urea nitrogen, serum creatine, uric acid, and cystatin C), thyroid function parameters (free triiodothyronine [FT3], free thyroxine [FT4] and thyroid-stimulating hormone [TSH]), and homocysteine.
+
+TABLE 1 | 1Demographic and clinical data of the subjects.T2DM HC p-value
+
+Age (years)
+
+58.66 ± 6.87
+
+57.36 ± 5.42
+
+0.312
+
+Sex (male:female)
+
+28/19
+
+25/22
+
+0.533 a
+
+Education (years)
+
+10.60 ± 3.06
+
+10.77 ± 2.65
+
+0.773
+
+T2DM duration (years)
+
+8.87 ± 6.61
+
+BMI (kg/m 2 )
+
+25.46 ± 5.11
+
+23.94 ± 3.87
+
+0.109
+
+Gray matter (cm 3 ) 608.15 ± 58.00 615.16 ± 51.67 0.538
+
+White matter (cm 3 ) 534.91 ± 64.85 524.16 ± 66.56 0.430
+
+Brain parenchyma (cm 3 ) 1143.06 ± 114.78 1139.32 ± 107.80 0.871
+
+Systolic blood pressure
+
+(mmHg)
+
+128.91 ± 16.81
+
+134.55 ± 17.88
+
+0.119
+
+Diastolic blood pressure
+
+(mmHg)
+
+79.49 ± 10.01
+
+80.26 ± 10.25
+
+0.715
+
+HbA 1c (%)
+
+8.26 ± 2.08
+
+5.63 ± 0.39
+
+< 0.001
+
+HbA 1c (mmol/mol)
+
+66.76 ± 22.80
+
+38.15 ± 4.33
+
+< 0.001
+
+Fasting plasma glucose
+
+(mmol/L)
+
+7.47 ± 2.70
+
+5.22 ± 0.46
+
+< 0.001
+
+Fasting insulin (mIU/L) 14.91 (9.58, 24.54) 11.41 (8.39, 17.10) 0.035 b
+
+Fasting C
+
+peptide (ng/mL)
+
+1.81 ± 1.05
+
+2.22 ± 0.90
+
+0.047
+
+HOMA2
+
+IR
+
+0.28 (0.19, 0.52)
+
+0.21 (0.16, 0.32)
+
+0.015 b
+
+Total cholesterol (mmol/L)
+
+4.89 ± 1.04
+
+5.10 ± 1.02
+
+0.325
+
+Triglyceride (mmol/L)
+
+1.45 (1.05, 1.98)
+
+1.23 (0.91, 1.48)
+
+0.023 b
+
+HDL cholesterol (mmol/L)
+
+1.06 ± 0.23
+
+1.41 ± 0.36
+
+< 0.001

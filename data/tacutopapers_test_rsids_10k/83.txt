@@ -1,0 +1,79 @@
+Prediction of C. elegans Longevity Genes by Human and Worm Longevity Networks Published October 29, 2012
+
+Robi Tacutu The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev Beer-ShevaIsrael
+
+David E Shore
+
+Department of Molecular Biology
+
+Massachusetts General Hospital
+
+BostonMassachusetts
+
+United States of America
+
+Department of Genetics
+
+Harvard Medical School
+
+BostonMassachusetts
+
+United States of America
+
+Arie Budovsky The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev Beer-ShevaIsrael
+
+Joã Pedro De Magalhã Es Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUnited Kingdom
+
+Gary Ruvkun
+
+Department of Molecular Biology
+
+Massachusetts General Hospital
+
+BostonMassachusetts
+
+United States of America
+
+Department of Genetics
+
+Harvard Medical School
+
+BostonMassachusetts
+
+United States of America
+
+Vadim E Fraifeld vadim.fraifeld@gmail.comvef The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev Beer-ShevaIsrael
+
+Sean P Curran spcurran@usc.edu
+
+Division of Biogerontology
+
+Davis School of Gerontology
+
+United States of America
+
+University of Southern California
+
+Los AngelesCalifornia
+
+Department of Molecular and Computational Biology Arts, and Sciences United States of America Dornsife College of Letters University of Southern California Los AngelesCalifornia
+
+Department of Biochemistry and Molecular Biology Keck School of Medicine University of Southern California Los AngelesCaliforniaUnited States of America
+
+Prediction of C. elegans Longevity Genes by Human and Worm Longevity Networks Published October 29, 2012Received June 7, 2012; Accepted September 21, 2012;Citation: Tacutu R, Shore DE, Budovsky A, de Magalhães JP, Ruvkun G, et al. (2012) Prediction of C. elegans Longevity Genes by Human and Worm Longevity Networks. PLoS ONE 7(10): e48282. Editor: Yousin Suh, Albert Einstein College of Medicne, United States of America The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript. Competing Interests: The authors have declared that no competing interests exist. * Intricate and interconnected pathways modulate longevity, but screens to identify the components of these pathways have not been saturating. Because biological processes are often executed by protein complexes and fine-tuned by regulatory factors, the first-order protein-protein interactors of known longevity genes are likely to participate in the regulation of longevity. Data-rich maps of protein interactions have been established for many cardinal organisms such as yeast, worms, and humans. We propose that these interaction maps could be mined for the identification of new putative regulators of longevity. For this purpose, we have constructed longevity networks in both humans and worms.
+
+We reasoned that the essential first-order interactors of known longevity-associated genes in these networks are more likely to have longevity phenotypes than randomly chosen genes. We have used C. elegans to determine whether post-developmental inactivation of these essential genes modulates lifespan. Our results suggest that the worm and human longevity networks are functionally relevant and possess a high predictive power for identifying new longevity regulators.
+
+Introduction
+
+Numerous pathways contribute to longevity, but the identification of their components has not been saturating [1]. Because of their short lifespan and genetic tractability, C. elegans have proven indispensable in the study of longevity. The first screen to identify C. elegans genes that regulate longevity was an EMS mutagenesis that isolated eight mutants, each of which modulated the dauer developmental pathway or caloric intake [2]. The relationship between these functions and lifespan is now well established [3,4]. Two subsequent studies utilized genome-wide RNA interference (RNAi) to identify genes that increase longevity when inactivated [5,6]. These screens identified 89 and 29 genes respectively, with an overlap of only 3 genes, strongly suggesting that neither was saturating. This likely reflects the high false negative rate associated with high-throughput RNAi screening, as well as technical limitations of the screen designs [1]. For instance, because the screens inactivated genes of interest during development, genes required for development but capable of modulating adult lifespan would be missed. Curran and Ruvkun explored this overlooked gene set by inactivating essential genes postdevelop-mentally, revealing 64 genes required for development that extend lifespan when inactivated during adulthood [7]. Nevertheless, many important longevity genes likely remain unidentified.
+
+Known longevity genes are enriched for roles in stress tolerance and development. Many mutations that modulate longevity were identified by virtue of their contribution to stress response pathways or by homology to genes of this kind. A study of over 50 long-lived C. elegans mutants reveals that each is resistant to one or more stressors, such as oxidative damage, heat stress or irradiation [8,9]. Many genes required for the successful extension of lifespan in one or more long-lived mutants also contribute to the longevity of wild-type animals, but are distinguished by a proportionally greater change in the mutant background. Examples of such genes include daf-16, hsf-1, smk-1, jnk-1, cst-1, skn-1, and pha-4 [10,11,12,13,14,15]. Overexpression of most of these genes extends lifespan and, where tested, increases stress tolerance. Network analyses have also revealed a link between aging-related genes and development; known longevity-associated genes (LAGs) are enriched for essential genes or those required for development, and essential genes are likewise enriched for LAGs [7,16,17,18,19]. This finding appears to illustrate the antagonistic pleiotropy theory of aging, which suggests that the postreproductive decrescendo of the force of natural selection permits the evolution of genes that are essential early in life but detrimental late in life [20]. Samuelson et al.
+
+(2007) screened for gene inactivations that suppress lifespan extension in daf-2 mutant C. elegans and identified 159 genes contributing to daf-2 lifespan and to stress tolerance [21]. The majority of the suppressors decrease the longevity of a control strain, but decrease daf-2 longevity by a greater margin. Based upon the efficacy of other genome-wide screens and technical limitations, it is unlikely that this screen saturated the breadth of genes that contribute to lifespan extension.
+
+Network biology is one approach to gaining insight regarding the interactions of known LAGs and identifying new longevity regulators [22,23]. Network approaches provide a conceptual framework for the study of the complex interactions amongst the components of biological systems [24]. Networks may be constructed from many kinds of data, including, but not limited to, protein-protein interactions, transcriptional co-regulation, putative microRNA targets, or participation in annotated biological pathways [16,18,25]. Databases of such interactions exist for many species including yeast, worm, fly, mouse, and human [26]. Often, genes that serve essential cell functions are more connected than others and genes that contribute to a particular phenotype are more interconnected than would be expected by chance [19,22,27].
+
+Previous network analyses have demonstrated that LAGs, on average, have more protein-protein interactions (PPIs) with other proteins and amongst each other than non-LAGs in the interactome [28]. This is consistent with the fact that many LAGs play significant roles in development, participate in complex stress response cascades or are otherwise essential. Given the wealth of LAGs, an effort to understand the regulation of longevity from a biological network perspective may provide new insights into longevity pathways.
+
+Networks may be enriched by the integration of information from diverse species using homology as a means to overlay speciesspecific findings [26]. This technique could be applicable to aging because LAGs are highly conserved across species [7,22,28]. Such an approach may be especially fruitful in the study of human aging because aging has been extensively studied in model organisms. The profusion of data from non-mammalian systems renders broader analyses increasingly powerful and informative. An interaction map enriched with data across all species and accounting for cross-species homology could generate a robust functional network and be used to identify new genes in lifespan extension pathways.

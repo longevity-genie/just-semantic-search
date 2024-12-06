@@ -1,0 +1,285 @@
+Data sources. The list of the PFRGs was compiled from peer-reviewed literature and the extracted data were manually curated by the authors. The data were organized in a tabular format (and is available as an Excel table  in Supplementary Table ST1, ST2 and ST3), and the curation process focused on the extraction of the following characteristics: targeted gene/protein, Ensembl ID, mouse strain, manipulation type, gender, age, dose/route of administration, regimen, main effects, pro-or anti-fibrotic effect, other effects, and relevant references. In order for a paper to be considered for the analysis, each article had to meet the following criteria: (1) To use the mouse model of BML-induced lung fibrosis, with sufficient fibrosis markers and follow-up description; (2) To contain the data on genetic or protein manipulations resulted in a significant promotion or suppression of BML-induced lung fibrosis. In addition, for comparative analysis between BLM-induced lung fibrosis and IPF, only the IPF papers with the expression of the gene of interest (i.e. genetically manipulated in BLM-induced lung fibrosis) were included. Evolutionary conservation. The evolutionary conservation analysis was performed using Python scripts developed in our lab, which automatically extract and analyze data from the InParanoid database 16 , version 8 (http:// inpar anoid. sbc. su. se/ cgi-bin/ index. cgi).
+
+For each mouse gene, the presence or absence of orthologs across 268 proteomes (all species available in InParanoid) was assessed and the overall evolutionary conservation was defined as the percentage of species in which at least one ortholog exists. The evaluation of orthology in InParanoid was performed with a threshold for the inparalog score of 1.0 (highest stringency). All comparisons were statistically significant unless otherwise mentioned (Chi-Square χ 2 test; p < 0.05). For the network analysis, the human orthologs for mouse PFRGs were computed using a similar method (InParanoid 8 inparalogs with scores of 1.0). Enrichment analysis. Enrichment analysis of PFRGs and related pathways was performed using the DAVID Bioinformatics Resources tool 41 , version 6.8, https:// david. ncifc rf. gov. As the data on human genes and proteins is the most abundant, the human orthologs of PFRGs defined in mice were used for the analysis. Statistical significance of enrichment was evaluated using the default parameters set in DAVID. Cell type enrichment analysis of the PFRGs was performed against the PanglaoDB database 18 (https:// pangl aodb. se) using the Enrichr platform 42 (https:// maaya nlab. cloud/ Enric hr/). The presented combined score is the multiplication of the natural logarithm of p-value (Fisher exact test) and the z-score of the deviation from the expected rank (for more details, please see: https:// maaya nlab. cloud/ Enric hr/).
+
+To determine the most likely tissue, we used the Human Gene Atlas database 17 (http:// biogps. org/).
+
+Protein
+
+protein interaction network.
+
+Protein-protein interaction (PPI) data were taken from the BioGRID database 20 , http:// thebi ogrid. org, human interactome, Build 3.5.188. The PPI network construction and analysis were performed using Cytoscape 43 , http:// www. cytos cape. org, version 3.8.0. Prior to any network analyses, genetic interactions, self-loops, duplicate edges and interactions with proteins from other species were removed from the interactome, and the remaining network was used as a control. The interconnectivity was computed as the fraction of nodes in the largest connected component out of the input gene set, by using the www.nature.com/scientificreports/ breadth-first search algorithm. Modeling the relationship between node subset size and interconnectivity in the human interactome (Fig. 4, panel a2) was carried out by randomly sampling subsets of nodes in the interactome, with a sample size varying from 50 to 17,600 nodes (step of 50). In this case, sampling was performed 100 times for each subset size. To evaluate the statistical significance of the observed network interconnectivity, random sampling of 190 nodes from the BioGRID network was performed 1000 times. The enrichment score for the degree of PFRGs in the PPI network was computed using the GSEA method 44 .
+
+Functional module analysis. The construction of a network with functional modules for FPRGs was carried out using the HumanBase tool 45 , https:// hb. flati ronin stitu te. org, with a minimum module size set to 10 genes. Briefly, HumanBase provides the possibility to identify, at the tissue level, functional modules containing genes and their interaction partners which specifically work together, by grouping them into clusters of relevant biological processes. HumanBase detects modules of genes from tissue-specific functional association gene networks built by integrating vast omics datasets and associates terms (e.g. processes, pathways) to the detected modules based on overrepresentation.
+
+Linear models linking longevity and gene expression. The linear longevity models for the PFRGs dataset included 14 species (Homo sapiens not included) with reported maximum lifespan and a total of 28 lung transcriptome samples (Supplementary Table ST6). 8205 genes were selected based on the orthology relationships and lung expression. Raw gene expression cross-species data was extracted from public archives and reanalyzed with an internal pipeline described elsewhere 24 . The orthology relationships were obtained from the 99th release of Ensembl Compara Database 46 ; https:// doi. org/ 10. 1093/ datab ase/ bav096. 90 of the PFRGs were considered for analysis based on orthology relationships among the 15 species, as described in Kulaga et al. 24 .
+
+Maximum lifespan data were extracted from the AnAge database 21 ; https:// genom ics. senes cence. info/ speci es. The analysis was performed using python scripts developed in our lab using several packages including Pandas, Seaborn, and Statsmodels. The analysis includes species with good quality assemblies and annotations and genes with orthologs in the selected species. For the evaluation of statistical significance (p < 0.05), the adjusted p-values with Benjamini-Hochberg correction were used. The models were defined and fitted using the "statsmodels" Python module 47 .
+
+Received: 28 April 2021; Accepted: 13 September 2021
+
+Figure 3 . 3Functional module network of the pulmonary fibrosis-related genes (PFRGs) in lung tissue. The network was built for the lung tissue, using HumanBase, with the human orthologs of PFRGs as input. The interaction network is built using the closest gene neighbors and then clustered based on enrichment in GO categories. (a) All PFRGs. (b) Anti-fibrotic genes. (c) Pro-fibrotic genes. The networks were generated with HumanBase online tool (https:// hb. flati ronin stitu te. org).
+
+Figure 4 . 4Network interactions between the human orthologs of pulmonary fibrosis-related genes (PFRGs).
+
+Figure 5 . 5Links between pulmonary fibrosis-related genes (PFRGs) and longevity. (a) Distribution of longevityassociated genes (LAGs) by their role in bleomycin-induced lung fibrosis in mice. 18 genes form the overlap between known LAGs and PFRGs. Among 12 pro-LAGs, 11 have an anti-fibrotic effect, while at least five out of the six anti-LAGs are pro-fibrotic. (b) Linear models of PFRG expression in lung tissue relative to maximum lifespan (MLS) identified 34 gene correlations (out of 90 PFRGs with orthologs in all considered species), for both pro-and anti-fibrotic genes (R 2 between 0.18 and 0.63).
+
+Table 2 . 2Consistency between the effects of genetic/protein manipulations on bleomycin-induced lung fibrosis in mice and expression of corresponding genes in human IPF. For a detailed list seeSupplementary Table ST1, ST2 and ST3.Consistency between bleomycin model and IPF Number of manipulations Percentage (%)
+
+Full
+
+93
+
+79.5
+
+Partial
+
+2
+
+1.7
+
+Inconsistent
+
+10
+
+8.5
+
+Not clear
+
+12
+
+10.3
+
+Consistency between the effects of different manipulations
+
+Full
+
+54
+
+85.7
+
+Partial
+
+7
+
+11.1
+
+Not clear
+
+2
+
+3.2
+
+Table 4 . 4Processes and pathways enriched in pulmonary fibrosis-related genes (PFRGs). For a full enrichment analysis seeSupplementary Table ST4. Italicised areas that are common to all, pro-fibrotic, and anti-fibrotic PFRGs.All PFRGs Pro-fibrotic PFRGs Anti-fibrotic PFRGs
+
+Regulation of proliferation Positive regulation of proliferation Negative regulation of proliferation
+
+Cytokine signaling
+
+Cytokine signaling
+
+Inflammation
+
+Inflammation
+
+Immune function
+
+Immune function
+
+Cancer
+
+Cancer
+
+Cancer
+
+Reaction to pathogen
+
+Reaction to pathogen
+
+Oxygen homeostasis
+
+Oxygen homeostasis
+
+MAPK signaling pathway
+
+MAPK signaling pathway
+
+TNF signaling pathway
+
+TNF signaling pathway
+
+Jak
+
+STAT signaling pathway
+
+Jak
+
+STAT signaling pathway
+
+Asthma
+
+Aging
+
+Insulin resistance
+
+Stress response
+
+Estrogen signaling pathway
+
+Response to mechanical stimulus
+
+PI3K
+
+Akt signaling pathway
+
+VEGF signaling pathway
+
+FoxO signaling pathway
+
+Apoptosis
+
+Table 5 . 5Genes/proteins that when manipulated had an effect on both longevity and lung fibrosis in mice. *Tert-The final impact on longevity is not entirely clear (for details please see the HAGR-GenAge database for details; https:// genom ics. senes cence. info/ genes/ index. html). For detailed description, see Suppl.Table ST8.Targeted gene/protein Impact on longevity Impact on lung fibrosis
+
+Akt1
+
+Anti
+
+Longevity
+
+Pro
+
+fibrotic
+
+Akt2
+
+Anti
+
+Longevity
+
+Pro
+
+fibrotic
+
+Cav1
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Fgf2
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Foxm1
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Kl (Klotho)
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Mtor
+
+Anti
+
+Longevity
+
+Pro
+
+fibrotic
+
+Nos3
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Parp1
+
+Anti
+
+Longevity
+
+Pro
+
+fibrotic
+
+Plau
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Pparg
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Rps6kb1
+
+Anti
+
+Longevity
+
+unclear
+
+Serpine1 (PAI
+
+1)
+
+Anti
+
+Longevity
+
+Pro
+
+fibrotic
+
+Sirt1
+
+Pro
+
+Longevity
+
+Anti
+
+fibrotic
+
+Sod3
+
+Pro

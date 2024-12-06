@@ -1,0 +1,45 @@
+The BioGRID Interaction Database: 2008 update. B J Breitkreutz, C Stark, T Reguly, L Boucher, A Breitkreutz, Nucleic Acids Res. 36Breitkreutz BJ, Stark C, Reguly T, Boucher L, Breitkreutz A, et al. (2008) The BioGRID Interaction Database: 2008 update. Nucleic Acids Res 36: D637-640.
+
+Ageand calorie-independent life span extension from dietary restriction by bacterial deprivation in Caenorhabditis elegans. E D Smith, T L Kaeberlein, B T Lydum, J Sager, K L Welton, BMC Dev Biol. 849Smith ED, Kaeberlein TL, Lydum BT, Sager J, Welton KL, et al. (2008) Age- and calorie-independent life span extension from dietary restriction by bacterial deprivation in Caenorhabditis elegans. BMC Dev Biol 8: 49.
+
+Demography of dietary restriction and death in Drosophila. W Mair, P Goymer, S D Pletcher, L Partridge, Science. 301Mair W, Goymer P, Pletcher SD, Partridge L (2003) Demography of dietary restriction and death in Drosophila. Science 301: 1731-1733.
+
+Rapamycin fed late in life extends lifespan in genetically heterogeneous mice. D E Harrison, R Strong, Z D Sharp, J F Nelson, C M Astle, Nature. 460Harrison DE, Strong R, Sharp ZD, Nelson JF, Astle CM, et al. (2009) Rapamycin fed late in life extends lifespan in genetically heterogeneous mice. Nature 460: 392-395.
+
+Timing requirements for insulin/IGF-1 signaling in C. elegans. A Dillin, D Crawford, C Kenyon, Science. 298Dillin A, Crawford D, Kenyon C (2002) Timing requirements for insulin/IGF-1 signaling in C. elegans. Science 298: 830-834.
+
+Temporal linkage between the phenotypic and genomic responses to caloric restriction. J M Dhahbi, H J Kim, P L Mote, R J Beaver, S R Spindler, Proc Natl Acad Sci U S A. 101Dhahbi JM, Kim HJ, Mote PL, Beaver RJ, Spindler SR (2004) Temporal linkage between the phenotypic and genomic responses to caloric restriction. Proc Natl Acad Sci U S A 101: 5524-5529.
+
+Dominant mutations in the late 40S biogenesis factor Ltv1 affect cytoplasmic maturation of the small ribosomal subunit in Saccharomyces cerevisiae. C A Fassio, B J Schofield, R M Seiser, A W Johnson, D E Lycan, Genetics. 185Fassio CA, Schofield BJ, Seiser RM, Johnson AW, Lycan DE (2010) Dominant mutations in the late 40S biogenesis factor Ltv1 affect cytoplasmic maturation of the small ribosomal subunit in Saccharomyces cerevisiae. Genetics 185: 199- 209.
+
+Transcriptional profile of aging in C. elegans. J Lund, P Tedesco, K Duke, J Wang, S K Kim, Curr Biol. 12Lund J, Tedesco P, Duke K, Wang J, Kim SK, et al. (2002) Transcriptional profile of aging in C. elegans. Curr Biol 12: 1566-1573.
+
+RNAi screening implicates a SKN-1-dependent transcriptional response in stress resistance and longevity deriving from translation inhibition. J Wang, S Robida-Stubbs, J M Tullet, J F Rual, M Vidal, PLoS Genet. 6Wang J, Robida-Stubbs S, Tullet JM, Rual JF, Vidal M, et al. (2010) RNAi screening implicates a SKN-1-dependent transcriptional response in stress resistance and longevity deriving from translation inhibition. PLoS Genet 6.
+
+Inhibition of mRNA translation extends lifespan in Caenorhabditis elegans. K Pan, J Palter, A Rogers, A Olsen, D Chen, Aging Cell. 6Pan K, Palter J, Rogers A, Olsen A, Chen D, et al. (2007) Inhibition of mRNA translation extends lifespan in Caenorhabditis elegans. Aging Cell 6: 111-119.
+
+Lifespan extension by conditions that inhibit translation in Caenorhabditis elegans. M Hansen, S Taubert, D Crawford, N Libina, S Lee, Aging Cell. 6Hansen M, Taubert S, Crawford D, Libina N, Lee S, et al. (2007) Lifespan extension by conditions that inhibit translation in Caenorhabditis elegans. Aging Cell 6: 95-110.
+
+Synthesis of insulin-dependent activator of hepatocyte plasmatic membrane Na,K-ATPase decreases in aging. V V Frolkis, A L Shkapenko, Mech Ageing Dev. 60Frolkis VV, Shkapenko AL (1991) Synthesis of insulin-dependent activator of hepatocyte plasmatic membrane Na,K-ATPase decreases in aging. Mech Ageing Dev 60: 55-60.
+
+Genomes optimize reproduction: aging as a consequence of the developmental program. J P De Magalhaes, G M Church, Physiology (Bethesda). 20de Magalhaes JP, Church GM (2005) Genomes optimize reproduction: aging as a consequence of the developmental program. Physiology (Bethesda) 20: 252- 259.
+
+MicroRNA, mRNA, and protein expression link development and aging in human and macaque brain. M Somel, S Guo, N Fu, Z Yan, H Y Hu, Genome Res. 20Somel M, Guo S, Fu N, Yan Z, Hu HY, et al. (2010) MicroRNA, mRNA, and protein expression link development and aging in human and macaque brain. Genome Res 20: 1207-1218.
+
+Progressive age-dependent DNA methylation changes start before adulthood in mouse tissues. M Takasugi, Mech Ageing Dev. 132Takasugi M (2011) Progressive age-dependent DNA methylation changes start before adulthood in mouse tissues. Mech Ageing Dev 132: 65-71.
+
+Changes in gene expression associated with aging commonly originate during juvenile growth. J C Lui, W Chen, K M Barnes, J Baron, Mech Ageing Dev. 131Lui JC, Chen W, Barnes KM, Baron J (2010) Changes in gene expression associated with aging commonly originate during juvenile growth. Mech Ageing Dev 131: 641-649.
+
+. V V Frolkis, Stress-age syndromeFrolkis VV (1991) [Stress-age syndrome].
+
+. Fiziol Zhl. 37Fiziol Zhl 37: 3-11.
+
+InParanoid 6: eukaryotic ortholog clusters with inparalogs. A C Berglund, E Sjolund, G Ostlund, E L Sonnhammer, Nucleic Acids Res. 36Berglund AC, Sjolund E, Ostlund G, Sonnhammer EL (2008) InParanoid 6: eukaryotic ortholog clusters with inparalogs. Nucleic Acids Res 36: D263-266.
+
+WormBase 2012: more genomes, more data, new website. K Yook, T W Harris, T Bieri, A Cabunoc, J Chan, Nucleic Acids Res. 40Yook K, Harris TW, Bieri T, Cabunoc A, Chan J, et al. (2012) WormBase 2012: more genomes, more data, new website. Nucleic Acids Res 40: D735-741.
+
+. A Rogers, I Antoshechkin, T Bieri, D Blasiar, C Bastiani, Nucleic Acids Res. 36Rogers A, Antoshechkin I, Bieri T, Blasiar D, Bastiani C, et al. (2008) WormBase 2007. Nucleic Acids Res 36: D612-617.
+
+DAVID: Database for Annotation, Visualization, and Integrated Discovery. G DennisJr, B T Sherman, D A Hosack, J Yang, W Gao, Genome Biol. 43Dennis G, Jr., Sherman BT, Hosack DA, Yang J, Gao W, et al. (2003) DAVID: Database for Annotation, Visualization, and Integrated Discovery. Genome Biol 4: P3.
+
+Cytoscape: a software environment for integrated models of biomolecular interaction networks. P Shannon, A Markiel, O Ozier, N S Baliga, J T Wang, Genome Res. 13Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, et al. (2003) Cytoscape: a software environment for integrated models of biomolecular interaction networks. Genome Res 13: 2498-2504.

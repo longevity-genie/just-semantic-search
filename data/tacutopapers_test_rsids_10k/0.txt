@@ -1,0 +1,51 @@
+The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource 2015
+
+Thomas Craig Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+Chris Smelick University of North Carolina at Chapel Hill NCUSA
+
+Robi Tacutu Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+Daniel Wuttke Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+Shona H Wood Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+Henry Stanley Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+Georges Janssens Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+Ekaterina Savitskaya Skolkovo Institute of Science and Technology Moscow regionRussia
+
+Alexey Moskalev Institute of Biology of Komi Science Center of RAS SyktyvkarRussia
+
+Moscow Institute of Physics and Technology DolgoprudnyRussia
+
+Robert Arking
+
+Department of Biological Sciences
+
+Wayne State University
+
+DetroitMIUSA
+
+João Pedro De Magalhães Integrative Genomics of Ageing Group Institute of Integrative Biology University of Liverpool LiverpoolUK
+
+The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource
+
+Nucleic Acids Research 43201510.1093/nar/gku843Received June 24, 2014; Revised August 25, 2014; Accepted September 03, 2014 Multiple studies characterizing the human ageing phenotype have been conducted for decades. However, there is no centralized resource in which data on multiple age-related changes are collated. Currently, researchers must consult several sources, including primary publications, in order to obtain age-related data at various levels. To address this and facilitate integrative, system-level studies of ageing we developed the Digital Ageing Atlas (DAA). The DAA is a one-stop collection of human age-related data covering different biological levels (molecular, cellular, physiological, psychological and pathological) that is freely available online (http://ageing-map.org/). Each of the >3000 age-related changes is associated with a specific tissue and has its own page displaying a variety of information, including at least one reference. Age-related changes can also be linked to each other in hierarchical trees to represent different types of relationships. In addition, we developed an intuitive and user-friendly interface that allows searching, browsing and retrieving information in an integrated and interactive fashion.
+
+Overall, the DAA offers a new approach to systemizing ageing resources, providing a manually-curated and readily accessible source of age-related changes.DIGITAL AGEING ATLAS CONTENT, INTERFACE AND STRUCTUREConceptually, an age-related change represents an observed difference of a molecule, parameter or process between young and old, and various and diverse types of properties can be represented in a quantitative and/or qualitative way.
+
+INTRODUCTION
+
+Ageing can be defined as a progressive functional decline, or a gradual deterioration of physiological function with age, often including a decrease in fecundity (1). Human ageing is characterized by multiple changes at different levels of bi-ological organization (2,3). It is still not clear which (if any) molecular, cellular or physiological changes are more important drivers of the process of ageing or how they influence each other. One difficulty in understanding how different processes at different scales relate to ageing as a whole is the lack of integrative, holistic views of ageing. This hinders studies of how different molecular, cellular and physiological components interact with each other, in spite of the recognized importance of such approaches (4,5).
+
+Particularly now in the post-genome era, efforts to obtain a more comprehensive and detailed characterization of molecular changes with ageing, such as those using -omics approaches (6)(7)(8), have been widespread. Use of this quantitative data, including its meta-and re-analysis, allows the application of systems biology approaches to ageing research. Consequently, there is now a drive to link these molecular level changes to cellular and physiological processes. The ultimate aim is to elucidate how molecular changes with age, for example, may influence or are influenced by changes in the wider organism, e.g. hormonal changes, and ultimately how these interactions contribute to pathology. Nonetheless, collating and converting raw data into information that is usable and can be cross compared is time consuming and difficult. In this context, we developed the Digital Ageing Atlas (DAA; http://ageing-map. org/), the first portal encompassing age-related changes at different biological levels, including a large amount ofomics data, already processed, categorized and filtered for statistical significance. To catalogue and organize age-related changes, in the DAA they fall into four broad categories: molecular, physiological, psychological and pathological changes ( Table 1).
+
+The DAA contains: more than 3000 molecular ageing changes, which include gene expression, epigenetic and proteomic changes; over 300 physiological changes, which include cellular, hormonal and changes at various scales (including organs and the whole organism); and psychological or cognitive changes. Also included are pathological changes, listing epidemiological data on the incidence and/or mortality of major age-related diseases. Our focus is on changes occurring during normal ageing across populations, though e.g. gender-specific changes are indicated. As detailed below, data was manually-curated from the literature, such as textbooks and papers, and retrieved from public databases like GEO (9). All changes are fully referenced making it possible to access the raw data. In total, the DAA currently details 3526 biological changes in humans and 713 changes in mice. The DAA focuses on human data, however mouse data has been included, in particular gene expression data, and cross-linked to relevant human entries (e.g., homologous genes), to enhance and expand the information on human ageing. We anticipate the addition of data from other model organisms in the future. Presenting information in an easy-to-understand visual form is a powerful means of fostering the analysis and interpretation of large datasets and of allowing researchers to identify gaps in knowledge and develop new research directions (10,11).
+
+Without it the comprehension of large-scale or diverse datasets is impeded. Therefore, not only does the DAA merge different types of data into a single repository, but we developed an intuitive and user-friendly web resource that allows accessing, searching, browsing and retrieving the datasets in an integrated and interactive fashion. Specifically, we developed an anatomical diagram to allow users to browse and select their organ of interest (Figure 1). The use of keyword term searching (e.g. 'heart' will show both tissues and changes associated with the heart while 'p53' will show changes related to any gene with p53 in its name or alias) and more general anatomical selection offers a great deal of flexibility to users, ensuring that users of any level of technical skill can access the resources, including non-researchers, opening up the field of ageing to a wider audience.
+
+Each age-related change in the DAA has its own page displaying a variety of information. Typically, entries include a description of the change with age, a quantification (if available) of the change with age (e.g. a percentage gene expression change between two ages), at least one reference and relevant links ( Figure 2). The way in which the changes are stored in the database is best described in an objectorientated way. The key objects in the DAA are change, tis- sue, gene, property and data. The change object stores the basic information on a change including type, age of occurrence, gender (if available) and organism. The gene object contains basic information on a gene, e.g. symbol and name, mapping to other information such as homologues in other organisms, Gene Ontology (GO) terms and links to external resources, for instance cross-linking to the GenAge database of ageing-related genes (12) (Figure 3). Gene information can then be associated with multiple changes to prevent repetition and ensure ease of updating when elements such as the gene symbol change. It also allows for the DAA to display all changes associated with a gene making it easier to find information. The tissue object contains details on a tissue such as a name and description.
+
+The tissue objects (currently 284 different tissues are represented) are arranged into a simple hierarchical structure, based upon the ontology created by eVOContology (13), supplemented by descriptive data from both Brenda (14) and Wikipedia Nucleic Acids Research, 2015, Vol. 43, Database issue D875 Figure 2. A labelled diagram of the entry for IGF1 age-related changes in the plasma: (1) Each change is colour coded for easy identification of type.

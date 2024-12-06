@@ -1,0 +1,49 @@
+It is hoped that CellAge will aid in understanding the various types of CS and that analysis of the data will lead to the discovery of further CS-associated genes and their regulatory mechanisms. Analysis of the CellAge dataset is currently being carried out by our group and will be published in a future publication.
+
+TOOLS, PROJECTS AND OTHER INFORMATION RE-SOURCES
+
+Ageing
+
+related disease genes
+
+In industrialized societies, ageing is the main risk factor for many debilitating and life-threatening diseases including cancer, cardiovascular disease, arthritis, diabetes and neurodegeneration. As lifespan increases so too does the prevalence of these diseases (38). An understanding of how these diseases are linked to the ageing process is needed to help tackle this growing problem (39). Our new ageingrelated disease genes tool (http://genomics.senescence.info/ diseases/), first described here, makes available a set of agerelated disease genes and permits their integration with ageing-related genes from our other databases.
+
+The genes were assembled using data compiled by a National Institute of Ageing study (40), as described (41). Diseases with fewer than 20 genes associated were excluded from the gene list to avoid the dilution of findings. Processes and conditions such as insulin resistance and hyperlipidaemia were classified as dysfunctions and excluded from the list. Users can browse genes and diseases by MeSH disease terms, MeSH disease class and by gene symbol. The disease classes are cardiovascular diseases, immune system diseases, musculoskeletal diseases, neoplasms, nervous system diseases, and nutritional and metabolic diseases. Results can be grouped by gene or disease. There are 769 genes associated with 20 age-related diseases in total.
+
+Our tool was designed so that age-related disease genes can be viewed, analyzed and downloaded in the context of ageing genes to understand potential functional overlap. The tool allows users to create a merged data set between age-related disease genes and ageing genes, according to user-defined filters. Where applicable, genes in HAGR databases can be converted into human homologs before merging.
+
+Cross
+
+links and complementary resources
+
+All our databases are fully integrated, allowing users to gain a deeper understanding of the genes and pathways involved in ageing. In particular genetic databases have extensive crosslinks between them, linking each entry in a database to entries in other databases where available. DrugAge is also integrated with other HAGR databases using drug-gene interaction data from DGIdb (42).
+
+Moreover, for a greater understanding of ageing there are several additional resources to HAGR. Succinctly, the Digital Ageing Atlas (DAA, http://ageing-map.org/) is a database of human age-related changes at different biological levels (43). HAGR links to the DAA on its homepage and searches within HAGR also show results from the DAA where available. The Ageing Research Computational Tools (http://genomics.senescence.info/software/) are a toolkit of Perl modules aimed at parsing files, datamining, and searching and downloading data from the Internet (2,4). An SPSS script is also available, which can be used to determine the demographic rate of ageing for a given population (44).
+
+Senescence.info (http://www.senescence.info) is an informational repository on the science of ageing which aims to highlight the importance of ageing research and give an overview of current knowledge on the biology and genetics of ageing. Unlike HAGR, senescence.info is developed by a single person (J.P.M). Also in a informational and educational context, the WhosAge database (http://whoswho. senescence.info/) is a non-exhaustive list of individuals and companies working on ageing and longevity science, featuring 26 companies and 291 researchers.
+
+Lastly, since the last update on HAGR (3), two social media resources have been made available on Facebook (https: //www.facebook.com/pg/BiologyAgingNews) and Twitter (https://twitter.com/AgingBiology) which report on the latest news and findings in the field. The updates detail research in longevity, life-extension and rejuvenation technologies and link to articles/papers for further reading. These resources usually post several times a week to >6000 followers.
+
+DOWNLOADS AND AVAILABILITY
+
+Our access policy remains the same as in our previous publications (2,3). All HAGR databases and resources are freely available at http://genomics.senescence.info/. All databases allow users the opportunity to export, download and reuse data for their own analyses, under a Creative Commons Attribution licence. Of note, for data from model organisms in GenAge and GenDR, users can not only download genes from each model organism but also homologs from other model organisms for each dataset. Lists of human homologs for all the genes from model organisms are also available. Feedback from users and colleagues is welcome and encouraged via email.
+
+DISCUSSION
+
+Over the last decade, HAGR has expanded to include several new databases, datasets, tools and additional resources. Specifically, compared to our previous HAGR update (3), HAGR now includes the LongevityMap, DrugAge and Cel-lAge databases. The older databases--GenAge, AnAge and GenDR--have been updated and enhanced with significant information and data. Overall, the databases in HAGR organize large quantities of complex data, putting the findings into context and aiding further analysis. Having organized databases is necessary for employing computational approaches to ageing (45), including machine learning (46) and systems biology approaches (47).
+
+HAGR emphasizes high quality data on ageing and our databases are under continuous curation by experts in the field. AnAge provides information on data quality and sample size and prioritizes the reliability of the data over the most extreme values. GenAge--Model organisms, GenDR and CellAge all focus on genes from genetic manipulation experiments to ensure the selection process is as unbiased as possible. Nonetheless, some subjectivity is unavoidable and conflicting results can emerge. To cope with this, our policy is to be inclusive, providing evidence and links to the relevant literature and thus providing a balanced and comprehensive overview to the reader. HAGR has been cited over 500 times since it was first published in 2005 and has seen a continuous rise in the number of citations over recent years. From 2006 our resources received over 10 000 unique visitors per month, and they now receive over 30 000 unique visitors per month, thus indicating HAGR's growing importance in the field (Figure 2A). Out of all the HAGR databases, AnAge is the most popular ( Figure 2B). GenAge--Human genes and GenAge--Model Organisms have collectively also maintained high levels of use. Since DrugAge was released in 2016 its usage has greatly increased, becoming one of the most widely used databases. CellAge is the newest HAGR Nucleic Acids Research, 2018, Vol. 46, Database issue D1089 resource, released in late 2016, hence not surprisingly still one of the least popular.
+
+In conclusion, HAGR covers many aspects of ageing, acting as a science of ageing portal aimed at an audience from beginners to experts in biogerontology. Visitors are encouraged to send feedback and propose enhancements/features they would like to see in future. Over time as data continues to be generated, we anticipate that HAGR will continue to grow to meet this influx, maintaining its status as a leading online resource for studying the biology and genetics of ageing.
+
+Figure 1 . 1Patterns of ageing research for different human genes over time. The proportion of publications that focused mainly on ageing research are shown in red, the remaining publications are shown in blue.
+
+Figure 2 . 2(A) Combined HAGR and senescence.info unique visitors per month (black line). The secondary axis and grey bars show the yearly growth in HAGR citations *HAGR became publicly available online in mid-2004. **Data to end of August 2017. (B) Usage by percentage of the different HAGR databases in 2017.
+
+Table 1 . 1Growth over time of the various datasets in the GenAge databaseDatabase Species
+
+ACKNOWLEDGEMENTSWe would like to thank the many people who have helped in this project, providing valuable advice and suggestions, including former and current members of the Integrative Genomics of Ageing Group. In addition, we are grateful to the many users who have provided feedback on our resources and to the many scientists who have contributed data and expertise to our databases, specially Steve Austad for helping curate AnAge. The hallmarks of aging. C Lopez-Otin, M A Blasco, L Partridge, M Serrano, G Kroemer, Cell. 153Lopez-Otin,C., Blasco,M.A., Partridge,L., Serrano,M. and Kroemer,G. (2013) The hallmarks of aging. Cell, 153, 1194-1217.
+
+HAGR: the Human Ageing Genomic Resources. J P De Magalhaes, J Costa, O Toussaint, Nucleic Acids Res. 33de Magalhaes,J.P., Costa,J. and Toussaint,O. (2005) HAGR: the Human Ageing Genomic Resources. Nucleic Acids Res., 33, D537-D543.
+
+Human Ageing Genomic Resources: integrated databases and tools for the biology and genetics of ageing. R Tacutu, T Craig, A Budovsky, D Wuttke, G Lehmann, D Taranukha, J Costa, V E Fraifeld, De Magalhaes, Nucleic Acids Res. 41J.P.Tacutu,R., Craig,T., Budovsky,A., Wuttke,D., Lehmann,G., Taranukha,D., Costa,J., Fraifeld,V.E. and de Magalhaes,J.P. (2013) Human Ageing Genomic Resources: integrated databases and tools for the biology and genetics of ageing. Nucleic Acids Res., 41, D1027-D033.

@@ -1,0 +1,55 @@
+Altered spontaneous brain activity in type 2 diabetes: a resting-state functional MRI study. Y Cui, Y Jiao, Y C Chen, K Wang, B Gao, S Wen, 10.2337/db13-0519Diabetes. 63Cui, Y., Jiao, Y., Chen, Y. C., Wang, K., Gao, B., Wen, S., et al. (2014). Altered spontaneous brain activity in type 2 diabetes: a resting-state functional MRI study. Diabetes 63, 749-760. doi: 10.2337/db13-0519
+
+Disrupted brain connectivity patterns in patients with type 2 diabetes. Y Cui, S F Li, H Gu, Y Z Hu, X Liang, C Q Lu, 10.3174/ajnr.A4858AJNR. Am. J. Neuroradiol. 37Cui, Y., Li, S. F., Gu, H., Hu, Y. Z., Liang, X., Lu, C. Q., et al. (2016). Disrupted brain connectivity patterns in patients with type 2 diabetes. AJNR. Am. J. Neuroradiol. 37, 2115-2122. doi: 10.3174/ajnr.A4858
+
+Cerebral perfusion alterations in type 2 diabetes and its relation to insulin resistance and cognitive dysfunction. Y Cui, X Liang, H Gu, Y Hu, Z Zhao, X Y Yang, 10.1007/s11682-016-9583-9Brain Imaging Behav. 11Cui, Y., Liang, X., Gu, H., Hu, Y., Zhao, Z., Yang, X. Y., et al. (2017). Cerebral perfusion alterations in type 2 diabetes and its relation to insulin resistance and cognitive dysfunction. Brain Imaging Behav. 11, 1248-1257. doi: 10.1007/s11682-016-9583-9
+
+Altering neuronal excitability to preserve network connectivity in a computational model of Alzheimer's disease. W De Haan, E C W Van Straaten, A A Gouw, C J Stam, 10.1371/journal.pcbi.1005707PLoS Comput. Biol. 131005707de Haan, W., van Straaten, E. C. W., Gouw, A. A., and Stam, C. J. (2017). Altering neuronal excitability to preserve network connectivity in a computational model of Alzheimer's disease. PLoS Comput. Biol. 13:e1005707. doi: 10.1371/journal.pcbi.1005707
+
+Executive functions. A Diamond, 10.1146/annurev-psych-113011-143750Annu. Rev. Psychol. 64Diamond, A. (2013). Executive functions. Annu. Rev. Psychol. 64, 135-168. doi: 10.1146/annurev-psych-113011-143750
+
+Analysing connectivity with Granger causality and dynamic causal modelling. K Friston, R Moran, A K Seth, 10.1016/j.conb.2012.11.010Curr. Opin. Neurobiol. 23Friston, K., Moran, R., and Seth, A. K. (2013). Analysing connectivity with Granger causality and dynamic causal modelling. Curr. Opin. Neurobiol. 23, 172-178. doi: 10.1016/j.conb.2012.11.010
+
+Mini-Mental State Examination (MMSE). M Galea, M Woodward, Galea, M., and Woodward, M. (2005). Mini-Mental State Examination (MMSE).
+
+. 10.1016/S0004-9514(05)70034-9Aust. J. Physiother. 51198Aust. J. Physiother. 51:198. doi: 10.1016/S0004-9514(05)70034-9
+
+Structural and functional brain changes in middle-aged type 2 diabetic patients: a cross-sectional study. N Garcia-Casares, M L Berthier, R E Jorge, P Gonzalez-Alegre, A Gutierrez Cardo, J Rioja Villodres, 10.3233/JAD-131736J. Alzheimers. Dis. 40Garcia-Casares, N., Berthier, M. L., Jorge, R. E., Gonzalez-Alegre, P., Gutierrez Cardo, A., Rioja Villodres, J., et al. (2014). Structural and functional brain changes in middle-aged type 2 diabetic patients: a cross-sectional study. J. Alzheimers. Dis. 40, 375-386. doi: 10.3233/JAD-131736
+
+Conserved functional connectivity but impaired effective connectivity of thalamocortical circuitry in schizophrenia. Y Guller, G Tononi, B R Postle, 10.1089/brain.2012.0100Brain Connect. 2Guller, Y., Tononi, G., and Postle, B. R. (2012). Conserved functional connectivity but impaired effective connectivity of thalamocortical circuitry in schizophrenia. Brain Connect. 2, 311-319. doi: 10.1089/brain.20 12.0100
+
+Investigating neural primacy in major depressive disorder: multivariate Granger causality analysis of resting-state fMRI time-series data. J P Hamilton, G Chen, M E Thomason, M E Schwartz, I H Gotlib, 10.1038/mp.2010.46Mol. Psychiatry. 16Hamilton, J. P., Chen, G., Thomason, M. E., Schwartz, M. E., and Gotlib, I. H. (2011). Investigating neural primacy in major depressive disorder: multivariate Granger causality analysis of resting-state fMRI time-series data. Mol. Psychiatry 16, 763-772. doi: 10.1038/mp.2010.46
+
+A rating scale for depression. M Hamilton, 10.1136/jnnp.23.1.56J. Neurol. Neurosurg. Psychiatr. 23Hamilton, M. (1960). A rating scale for depression. J. Neurol. Neurosurg. Psychiatr. 23, 56-62. doi: 10.1136/jnnp.23.1.56
+
+Hyperactivation of working memory-related brain circuits in newly diagnosed middle-aged type 2 diabetics. X S He, Z X Wang, Y Z Zhu, N Wang, X Hu, D R Zhang, 10.1007/s00592-014-0618-7Acta Diabetol. 52He, X. S., Wang, Z. X., Zhu, Y. Z., Wang, N., Hu, X., Zhang, D. R., et al. (2015). Hyperactivation of working memory-related brain circuits in newly diagnosed middle-aged type 2 diabetics. Acta Diabetol. 52, 133-142. doi: 10.1007/s00592-014-0618-7
+
+Neural coding of "attention for action" and "response selection" in primate anterior cingulate cortex. Y Isomura, Y Ito, T Akazawa, A Nambu, M Takada, J. Neurosci. 23Isomura, Y., Ito, Y., Akazawa, T., Nambu, A., and Takada, M. (2003). Neural coding of "attention for action" and "response selection" in primate anterior cingulate cortex. J. Neurosci. 23, 8002-8012.
+
+Small-world human brain networks: perspectives and challenges. X Liao, A V Vasilakos, Y He, 10.1016/j.neubiorev.2017.03.018Neurosci. Biobehav. Rev. 77Liao, X., Vasilakos, A. V., and He, Y. (2017). Small-world human brain networks: perspectives and challenges. Neurosci. Biobehav. Rev. 77, 286-300. doi: 10.1016/j.neubiorev.2017.03.018
+
+Aberrant brain regional homogeneity and functional connectivity in middle-aged T2DM patients: a resting-state functional MRI study. D Liu, S Duan, J Zhang, C Zhou, M Liang, X Yin, 10.3389/fnhum.2016.00490Front. Hum. Neurosci. 10490Liu, D., Duan, S., Zhang, J., Zhou, C., Liang, M., Yin, X., et al. (2016). Aberrant brain regional homogeneity and functional connectivity in middle-aged T2DM patients: a resting-state functional MRI study. Front. Hum. Neurosci. 10:490. doi: 10.3389/fnhum.2016.00490
+
+Topdown modulation of neural activity in anticipatory visual attention: control mechanisms revealed by simultaneous EEG-fMRI. Y Liu, J Bengson, H Huang, G R Mangun, M Ding, 10.1093/cercor/bhu204Cereb. Cortex. 26Liu, Y., Bengson, J., Huang, H., Mangun, G. R., and Ding, M. (2016). Top- down modulation of neural activity in anticipatory visual attention: control mechanisms revealed by simultaneous EEG-fMRI. Cereb. Cortex 26, 517-529. doi: 10.1093/cercor/bhu204
+
+. M Lustig, D L Donoho, J M Santos, Pauly , J M , Lustig, M., Donoho, D. L., Santos, J. M., and Pauly, J. M. (2008).
+
+Compressed Sensing MRI. 10.1109/MSP.2007.914728IEEE Signal Process. Mag. 25Compressed Sensing MRI. IEEE Signal Process. Mag. 25, 72-82. doi: 10.1109/MSP.2007.914728
+
+Neurophysiology of perceptual and motor aspects of interception. H Merchant, A P Georgopoulos, 10.1152/jn.00422.2005J. Neurophysiol. 95Merchant, H., and Georgopoulos, A. P. (2006). Neurophysiology of perceptual and motor aspects of interception. J. Neurophysiol. 95, 1-13. doi: 10.1152/jn.00422.2005
+
+Impact of diabetes on cognitive function and brain structure. A Moheet, S Mangia, E R Seaquist, 10.1111/nyas.12807Ann. N.Y. Acad. Sci. 1353Moheet, A., Mangia, S., and Seaquist, E. R. (2015). Impact of diabetes on cognitive function and brain structure. Ann. N.Y. Acad. Sci. 1353, 60-71. doi: 10.1111/nyas.12807
+
+Individual variability in functional connectivity architecture of the human brain. S Mueller, D Wang, M D Fox, B T Yeo, J Sepulcre, M R Sabuncu, 10.1016/j.neuron.2012.12.028Neuron. 77Mueller, S., Wang, D., Fox, M. D., Yeo, B. T., Sepulcre, J., Sabuncu, M. R., et al. (2013). Individual variability in functional connectivity architecture of the human brain. Neuron 77, 586-595. doi: 10.1016/j.neuron.2012. 12.028
+
+Magnitude of cognitive dysfunction in adults with type 2 diabetes: a meta-analysis of six cognitive domains and the most frequently reported neuropsychological tests within domains. P Palta, A L Schneider, G J Biessels, P Touradji, F Hill-Briggs, 10.1017/S1355617713001483J. Int. Neuropsychol. Soc. 20Palta, P., Schneider, A. L., Biessels, G. J., Touradji, P., and Hill-Briggs, F. (2014). Magnitude of cognitive dysfunction in adults with type 2 diabetes: a meta-analysis of six cognitive domains and the most frequently reported neuropsychological tests within domains. J. Int. Neuropsychol. Soc. 20, 278-291. doi: 10.1017/S1355617713001483
+
+Cerebral alterations of type 2 diabetes mellitus on MRI: a pilot study. B Peng, Z Chen, L Ma, Y Dai, 10.1016/j.neulet.2015.08.030Neurosci. Lett. 606Peng, B., Chen, Z., Ma, L., and Dai, Y. (2015). Cerebral alterations of type 2 diabetes mellitus on MRI: a pilot study. Neurosci. Lett. 606, 100-105. doi: 10.1016/j.neulet.2015.08.030
+
+Abnormal spontaneous brain activity in type 2 diabetes with and without microangiopathy revealed by regional homogeneity. J Peng, H Qu, J Peng, T Y Luo, F J Lv, L Chen, 10.1016/j.ejrad.2015.12.024Eur. J. Radiol. 85Peng, J., Qu, H., Peng, J., Luo, T. Y., Lv, F. J., Chen, L., et al. (2016). Abnormal spontaneous brain activity in type 2 diabetes with and without microangiopathy revealed by regional homogeneity. Eur. J. Radiol. 85, 607-615. doi: 10.1016/j.ejrad.2015.12.024
+
+The attention system of the human brain: 20 years after. S E Petersen, M I Posner, 10.1146/annurev-neuro-062111-150525Annu. Rev. Neurosci. 35Petersen, S. E., and Posner, M. I. (2012). The attention system of the human brain: 20 years after. Annu. Rev. Neurosci. 35, 73-89. doi: 10.1146/annurev-neuro-062111-150525
+
+Brain networks and cognitive architectures. S E Petersen, O Sporns, 10.1016/j.neuron.2015.09.027Neuron. 88Petersen, S. E., and Sporns, O. (2015). Brain networks and cognitive architectures. Neuron 88, 207-219. doi: 10.1016/j.neuron.2015.09.027
+
+Complex network measures of brain connectivity: uses and interpretations. M Rubinov, O Sporns, 10.1016/j.neuroimage.2009.10.003Neuroimage. 52Rubinov, M., and Sporns, O. (2010). Complex network measures of brain connectivity: uses and interpretations. Neuroimage 52, 1059-1069. doi: 10.1016/j.neuroimage.2009.10.003

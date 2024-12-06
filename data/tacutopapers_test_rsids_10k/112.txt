@@ -1,0 +1,245 @@
+Figure 4 4Figure 4. The y-axis quantifies the number of age-related diseases which significantly overlap with aging-related genes; the x-axis describes the aging-related gene sets studied according to the source organism (i.e., human plus human homologs of aging-related genes from each model organism). The columns have seven different
+
+Figure 6 . 6(A) CAD-genes distribution as associated with age-related disease classes. (B) shows the genes involved in half or more disease classes. TNF is associated with all the age-related disease classes analysed. This analysis was performed with PBC.
+
+Figure 7 . 7(A) CAD-gene distribution as associated with individual age-related diseases. (B) shows the CAD-genes involved in ten or more individual diseases, with PON1, TNF, APOE the top 3 genes associated with the greatest number of age-related diseases. This analysis was performed with PBC.
+
+Figure 8 . 8Number of genes by age-related disease class (Total column) and shared with each other disease classes. The white cells present the number of genes shared between disease classes and the darker grey cells show the number of genes not shared with any other disease class.
+
+Table 1 . 1Number of genes plus average and median number of publications per gene in each datasetDataset a Num. of genes
+
+Average
+
+num. pubs.
+
+Median
+
+num. pubs.
+
+Human genome (NCBI)
+
+20183 b
+
+8.7
+
+6
+
+Human interactome (BioGRID)
+
+15000 c
+
+10.4
+
+8
+
+Human aging
+
+related genes
+
+298
+
+30.3
+
+23
+
+All aging
+
+related orthologs
+
+894
+
+14.5
+
+10
+
+anti
+
+longevity
+
+448
+
+13.2
+
+9
+
+pro
+
+longevity
+
+421
+
+15.9
+
+11
+
+M. musculus
+
+84
+
+26.8
+
+19
+
+anti
+
+longevity
+
+23
+
+22.7
+
+13
+
+pro
+
+longevity
+
+59
+
+28.6
+
+21
+
+D. melanogaster
+
+135
+
+19.9
+
+13
+
+anti
+
+longevity
+
+48
+
+20.1
+
+12
+
+pro
+
+longevity
+
+87
+
+19.6
+
+13
+
+C. elegans
+
+693
+
+13.1
+
+9
+
+anti
+
+longevity
+
+381
+
+13.0
+
+9
+
+pro
+
+longevity
+
+290
+
+13.1
+
+9
+
+S. cerevisiae
+
+62
+
+17.9
+
+14
+
+anti
+
+longevity
+
+41
+
+14.7
+
+10
+
+pro
+
+longevity
+
+13
+
+23.2
+
+15
+
+Notes:.
+
+a
+
+All datasets refer to human genes, including human orthologs of genes from
+
+various model organisms.
+
+b
+
+Genome has 20183 annotated genes in NCBI but only 19071 are in the Swiss-
+
+Prot database.
+
+c
+
+Interactome has 15000 annotated genes in NCBI but only 14498 are in the
+
+Swiss
+
+Prot database.
+
+Table S20 . S20In total, 40 diseases were part of ARD classes, of which 22 ARDs were analysed individually. The list of all age-related diseases and their related Supplementary Dataset 5). Our full datasets are also available on GitHub (https://github.com/maglab/genage-analysis).genes is available in the supplementary material ( Figure 2. The y-axis quantifies the number of age-related diseases which significantly overlap with aging-related genes; the x-axis describes the aging-related gene sets studied according to the source organism (i.e., human plus human homologs of aging-related genes from each model organism). The columns have seven different colours to represent each age-related disease classe analysed: Neoplasms (light blue), Nutritional and Metabolic diseases (orange), Nervous System diseases (light grey), Cardiovascular diseases (yellow), Musculoskeletal diseases (blue), Respiratory Tract diseases (green) and Immune System diseases (dark blue). The first column represents the number of age-related diseases with a significant overlap with candidate human aging-associated genes. Model organisms are ordered by evolutionary proximity to humans. The genome was considered as background. The secondary y-axis displays the number of genes from the respective gene sets. (A) shows the number of significant overlapping aging-related genes with age-related diseases.
+
+(B) shows the number of significant overlapping aging-related genes with age-related diseases with PBC (i.e., only genes with more than 10 publications were used). | Human Molecular Genetics, 2016, Vol. 25, No. 21 AcknowledgementsWe thank Louise Crompton for assistance in compiling the relevant literature.Conflict of Interest statement. None declared.FundingGenAge is supported by a Wellcome Trust grant (104978/Z/14/Z) to JPM. Funding to pay the Open Access publication charges for this article was provided by Wellcome Trust. Inflamm-aging -An evolutionary perspective on immunosenescence. C Franceschi, M Bonafe, S Valensin, F Olivieri, M De Luca, E Ottaviani, G De Benedictis, Mol. Cell. Gerontol. 908Franceschi, C., Bonafe, M., Valensin, S., Olivieri, F., De Luca, M., Ottaviani, E. and De Benedictis, G. (2000) Inflamm-aging - An evolutionary perspective on immunosenescence. Mol. Cell. Gerontol., 908, 244-254.
+
+. C Lopez-Otin, M A Blasco, L Partridge, M Serrano, G Kroemer, The Hallmarks of Aging. Cell. 153Lopez-Otin, C., Blasco, M.A., Partridge, L., Serrano, M. and Kroemer, G. (2013) The Hallmarks of Aging. Cell, 153, 1194-1217.
+
+J P De Magalhaes, I Stuart-Hamilton, An Introduction to Gerontology. CambridgeCambridge University Pressde Magalhaes, J.P. (2011) Stuart-Hamilton, I. (ed. ), In An Introduction to Gerontology. Cambridge University Press, Cambridge, pp. 21-47.
+
+Open-minded scepticism: inferring the causal mechanisms of human ageing from genetic perturbations. J P De Magalhaes, Ageing Res. Rev. 4de Magalhaes, J.P. (2005) Open-minded scepticism: inferring the causal mechanisms of human ageing from genetic per- turbations. Ageing Res. Rev., 4, 1-22.
+
+The genetics of ageing. C J Kenyon, Nature. 464Kenyon, C.J. (2010) The genetics of ageing. Nature, 464, 504-512.
+
+Human Ageing Genomic Resources: Integrated databases and tools for the biology and genetics of ageing. R Tacutu, T Craig, A Budovsky, D Wuttke, G Lehmann, D Taranukha, J Costa, V E Fraifeld, De Magalhaes, Nucleic Acids Res. 41J.P.Tacutu, R., Craig, T., Budovsky, A., Wuttke, D., Lehmann, G., Taranukha, D., Costa, J., Fraifeld, V.E. and de Magalhaes, J.P. (2013) Human Ageing Genomic Resources: Integrated data- bases and tools for the biology and genetics of ageing. Nucleic Acids Res., 41, D1027-D1033.
+
+Gerontome: a webbased database server for aging-related genes and analysis pipelines. J Kwon, B Lee, H Chung, BMC Genomics. 1120Kwon, J., Lee, B. and Chung, H. (2010) Gerontome: a web- based database server for aging-related genes and analysis pipelines. BMC Genomics, 11, S20.
+
+Predicting the Pro-Longevity or Anti-Longevity Effect of Model Organism Genes with New Hierarchical Feature Selection Methods. C Wan, A A Freitas, J P De Magalhaes, IEEE-ACM Transact. Comput. Biol. Bioinform. 12Wan, C., Freitas, A.A. and de Magalhaes, J.P. (2015) Predicting the Pro-Longevity or Anti-Longevity Effect of Model Organism Genes with New Hierarchical Feature Selection Methods. IEEE- ACM Transact. Comput. Biol. Bioinform., 12, 262-275.
+
+GenAge: a genomic and proteomic network map of human ageing. J P De Magalhaes, O Toussaint, FEBS Lett. 571de Magalhaes, J.P. and Toussaint, O. (2004) GenAge: a geno- mic and proteomic network map of human ageing. FEBS Lett, 571, 243-247.
+
+Systems-level analysis of human aging genes shed new light on mechanisms of aging. Q Zhang, R Nogales-Cadenas, J R Lin, W Zhang, Y Cai, J Vijg, Z D Zhang, Hum Mol Genet. 25Zhang, Q., Nogales-Cadenas, R., Lin, J.R., Zhang, W., Cai, Y., Vijg, J., and Zhang, Z.D. (2016) Systems-level analysis of hu- man aging genes shed new light on mechanisms of aging. Hum Mol Genet., 25, 2934-2947.
+
+A data mining approach for classifying DNA repair genes into ageing-related or non-ageing-related. A A Freitas, O Vasieva, J P De Magalhaes, BMC Genomics. 1227Freitas, A.A., Vasieva, O. and de Magalhaes, J.P. (2011) A data mining approach for classifying DNA repair genes into age- ing-related or non-ageing-related. BMC Genomics, 12, 27.
+
+Dynamic networks reveal key players in aging. F E Faisal, T Milenkovic, Bioinformatics. 30Faisal, F.E. and Milenkovic, T. (2014) Dynamic networks re- veal key players in aging. Bioinformatics, 30, 1721-1729.
+
+Dissecting the gene network of dietary restriction to identify evolutionarily conserved pathways and new functional genes. D Wuttke, R Connor, C Vora, T Craig, Y Li, S Wood, O Vasieva, R Shmookler Reis, F Tang, J P De Magalhaes, PLoS Genet. 81002834Wuttke, D., Connor, R., Vora, C., Craig, T., Li, Y., Wood, S., Vasieva, O., Shmookler Reis, R., Tang, F. and de Magalhaes, J.P. (2012) Dissecting the gene network of dietary restriction to identify evolutionarily conserved pathways and new functional genes. PLoS Genet., 8, e1002834.
+
+Prediction of C. elegans longevity genes by human and worm longevity networks. R Tacutu, D E Shore, A Budovsky, J P De Magalhaes, G Ruvkun, V E Fraifeld, S P Curran, PLoS One. 748282Tacutu, R., Shore, D.E., Budovsky, A., de Magalhaes, J.P., Ruvkun, G., Fraifeld, V.E. and Curran, S.P. (2012) Prediction of C. elegans longevity genes by human and worm longevity networks. PLoS One, 7, e48282.
+
+GeneFriends: an online coexpression analysis tool to identify novel gene targets for aging and complex diseases. S Van Dam, R Cordeiro, T Craig, J Van Dam, S H Wood, De Magalhaes, BMC Genomics. 535J.P.van Dam, S., Cordeiro, R., Craig, T., van Dam, J., Wood, S.H. and de Magalhaes, J.P. (2012) GeneFriends: an online co- expression analysis tool to identify novel gene targets for ag- ing and complex diseases. BMC Genomics, 13, 535.
+
+Gene expression reveals overlap between normal aging and Alzheimer's disease genes. D Avramopoulos, M Szymanski, R H Wang, S Bassett, Neurobiol. Aging. 32Avramopoulos, D., Szymanski, M., Wang, R.H. and Bassett, S. (2011) Gene expression reveals overlap between normal aging and Alzheimer's disease genes. Neurobiol. Aging, 32, 2319.e27-34.
+
+How ageing processes influence cancer. J P De Magalhaes, Nat. Rev. Cancer. 13de Magalhaes, J.P. (2013) How ageing processes influence cancer. Nat. Rev. Cancer, 13, 357-365.
+
+Understanding the biology of aging with interaction networks. F Peysselon, S Ricard-Blum, Maturitas. 69Peysselon, F. and Ricard-Blum, S. (2011) Understanding the biol- ogy of aging with interaction networks. Maturitas, 69, 126-130.

@@ -1,0 +1,387 @@
+Table 2 . 2Overlapping pathways for targets of SM cocktails and OSKM.Pathways
+
+Cocktails
+
+#1
+
+#2
+
+#3
+
+#4
+
+#5
+
+#6
+
+#7
+
+#8
+
+#9
+
+#10
+
+Pathways in cancer
+
+Chronic myeloid leukemia
+
+Prostate cancer
+
+Bladder cancer
+
+Small cell lung cancer *
+
+Viral carcinogenesis
+
+HTLV
+
+I infection
+
+Hepatitis B
+
+Epstein
+
+Barr virus infection
+
+p53 signaling pathway
+
+Dark gray color with (*) depicts overlaps with p < 0.05. Light gray depicts the pathways with insignificant overlaps (p > 0.05).
+
+Table 3 . 3SMs as human metabolites.Name Role in induced cell reprogramming (inducer/enhancer) Chemical class
+
+5'
+
+Azacytidine (5'
+
+azaC)
+
+Enhancer
+
+Nucleotides and nucleotide derivatives
+
+5'
+
+Aza
+
+2'
+
+deoxycytidine
+
+Enhancer
+
+Nucleotides and nucleotide derivatives
+
+7
+
+hydroxyflavone
+
+Enhancer
+
+Flavonoids
+
+90
+
+D3 (Vitamin D3)
+
+Enhancer
+
+Steroids and steroid derivatives
+
+Apigenin
+
+Enhancer
+
+Flavonoids
+
+Caffeic acid
+
+Putative enhancer or inducer
+
+Cinnamic acids and derivatives
+
+Chlorogenic acid
+
+Putative enhancer or inducer
+
+Fatty acids and derivatives
+
+Curcumin
+
+Enhancer
+
+Diarylheptanoids
+
+Dasatinib
+
+Inducer
+
+Benzene and derivatives
+
+Dexamethasone
+
+Enhancer
+
+Steroids and steroid derivatives
+
+EGCG
+
+Enhancer
+
+Flavonoids
+
+Fisetin
+
+Enhancer
+
+Flavonoids
+
+Forskolin
+
+Inducer
+
+Benzofurans
+
+Fru
+
+2,6
+
+P2
+
+Enhancer
+
+Organooxygen compounds
+
+Luteolin
+
+Enhancer
+
+Flavonoids
+
+N
+
+acetyl
+
+cysteine
+
+Enhancer
+
+Amino acids and derivatives
+
+Sodium Butyrate (NaB)
+
+Inducer and enhancer
+
+Fatty acids and derivatives
+
+Prostaglandin E2
+
+Enhancer
+
+Fatty acids and derivatives
+
+Quercetin
+
+Enhancer
+
+Flavonoids
+
+Rapamycin
+
+Enhancer
+
+Macrolide lactams
+
+Resveratrol
+
+Enhancer
+
+Stilbenes
+
+Retinoic acid
+
+Enhancer
+
+Prenol lipids
+
+SAHA
+
+Enhancer
+
+Benzene and derivatives
+
+Spermidine
+
+Enhancer
+
+Organonitrogen compounds
+
+Valproic acid
+
+Inducer
+
+Fatty acids and derivatives
+
+Vitamin A (Retinol acetate)
+
+Enhancer
+
+Prenol lipids
+
+Vitamin C (Ascorbic acid; Ascorbate) Enhancer Dihydrofurans
+
+Zolpidem
+
+Enhancer
+
+Azoles
+
+enrichment = 5, p < 2.0E-
+
+Cocktail 5 (BrdUC6F)Cocktail 6 (VC6TF + AM 580 + EPZ004777) Cocktail 7 (VC6TF + AM580 + DZNep + 5-aza-dC + SGC0946 + EPZ004777) SMs and their protein targets.Cocktail 9 (VC6TF + AM 580 + DZNep)BrdU CHIR99021 RepSox Forskolin
+
+VPA
+
+CHIR99021
+
+RepSox
+
+Parnate
+
+Forskolin
+
+AM 580
+
+EPZ004777
+
+VPA
+
+CHIR99021
+
+RepSox
+
+Parnate
+
+Forskolin
+
+AM 580
+
+DZNep
+
+5
+
+aza
+
+dC
+
+SGC0946
+
+EPZ004777
+
+Cocktail 8 (VC6TF + DZNep)
+
+VPA
+
+CHIR99021
+
+AGING
+
+RepSOX
+
+Parnate
+
+Forskolin
+
+DZNep
+
+VPA
+
+CHIR99021
+
+RepSox
+
+Parnate
+
+Forskolin
+
+AM 580
+
+DZNep
+
+Cocktail 10 (CNɑATP)
+
+CHIR99021
+
+NaB
+
+cyclic pifithrin
+
+a (ɑ)
+
+A
+
+83
+
+01
+
+Thiazovivin
+
+PD0325901
+
+The role of DNA damage and repair in aging through the prism of Koch-like criteria. A A Moskalev, M V Shaposhnikov, E N Plyusnina, A Zhavoronkov, A Budovsky, H Yanai, V E Fraifeld, 10.1016/j.arr.2012.02.00122353384Ageing Res Rev. 12Moskalev AA, Shaposhnikov MV, Plyusnina EN, Zhavoronkov A, Budovsky A, Yanai H, Fraifeld VE. The role of DNA damage and repair in aging through the prism of Koch-like criteria. Ageing Res Rev. 2013; 12:661-84. https://doi.org/10.1016/j.arr.2012.02.001 PMID:22353384
+
+A multidimensional systems biology analysis of cellular senescence in aging and disease. R A Avelar, J G Ortega, R Tacutu, E J Tyler, D Bennett, P Binetti, A Budovsky, K Chatsirisupachai, Johnson E Murray, A Shields, S Tejada-Martinez, D Thornton, D , 10.1186/s13059-020-01990-9Genome Biol. 2132264951Avelar RA, Ortega JG, Tacutu R, Tyler EJ, Bennett D, Binetti P, Budovsky A, Chatsirisupachai K, Johnson E, Murray A, Shields S, Tejada-Martinez D, Thornton D, et al. A multidimensional systems biology analysis of cellular senescence in aging and disease. Genome Biol. 2020; 21:91. https://doi.org/10.1186/s13059-020-01990-9 PMID:32264951
+
+iPSCs-Induced Cellular Reprogramming. Encyclopedia of Biomedical Gerontology. K K Muradian, V E Fraifeld, Academic PressMuradian KK, Fraifeld VE. iPSCs-Induced Cellular Reprogramming. Encyclopedia of Biomedical Gerontology. Academic Press. 2020; 291-8.
+
+. 10.1016/B978
+
+0
+
+12
+
+801238
+
+3.11299
+
+1https://doi.org/10.1016/B978
+
+0
+
+12
+
+801238
+
+3.11299
+
+1
+
+Induction of pluripotent stem cells from mouse embryonic and adult fibroblast cultures by defined factors. K Takahashi, S Yamanaka, 10.1016/j.cell.2006.07.02416904174Cell. 126Takahashi K, Yamanaka S. Induction of pluripotent stem cells from mouse embryonic and adult fibroblast cultures by defined factors. Cell. 2006; 126:663-76. https://doi.org/10.1016/j.cell.2006.07.024 PMID:16904174
+
+Induction of pluripotent stem cells from adult human fibroblasts by defined factors. K Takahashi, K Tanabe, M Ohnuki, M Narita, T Ichisaka, K Tomoda, S Yamanaka, 10.1016/j.cell.2007.11.01918035408Cell. 131Takahashi K, Tanabe K, Ohnuki M, Narita M, Ichisaka T, Tomoda K, Yamanaka S. Induction of pluripotent stem cells from adult human fibroblasts by defined factors. Cell. 2007; 131:861-72. https://doi.org/10.1016/j.cell.2007.11.019 PMID:18035408
+
+The developmental potential of iPSCs is greatly influenced by reprogramming factor selection. Y Buganim, S Markoulaki, N Van Wietmarschen, H Hoke, T Wu, K Ganz, B Akhtar-Zaidi, Y He, B J Abraham, D Porubsky, E Kulenkampff, D A Faddah, L Shi, Cell Stem Cell. 15Buganim Y, Markoulaki S, van Wietmarschen N, Hoke H, Wu T, Ganz K, Akhtar-Zaidi B, He Y, Abraham BJ, Porubsky D, Kulenkampff E, Faddah DA, Shi L, et al. The developmental potential of iPSCs is greatly influenced by reprogramming factor selection. Cell Stem Cell. 2014; 15:295-309.
+
+. 10.1016/j.stem.2014.07.00325192464https://doi.org/10.1016/j.stem.2014.07.003 PMID:25192464
+
+Induced pluripotent stem cell lines derived from human somatic cells. J Yu, M A Vodyanik, K Smuga-Otto, Antosiewicz- Bourget, J Frane, J L Tian, S Nie, J Jonsdottir, G A Ruotti, V Stewart, R Slukvin, I I Thomson, J A , 10.1126/science.115152618029452Science. 318Yu J, Vodyanik MA, Smuga-Otto K, Antosiewicz-Bourget J, Frane JL, Tian S, Nie J, Jonsdottir GA, Ruotti V, Stewart R, Slukvin II, Thomson JA. Induced pluripotent stem cell lines derived from human somatic cells. Science. 2007; 318:1917-20. https://doi.org/10.1126/science.1151526 PMID:18029452
+
+Enhanced efficiency of generating induced pluripotent stem (iPS) cells from human somatic cells by a combination of six transcription factors. J Liao, Z Wu, Y Wang, L Cheng, C Cui, Y Gao, T Chen, L Rao, S Chen, N Jia, H Dai, S Xin, J Kang, 10.1038/cr.2008.5118414447Cell Res. 18Liao J, Wu Z, Wang Y, Cheng L, Cui C, Gao Y, Chen T, Rao L, Chen S, Jia N, Dai H, Xin S, Kang J, et al. Enhanced efficiency of generating induced pluripotent stem (iPS) cells from human somatic cells by a combination of six transcription factors. Cell Res. 2008; 18:600-3. https://doi.org/10.1038/cr.2008.51 PMID:18414447
+
+. P Hou, Y Li, X Zhang, C Liu, J Guan, H Li, T Zhao, J Ye, Hou P, Li Y, Zhang X, Liu C, Guan J, Li H, Zhao T, Ye J, www.aging-us.com AGING
+
+Pluripotent stem cells induced from mouse somatic cells by smallmolecule compounds. W Yang, K Liu, J Ge, J Xu, Q Zhang, 10.1126/science.123927823868920Science. 341Yang W, Liu K, Ge J, Xu J, Zhang Q, et al. Pluripotent stem cells induced from mouse somatic cells by small- molecule compounds. Science. 2013; 341:651-4. https://doi.org/10.1126/science.1239278 PMID:23868920
+
+Generation of neural progenitor cells by chemical cocktails and hypoxia. L Cheng, W Hu, B Qiu, J Zhao, Y Yu, W Guan, M Wang, W Yang, G Pei, 10.1038/cr.2014.3224638034Cell Res. 24Cheng L, Hu W, Qiu B, Zhao J, Yu Y, Guan W, Wang M, Yang W, Pei G. Generation of neural progenitor cells by chemical cocktails and hypoxia. Cell Res. 2014; 24:665-79. https://doi.org/10.1038/cr.2014.32 PMID:24638034
+
+Pluripotent stem cells induced from mouse neural stem cells and small intestinal epithelial cells by small molecule compounds. J Ye, J Ge, X Zhang, L Cheng, Z Zhang, S He, Y Wang, H Lin, W Yang, J Liu, Y Zhao, H Deng, Cell Res. 26Ye J, Ge J, Zhang X, Cheng L, Zhang Z, He S, Wang Y, Lin H, Yang W, Liu J, Zhao Y, Deng H. Pluripotent stem cells induced from mouse neural stem cells and small intestinal epithelial cells by small molecule compounds. Cell Res. 2016; 26:34-45.
+
+. 10.1038/cr.2015.14226704449https://doi.org/10.1038/cr.2015.142 PMID:26704449
+
+The triumph of chemically enhanced cellular reprogramming: a patent review. M A Anwar, S Kim, S Choi, 10.1517/13543776.2016.111805826593376Expert Opin Ther Pat. 26Anwar MA, Kim S, Choi S. The triumph of chemically enhanced cellular reprogramming: a patent review. Expert Opin Ther Pat. 2016; 26:265-80. https://doi.org/10.1517/13543776.2016.1118058 PMID:26593376
+
+Chemical reprogramming and transdifferentiation. X Xie, Y Fu, J Liu, 10.1016/j.gde.2017.07.00328755566Curr Opin Genet Dev. 46Xie X, Fu Y, Liu J. Chemical reprogramming and transdifferentiation. Curr Opin Genet Dev. 2017; 46:104-13. https://doi.org/10.1016/j.gde.2017.07.003 PMID:28755566
+
+Chemical-induced cardiac reprogramming in vivo. C Huang, W Tu, Y Fu, J Wang, X Xie, 10.1038/s41422-018-0036-4Cell Res. 2829670223Huang C, Tu W, Fu Y, Wang J, Xie X. Chemical-induced cardiac reprogramming in vivo. Cell Res. 2018; 28:686-9. https://doi.org/10.1038/s41422-018-0036-4 PMID:29670223
+
+The role of the Hedgehog signaling pathway in cancer: A comprehensive review. A M Skoda, D Simovic, V Karin, V Kardum, S Vranic, L Serman, 10.17305/bjbms.2018.275629274272Bosn J Basic Med Sci. 18Skoda AM, Simovic D, Karin V, Kardum V, Vranic S, Serman L. The role of the Hedgehog signaling pathway in cancer: A comprehensive review. Bosn J Basic Med Sci. 2018; 18:8-20. https://doi.org/10.17305/bjbms.2018.2756 PMID:29274272

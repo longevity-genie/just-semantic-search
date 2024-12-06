@@ -1,0 +1,63 @@
+Machine Learning Analysis of Longevity-Associated Gene Expression Landscapes in Mammals 2021
+
+Anton Y Kulaga Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+International Longevity Alliance
+
+92330SceauxFrance
+
+CellFabrik SRL
+
+060512BucharestRomania
+
+Eugen Ursu Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+Dmitri Toren Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+The Shraga Segal Department of Microbiology, Immunology and Genetics Faculty of Health Sciences Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 8410501Beer-ShevaIsrael
+
+Vladyslava Tyshchenko
+
+SoftServe Inc
+
+49044DniproUkraine
+
+Rodrigo Guinea Escuela de Postgrado, Pontificia Universidad Católica del Perú 15023San MiguelPeru
+
+Malvina Pushkova Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+Vadim E Fraifeld The Shraga Segal Department of Microbiology, Immunology and Genetics Faculty of Health Sciences Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 8410501Beer-ShevaIsrael
+
+Robi Tacutu Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+Machine Learning Analysis of Longevity-Associated Gene Expression Landscapes in Mammals
+
+International Journal of Molecular Sciences Article Int. J. Mol. Sci 221073202110.3390/ijms22031073Received: 15 December 2020 Accepted: 20 January 2021 Citation: Kulaga, A.Y. ; Ursu, E.; Toren, D.; Tyshchenko, V.; Guinea, R.; Pushkova, M.; Fraifeld, V.E. ; Tacutu, R. Machine Learning Analysis of Longevity-Associated Gene Expression Landscapes in Mammals.
+
+Introduction
+
+Numerous studies have showed that the average lifespan, and in some cases even maximum lifespan (MLS), could be modified by genetic interventions. Hundreds of genes have been shown to be involved in the control of longevity in model organisms or in the etiopathogenesis of aging-related diseases, with many being highly conserved and interacting in a cooperative manner [1][2][3]. Still, until now, only a~1.5-fold lifespan increase has been achieved through genetic interventions in mammals [4], and even less with pharmacological interventions [5,6]. In contrast, MLS varies in at least a 100-fold range across the Mammalia class [3], hinting that the comparative biology of aging has not been exhausted yet and novel genetic interventions might still be discovered by looking at the differences between various species.
+
+Studying the variations in MLS and transcription across multiple species is an informative method for investigating the evolution of longevity. Recent studies demonstrated that differences in gene expression between long-and short-living mammals exist [7][8][9][10].
+
+Results and Discussion
+
+Data Collection and Processing of Gene Expression across Mammalian Species
+
+Using publicly available RNA-Seq data, we build a cross-species dataset of gene expression levels. The dataset consists of 408 samples from 41 mammalian species and covers five organs: liver, kidney, lung, brain, or heart (the full list of species and sequencing run IDs is available in Supplementary Table S1). The dataset was normalized, processed, and further augmented with species data for studying the associations among gene expression levels and systemic species variables: MLS, body mass, temperature, metabolic rate, gestation period and GC content of mitochondrial DNA, all of which have been suggested to be determinants of MLS [15][16][17]. Linear, LightGBM-SHAP, and Bayesian network models were employed to identify and describe the associations among gene expression levels and MLS (as described in detail in Figure 1). Independent results from three approaches were integrated to investigate which genes will appear as the top MLS predictors, regardless of the methodology differences.
+
+Linear Correlations between Gene Expression and Maximum Lifespan
+
+To investigate to what extent the expression level of evolutionarily conserved genes correlates with MLS across mammals, linear models were first constructed for 11,831 orthologous genes that are found between 33 mammalian species (Figure 2a). For each of these genes, the coefficient of determination (R 2 ), which indicates how well the trained linear models explain the MLS variability, was computed. The numbers of genes that were significantly associated with MLS in every organ under analysis are as follows: brain-381, liver-390, kidney-154, heart-535, and lung-756. The median R 2 was similar across organs: for brain-0.36, liver-0.36, kidney-0.35, heart-0.38, and lung-0. 38. The analysis of the linear models identified that only three genes (CRYGS, TCFL5, SPATA20) have significant positive correlations with MLS (FDR < 0.05, R 2 > 0. 3), in a consistent manner among all five studied organs. It should be noted that the sample size for the heart and lung is relatively lower than that for the other organs, which is mainly due to the generally lower availability for these samples. As such, this bias could be responsible for the small number of genes found to associate in all of the five organs. Consequently, we also looked at the significant correlations that are observable only in the organs with a high sample size: brain, liver, and kidney.
+
+The results led to a slightly extended list of 12 genes (SPATA20, TCFL5, TIMP1, HSPB1, RASSF4, SLC25A23, NASP, CCDC14, A2M, NOXA1, C20orf96, CRYGS) whose expression correlates with MLS (FDR < 0.05, R 2 > 0. 3) in the brain, liver, and kidney. For a full list of genes associated with MLS and other species' features, see Supplementary Table S2.
+
+Genes that are predictive for MLS might also correlate with at least one other lifehistory trait. For example, it is known that MLS correlates with body mass, body temperature, metabolic rate, gestation age, and mitochondrial GC%, which raises the possibility that the associations with MLS are in fact found due to indirect causes. In the brain and kidney, we identified no genes that correlate with MLS uniquely (i.e., genes whose expression correlates with MLS, but not with other variables). In the liver, only one gene (CERS4) correlates with MLS, but not with the other investigated traits. In the heart and lung, we identified 4 and 131 unique associations, respectively, but conclusions drawn from these two organs might be biased because of the lower sample size (we had access to 28 lung samples from 16 species, compared to 121 liver samples from 30 species).
+
+Linear Correlations between Gene Expression and Maximum Lifespan
+
+To investigate to what extent the expression level of evolutionarily conserved genes correlates with MLS across mammals, linear models were first constructed for 11,831 orthologous genes that are found between 33 mammalian species (Figure 2a). For each of these genes, the coefficient of determination (R 2 ), which indicates how well the trained linear models explain the MLS variability, was computed. The numbers of genes that were significantly associated with MLS in every organ under analysis are as follows: brain-381, liver-390, kidney-154, heart-535, and lung-756. The median R 2 was similar across organs: for brain-0.36, liver-0.36, kidney-0.35, heart-0.38, and lung-0.38. The analysis of the linear models identified that only three genes (CRYGS, TCFL5, SPATA20) have significant positive correlations with MLS (FDR < 0.05, R 2 > 0.3), in a consistent manner among all five studied organs. It should be noted that the sample size for the heart and lung is relatively lower than that for the other organs, which is mainly due to the generally lower availability for these samples. As such, this bias could be responsible for the small number of genes found to associate in all of the five organs. Consequently, we also looked at the significant correlations that are observable only in the organs with a high sample size: brain, liver, and kidney.
+
+The results led to a slightly extended list of 12 genes (SPATA20, TCFL5, TIMP1, HSPB1, RASSF4, SLC25A23, NASP, CCDC14, A2M, NOXA1, C20orf96, CRYGS) whose expression correlates with MLS (FDR < 0.05, R 2 > 0.3) in the brain, liver, and kidney. For a full list of genes associated with MLS and other species' features, see Supplementary Table S2.
+
+Genes that are predictive for MLS might also correlate with at least one other lifehistory trait. For example, it is known that MLS correlates with body mass, body temperature, metabolic rate, gestation age, and mitochondrial GC%, which raises the possibility that the associations with MLS are in fact found due to indirect causes. In the brain and kidney, we identified no genes that correlate with MLS uniquely (i.e., genes whose expression correlates with MLS, but not with other variables). In the liver, only one gene (CERS4) correlates with MLS, but not with the other investigated traits. In the heart and lung, we identified 4 and 131 unique associations, respectively, but conclusions drawn from these two organs might be biased because of the lower sample size (we had access to 28 lung samples from 16 species, compared to 121 liver samples from 30 species). Supplementary Table  S2). (b) Top linear correlations for MLS and pathway enrichment scores. The heatmap represents the significant associations between MLS and the computed enrichment score (ES) for pathways, obtained using the signature projection approach, which takes into account the expression of all the expressed genes belonging to each pathway.

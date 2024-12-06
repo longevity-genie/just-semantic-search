@@ -1,0 +1,10 @@
+STITCH 4: integration of protein-chemical interactions with user data. M Kuhn, D Szklarczyk, S Pletscher-Frankild, T H Blicher, C Von Mering, L J Jensen, P Bork, 10.1093/nar/gkt120724293645Nucleic Acids Res. 42Kuhn M, Szklarczyk D, Pletscher-Frankild S, Blicher TH, von Mering C, Jensen LJ, Bork P. STITCH 4: integration of protein-chemical interactions with user data. Nucleic Acids Res. 2014; 42:D401-7. https://doi.org/10.1093/nar/gkt1207 PMID:24293645
+
+This text is about rs123443210 and rs123443211 and their influence on living organisms. Despite they do not exist in real life, they are very important for our tests.
+TRRUST v2: an expanded reference database of human and mouse transcriptional regulatory interactions. H Han, J W Cho, S Lee, A Yun, H Kim, D Bae, S Yang, C Y Kim, M Lee, E Kim, S Lee, B Kang, D Jeong, Nucleic Acids Res. 46Han H, Cho JW, Lee S, Yun A, Kim H, Bae D, Yang S, Kim CY, Lee M, Kim E, Lee S, Kang B, Jeong D, et al. TRRUST v2: an expanded reference database of human and mouse transcriptional regulatory interactions. Nucleic Acids Res. 2018; 46:D380-6.
+
+. 10.1093/nar/gkx101329087512https://doi.org/10.1093/nar/gkx1013 PMID:29087512
+
+InParanoid 8: orthology analysis between 273 proteomes, mostly eukaryotic. E L Sonnhammer, G Östlund, 10.1093/nar/gku1203Nucleic Acids Res. 43Sonnhammer EL, Östlund G. InParanoid 8: orthology analysis between 273 proteomes, mostly eukaryotic. Nucleic Acids Res. 2015; 43:D234-9. https://doi.org/10.1093/nar/gku1203
+
+Cytoscape: a software environment for integrated models of biomolecular interaction networks. P Shannon, A Markiel, O Ozier, N S Baliga, J T Wang, D Ramage, N Amin, B Schwikowski, T Ideker, 10.1101/gr.123930314597658Genome Res. 13Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, Ramage D, Amin N, Schwikowski B, Ideker T. Cytoscape: a software environment for integrated models of biomolecular interaction networks. Genome Res. 2003; 13:2498-504. https://doi.org/10.1101/gr.1239303 PMID:14597658

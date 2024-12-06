@@ -1,0 +1,77 @@
+Systems biology analysis of lung fibrosis-related genes in the bleomycin mouse model 0123456789. 2021
+
+Dmitri Toren Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+Hagai Yanai Epigenetics and Stem Cell Unit Translational Gerontology Branch National Institute on Aging, NIH 21224BaltimoreMDUSA
+
+Reem Abu Taha Gabriela Bunu Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+Eugen Ursu Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+Rolf Ziesche
+
+Internal Medicine II/Pulmonology
+
+Medical University of Vienna
+
+27271WienAustria
+
+Robi Tacutu Systems Biology of Aging Group Institute of Biochemistry of the Romanian Academy 060031BucharestRomania
+
+E Vadim
+
+Fraifeld
+
+The Shraga Segal Department of Microbiology, Immunology and Genetics Center for Multidisciplinary Research on Aging Ben-Gurion University of the Negev 8410501Beer-ShevaIsrael
+
+Systems biology analysis of lung fibrosis-related genes in the bleomycin mouse model
+
+Scientific Reports | 11192690123456789. 202110.1038/s41598-021-98674-61 www.nature.com/scientificreports Tissue fibrosis is a major driver of pathology in aging and is involved in numerous age-related diseases. The lungs are particularly susceptible to fibrotic pathology which is currently difficult to treat. The mouse bleomycin-induced fibrosis model was developed to investigate lung fibrosis and widely used over the years. However, a systematic analysis of the accumulated results has not been performed. We undertook a comprehensive data mining and subsequent manual curation, resulting in a collection of 213 genes (available at the TiRe database, www. tiredb. org), which when manipulated had a clear impact on bleomycin-induced lung fibrosis. Our meta-analysis highlights the age component in pulmonary fibrosis and strong links of related genes with longevity. The results support the validity of the bleomycin model to human pathology and suggest the importance of a multi-target therapeutic strategy for pulmonary fibrosis treatment.Tissue fibrosis is a major cause of frailty in aging and is involved in numerous age-related pathologies 1,2 . Among adult tissues, the lungs seem to be especially susceptible to age-related fibrotic pathology which is often poorly mendable 3-5 . As such, there is a great need for treatment and drug development to cope with this problem 6 .
+
+Unfortunately, experimental models of lung fibrosis are still few 7 , and it is still debatable to what extent these models adequately reflect pulmonary fibrosis in humans, in particular, idiopathic pulmonary fibrosis (IPF) 3,8,9 . The most popular experimental model, due to its ease of use, has been the mouse bleomycin-induced model 7 , in which a chemotherapeutic agent elicits a quick and robust fibrotic effect when inhaled 10 . While bleomycin does not model the disease perfectly 11,12 , it is still extremely useful for research and a widely-used model which has undoubtedly increased our understanding of fibrotic pathology 13,14 . Subsequently, a large body of data on the genetic factors that influence lung fibrosis has been accumulated based on the bleomycin-induced model. Yet, a systematic analysis of these data has not been performed to date. With this in mind, we conducted a meta-analysis of highly curated genes that have been rigorously shown to impact lung fibrosis in the bleomycin mouse model. The list containing these pulmonary fibrosis-related genes (PFRGs) is now part of the TiRe database (http:// www. tiredb.
+
+org), which contains curated genetic information on wound healing and fibroproliferative processes 15 .Apart from the collection and detailed characterization of PFRGs, we placed a special emphasis on (i) the consistency between different types of manipulations; (ii) the consistency of bleomycin data with the expression of corresponding genes in lungs of IPF patients, and (iii) the relationships between lung fibrosis-related and longevity-associated genes (LAGs).
+
+www.nature.com/scientificreports/ two or more manipulations. As seen in Table 2, over 85% of the different types of manipulations, applied either in the same study or in independent studies, are fully consistent with one another with regard to their effects on bleomycin-induced lung fibrosis. The rest were either partially consistent or consistency was unclear based on available data. Along with the bleomycin model to test interventions, several other murine models for inducing lung fibrosis have also been used (Table 3). In all cases, when a "non-bleomycin" murine model was used for investigating the role of a given gene or protein in lung fibrosis, the effects observed were consistent with those seen in the bleomycin model (Supplementary Table ST1).
+
+Overall, the curated list of PFRGs consists of 216 unique (non-redundant) genes that were examined regarding their role in bleomycin-induced lung fibrosis in mice (Supplementary Table ST1). Of them, only 3 genes Table 1. Gene-specific manipulation types in bleomycin-induced lung fibrosis studies. For a full detailed list see Supplementary Table ST1.
+
+Type of manipulation Number of studies
+
+Knockout 185
+
+Overexpression 77
+
+Overexpression and knockout 20
+
+Protein downregulation (inhibitors, Abs) 20
+
+Protein upregulation (agonists, external) 8
+
+MiR knockout/knockdown 7
+
+MiR overexpression 1
+
+Genetic and non
+
+genetic manipulation 22
+
+Genetic and non
+
+genetic (protein) 18
+
+Genetic and epigenetic (microRNA) 3
+
+Protein and epigenetic (microRNA) 1
+
+Combined studies 44  Table 3. Non-bleomycin models of lung fibrosis in mice. 21 of 23 non-bleomycin models were used in addition to the bleomycin model in the same studies; in the case of Lox1 and Timp1 genes, only non-bleomycin models were used. www.nature.com/scientificreports/ (Ptgs1, Rps6kb1, Rps6kb2) did not show a definite impact. The PFRGs that displayed an effect could be further divided into two major groups: anti-fibrotic and pro-fibrotic. We considered a gene as anti-fibrotic if its upregulation reduced fibrosis and/or its downregulation had an opposite effect. Conversely, if upregulation promoted lung fibrosis and/or downregulation reduced fibrosis, the gene was considered pro-fibrotic. In our dataset, the number of anti-fibrotic genes was approximately equal to that of pro-fibrotic genes: 43.5% of genes displayed a clear anti-fibrotic activity, 50% of genes displayed pro-fibrotic activity, and 6.5% of genes showed inconsistent results (both pro-and anti-fibrotic). Remarkably, we noted a high consistency (~ 80%) between the effects of genetic manipulations of PFRGs in bleomycin-induced lung fibrosis in mice and the expression of their human orthologs in the lungs of patients with IPF (Table 2).
+
+Additional models of lung fibrosis Number of studies
+
+Evolutionary conservation of pulmonary fibrosis-related genes. PFRGs were studied in mice but are most interesting for their potential impact on humans. Consequently, we also evaluated their evolutionary conservation in more depth. For this purpose, we extracted the PFRG orthologs for all species available in the InParanoid database 16 ; http:// inpar anoid. sbc. su. se/). Some of the PFRGs (n = 18) were not represented in InParanoid and the analysis was performed on 195 genes only. As seen in Fig. 1, PFRGs are differentially conserved among vertebrates and invertebrates: they are over-represented in vertebrates and under-represented in invertebrates.
+
+Enrichment analysis. Next, we looked to see whether the PFRG list is enriched for certain processes and pathways that dominate in pulmonary fibrosis. We found that PFRGs are enriched for processes such as regulation of proliferation, inflammation and immune functions, and aging processes (Table 4). Interestingly, there are marked enrichment differences between pro-fibrotic and anti-fibrotic genes: (i) While pro-fibrotic genes are enriched for genes that positively regulate proliferation, anti-fibrotic genes are composed of those that negatively regulate it; (ii) pro-fibrotic genes are also enriched for pathways that relate to inflammation and immune function while anti-fibrotic genes are not. An important question is whether there is any association between pro-fibrotic or anti-fibrotic genes and specific cell types. Since the vast majority of data on gene expression in pulmonary fibrosis were obtained for the whole lung tissue, a direct answer to this question is at the moment impossible. Nevertheless, we took advantage of the Enrichr tools to estimate what tissues and cell types are more likely to be associated, if any, with PFRGs. The Human Gene Atlas database 17 (http:// biogps. org) analysis revealed that our set of anti-fibrotic genes is more likely to be expressed in lungs, while the pro-fibrotic genes are more likely to be expressed in vessels, lungs, and blood. We further used the PanglaoDB database 18 (http:// pangl aodb.
+
+se) for determining cell types associated with PFRGs. As seen in Fig. 2, the pro-fibrotic genes are mostly associated with immune cells. Apart from immune cells, the anti-fibrotic genes are mostly associated with connective tissue and endothelial cells.
+
+Functional module analysis.

@@ -1,0 +1,31 @@
+Energy sensing pathways in aging and chronic lung disease. V J Thannickal, Trans. Am. Clin. Climatol. Assoc. 131Thannickal, V. J. Energy sensing pathways in aging and chronic lung disease. Trans. Am. Clin. Climatol. Assoc. 131, 286-293 (2020).
+
+Oxidative stress in pulmonary fibrosis. E Otoupalova, S Smith, G Cheng, V J Thannickal, Compr. Physiol. 10Otoupalova, E., Smith, S., Cheng, G. & Thannickal, V. J. Oxidative stress in pulmonary fibrosis. Compr. Physiol. 10, 509-547 (2020).
+
+Heterogeneous distribution of mechanical stress in human lung: A mathematical approach to evaluate abnormal remodeling in IPF. A Carloni, V Poletti, L Fermo, N Bellomo, M Chilosi, J. Theor. Biol. 332Carloni, A., Poletti, V., Fermo, L., Bellomo, N. & Chilosi, M. Heterogeneous distribution of mechanical stress in human lung: A mathematical approach to evaluate abnormal remodeling in IPF. J. Theor. Biol. 332, 136-140 (2013).
+
+Exploring animal models that resemble idiopathic pulmonary fibrosis. J Tashiro, Front Med. (Lausanne). 4118Tashiro, J. et al. Exploring animal models that resemble idiopathic pulmonary fibrosis. Front Med. (Lausanne) 4, 118 (2017).
+
+Systems biology approaches and tools for analysis of interactomes and multi-target drugs. A Schrattenholz, K Groebe, V Soskic, Methods Mol. Biol. 662Schrattenholz, A., Groebe, K. & Soskic, V. Systems biology approaches and tools for analysis of interactomes and multi-target drugs. Methods Mol. Biol. 662, 29-58 (2010).
+
+M(o)TOR of aging: MTOR as a universal molecular hypothalamus. M V Blagosklonny, Aging. 5Blagosklonny, M. V. M(o)TOR of aging: MTOR as a universal molecular hypothalamus. Aging (Albany, NY) 5, 490-494 (2013).
+
+Accelerated aging induced by deficiency of Zmpste24 protects old mice to develop bleomycin-induced pulmonary fibrosis. J Calyeca, Aging. 10Calyeca, J. et al. Accelerated aging induced by deficiency of Zmpste24 protects old mice to develop bleomycin-induced pulmonary fibrosis. Aging (Albany, NY) 10, 3881-3896 (2018).
+
+Wound healing and longevity: Lessons from long-lived αMUPA mice. H Yanai, Aging. 7Yanai, H. et al. Wound healing and longevity: Lessons from long-lived αMUPA mice. Aging (Albany, NY) 7, 167-176 (2015).
+
+Is rate of skin wound healing associated with aging or longevity phenotype. H Yanai, A Budovsky, R Tacutu, V E Fraifeld, Biogerontology. 12Yanai, H., Budovsky, A., Tacutu, R. & Fraifeld, V. E. Is rate of skin wound healing associated with aging or longevity phenotype?. Biogerontology 12, 591-597 (2011).
+
+DAVID-WS: A stateful web service to facilitate gene/protein list analysis. X Jiao, Bioinformatics. 28Jiao, X. et al. DAVID-WS: A stateful web service to facilitate gene/protein list analysis. Bioinformatics 28, 1805-1806 (2012).
+
+Enrichr: A comprehensive gene set enrichment analysis web server 2016 update. M V Kuleshov, Nucleic Acids Res. 44Kuleshov, M. V. et al. Enrichr: A comprehensive gene set enrichment analysis web server 2016 update. Nucleic Acids Res. 44, W90-W97 (2016).
+
+Cytoscape: A software environment for integrated models of biomolecular interaction networks. P Shannon, Genome Res. 13Shannon, P. et al. Cytoscape: A software environment for integrated models of biomolecular interaction networks. Genome Res. 13, 2498-2504 (2003).
+
+Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. A Subramanian, Proc. Natl. Acad. Sci. USA. 102Subramanian, A. et al. Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. Proc. Natl. Acad. Sci. USA 102, 15545-15550 (2005).
+
+Understanding multicellular function and disease with human tissue-specific networks. C S Greene, Nat. Genet. 47Greene, C. S. et al. Understanding multicellular function and disease with human tissue-specific networks. Nat. Genet. 47, 569-576 (2015).
+
+Ensemble comparative genomics resources. J Herrero, Database (Oxford). 117Herrero, J. et al. Ensemble comparative genomics resources. Database (Oxford) 1, 17 (2016).
+
+Econometric and statistical modeling with Python. S Seabold, J Perktold, Statsmodels, 10.25080/Majora-92bf1922-011Proceedings of the 9th Python in Science Conference 92-96. the 9th Python in Science Conference 92-96SciPySeabold, S. & Perktold, J. Statsmodels: Econometric and statistical modeling with Python. in Proceedings of the 9th Python in Sci- ence Conference 92-96 (SciPy, 2010). https:// doi. org/ 10. 25080/ Majora-92bf1 922-011.

@@ -1,0 +1,61 @@
+GeneFriends: a human RNA-seq-based gene and transcript co-expression database. S Van Dam, T Craig, J P De Magalhaes, Nucleic Acids Res. 43van Dam S, Craig T, de Magalhaes JP. GeneFriends: a human RNA-seq-based gene and transcript co-expression database. Nucleic Acids Res. 2015; 43(Database issue):D1124-32.
+
+Hallmarks of cellular senescence. A Hernandez-Segura, J Nehme, M Demaria, Trends Cell Biol. 286Hernandez-Segura A, Nehme J, Demaria M. Hallmarks of cellular senescence. Trends Cell Biol. 2018;28(6):436-53.
+
+Network-based analysis of differentially expressed genes in cerebrospinal fluid (CSF) and blood reveals new candidate genes for multiple sclerosis. N Safari-Alighiarloo, M Rezaei-Tavirani, M Taghizadeh, S M Tabatabaei, S Namaki, PeerJ. 42775Safari-Alighiarloo N, Rezaei-Tavirani M, Taghizadeh M, Tabatabaei SM, Namaki S. Network-based analysis of differentially expressed genes in cerebrospinal fluid (CSF) and blood reveals new candidate genes for multiple sclerosis. PeerJ. 2016;4:e2775.
+
+Tools for protein-protein interaction network analysis in cancer research. R Sanz-Pamplona, A Berenguer, X Sole, D Cordero, M Crous-Bou, J Serra-Musach, Clin Transl Oncol. 141Sanz-Pamplona R, Berenguer A, Sole X, Cordero D, Crous-Bou M, Serra- Musach J, et al. Tools for protein-protein interaction network analysis in cancer research. Clin Transl Oncol. 2012;14(1):3-14.
+
+Comprehensive curation and analysis of global interaction networks in Saccharomyces cerevisiae. T Reguly, A Breitkreutz, L Boucher, B J Breitkreutz, G C Hon, C L Myers, J Biol. 5411Reguly T, Breitkreutz A, Boucher L, Breitkreutz BJ, Hon GC, Myers CL, et al. Comprehensive curation and analysis of global interaction networks in Saccharomyces cerevisiae. J Biol. 2006;5(4):11.
+
+Meta-analysis of age-related gene expression profiles identifies common signatures of aging. J P De Magalhaes, J Curado, G M Church, Bioinformatics. 257de Magalhaes JP, Curado J, Church GM. Meta-analysis of age-related gene expression profiles identifies common signatures of aging. Bioinformatics. 2009;25(7):875-81.
+
+Increased SHP-1 expression results in radioresistance, inhibition of cellular senescence, and cell cycle redistribution in nasopharyngeal carcinoma cells. Z Sun, X Pan, Z Zou, Q Ding, G Wu, G Peng, Radiat Oncol. 10152Sun Z, Pan X, Zou Z, Ding Q, Wu G, Peng G. Increased SHP-1 expression results in radioresistance, inhibition of cellular senescence, and cell cycle redistribution in nasopharyngeal carcinoma cells. Radiat Oncol. 2015;10:152.
+
+Targeting the senescence-overriding cooperative activity of structurally unrelated H3K9 demethylases in melanoma. Y Yu, K Schleich, B Yue, Ji S Lohneis, P Kemper, K , Cancer Cell. 332e8Yu Y, Schleich K, Yue B, Ji S, Lohneis P, Kemper K, et al. Targeting the senescence-overriding cooperative activity of structurally unrelated H3K9 demethylases in melanoma. Cancer Cell. 2018;33(2):322-36. e8.
+
+When is hub gene selection better than standard meta-analysis?. P Langfelder, P S Mischel, S Horvath, PLoS One. 8461505Langfelder P, Mischel PS, Horvath S. When is hub gene selection better than standard meta-analysis? PLoS One. 2013;8(4):e61505.
+
+CytoCluster: a Cytoscape plugin for cluster analysis and visualization of biological networks. M Li, D Li, Y Tang, F Wu, J Wang, Int J Mol Sci. 189Li M, Li D, Tang Y, Wu F, Wang J. CytoCluster: a Cytoscape plugin for cluster analysis and visualization of biological networks. Int J Mol Sci. 2017;18(9). https://www.mdpi.com/about/announcements/784.
+
+Immune surveillance of senescent cells--biological significance in cancer-and non-cancer pathologies. L Hoenicke, L Zender, Carcinogenesis. 336Hoenicke L, Zender L. Immune surveillance of senescent cells--biological significance in cancer-and non-cancer pathologies. Carcinogenesis. 2012; 33(6):1123-6.
+
+A novel role for the condensin II complex in cellular senescence. Y Yokoyama, H Zhu, R Zhang, K Noma, Cell Cycle. 1413Yokoyama Y, Zhu H, Zhang R, Noma K. A novel role for the condensin II complex in cellular senescence. Cell Cycle. 2015;14(13):2160-70.
+
+Living on a break: cellular senescence as a DNAdamage response. Adda Di Fagagna, F , Nat Rev Cancer. 87d'Adda di Fagagna F. Living on a break: cellular senescence as a DNA- damage response. Nat Rev Cancer. 2008;8(7):512-22.
+
+SMC4, which is essentially involved in lung development, is associated with lung adenocarcinoma progression. C Zhang, M Kuang, M Li, L Feng, K Zhang, S Cheng, Sci Rep. 634508Zhang C, Kuang M, Li M, Feng L, Zhang K, Cheng S. SMC4, which is essentially involved in lung development, is associated with lung adenocarcinoma progression. Sci Rep. 2016;6:34508.
+
+RNaseH2A is involved in human gliomagenesis through the regulation of cell proliferation and apoptosis. B Dai, P Zhang, Y Zhang, C Pan, G Meng, X Xiao, Oncol Rep. 361Dai B, Zhang P, Zhang Y, Pan C, Meng G, Xiao X, et al. RNaseH2A is involved in human gliomagenesis through the regulation of cell proliferation and apoptosis. Oncol Rep. 2016;36(1):173-80.
+
+The hypusine cascade promotes cancer progression and metastasis through the regulation of RhoA in squamous cell carcinoma. T Muramatsu, K I Kozaki, S Imoto, R Yamaguchi, H Tsuda, T Kawano, Oncogene. 3540Muramatsu T, Kozaki KI, Imoto S, Yamaguchi R, Tsuda H, Kawano T, et al. The hypusine cascade promotes cancer progression and metastasis through the regulation of RhoA in squamous cell carcinoma. Oncogene. 2016;35(40):5304-16.
+
+RNA-Seq: a revolutionary tool for transcriptomics. Z Wang, M Gerstein, M Snyder, Nat Rev Genet. 101Wang Z, Gerstein M, Snyder M. RNA-Seq: a revolutionary tool for transcriptomics. Nat Rev Genet. 2009;10(1):57-63.
+
+Differential roles for cyclindependent kinase inhibitors p21 and p16 in the mechanisms of senescence and differentiation in human fibroblasts. G H Stein, L F Drullinger, A Soulard, V Dulic, Mol Cell Biol. 193Stein GH, Drullinger LF, Soulard A, Dulic V. Differential roles for cyclin- dependent kinase inhibitors p21 and p16 in the mechanisms of senescence and differentiation in human fibroblasts. Mol Cell Biol. 1999;19(3):2109-17.
+
+Polycomb CBX7 has a unifying role in cellular lifespan. J Gil, D Bernard, D Martinez, D Beach, Nat Cell Biol. 61Gil J, Bernard D, Martinez D, Beach D. Polycomb CBX7 has a unifying role in cellular lifespan. Nat Cell Biol. 2004;6(1):67-72.
+
+Secretion of vascular endothelial growth factor by primary human fibroblasts at senescence. J P Coppe, K Kauser, J Campisi, C M Beausejour, J Biol Chem. 28140Coppe JP, Kauser K, Campisi J, Beausejour CM. Secretion of vascular endothelial growth factor by primary human fibroblasts at senescence. J Biol Chem. 2006;281(40):29568-74.
+
+Has gene duplication impacted the evolution of Eutherian longevity?. A Doherty, J P De Magalhaes, Aging Cell. 155Doherty A, de Magalhaes JP. Has gene duplication impacted the evolution of Eutherian longevity? Aging Cell. 2016;15(5):978-80.
+
+A proposal to sequence genomes of unique interest for research on aging. J P De Magalhaes, J M Sedivy, C E Finch, S N Austad, G M Church, J Gerontol A Biol Sci Med Sci. 626de Magalhaes JP, Sedivy JM, Finch CE, Austad SN, Church GM. A proposal to sequence genomes of unique interest for research on aging. J Gerontol A Biol Sci Med Sci. 2007;62(6):583-4.
+
+Comparative genetics of longevity and cancer: insights from long-lived rodents. V Gorbunova, A Seluanov, Z Zhang, V N Gladyshev, J Vijg, Nat Rev Genet. 158Gorbunova V, Seluanov A, Zhang Z, Gladyshev VN, Vijg J. Comparative genetics of longevity and cancer: insights from long-lived rodents. Nat Rev Genet. 2014;15(8):531-40.
+
+The origins and evolution of the p53 family of genes. V A Belyi, P Ak, E Markert, H Wang, W Hu, A Puzio-Kuter, Cold Spring Harb Perspect Biol. 261198Belyi VA, Ak P, Markert E, Wang H, Hu W, Puzio-Kuter A, et al. The origins and evolution of the p53 family of genes. Cold Spring Harb Perspect Biol. 2010;2(6):a001198.
+
+Evolutionary history of the reprimo tumor suppressor gene family in vertebrates with a description of a new reprimo gene lineage. I A Wichmann, K Zavala, F G Hoffmann, M W Vandewege, A H Corvalan, J D Amigo, Gene. 5911Wichmann IA, Zavala K, Hoffmann FG, Vandewege MW, Corvalan AH, Amigo JD, et al. Evolutionary history of the reprimo tumor suppressor gene family in vertebrates with a description of a new reprimo gene lineage. Gene. 2016;591(1):245-54.
+
+Evolutionary mutant models for human disease. R C Albertson, W Cresko, H W Detrich, J H Postlethwait, Trends Genet. 252Albertson RC, Cresko W, Detrich HW 3rd, Postlethwait JH. Evolutionary mutant models for human disease. Trends Genet. 2009;25(2):74-81.
+
+Hallmarks of cancer: the next generation. D Hanahan, R A Weinberg, Cell. 1445Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation. Cell. 2011;144(5):646-74.
+
+Evolution in health and medicine Sackler colloquium: evolutionary perspectives on health and medicine. S C Stearns, R M Nesse, D R Govindaraju, P T Ellison, Proc Natl Acad Sci U S A. 1071SupplStearns SC, Nesse RM, Govindaraju DR, Ellison PT. Evolution in health and medicine Sackler colloquium: evolutionary perspectives on health and medicine. Proc Natl Acad Sci U S A. 2010;107(Suppl 1):1691-5.
+
+The hallmarks of aging. C Lopez-Otin, M A Blasco, L Partridge, M Serrano, G Kroemer, Cell. 1536Lopez-Otin C, Blasco MA, Partridge L, Serrano M, Kroemer G. The hallmarks of aging. Cell. 2013;153(6):1194-217.
+
+The business of anti-aging science. J P De Magalhaes, M Stevens, D Thornton, Trends Biotechnol. 3511de Magalhaes JP, Stevens M, Thornton D. The business of anti-aging science. Trends Biotechnol. 2017;35(11):1062-73.
+
+Ensembl BioMarts: a hub for data retrieval across taxonomic space. R J Kinsella, A Kahari, S Haider, J Zamora, G Proctor, G Spudich, Database (Oxford). 30Kinsella RJ, Kahari A, Haider S, Zamora J, Proctor G, Spudich G, et al. Ensembl BioMarts: a hub for data retrieval across taxonomic space. Database (Oxford). 2011;2011:bar030.

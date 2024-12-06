@@ -1,0 +1,63 @@
+The Overrepresentation Enrichment Analysis (ORA) of biological processes (Gene Ontology database) was done via the WEB-based Gene SeT AnaLysis Toolkit (WebGestalt) for the analysis of all CellAge genes, CellAge CS regulators and overexpressed signatures of CS overexpressed in the meta-analysis of aging signatures, and for the CellAge genes overlapping with tumor suppressor and oncogenes [38]. A p value cutoff of 0.05 was used, and p values were adjusted using BH correction. Redundant GO terms were removed and the remaining GO terms were grouped into categories based on their function using the default parameters on Reduce + Visualize Gene Ontology (REVIGO) [37]. Results were then visualized using and the R package treemap [104] (Fig. 1c; Additional file 2: Fig. S8A -S8D). Venn diagrams to represent gene overlaps were created using Venny [52] and the ggplot2 library [90,102].
+
+Networks
+
+We used Cytoscape version 3.6.1 to generate networks and R version 3.3.1 to perform aspects of the statistical analysis [90,105]. The networks were built starting from a list of seed nodes-all genes included in build 1 of Cel-lAge, part of the Human Ageing Genomic Resources [28]. Network propagation was measured using the Cytoscape plugin Diffusion [106].
+
+The analysis of the fit to the scale-free structure was calculated by the Network Analyzer tool of Cytoscape 3.2.1 [105]. Network analyzer is a Cytoscape plugin which performs topological analysis on the network and reports the pillar nodes on the network structure based on a series of mathematical parameters. Network analyzer also calculates the fit of the distribution of the number of edges per node to the power law distribution. A significant fit to the power law indicates the presence of a scale-free structure in the network [61,107]. The analysis was applied to the PPI network, the RNA-seq Unweighted Co-expression network, and the Microarray Unweighted Co-expression network of cellular senescence (Additional file 2: Fig. S9). The Network Analyzer tool was also used to calculate BC, CC, and IC in the networks.
+
+Protein
+
+protein interaction network
+
+The protein-protein interaction network was built from the BioGrid database of physical multi-validated protein interactions (Biology General Repository for Interaction Datasets) version 3.4.160, using CellAge proteins as seed nodes and extracting the proteins encoded by CellAge genes as well as the first-order interactors of CellAge proteins [108]. After removing duplicated edges and self-loops, the network consisted of 2643 nodes and 16, 930 edges. The network was constructed and visualized in Cytoscape version 3.6.1. The "CytoCluster" App in Cytoscape was used to identify modules in the network with the following parameters: HC-PIN algorithm; Weak, Threshold = 2.0; ComplexSize Threshold = 1% [68].
+
+Unweighted RNA
+
+Seq co
+
+expression network
+
+The RNA-seq co-expression network was built using CellAge data and RNA-Seq co-expression data taken from Genefriends (http://genefriends.org/RNAseq) [59].
+
+The unweighted co-expression network was built applying the method of correlation threshold selection described by Aoki to the GeneFriends database of RNA-Seq co-expression version 3.1 [109]. Aoki initially designed this methodology for plant co-expression network analysis, but it has been successfully applied to build human networks [110]. The Pearson Correlation Coefficient (PCC) threshold which generated the database of edges with the lowest network density was selected. The network density is the proportion of existing edges out of all possible edges between all nodes. The lower the network density is the more nodes and fewer edges are included in the network. The lower the number of edges, the higher the minimum correlation in expression between each pair of genes represented by the edges. The higher the number of nodes, the higher the portion of nodes from CellAge included, and, therefore, the more representative the network is of the CellAge database. The PCC threshold of 0.65 generated the database of interactions of RNA-Seq co-expression with the lowest network density, 0.01482 (Additional file 2: Fig. S14A). The unweighted RNA-Seq network was generated and visualized in Cytoscape 3.6.1.
+
+Microarray co
+
+expression network
+
+The microarray co-expression network was generated using the CellAge genes as seed nodes and their direct interactions and edges, derived using the COXPRESdb database of Microarray co-expression (version Hsa-m2.c2-0) [57]. PCC threshold of 0.53 created the Microarray database with the lowest network density, 1.006 × 10 − 2 (Additional file 2: Fig. S14B). The adjustment of the node-degree distribution to the power law distribution had a correlation of 0.900 and an R-squared of 0.456 (Additional file 2: Fig. S9C). The fit to the power law distribution confirmed the scale-free structure of the network.
+
+Experimental validation of new CS genes
+
+We used normal human mammary fibroblasts (HMFs) and siRNAs to find new CS regulators based on highranking co-expressed inhibitors of CS and SIPS inhibitors. We also tested SMC4 due to its high-scoring topological parameters within the microarray co-expression network (see Experimental Validation of Senescence Candidates in Results).
+
+Cell culture and reagents
+
+Fibroblasts were obtained from reduction mammoplasty tissue of a 16-year-old individual, donor 48 [111]. The cells were seeded at 7500 cells/cm 2 and maintained in Dulbecco's modified Eagle's medium (DMEM) (Life Technologies, UK) supplemented with 10% fetal bovine serum (FBS) (Labtech.com, UK), 2 mM L-glutamine (Life Technologies, UK) and 10 μg/mL insulin from bovine pancreas (Sigma). All cells were maintained at 37°C/5% CO 2 . All cells were routinely tested for mycoplasma and shown to be negative.
+
+siRNA knockdown experiments
+
+For high-content analysis (HCA), cells were forward transfected with 30 nM siRNA pools at a 1:1:1 ratio (Ambion) using Dharmafect 1 (Dharmacon) in 384-well format. Control siRNA targeting cyclophilin B (Dharmacon) or Chromobox homolog 7 (CBX7, Ambion) were also included as indicated. Cells were incubated at 37°C/ 5% CO 2 and medium changed after 24 h. Cells were then fixed/stained 96 h later and imaged as described below. The siRNA sequences are provided in Additional file 1: Table S47A and S47B.
+
+Z
+
+score generation
+
+For each of the parameters analyzed, significance was defined as one Z-score from the negative control mean and average Z-scores from at least two independent experiments performed in at least triplicate are presented. Z-scores were initially generated on a per experiment basis according to the formula below: Z−score ¼ mean value of target siRNA À mean value for cyclophilin B siRNA ð Þ =standard deviation SD ð Þfor cyclophilin B siRNA:
+
+Immunofluorescence microscopy and high-content analysis Cells were fixed with 3.7% paraformaldehyde, permeabilized for 15 min using 0.1% Triton X and blocked in 0.25% BSA before primary antibody incubations. Primary antibodies used are listed in Additional file 1: Table S48. Cells were incubated for 2 h at room temperature with the appropriate AlexaFluor-488 or AlexaFluor-546 conjugated antibody (1:500, Invitrogen), DAPI, and CellMask Deep Red (Invitrogen). Images were acquired using the IN Cell 2200 automated microscope (GE), and HCA was performed using the IN Cell Developer software (GE).
+
+Supplementary information
+
+Supplementary information accompanies this paper at https://doi.org/10. 1186/s13059-020-01990-9.
+
+Additional file 1: Supplementary Tables. Excel file containing  Supplementary Tables S1-S48.
+
+Fig. 2 2Differential expression of a CellAge inducers and inhibitors of CS and b differentially expressed signatures of CS in human tissues with age.
+
+Fig. 3 a 3Overlap between CellAge inducers and inhibitors, and oncogenes and tumor-suppressing genes. b Adjusted p value and odds ratio of the overlap analysis. The number of overlapping genes in each category was significant (p < 0.05, Fisher's exact test with BH correction). p values are shown in gray writing for each comparison. Data available in Additional file 1:Table S22-S27
+
+Fig. 4 a 4Cluster analysis of the RNA-Seq Unweighted Co-expression Network. The 171 seed nodes obtained from CellAge and their first order interactors. The colours represent the breakdown of the network into clusters. The algorithm revealed 52 distinct clusters, of which we color and order the 19 clusters with the best rankings for modularity, or in the case of module 17-19, size. The CellAge nodes are colored in dark purple, appearing throughout the network. Larger nodes have higher betweenness centrality. In order of decreasing modularity, the main function clusters of the modules were related to; Spermatogenesis (Module 1), Synapse (Module 2), Cardiac muscle contraction (Module 3), Cell Cycle (Module 4), Secreted (Module 5), Tudor domain (Module 6), ATP-binding (Module 7), Symport (Sodium ion transport) (Module 8), DNA damage and repair (Module 9), transit peptide: Mitochondrion (Module 10), Steroid metabolism (Module 11), Transcription regulation (Module 12), Protein transport (Module 13), Mitochondrion (Module 14), Heme biosynthesis (Module 15), Innate immunity (Module 16), Signal peptide (Module 17), Keratinocyte (Module 18), and Transcription repression (Module 19) (Enrichment results in Additional file 1:
+
+Fig. 5 5Experimental validation of 26 senescence candidates. a-e Representative images of fibroblasts following transfection with cyclophilin B siRNA (top row), CBX7 siRNA (middle row), or GFT3C4 siRNA (bottom row)

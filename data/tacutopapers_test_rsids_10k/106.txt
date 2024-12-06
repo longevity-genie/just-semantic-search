@@ -1,0 +1,79 @@
+Systematic analysis of the gerontome reveals links between aging and age-related diseases
+
+Maria Fernandes Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Faculty of Sciences
+
+LaSIGE
+
+Large
+
+Scale Informatics Systems Laboratory
+
+University of Lisbon
+
+Portugal
+
+Cen Wan
+
+School of Computing
+
+University of Kent
+
+CanterburyUK
+
+Department of Computer Science
+
+University College London
+
+LondonUK
+
+Robi Tacutu Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Diogo Barardo Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Ashish Rajput German Center for Neurodegenerative Diseases (DZNE) Research Group for Computational Systems Biology Gö ttingenGermany
+
+Institute of Ageing and Chronic Disease Integrative Genomics of Ageing Group University of Liverpool William Henry Duncan Building, Room 281, 6 West Derby StreetLiverpool, UK
+
+Jingwei Wang Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Harikrishnan Thoppil Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Daniel Thornton Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Chenhao Yang Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Alex Freitas
+
+School of Computing
+
+University of Kent
+
+CanterburyUK
+
+João Pedro De Magalhães Integrative Genomics of Ageing Group Institute of Ageing and Chronic Disease University of Liverpool LiverpoolUK
+
+Systematic analysis of the gerontome reveals links between aging and age-related diseases 10.1093/hmg/ddw307O R I G I N A L A R T I C L E *To whom correspondence should be addressed at: In model organisms, over 2,000 genes have been shown to modulate aging, the collection of which we call the 'gerontome'. Although some individual aging-related genes have been the subject of intense scrutiny, their analysis as a whole has been limited. In particular, the genetic interaction of aging and age-related pathologies remain a subject of debate. In this work, we perform a systematic analysis of the gerontome across species, including human aging-related genes. First, by classifying aging-related genes as pro-or anti-longevity, we define distinct pathways and genes that modulate aging in different ways. Our subsequent comparison of aging-related genes with age-related disease genes reveals species-specific effects with strong overlaps between aging and age-related diseases in mice, yet surprisingly few overlaps in lower model organisms. We discover that genetic links between aging and age-related diseases are due to a small fraction of aging-related genes which also tend to have a high network connectivity.
+
+Other insights from our systematic analysis include assessing how using datasets with genes more or less studied than average may result in biases, showing that age-related disease genes have faster molecular evolution rates and predicting new aging-related drugs based on drug-gene interaction data. Overall, this is the largest systems-level analysis of the genetics of aging to date and the first to discriminate anti-and pro-longevity genes, revealing new insights on aging-related genes as a whole and their interactions with age-related diseases.
+
+Introduction
+
+Aging is a major social and medical challenge of the 21 st century. The most accepted mechanisms of aging include inflammation (1), apoptosis, oxidative stress, accumulation of DNA damage, cell cycle deregulation and mitochondrial dysfunction (2)(3)(4). In addition, one of the major breakthroughs in the field of aging research is the discovery that, in model organisms, aging is under genetic regulation (5). In the past 20 years, aging has been shown to be under genetic control in various short-lived model organisms, and in particular in yeast, worms, flies and mice. According to the GenAge database (6), over 2,000 genes can modulate aging and/or longevity in model organisms. We call the collection of these aging-related genes the 'gerontome' (7). Many of these genes work in common pathways (4), which include the insulin-like growth factor (IGF-1) signalling pathway, the target of rapamycin (TOR) pathway and the AMP kinase pathway (5).
+
+Although some individual aging-related genes have been the subject of intense scrutiny, their analysis as a whole has been limited (8)(9)(10)(11). Yet genes and proteins do not act individually. Therefore, biological networks provide a more realistic description of biological systems than single-molecule studies and give way to the integration of several types of data (12). Indeed, network analyses have already revealed insights on aging and its manipulation (13)(14)(15).
+
+Aging is associated with various diseases. The main categories of aging-related pathologies are: cancer, cardiovascular diseases, neurodegenerative diseases, nutritional and metabolic diseases (16)(17)(18). The relationship between aging and agerelated diseases has long been a contentious topic. A previous study has shown that the analysis of networks can uncover links between aging-related genes and age-related diseases (19), but many questions remain unanswered, like which agingrelated genes and pathways are important in these interactions? Moreover, we have further classified aging-related genes as anti-or pro-longevity, depending on how they are genetically manipulated and whether they increase or decrease lifespan in model organisms (6). Whether and how anti-and pro-longevity genes interact with aging disease-related genes is unknown.
+
+In this work, we performed a systematic analysis of the gerontome, the largest such analysis to date and the first to discriminate anti-and pro-longevity genes. Our analysis of pathways common to aging-related genes allows us to systematically classify pathways as anti-or pro-longevity, even though these mostly recapitulate previous findings. By contrast, our comparison of aging-related genes with age-related disease genes reveals several unexpected results: we found an association between aging-related genes and age-related diseases, yet this association is surprisingly organism-specific and driven by a small cluster of genes. Besides, one major issue in network analysis is whether some genes being better studied than others (what we call publication bias) impacts the underlying datasets and subsequent results. We correct for publication bias and show that a small but detectable fraction of results from protein-protein interaction network analysis is indeed influenced by whether genes are more studied than others. Lastly, we identify and rank drugs being targeted by aging-related genes which are promising for additional studies.
+
+Results
+
+Our systematic analysis of the gerontome employed the GenAge database developed by our lab (6). This includes 298 human candidate aging-related genes and genes associated with aging and/or longevity in model organisms of which over 1,000 can be converted to human homologs (see Materials and Methods). Model organism aging-related genes were further classified as pro-or anti-longevity depending on their effects: pro-longevity genes are defined as genes whose decreased expression reduces lifespan and/or whose overexpression extends lifespan; accordingly, anti-longevity genes are those whose decreased expression extends lifespan and/or whose overexpression decreases it (6) (Materials and Methods). This work is the first to consider such classification in a systematic way.
+
+Processes and pathways overrepresented in pro-and anti-longevity genes
+
+First, we performed a functional enrichment analysis of proand anti-longevity genes in each of the major model organisms. For pro-longevity genes, the most significant enriched pathways were p53-signalling pathway and cell cycle in mice; hypoxia response via HIF activation in Drosophila melanogaster; regulation of autophagy and oxidative phosphorylation in C. elegans (Supplementary Dataset 1). On the other hand, for antilongevity genes, insulin signalling, growth hormone signalling and IGF-1 receptor pathways were overrepresented in mice; the PI3 kinase pathway, oxidative phosphorylation and IGF pathway in Drosophila; oxidative phosphorylation, mTOR signalling pathway in C. elegans; ribosome in Saccharomyces cerevisiae. Some pathways like mTOR signalling, autophagy, insulin signalling and ribosome were enriched in more than one model organism (Supplementary Dataset 1).
+
+In addition to the more traditional functional enrichment, we also used a recently proposed feature selection method, from the area of data mining (or machine learning) to select relevant biological process Gene Ontology (GO) terms for predicting the pro-longevity or anti-longevity effect of a gene on a model organism (8). Among the top ranking GO terms identified by that feature selection method, terms associated with prolongevity included apoptotic signalling pathway and cell cycle checkpoint in mice, lipid metabolic process in Drosophila, autophagy in C. elegans and telomere organization in S. cerevisiae. By contrast, top ranking GO terms associated with antilongevity included positive regulation of multicellular organism growth in mice, sensory perception in Drosophila and translation in C. elegans (Supplementary Material, Dataset 2).

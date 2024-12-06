@@ -1,0 +1,219 @@
+Human A comprehensive set of genes potentially associated with human ageing. The list contains genes that have been directly linked to ageing in humans, as well as the best candidate genes, supported by different types of evidence in model organisms, cells and/or functional analyses. Models A set of genes in model organisms (predominantly from Mus musculus, Drosophila melanogaster, Caenorhabditis elegans and Saccharomyces cerevisiae) shown to significantly affect lifespan through genetic manipulations. Microarray A list of genes commonly altered during mammalian ageing from a meta-analysis of microarray studies (13).
+
+Table 2 . 2Summary of the genes and longevity observations for model organismsEntries in GenAge M. musculus D. melanogaster C. elegans S. cerevisiae Total
+
+Number of genes
+
+91
+
+128
+
+680
+
+809
+
+1708
+
+Pro
+
+longevity
+
+64
+
+85
+
+221
+
+43
+
+413
+
+Anti
+
+longevity
+
+24
+
+41
+
+439
+
+217
+
+721
+
+Necessary for fitness
+
+485
+
+485
+
+Number of observations
+
+119
+
+151
+
+801
+
+1050
+
+2121
+
+Observations per gene
+
+1.31
+
+1.17
+
+1.18
+
+1.30
+
+1.24
+
+Greatest lifespan increase
+
+50%
+
+92%
+
+10
+
+fold
+
+6
+
+fold
+
+Table 3 . 3Summary of AnAge species according to taxonomic classClass Number of species a Range of MLS (years) Average and STDEV of MLS (years)
+
+Aves
+
+1088 (1186)
+
+3
+
+79
+
+19.2 ± 16.4
+
+Mammalia
+
+989 (1330)
+
+2.1
+
+211
+
+19.0 ± 15.6
+
+Actinopterygii
+
+811 (822)
+
+0.16
+
+205
+
+17.9 ± 22.8
+
+Reptilia
+
+508 (542)
+
+0.4
+
+177
+
+21.3 ± 17.0
+
+Amphibia
+
+149 (173)
+
+4.1
+
+102
+
+15.6 ± 10.8
+
+Chondrichthyes
+
+115 (116)
+
+6
+
+75
+
+22.3 ± 14.3
+
+a
+
+Included in the table are the species with data quality annotated as acceptable or above. In brackets the total number of species present in AnAge is given. MLS, maximum lifespan; STDEV, standard deviation.
+
+User statistics include the number of unique visitors per month (in thousands) of all resources combined.HAGR citations 1 6 7 11 25 33 44 46 23 User statistics c 3 6.6 10.6 11.9 15.7 16.1 14.8 16.5 15.1
+
+a
+
+Starting in mid
+
+2004.
+
+b
+
+By mid
+
+2012.
+
+c
+
+ACKNOWLEDGEMENTSThe authors thank the numerous contributors and experts who have provided valuable advice and suggestionsConflict of interest statement. None declared. . Wellcome Trust, ME050495MES to J.P.M.Wellcome Trust [ME050495MES to J.P.M. ];
+
+. Ellison Medical Foundation (to J.P.M. Ellison Medical Foundation (to J.P.M. );
+
+European Commission FP7 Health Research. HEALTH-F4-2008-202047 to V.E.F., in part. Funding for open access charge: Wellcome Trust [ME050495MESEuropean Commission FP7 Health Research [HEALTH-F4-2008-202047 to V.E.F., in part]. Funding for open access charge: Wellcome Trust [ME050495MES].
+
+HAGR: the Human Ageing Genomic Resources. J P References 1. De Magalha˜es, J Costa, O Toussaint, Nucleic Acids Res. 33REFERENCES 1. de Magalha˜es,J.P., Costa,J. and Toussaint,O. (2005) HAGR: the Human Ageing Genomic Resources. Nucleic Acids Res., 33, D537-D543.
+
+The Human Ageing Genomic Resources: online databases and tools for biogerontologists. J P De Magalha˜es, A Budovsky, G Lehmann, J Costa, Y Li, V Fraifeld, G M Church, Aging Cell. 8de Magalha˜es,J.P., Budovsky,A., Lehmann,G., Costa,J., Li,Y., Fraifeld,V. and Church,G.M. (2009) The Human Ageing Genomic Resources: online databases and tools for biogerontologists. Aging Cell, 8, 65-72.
+
+Common gene signature of cancer and longevity. A Budovsky, R Tacutu, H Yanai, A Abramovich, M Wolfson, V Fraifeld, Mech. Ageing Dev. 130Budovsky,A., Tacutu,R., Yanai,H., Abramovich,A., Wolfson,M. and Fraifeld,V. (2009) Common gene signature of cancer and longevity. Mech. Ageing Dev., 130, 33-39.
+
+The signaling hubs at the crossroad of longevity and age-related disease networks. M Wolfson, A Budovsky, R Tacutu, V Fraifeld, Int. J. Biochem. Cell Biol. 41Wolfson,M., Budovsky,A., Tacutu,R. and Fraifeld,V. (2009) The signaling hubs at the crossroad of longevity and age-related disease networks. Int. J. Biochem. Cell Biol., 41, 516-520.
+
+Lifespan regulation by evolutionarily conserved genes essential for viability. S Curran, G Ruvkun, PLoS Genet. 356Curran,S. and Ruvkun,G. (2007) Lifespan regulation by evolutionarily conserved genes essential for viability. PLoS Genet., 3, e56.
+
+Shortest-path network analysis is a useful approach toward identifying genetic determinants of longevity. J R Managbanag, T M Witten, D Bonchev, L A Fox, M Tsuchiya, B K Kennedy, M Kaeberlein, PLoS One. 33802Managbanag,J.R., Witten,T.M., Bonchev,D., Fox,L.A., Tsuchiya,M., Kennedy,B.K. and Kaeberlein,M. (2008) Shortest-path network analysis is a useful approach toward identifying genetic determinants of longevity. PLoS One, 3, e3802.
+
+Quantitative evidence for conserved longevity pathways between divergent eukaryotic species. E D Smith, M Tsuchiya, L A Fox, N Dang, D Hu, E O Kerr, E D Johnston, B N Tchao, D N Pak, K L Welton, Genome Res. 18Smith,E.D., Tsuchiya,M., Fox,L.A., Dang,N., Hu,D., Kerr,E.O., Johnston,E.D., Tchao,B.N., Pak,D.N., Welton,K.L. et al. (2008) Quantitative evidence for conserved longevity pathways between divergent eukaryotic species. Genome Res., 18, 564-570.
+
+Genome-wide screen in Saccharomyces cerevisiae identifies vacuolar protein sorting, autophagy, biosynthetic, and tRNA methylation genes involved in life span regulation. P Fabrizio, S Hoon, M Shamalnasab, A Galbani, M Wei, G Giaever, C Nislow, V D Longo, PLoS Genet. 61001024Fabrizio,P., Hoon,S., Shamalnasab,M., Galbani,A., Wei,M., Giaever,G., Nislow,C. and Longo,V.D. (2010) Genome-wide screen in Saccharomyces cerevisiae identifies vacuolar protein sorting, autophagy, biosynthetic, and tRNA methylation genes involved in life span regulation. PLoS Genet., 6, e1001024.
+
+A microarray-based genetic screen for yeast chronological aging factors. M Matecic, D L Smith, X Pan, N Maqani, S Bekiranov, J D Boeke, J S Smith, PLoS Genet. 61000921Matecic,M., Smith,D.L., Pan,X., Maqani,N., Bekiranov,S., Boeke,J.D. and Smith,J.S. (2010) A microarray-based genetic screen for yeast chronological aging factors. PLoS Genet., 6, e1000921.
+
+Identification of evolutionarily conserved genetic regulators of cellular aging. G T Laschober, D Ruli, E Hofer, C Muck, D Carmona-Gutierrez, J Ring, E Hutter, C Ruckenstuhl, L Micutkova, R Brunauer, Aging Cell. 9Laschober,G.T., Ruli,D., Hofer,E., Muck,C., Carmona- Gutierrez,D., Ring,J., Hutter,E., Ruckenstuhl,C., Micutkova,L., Brunauer,R. et al. (2010) Identification of evolutionarily conserved genetic regulators of cellular aging. Aging Cell, 9, 1084-1097.
+
+The biology of ageing: a primer. J P De Magalha˜es, An Introduction to Gerontology. Stuart-Hamilton,I.Cambridge, UKCambridge University Pressde Magalha˜es,J.P. (2011) The biology of ageing: a primer. In: Stuart-Hamilton,I. (ed. ), An Introduction to Gerontology. Cambridge University Press, Cambridge, UK, pp. 21-47.
+
+Genome-environment interactions that modulate aging: powerful targets for drug discovery. J P De Magalha˜es, D Wuttke, S H Wood, M Plank, C Vora, Pharmacol. Rev. 64de Magalha˜es,J.P., Wuttke,D., Wood,S.H., Plank,M. and Vora,C. (2012) Genome-environment interactions that modulate aging: powerful targets for drug discovery. Pharmacol. Rev., 64, 88-101.
+
+. J P De Magalha˜es, J Curado, G M Church, de Magalha˜es,J.P., Curado,J. and Church,G.M. (2009)
+
+Meta-analysis of age-related gene expression profiles identifies common signatures of aging. Bioinformatics. 25Meta-analysis of age-related gene expression profiles identifies common signatures of aging. Bioinformatics, 25, 875-881.
+
+Extending healthy life span-from yeast to humans. L Fontana, L Partridge, V D Longo, Science. 328Fontana,L., Partridge,L. and Longo,V.D. (2010) Extending healthy life span-from yeast to humans. Science, 328, 321-326.
+
+Dissecting the gene network of dietary restriction to identify evolutionarily conserved pathways and new functional genes. D Wuttke, R Connor, C Vora, T Craig, Y Li, S Wood, O Vasieva, R S Reis, F Tang, J P De Magalha˜es, PLoS Genet. 81002834Wuttke,D., Connor,R., Vora,C., Craig,T., Li,Y., Wood,S., Vasieva,O., Reis,R.S., Tang,F. and de Magalha˜es,J.P. (2012) Dissecting the gene network of dietary restriction to identify evolutionarily conserved pathways and new functional genes. PLoS Genet., 8, e1002834.
+
+Targeted disruption of growth hormone receptor interferes with the beneficial actions of calorie restriction. M S Bonkowski, J S Rocha, M M Masternak, K A Regaiey, A Bartke, Proc. Natl Acad. Sci. USA. 103Bonkowski,M.S., Rocha,J.S., Masternak,M.M., Al Regaiey,K.A. and Bartke,A. (2006) Targeted disruption of growth hormone receptor interferes with the beneficial actions of calorie restriction. Proc. Natl Acad. Sci. USA, 103, 7901-7905.
+
+A meta-analysis of caloric restriction gene expression profiles to infer common signatures and regulatory mechanisms. M Plank, D Wuttke, S Van Dam, S A Clarke, J P De Magalha˜es, Mol. Biosyst. 8Plank,M., Wuttke,D., van Dam,S., Clarke,S.A. and de Magalha˜es,J.P. (2012) A meta-analysis of caloric restriction gene expression profiles to infer common signatures and regulatory mechanisms. Mol. Biosyst., 8, 1339-1349.
+
+A database of vertebrate longevity records and their relation to other life-history traits. J P De Magalha˜es, J Costa, J. Evol. Biol. 22de Magalha˜es,J.P. and Costa,J. (2009) A database of vertebrate longevity records and their relation to other life-history traits. J. Evol. Biol., 22, 1770-1774.
+
+Asdell's Patterns of Mammalian Reproduction: A Compendium of Species-Specific Data. V D Hayssen, A Van Tienhoven, A Van Tienhoven, Comstock Publishing AssociatesIthaca, NYHayssen,V.D., Van Tienhoven,A. and Van Tienhoven,A. (1993) Asdell's Patterns of Mammalian Reproduction: A Compendium of Species-Specific Data. Comstock Publishing Associates, Ithaca, NY.
+
+CRC Handbook of Avian Body Masses. J Dunning, CRC PressBoca RatonDunning,J. (2008) CRC Handbook of Avian Body Masses. CRC Press, Boca Raton.
+
+Walker's Mammals of the World. R Nowak, Johns Hopkins University PressBaltimoreNowak,R. (1999) Walker's Mammals of the World. Johns Hopkins University Press, Baltimore.

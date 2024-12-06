@@ -1,0 +1,299 @@
+The TiRe database is available at http://www.tiredb. org, with the data made available under the permissive Creative Commons license, allowing data to be used in other analyses. There are options to either download the entire database or its parts. Feedback is welcome. www.impactjournals.com/oncotarget
+
+Data analysis Evolutionary conservation
+
+The analysis was performed using a software package developed in our lab, which automatically extracts and analyses data from the InParanoid database (http://inparanoid.sbc.su.se/cgi-bin/index.cgi [13]). For each gene, the presence or absence of orthologs across 205 proteomes (all species available excluding parasites) was defined and the evolutionary conservation was expressed as percentage of orthologs. The evaluation was performed for an inparalog score of 1.0. All comparisons were statistically significant unless otherwise mentioned (Chisquared χ 2 test; p < 0.05).
+
+Enrichment analysis
+
+Enrichment analysis of WHAGs was performed using the EnrichR toolset () [40]. As the data on human genes and proteins is the most complete among the tested species, the human orthologs of WHAGs defined in model organisms were used for the analysis. Statistical significance of enrichment was evaluated with the Fisher's exact t-test and the EnrichR combined score.
+
+Longevity
+
+associated genes (LAGs)
+
+Longevity-associated genes were extracted from The Human Ageing Genomic Resources (HAGR) -GenAge Database of Ageing-Related Genes, build 17 [24].
+
+Protein
+
+protein interaction network
+
+Protein-protein interaction (PPI) data from the BioGRID database ( [41], http://thebiogrid.org), human interactome, release 3.4.129, was used for the analysis of connectivity and interconnectivity. The entire human interactome was used as control. Network construction and analysis was performed using Cytoscape ( [42], http://www.cytoscape.org), version 3.3.0. Prediction of important network interactors was performed using the hypergeometric distribution test for relative connectivity [18].
+
+CONFLICTS OF INTEREST
+
+The authors declare that they have no conflict of interest.
+
+GRANT SUPPORT
+
+This study was funded by the European Union FP7 Health Research Grant number HEALTH-F4-2008-202047, and by the Israel Ministry of Science and Technology. This work was also supported by the Fund in Memory of Dr. Amir Abramovich.
+
+Figure 1 : 1Evolutionary conservation of skin wound healing-associated genes. Each dot represents the percentage of orthologs between humans and a given species (in descending order by % of orthology). A total of 205 species from all kingdoms of life are presented (for a full list of species and conservation data see Suppl.
+
+Figure 2 : 2Enrichment analysis. A. Cellular component enrichment for all WHAGs. B. KEGG pathway enrichment for all WHAGs. C.
+
+Figure 3 : 3Protein-protein interaction network of skin wound healing genes. Depicted in the figure is the largest continuous component of the wound healing network with the most enriched signaling pathways (See Figure 2). Included are also 27 WHAGs connected to the WH network only through the enriched pathways. Genes (N = 231) are depicted with green circles and KEGG pathways (N = 9) with yellow rectangles. The enriched pathways include a total of 114 WHAGs, with several genes belonging to multiple pathways. Depicted are 188 Gene-pathways connections and 566 gene-gene interactions.
+
+5 : 5Comparison of the effects of genetic interventions on skin wound healing and longevity in mice. a Loss-of-function b Enhanced function c Ectopic expression For full gene names please refer to the database.
+
+Table 1 : 1Summary of interventions included in the TiRe database. Each entry represents a single study.Intervention Number of entries per species
+
+Mus musculus Rattus norvegicus
+
+Sus domesticus
+
+Homo sapiens Total
+
+Knockout
+
+260
+
+0
+
+0
+
+0
+
+260
+
+Overexpression
+
+47
+
+8
+
+3
+
+1
+
+59
+
+Mutation
+
+13
+
+0
+
+0
+
+0
+
+13
+
+siRNA
+
+5
+
+0
+
+0
+
+0
+
+5
+
+Protein administration
+
+15
+
+27
+
+8
+
+12
+
+62
+
+Antibody treatment
+
+8
+
+6
+
+0
+
+0
+
+14
+
+Agonist/antagonist/inhibitor
+
+administration
+
+8
+
+2
+
+0
+
+0
+
+10
+
+Other
+
+2
+
+1
+
+1
+
+1
+
+5
+
+Table 2 : 2Summary of wound healing assays included in the TiRe database. Intervention Number of entries per species Mus musculus Rattus norvegicus Sus domesticus Homo sapiens Total Note: over 95% of the indicated studies were performed on the dorsum. www.impactjournals.com/oncotargetFull-thickness excisional punch 264 16 2 0 282
+
+Full
+
+thickness incision
+
+36
+
+13
+
+1
+
+0
+
+50
+
+Flap
+
+5
+
+15
+
+0
+
+0
+
+20
+
+Clinical trial/case report
+
+0
+
+0
+
+0
+
+14
+
+14
+
+Skin graft
+
+4
+
+3
+
+4
+
+0
+
+11
+
+Partial
+
+Thickness wound
+
+4
+
+0
+
+6
+
+0
+
+10
+
+Burn wound
+
+2
+
+2
+
+2
+
+0
+
+6
+
+Embryonic skin wound
+
+6
+
+0
+
+0
+
+0
+
+6
+
+Ear hole
+
+5
+
+0
+
+0
+
+0
+
+5
+
+Other
+
+26
+
+6
+
+0
+
+0
+
+32
+
+Table
+
+). The list of WHAGs established thus far in model organisms and humans was compiled from scientific literature and manually curated. To date, the list contains 397 entries for four organisms: Mus musculus, Rattus norvegicus, Sus domesticus, and Homo sapiens (330, 40, 12 and 14 entries, respectively). www.impactjournals.com/oncotarget
+
+Ontogenetic decline of regenerative ability and the stimulation of human regeneration. D M Gardiner, Rejuvenation Res. 8Gardiner DM. Ontogenetic decline of regenerative ability and the stimulation of human regeneration. Rejuvenation Res. 2005; 8:141-153.
+
+Scar-free healing: From embryonic mechanisms to adult therapeutic intervention. M W Ferguson, S O&apos;kane, Philos Trans R Soc Lond B Biol Sci. 359Ferguson MW, O'Kane S. Scar-free healing: From embryonic mechanisms to adult therapeutic intervention. Philos Trans R Soc Lond B Biol Sci. 2004; 359:839-850.
+
+Mitochondria-targeted antioxidant SkQ1 improves impaired dermal wound healing in old mice. I A Demyanenko, E N Popova, V V Zakharova, O P Ilyinskaya, T V Vasilieva, V P Romashchenko, A V Fedorov, V N Manskikh, M V Skulachev, R A Zinovkin, O Y Pletjushkina, V P Skulachev, B V Chernyak, 10.18632/aging.100772Aging (Albany NY). 7Demyanenko IA, Popova EN, Zakharova VV, Ilyinskaya OP, Vasilieva TV, Romashchenko VP, Fedorov AV, Manskikh VN, Skulachev MV, Zinovkin RA, Pletjushkina OY, Skulachev VP, Chernyak BV. Mitochondria-targeted antioxidant SkQ1 improves impaired dermal wound healing in old mice. Aging (Albany NY). 2015; 7:475-485. doi: 10.18632/aging.100772.
+
+Wound healing studies in transgenic and knockout mice. A review. R Grose, S Werner, Methods Mol Med. 78Grose R, Werner S. Wound healing studies in transgenic and knockout mice. A review. Methods Mol Med. 2003; 78:191-216.
+
+Fibrosis-a common pathway to organ injury and failure. D C Rockey, P D Bell, J A Hill, N Engl J Med. 372Rockey DC, Bell PD, Hill JA. Fibrosis-a common pathway to organ injury and failure. N Engl J Med. 2015; 372:1138-1149.
+
+Cellular and molecular mechanisms of repair in acute and chronic wound healing. P Martin, R Nunan, Br J Dermatol. 173Martin P, Nunan R. Cellular and molecular mechanisms of repair in acute and chronic wound healing. Br J Dermatol. 2015; 173:370-378.
+
+Cutaneous wound healing. A J Singer, R A Clark, N Engl J Med. 341Singer AJ, Clark RA. Cutaneous wound healing. N Engl J Med. 1999; 341:738-746.
+
+Advances in skin grafting and treatment of cutaneous wounds. B K Sun, Z Siprashvili, P A Khavari, Science. 346Sun BK, Siprashvili Z, Khavari PA. Advances in skin grafting and treatment of cutaneous wounds. Science. 2014; 346:941-945.
+
+Wound repair and regeneration. G C Gurtner, S Werner, Y Barrandon, M T Longaker, Nature. 453Gurtner GC, Werner S, Barrandon Y, Longaker MT. Wound repair and regeneration. Nature. 2008; 453:314-321.
+
+Is rate of skin wound healing associated with aging or longevity phenotype?. H Yanai, A Budovsky, R Tacutu, V E Fraifeld, Biogerontology. 12Yanai H, Budovsky A, Tacutu R, Fraifeld VE. Is rate of skin wound healing associated with aging or longevity phenotype? Biogerontology. 2011; 12:591-597.
+
+The future of wound healing: Pursuing surgical models in transgenic and knockout mice. R R Reid, H K Said, J E Mogford, T A Mustoe, J Am Coll Surg. 199Reid RR, Said HK, Mogford JE, Mustoe TA. The future of wound healing: Pursuing surgical models in transgenic and knockout mice. J Am Coll Surg. 2004; 199:578-585.
+
+Wound repair at a glance. T J Shaw, P Martin, J Cell Sci. 122Shaw TJ, Martin P. Wound repair at a glance. J Cell Sci. 2009; 122:3209-3213.
+
+InParanoid 8: Orthology analysis between 273 proteomes, mostly eukaryotic. E L Sonnhammer, G Ostlund, Nucleic Acids Res. 43Sonnhammer EL, Ostlund G. InParanoid 8: Orthology analysis between 273 proteomes, mostly eukaryotic. Nucleic Acids Res. 2015; 43:D234-9.
+
+Regenerative skin wound healing in mammals: State-of-the-art on growth factor and stem cell based treatments. B M Borena, A Martens, S Y Broeckx, E Meyer, K Chiers, L Duchateau, J H Spaas, Cell Physiol Biochem. 36Borena BM, Martens A, Broeckx SY, Meyer E, Chiers K, Duchateau L, Spaas JH. Regenerative skin wound healing in mammals: State-of-the-art on growth factor and stem cell based treatments. Cell Physiol Biochem. 2015; 36:1-23.
+
+Evolution of vertebrate immunity. T Boehm, Curr Biol. 22Boehm T. Evolution of vertebrate immunity. Curr Biol. 2012; 22:R722-32.
+
+The acquired immune system: A vantage from beneath. S M Hedrick, Immunity. 21Hedrick SM. The acquired immune system: A vantage from beneath. Immunity. 2004; 21:607-615.
+
+Wound healing-aiming for perfect skin regeneration. P Martin, Science. 276Martin P. Wound healing-aiming for perfect skin regeneration. Science. 1997; 276:75-81.
+
+. M Bessarabova, A Ishkin, L Jebailey, T Nikolskaya, Bessarabova M, Ishkin A, JeBailey L, Nikolskaya T, www.impactjournals.com/oncotarget
+
+Knowledge-based analysis of proteomics data. Y Nikolsky, BMC Bioinformatics. 13Suppl 16:S13-2105-13-S16-S13. EpubNikolsky Y. Knowledge-based analysis of proteomics data. BMC Bioinformatics. 2012; 13 Suppl 16:S13-2105-13- S16-S13. Epub 2012 Nov 5.

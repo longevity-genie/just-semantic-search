@@ -1,0 +1,197 @@
+To determine the protein targets of the collected SMs, we used the STITCH database (version 5.0), http://stitch.embl.de/, one of the largest repositories of chemical-protein interactions [27], which include direct (physical) and indirect (functional) interactions. For the scope of the analyses in this study, text-mining and predicted interactions were excluded. If not indicated otherwise, a confidence score of medium stringency (0.4) was used for including interaction in the analysis. Drug similarity analysis was performed using the STITCH tool as described by Kuhn et al. [60].
+
+Gene targets overlap
+
+To obtain the list of OSKM transcription factors the TRRUST database [61], https://www.grnpedia.org/tr rust/, was used. The overlaps between gene targets of drug cocktails and OSKM transcription factors were calculated using only the genes that are present in both STITCH and TRRUST databases. In order to compute the overlap between gene targets of SMs and GenAge [55], https://genomics.senescence.info/genes/index.html, two lists of longevity-associated genes (LAGs) were used: i) the manually curated list of human LAGs from GenAge, build 20 and ii) the human orthologs of model organisms LAGs from GenAge, build 20. Orthologs of genes were computed using a script developed in our lab, that queries the database InParanoid 8 [62], https://in paranoid.sbc.su.se/cgi-bin/index.cgi. For stringency, we selected for each gene only inparalogs with scores of 1.0. The significance of the overlaps with GenAge [55] and CellAge [2] -https://genomics.senescence.info/cells/, was computed using Fisher's exact test.
+
+SMs overlap with chemical databases
+
+The overlaps between: i) the list of SMs and HMDB, and ii) the list of SMs and DrugAge [54] were calculated using the PubChem IDs of the compounds as identifiers. The significance of the overlap was computed using Fisher's exact test and considering all PubChem and all DrugBank compounds, respectively, as background.
+
+KEGG pathways and gene ontology enrichment analysis
+
+Functional and pathway enrichment analyses were performed with the DAVID Bioinformatics Resources tool, version 6.8 [22], https://david.ncifcrf.gov. Statistical significance of enrichment was evaluated using default parameters set in DAVID. A threshold of 0.001 was used for the adjusted P-value.
+
+Protein
+
+protein interaction networks
+
+Protein-protein interaction (PPI) data were taken from the BioGRID database [23], http://thebiogrid.org, human interactome, Build 3.5.177. The PPI network construction and analyses were performed using Cytoscape [63], http://www.cytoscape.org, version 3.7.1. Prior to any network analyses, genetic interactions, self-loops, duplicate edges and interactions with proteins from other species were removed from the interactome, and the remaining network was used as a control. The interconnectivity was computed as the fraction of nodes in the largest connected component out of the input gene set, by using the breadth-first AGING search algorithm. Modeling the relationship between node subset size and interconnectivity in the human interactome was carried out by randomly sampling subsets of nodes in the interactome, with a sample size varying from 50 to 17,600 nodes (step of 50). In this case, sampling was performed 100 times for each subset size. In order to evaluate the statistical significance of the observed network interconnectivity for cocktails and SMs gene targets, random sampling from the BioGRID network was performed 1000 times, for a subset of nodes of equal size to each evaluated network. For each set of random samplings, average interconnectivity, standard deviation and z-score of the observed interconnectivity were computed.
+
+For a joint protein-drug network, the protein targets of the collected SMs, determined from the STITCH database, were used together with PPIs from BioGRID.
+
+Abbreviations for SM cocktails
+
+Cocktail 3 (VCR)
+
+Valproic acid CHIR99021 RepSox
+
+Cocktail 4 (TLT)
+
+Trichostatin A (TSA) Li2CO3 Tranilast
+
+AUTHOR CONTRIBUTIONS
+
+This study was carried out by the VEF and RT research groups. Data collection, processing, analysis of the result and their description were done by AK and GB. Interpretation of the results was done by all authors. VEF and RT coordinated and supervised the project. All authors have participated in the writing of the manuscript. All authors reviewed the manuscript.
+
+CONFLICTS OF INTEREST
+
+The authors declare that they have no conflicts of interest.
+
+Figure 1 . 1Distribution of SMs by functional categories. The basic biological activities of all SMs that induce or enhance pluripotency (n = 92) were extracted from the STITCH online tool, PubChem database and scientific literature. Functional categories of SMs were based on Gene Ontology Resource.
+
+Figure 2 . 2Top enriched KEGG pathways of SM protein targets. Enriched pathways at high confidence (p < 0.001 after Benjamini correction, with at least two-fold enrichment) are presented. Because of visualization limitations, only the top-most enriched 50 pathways are included in the figure. For a full list of the enriched pathways, see Supplementary
+
+AGINGFigure 3 . 3(A) Graphical output of the PPI network of the entire set of SMs' targets. (B) Simulation of expected interconnectivity given the size of a random sample. The observed interconnectivity of SMs' gene targets in the interactome, depicted by the red dot in the scatter plot and the observed interconnectivity of cocktails' gene targets, depicted by the orange dots, can be compared to the percentage of interconnected nodes (on the Y-axis), found in the largest continuous component of the network, for randomly sampled node sets. The plot shows the sampling of subsets of random interactome nodes, of various sizes (represented in a log10 scale on the X-axis, from 50 to 17,600 nodes). For each step, the interconnectivity was computed 100 times. Simulations were performed only for samples larger than 50 nodes, because of the increased variability of very small node sets. (C) The log-log plot of P(k) against k, illustrating scale-free topology of the network (for details, see the text and Methods). For all the nodes and edges in the network seeSupplementary Table 9. (A, C) The construction and display of the network and the degree distribution regression were performed using Cytoscape, which pulls physical PPIs data determined in vitro and in vivo from the BioGRID database.
+
+Figure 4 . 4The network with the highest interconnectivity (corresponding to the TLT cocktail). In total, 58 protein targets are in the network. Continuous network without taking into account drug connectivity (chemical-protein interactions) includes 44 genes/proteins (75.9%; values for random sampling (mean ± SD): 4.5 ± 2.4; z-score for observed value: 30.03).
+
+Figure 5 . 5(A) Venn diagram of the gene targets of OSKM significantly overlapping with gene targets of cocktails. (B) Venn diagram of significantly overlapping enriched pathways for gene targets of SM cocktails and of OSKM. In order to simplify the figure, only statistically significant overlaps between OSKM and cocktails are displayed. Overlaps between pairs of cocktails are not shown.
+
+Gallate; ESCs: Embryonic stem cells; EZH: Enhancer of Zeste Homologue; Fru-2,6-P2: Fructose 2,6bisphosphate; GSK3: Glycogen synthase kinase 3; HDAC: Histone deacetylase; HIF: Hypoxia-inducible factor-1; Hif1alpha: Hypoxia-inducible factor 1 alpha; HMDB: Human Metabolome Database; HMT: Histone methyltransferase; IBMX: 3-Isobutyl-1-Methylxanthine; iP: Induced pluripotency; LAGs: Longevity-associated genes; MW: Molecular weight; O4I3: OCT4-inducing compound 3; OSKM: Oct3/4, Sox2, Klf4, and c-Myc (Yamanaka's factors); PDK1: 3′-phosphoinositidedependent kinase-1; PFK-1: Phosphofructokinase 1; PI3K: Phosphoinositide 3-kinase; PPIs: Protein-protein interactions; ROS: Reactive oxygen species; SAH: S-Adenosyl-l-homocysteine; SAHA: Suberoylanilide hydroxamic acid; SMs: Small molecules; TFs: Transcription factors.
+
+FUNDING This work was supported by the National Authority for Scientific Research and Innovation, and by the Ministry of European Funds, Romania, through the Competitiveness Operational Programme 2014-2020, POC-A.1-A.1.1.4-E-2015 [Grant number: 40/02.09.2016, ID: P_37_778, to RT] and by the Romanian Ministry of Education and Research, CCCDI -UEFISCDI, through PNCDI III [Grant number: PN-III-P2-2.1-PED-2019-2593 to RT]. We are also grateful for the funding received from the Dr. Amir Abramovich Research Fund [granted to VEF].
+
+The SMs with signaling activity represent the largest group(51 out of 92 compounds; 55.4%; Supplementary Table 2), followed by epigenetic (n = 26; 28.3%; Supplementary Table 3) and metabolic modifiers (n = 7; 7.6%; Supplementary
+
+Table 1 . 1Non-redundant SMs for reprogramming cocktails and their main bioactivities.SM Main bioactivity
+
+Cocktail
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+CHIR99021
+
+GSK3 inhibitor
+
+RepSox
+
+TGFβ inhibitor
+
+[can replace Sox2]
+
+VPA
+
+HDAC inhibitor
+
+Forskolin
+
+cAMP activator
+
+[can replace Oct4]
+
+Parnate Inhibitor of LSD1 acting on histone H3
+
+DZNep
+
+Inhibitor of HMT EZH
+
+and SAH synthesis
+
+AM 580
+
+Nuclear RARα
+
+selective agonist
+
+EPZ004777
+
+DOT1L histone (H3K79)
+
+methyltransferase inhibitor
+
+NaB
+
+HDAC inhibitor
+
+TTNPB
+
+Synthetic retinoic acid
+
+receptor ligand
+
+BrdU Synthetic analog of thymidine [can replace Oct4]
+
+LiCl
+
+GSK3 inhibitor
+
+SB431542
+
+TGFβ inhibitor
+
+[can replace RepSox]
+
+Tranilast
+
+TGFβ inhibitor
+
+[can replace RepSox]
+
+Trichostatin A
+
+HDAC inhibitor
+
+Li2CO3
+
+GSK3 inhibitor
+
+5'
+
+aza
+
+dC
+
+DNMT inhibitor
+
+SGC0946
+
+DOT1L histone (H3K79)
+
+methyltransferase inhibitor
+
+Cyclic
+
+pifithrin
+
+a
+
+p53 inhibitor
+
+A
+
+83
+
+01
+
+TGF
+
+beta receptor
+
+inhibitor
+
+Thiazovivin
+
+Rho Kinase (ROCK) inhibitor
+
+PD0325901 Potent MKK1 (MEK1) and MKK2 (MEK2) inhibitor
+
+Table 7 , 7and for the enriched pathways for each SM cocktail, seeSupplementary Table 8.

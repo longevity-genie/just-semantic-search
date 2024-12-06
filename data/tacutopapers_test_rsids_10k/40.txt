@@ -1,0 +1,51 @@
+; 80.7% (21/26) increased p16; 96.2% increased p21 (25/26); 65.4% increase IL-6; and 65.4% (17/ 26) increase SA-β-galactosidase. Of the siRNAs that resulted in a decrease in Ki67 index, 61.9% (13/21) were classified as top hits as they concomitantly decreased cell number and altered at least one morphological measure. 92.3% (12/13) of the top hits activated both the p16 and p21 pathway, 84.6% (11/13) upregulated the SASP factor IL-6, while 61.5% (8/13) generated an increase in the percentage of SA-β-galactosidase positive cells. In general, we have shown the power of networks in predicting gene function, with 13 "top hits" (GTF3C4, C9orf40, HAUS4, MCM7, TCEB3, CDC25A, CDCA4, CKAP2, MTHFD2, NEK2, IMMT, MYBL2, and NIPA2). Additional file 5. GTEx simulated expression script.
+
+R script to find expected number of overlaps between GTEx tissue DEGs with age when gene names are scrambled.Additional file 6. Review history.Peer review informationYixin Yao was the primary editor on this article and managed its editorial process and peer review in collaboration with the rest of the editorial team.Review historyThe review history is available as Additional file 6.Availability of data and materialsSupplementary figures and citations, tables, and files are available on the Integrative Genomics of Ageing Group CellAge_supplementary GitHub repository, along with an R script to recreate the scrambled GTEx gene expression data (Additional file 5) (https://github.com/maglab/CellAge_ supplementary)[112]. CellAge, GenAge, and disease genes are available on HAGR (https://genomics.senescence.info/)[28,34]. Tissue-specific differentially expressed genes with age and signatures of cellular senescence are from[32].Ethics approval and consent to participate Not applicable.Consent for publicationNot applicable.Competing interestsThe authors declare that they have no competing interests.Author details The serial cultivation of human diploid cell strains. L Hayflick, P S Moorhead, Exp Cell Res. 25Hayflick L, Moorhead PS. The serial cultivation of human diploid cell strains. Exp Cell Res. 1961;25:585-621.
+
+The essence of senescence. T Kuilman, C Michaloglou, W J Mooi, D S Peeper, Genes Dev. 2422Kuilman T, Michaloglou C, Mooi WJ, Peeper DS. The essence of senescence. Genes Dev. 2010;24(22):2463-79.
+
+Telomere shortening triggers senescence of human cells through a pathway involving ATM, p53, and p21(CIP1), but not p16(INK4a). U Herbig, W A Jobling, B P Chen, D J Chen, J M Sedivy, Mol Cell. 144Herbig U, Jobling WA, Chen BP, Chen DJ, Sedivy JM. Telomere shortening triggers senescence of human cells through a pathway involving ATM, p53, and p21(CIP1), but not p16(INK4a). Mol Cell. 2004;14(4):501-13.
+
+A DNA damage checkpoint response in telomere-initiated senescence. F Di Fagagna, P M Reaper, L Clay-Farrace, H Fiegler, P Carr, Von Zglinicki, T , Nature. 4266963d'Adda di Fagagna F, Reaper PM, Clay-Farrace L, Fiegler H, Carr P, Von Zglinicki T, et al. A DNA damage checkpoint response in telomere-initiated senescence. Nature. 2003;426(6963):194-8.
+
+Stress, cell senescence and organismal ageing. J P De Magalhaes, J F Passos, Mech Ageing Dev. 170de Magalhaes JP, Passos JF. Stress, cell senescence and organismal ageing. Mech Ageing Dev. 2018;170:2-9.
+
+Senescence is a developmental mechanism that contributes to embryonic growth and patterning. M Storer, A Mas, A Robert-Moreno, M Pecoraro, M C Ortells, Di Giacomo, V , Cell. 1555Storer M, Mas A, Robert-Moreno A, Pecoraro M, Ortells MC, Di Giacomo V, et al. Senescence is a developmental mechanism that contributes to embryonic growth and patterning. Cell. 2013;155(5):1119-30.
+
+Programmed cell senescence during mammalian embryonic development. D Munoz-Espin, M Canamero, A Maraver, G Gomez-Lopez, J Contreras, S Murillo-Cuesta, Cell. 1555Munoz-Espin D, Canamero M, Maraver A, Gomez-Lopez G, Contreras J, Murillo-Cuesta S, et al. Programmed cell senescence during mammalian embryonic development. Cell. 2013;155(5):1104-18.
+
+An essential role for senescent cells in optimal wound healing through secretion of PDGF-AA. M Demaria, N Ohtani, S A Youssef, F Rodier, W Toussaint, J R Mitchell, Dev Cell. 316Demaria M, Ohtani N, Youssef SA, Rodier F, Toussaint W, Mitchell JR, et al. An essential role for senescent cells in optimal wound healing through secretion of PDGF-AA. Dev Cell. 2014;31(6):722-33.
+
+Senescence surveillance of pre-malignant hepatocytes limits liver cancer development. T W Kang, T Yevsa, N Woller, L Hoenicke, T Wuestefeld, D Dauch, Nature. 4797374Kang TW, Yevsa T, Woller N, Hoenicke L, Wuestefeld T, Dauch D, et al. Senescence surveillance of pre-malignant hepatocytes limits liver cancer development. Nature. 2011;479(7374):547-51.
+
+Cellular senescence: Immunosurveillance and future immunotherapy. Dga Burton, A Stolzing, Ageing Res Rev. 43Burton DGA, Stolzing A. Cellular senescence: Immunosurveillance and future immunotherapy. Ageing Res Rev. 2018;43:17-25.
+
+Aging, cellular senescence, and cancer. J Campisi, Annu Rev Physiol. 75Campisi J. Aging, cellular senescence, and cancer. Annu Rev Physiol. 2013; 75:685-705.
+
+The role of senescent cells in ageing. J M Van Deursen, Nature. 5097501van Deursen JM. The role of senescent cells in ageing. Nature. 2014; 509(7501):439-46.
+
+A complex secretory program orchestrated by the inflammasome controls paracrine senescence. J C Acosta, A Banito, T Wuestefeld, A Georgilis, P Janich, J P Morton, Nat Cell Biol. 158Acosta JC, Banito A, Wuestefeld T, Georgilis A, Janich P, Morton JP, et al. A complex secretory program orchestrated by the inflammasome controls paracrine senescence. Nat Cell Biol. 2013;15(8):978-90.
+
+Naturally occurring p16(Ink4a)-positive cells shorten healthy lifespan. D J Baker, B G Childs, M Durik, M E Wijers, C J Sieben, J Zhong, Nature. 5307589Baker DJ, Childs BG, Durik M, Wijers ME, Sieben CJ, Zhong J, et al. Naturally occurring p16(Ink4a)-positive cells shorten healthy lifespan. Nature. 2016; 530(7589):184-9.
+
+Clearance of p16Ink4a-positive senescent cells delays ageingassociated disorders. D J Baker, T Wijshake, T Tchkonia, N K Lebrasseur, B G Childs, B Van De Sluis, Nature. 4797372Baker DJ, Wijshake T, Tchkonia T, LeBrasseur NK, Childs BG, van de Sluis B, et al. Clearance of p16Ink4a-positive senescent cells delays ageing- associated disorders. Nature. 2011;479(7372):232-6.
+
+Directed elimination of senescent cells by inhibition of BCL-W and BCL-XL. R Yosef, N Pilpel, R Tokarsky-Amiel, A Biran, Y Ovadya, S Cohen, Nat Commun. 711190Yosef R, Pilpel N, Tokarsky-Amiel R, Biran A, Ovadya Y, Cohen S, et al. Directed elimination of senescent cells by inhibition of BCL-W and BCL-XL. Nat Commun. 2016;7:11190.
+
+Targeted apoptosis of senescent cells restores tissue homeostasis in response to chemotoxicity and aging. M P Baar, Rmc Brandt, D A Putavet, Jdd Klein, Kwj Derks, Brm Bourgeois, Cell. 1691e16Baar MP, Brandt RMC, Putavet DA, Klein JDD, Derks KWJ, Bourgeois BRM, et al. Targeted apoptosis of senescent cells restores tissue homeostasis in response to chemotoxicity and aging. Cell. 2017;169(1): 132-47. e16.
+
+Reconstitution of telomerase activity in normal human cells leads to elongation of telomeres and extended replicative life span. H Vaziri, S Benchimol, Curr Biol. 85Vaziri H, Benchimol S. Reconstitution of telomerase activity in normal human cells leads to elongation of telomeres and extended replicative life span. Curr Biol. 1998;8(5):279-82.
+
+Unmasking transcriptional heterogeneity in senescent cells. A Hernandez-Segura, T V De Jong, S Melov, V Guryev, J Campisi, M Demaria, Curr Biol. 2717e4Hernandez-Segura A, de Jong TV, Melov S, Guryev V, Campisi J, Demaria M. Unmasking transcriptional heterogeneity in senescent cells. Curr Biol. 2017; 27(17):2652-60. e4.
+
+Scoring of senescence signalling in multiple human tumour gene expression datasets, identification of a correlation between senescence score and drug toxicity in the NCI60 panel and a pro-inflammatory signature correlating with survival advantage in peritoneal mesothelioma. K Lafferty-Whyte, A Bilsland, C J Cairney, L Hanley, N B Jamieson, N Zaffaroni, BMC Genomics. 11532Lafferty-Whyte K, Bilsland A, Cairney CJ, Hanley L, Jamieson NB, Zaffaroni N, et al. Scoring of senescence signalling in multiple human tumour gene expression datasets, identification of a correlation between senescence score and drug toxicity in the NCI60 panel and a pro-inflammatory signature correlating with survival advantage in peritoneal mesothelioma. BMC Genomics. 2010;11:532.
+
+Stressing the cell cycle in senescence and aging. H Chandler, G Peters, Curr Opin Cell Biol. 256Chandler H, Peters G. Stressing the cell cycle in senescence and aging. Curr Opin Cell Biol. 2013;25(6):765-71.
+
+A biomarker that identifies senescent human cells in culture and in aging skin in vivo. G P Dimri, X Lee, G Basile, M Acosta, G Scott, C Roskelley, Proc Natl Acad Sci. 9220Dimri GP, Lee X, Basile G, Acosta M, Scott G, Roskelley C, et al. A biomarker that identifies senescent human cells in culture and in aging skin in vivo. Proc Natl Acad Sci U S A. 1995;92(20):9363-7.
+
+Forging a signature of in vivo senescence. N E Sharpless, C J Sherr, Nat Rev Cancer. 157Sharpless NE, Sherr CJ. Forging a signature of in vivo senescence. Nat Rev Cancer. 2015;15(7):397-408.
+
+Beta-galactosidase--an indicator of the maturational stage of mouse and human mononuclear phagocytes. I Bursuker, J M Rhodes, R Goldman, J Cell Physiol. 1123Bursuker I, Rhodes JM, Goldman R. Beta-galactosidase--an indicator of the maturational stage of mouse and human mononuclear phagocytes. J Cell Physiol. 1982;112(3):385-90.
+
+Beta-galactosidase staining on bone marrow. The osteoclast pitfall. H G Kopp, A T Hooper, S V Shmelkov, S Rafii, Histol Histopathol. 229Kopp HG, Hooper AT, Shmelkov SV, Rafii S. Beta-galactosidase staining on bone marrow. The osteoclast pitfall. Histol Histopathol. 2007;22(9):971-6.

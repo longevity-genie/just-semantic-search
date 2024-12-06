@@ -1,0 +1,27 @@
+services:
+  meilisearch:
+    container_name: meilisearch
+    image: getmeili/meilisearch:latest
+    environment:
+      - http_proxy
+      - https_proxy
+      - MEILI_MASTER_KEY=fancy_master_key
+      - MEILI_NO_ANALYTICS=${MEILI_NO_ANALYTICS:-true}
+      - MEILI_ENV=${MEILI_ENV:-development}
+      - MEILI_LOG_LEVEL
+      - MEILI_DB_PATH=${MEILI_DB_PATH:-/data.ms}
+      - MEILI_EXPERIMENTAL_ENABLE_METRICS=true
+      - MEILI_EXPERIMENTAL_ENABLE_VECTORS=true
+    ports:
+      - ${MEILI_PORT:-7700}:7700
+    networks:
+      - meilisearch
+    volumes:
+      - ./data.ms:/data.ms
+    restart: unless-stopped
+    #env_file:
+    #  - ../.env    
+
+networks:
+  meilisearch:
+    driver: bridge

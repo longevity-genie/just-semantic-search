@@ -1,0 +1,61 @@
+All data available at MitoAge have undergone a threestep validation: (i) the collected raw data from NCBI Ref-Seq was processed through our software and log files were generated; (ii) reports of errors and inconsistencies from log files were then manually curated; and finally (iii) additional tests for database consistency (e.g. duplicates, faulty values, etc.) were performed by the administrative tools in the MitoAge website. The list of errors and inconsistencies found in the mtDNA sequence annotations were reported to the NCBI admin and subsequently corrected by the NCBI team. Upon successful validation, the corrected data were uploaded into the MitoAge database and various statistical metrics were computed.
+
+DATA CALCULATION
+
+The compositional features of the mtDNA heavy strand (H-strand) were mostly considered (unless indicated otherwise), since the H-strand represents a primary target for the directional mutation pressure (20). For computing codon usage, data were taken from the complement of the coding strand and Thymine (T) was replaced with Uracil (U) (i.e. transforming it into the mRNA sequence). When combining multiple genes (e.g. when computing the total proteincoding genes), we append one gene to another and use the entire sequence for the analysis. In case of overlap between genes, we count the overlapping sequences only once for the computation of base composition, and we count them twice for the computation of codon usage and amino acids frequencies for each gene. Sequences are always analyzed from 5 to 3 (both for DNA and RNA).
+
+AVAILABILITY
+
+The MitoAge database is available at www.mitoage.org and www.mitoage.info, with the data made available under the permissive Creative Commons license, allowing data to be used in other analyses. There are options to either download the entire database or its parts, or to export specific results of the website. Feedback via email is welcome.
+
+CONCLUSION
+
+The MitoAge database is an integrated web resource for comparative analysis of mtDNA, with a special focus on animal longevity. Thus, it fills the gap in one of the 'hot spots' at the crossroad of aging research, evolutionary and mitochondrial biology. MitoAge novelties, together with a userfriendly interface, provide unique capabilities for in-depth investigation of: (i) the abundance of mtDNA bases and its variability across animal taxa with different MLS; (ii) the links between longevity and the mtDNA compositional features (total, region or gene-specific), including codon usage and amino acids frequency. Using the MitoAge database, we revealed more than 3780 statistically significant correlations between mtDNA features and animal longevity in different taxonomic groups. MitoAge could be also a useful supporting tool for building predictive models of animal longevity, involving mtDNA features.
+
+CFigure 1 . 1The Author(s) 2015. Published by Oxford University Press on behalf of Nucleic Acids Research. This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/4.0/), which permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited. Nucleic Acids Research, 2016, Vol. 44, Database issue D1263 A labeled diagram of the MitoAge interface.
+
+Figure 2 . 2Example: viewing data for Arctica islandica.
+
+FUNDING Fund in Memory of Dr Amir Abramovich. Funding for open access charge: Ben-Gurion University of the Negev [to V.E.F.]. Conflict of interest statement. None declared.
+
+Table 1 . 1Number of species per taxon in MitoAgeTaxa (scientific name)
+
+A mitochondrial paradigm of metabolic and degenerative diseases, aging, and cancer: a dawn for evolutionary medicine. D C Wallace, Annu. Rev. Genet. 39Wallace,D.C. (2005) A mitochondrial paradigm of metabolic and degenerative diseases, aging, and cancer: a dawn for evolutionary medicine. Annu. Rev. Genet., 39, 359-407.
+
+The hallmarks of aging. C Lopez-Otin, M A Blasco, L Partridge, M Serrano, G Kroemer, Cell. 153Lopez-Otin,C., Blasco,M.A., Partridge,L., Serrano,M. and Kroemer,G. (2013) The hallmarks of aging. Cell, 153, 1194-1217.
+
+Mitochondria sentencing about cellular life and death: a matter of oxidative stress. N Apostolova, A Blas-Garcia, J V Esplugues, Curr. Pharm. Des. 17Apostolova,N., Blas-Garcia,A. and Esplugues,J.V. (2011) Mitochondria sentencing about cellular life and death: a matter of oxidative stress. Curr. Pharm. Des., 17, 4047-4060.
+
+Do mitochondrial DNA and metabolic rate complement each other in determination of the mammalian maximum longevity?. G Lehmann, E Segal, K K Muradian, V E Fraifeld, Rejuvenation Res. 11Lehmann,G., Segal,E., Muradian,K.K. and Fraifeld,V.E. (2008) Do mitochondrial DNA and metabolic rate complement each other in determination of the mammalian maximum longevity? Rejuvenation Res., 11, 409-417.
+
+) mtDNA mutations in human aging and longevity: controversies and new perspectives opened by high-throughput technologies. F Sevini, C Giuliani, D Vianello, E Giampieri, A Santoro, F Biondi, P Garagnani, G Passarino, D Luiselli, M Capri, Exp. Gerontol. 56Sevini,F., Giuliani,C., Vianello,D., Giampieri,E., Santoro,A., Biondi,F., Garagnani,P., Passarino,G., Luiselli,D., Capri,M. et al. (2014) mtDNA mutations in human aging and longevity: controversies and new perspectives opened by high-throughput technologies. Exp. Gerontol., 56, 234-244.
+
+Mitochondrial DNA mutations in aging. K Khrapko, D Turnbull, Prog. Mol. Biol. Transl. Sci. 127Khrapko,K. and Turnbull,D. (2014) Mitochondrial DNA mutations in aging. Prog. Mol. Biol. Transl. Sci., 127, 29-62.
+
+Transcription and replication of mitochondrial DNA. D A Clayton, Hum. Reprod. 15Suppl. 2Clayton,D.A. (2000) Transcription and replication of mitochondrial DNA. Hum. Reprod., 15(Suppl. 2), 11-17.
+
+Replication and transcription of mammalian mitochondrial DNA. P Fernandez-Silva, J A Enriquez, J Montoya, Exp. Physiol. 88Fernandez-Silva,P., Enriquez,J.A. and Montoya,J. (2003) Replication and transcription of mammalian mitochondrial DNA. Exp. Physiol., 88, 41-56.
+
+Human Ageing Genomic Resources: integrated databases and tools for the biology and genetics of ageing. R Tacutu, T Craig, A Budovsky, D Wuttke, G Lehmann, D Taranukha, J Costa, V E Fraifeld, De Magalhaes, Nucleic Acids Res. 41J.P.Tacutu,R., Craig,T., Budovsky,A., Wuttke,D., Lehmann,G., Taranukha,D., Costa,J., Fraifeld,V.E. and de Magalhaes,J.P. (2013) Human Ageing Genomic Resources: integrated databases and tools for the biology and genetics of ageing. Nucleic Acids Res., 41, D1027-D1033.
+
+Mitochondrial DNA in metazoa: degree of freedom in a frozen event. C Saccone, C Gissi, A Reyes, A Larizza, E Sbisa, G Pesole, Gene. 286Saccone,C., Gissi,C., Reyes,A., Larizza,A., Sbisa,E. and Pesole,G. (2002) Mitochondrial DNA in metazoa: degree of freedom in a frozen event. Gene, 286, 3-12.
+
+Reconsidering the Role of Mitochondria in Aging. M Gonzalez-Freire, R De Cabo, M Bernier, S J Sollott, E Fabbri, P Navas, L Ferrucci, J. Gerontol. A Biol. Sci. Med. Sci. 70Gonzalez-Freire,M., de Cabo,R., Bernier,M., Sollott,S.J., Fabbri,E., Navas,P. and Ferrucci,L. (2015) Reconsidering the Role of Mitochondria in Aging. J. Gerontol. A Biol. Sci. Med. Sci., 70, 1334-1342.
+
+Do mtDNA deletions drive premature aging in mtDNA mutator mice?. Y Kraytsberg, D K Simon, D M Turnbull, K Khrapko, Aging Cell. 8Kraytsberg,Y., Simon,D.K., Turnbull,D.M. and Khrapko,K. (2009) Do mtDNA deletions drive premature aging in mtDNA mutator mice? Aging Cell, 8, 502-506.
+
+Telomere length and body temperature-independent determinants of mammalian longevity?. G Lehmann, K K Muradian, V E Fraifeld, Front. Genet. 4111Lehmann,G., Muradian,K.K. and Fraifeld,V.E. (2013) Telomere length and body temperature-independent determinants of mammalian longevity? Front. Genet., 4, 111.
+
+Life span is related to the free energy of mitochondrial DNA. D C Samuels, Mech. Ageing Dev. 126Samuels,D.C. (2005) Life span is related to the free energy of mitochondrial DNA. Mech. Ageing Dev., 126, 1123-1129.
+
+Mitochondrial DNA repeats constrain the life span of mammals. D C Samuels, Trends Genet. 20Samuels,D.C. (2004) Mitochondrial DNA repeats constrain the life span of mammals. Trends Genet., 20, 226-229.
+
+Inverse relationship between longevity and evolutionary rate of mitochondrial proteins in mammals and birds. N Galtier, P U Blier, B Nabholz, Mitochondrion. 9Galtier,N., Blier,P.U. and Nabholz,B. (2009) Inverse relationship between longevity and evolutionary rate of mitochondrial proteins in mammals and birds. Mitochondrion, 9, 51-57.
+
+Mitochondrial genome anatomy and species-specific lifespan. G Lehmann, A Budovsky, K K Muradian, V E Fraifeld, Rejuvenation Res. 9Lehmann,G., Budovsky,A., Muradian,K.K. and Fraifeld,V.E. (2006) Mitochondrial genome anatomy and species-specific lifespan. Rejuvenation Res., 9, 223-226.
+
+Mitochondrial inverted repeats strongly correlate with lifespan: mtDNA inversions and aging. J N Yang, A Seluanov, V Gorbunova, PLoS One. 873318Yang,J.N., Seluanov,A. and Gorbunova,V. (2013) Mitochondrial inverted repeats strongly correlate with lifespan: mtDNA inversions and aging. PLoS One, 8, e73318.
+
+Update on RefSeq microbial genomes resources. T Tatusova, S Ciufo, S Federhen, B Fedorov, R Mcveigh, K O&apos;neill, I Tolstoy, L Zaslavsky, Nucleic Acids Res. 43Tatusova,T., Ciufo,S., Federhen,S., Fedorov,B., McVeigh,R., O'Neill,K., Tolstoy,I. and Zaslavsky,L. (2015) Update on RefSeq microbial genomes resources. Nucleic Acids Res., 43, D599-D605.
+
+Asymmetrical directional mutation pressure in the mitochondrial genome of mammals. A Reyes, C Gissi, G Pesole, C Saccone, Mol. Biol. Evol. 15Reyes,A., Gissi,C., Pesole,G. and Saccone,C. (1998) Asymmetrical directional mutation pressure in the mitochondrial genome of mammals. Mol. Biol. Evol., 15, 957-966.

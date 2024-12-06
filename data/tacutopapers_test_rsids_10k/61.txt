@@ -1,0 +1,49 @@
+Thus, given the above described indeterminacies the precise LRR motif identification becomes the most problematic step in the correct repeat delineation within a LRR domain. This also explains why LRR domains and their individual repeats are poorly annotated in genomes or protein databases in contrast to the better annotated, relatively more conserved NBS domain, which has therefore been used in phylogenetic analyses [10,25]. Hence, these major limitations hamper the study of NLRs at various levels such as in the context of plant innate immunity. To address these challenges, in this paper we propose a new LRR motif detection method: LRRpredictor, designed to be more sensitive to motif irregularities than the existing methods like LRRfinder [26] or LRRsearch [27] and to detect irregular and short LRR signatures as are often found in plant NLRs, but not limited to this class.
+
+We assessed how LRRpredictor behaves within different classes of immune-related receptors that contain LRR domains, such as plant NLRs, RLPs, and RLKs and vertebrate NLRs and TLRs with the aim to provide novel insights into the diversification of LRR domains and their role in the functioning of immune receptors.
+
+Materials and Methods
+
+Assembly and Analysis of the LRR Structural Dataset
+
+Various protein domain databases, such as CATH [28], Pfam [29], and Interpro collection [30] were used to obtain a dataset of 611 structure files of proteins annotated to contain LRR domains. These files were processed and filtered out to extract a clean set of LRR chains sharing less than 90% sequence identity using Pisces server [31]. This set containing 178 LRR chains were visually inspected and subjected to LRR repeat delineation based on the distinctive LRR ventral beta-sheet secondary structure pattern. Annotated LRR domains consisting in less than five LRR repeats, as well as incomplete repeats not covering at least five amino acids upstream and downstream of the "LxxLxL" minimal motif were further eliminated.
+
+Using this procedure, we generated the 90% identity data set, ID90, consisting of 172 N-ter LRR 'entry' repeats (N), 1792 LRR 'core' repeats (L), and 154 C-ter LRR 'exit' repeats (C) (File S1). To avoid redundancy in the training data the level of identity has to be further significantly reduced. However, given the small size of ID90 (<180 chains), a trade-off between increase in entropy and loss of data had to be reached. As seen from Figure A1a, a proper inflection point shapes up at around 50% identity and was considered the best compromise in generating a nonredundant set of repeats. In practical terms, the nonredundant ID50 set was generated from ID90 by selecting repeats showing less than eight identical amino acids on a 16 amino acid window centered on the 'LxxLxL' minimal LRR motif, i.e., the window comprising five amino acids upstream and downstream 'LxxLxL'. This nonredundant ID50 set was comprised of 106 N-ter 'entry' repeats (N), 659 'core' repeats (L), and 88 C-ter 'exit' repeats (C), i.e., ≈40% of the 90ID set ( Figure 1, File S1).
+
+Jensen-Shannon divergence (JSD) scores ( Figure 1e) were computed using Capra et al. implementation [32], using the BLOSUM62 matrix for background probabilities and a window parameter 0. The phyla distribution shown in Figure 1c was computed using the Environment for Tree Exploration (ETE3) library v3.1.1 [33].
+
+Training and Testing Datasets Construction
+
+In order to provide a representative collection of non-LRR examples, we selected a representative example of each CATH [28] domains' topology (except LRR) from a nonredundant dataset provided by CATH where all proteins share less than 20% identity or have a less than 60% overlap (cath-dataset-nonredundant-S20 set-09.12.2019). Given potential synchronization problems between various databases used to build the overall learning set comprising (a) the nonredundant 50ID LRRs, containing the 'entry'-, 'core'-, 'exit'-repeats and the flanking nonLRR domains when present and (b) the CATH nonLRR domains-the data was subjected to a third redundancy filter performed with a similar CATH methodology, aimed at eliminating sequences that fail one of the below bounds:
+
+the length of the alignment is over 100 and the identity is over 20%.
+
+length of the alignment is between 40 and 100 with an identity over 20% and the overlap with respect to both sequences is more than 60%.
+
+LRR repeats with alignments lengths ≥16 aa and ≥50% identical (equivalent of at most 8/16 aa constraint imposed initially on the motifs).
+
+The final dataset built as above and used herein for training and testing classifiers, contains 648 LRR core repeats, 100 N-ter entry, and 67 C-ter exit nonredundant repeats (including the LRR domain flanking regions) and 875 non-LRR domains from CATH.
+
+From this set, 1/5th was used to generate the test dataset, while the remaining 4/5 were used to build the training datasets, preserving the class ratio between the sets. The test dataset contains 40,241 amino acid samples of which only 150, i.e., less than 0.4%, are initiating LRR motifs. Similarly, over the training set less than 0.5% of the samples are LRR initiators. The training set was further split into four cross-validation sets that were used for parameter optimization. All these sets are provided in File S2.
+
+Feature Selection and Data Pre-Processing
+
+In developing LRRpredictor we tested sequence-based (SeqB) features: solely or combined with structural based (StrB) features. The SeqB features comprise position-specific scoring matrices PSSM over the above discussed 16 amino acids interval summing up to 320 features corresponding to 20 amino acid types over the 16 positions. The StrB features comprise: (a) the three state (H-helix, E-extended, C-coil) secondary structure probabilities, (b) the three class (B-buried, M-medium and E-exposed) residue relative solvent accessibility, RSA probabilities and (c) intrinsic disorder probability-summing up to seven extra structural features per residue, resulting in a total of 432 features per 16 aa window. The structural based predictions were performed with RaptorX-Property software [34][35][36][37]. Sequence PSSMs were computed on Uniprot20 protein sequence database, using HHblits [38,39] that is based on HMM-HMM alignments shown to improve accuracy of alignments at low sequence homology levels.
+
+In the pre-processing stage, feature variables were normalized, centered, and rescaled, as standard procedure involves. Data whitening using principal component analysis (PCA) decomposition was not used as it did not provide better performance on the tested classifiers.
+
+Machine Learning Model Selection
+
+Several classifiers such as support vector classification (SVC) [40], multi-layer perceptron (MLP) [41,42], and AdaBoost [43] as well as several oversampling techniques such as Adasyn [44] and SMOTE-based varieties [45][46][47], or over-and under-sampling combined approaches SmoteTomek [48] and SmoteEEN [49], were tested and parameter optimized via cross-validation using Scikit-learn library v.0.22.1 [50]. Multiclass estimators for N-entry (N), core (L), and C-exit (C) motif types that use either one-vs.-one or one-vs.-rest approaches were also investigated, but they performed worse than when treating all LRR motifs as a single class.
+
+The best performing classifiers with tuned parameters were further studied in the context of a soft voter (that averages predicted probabilities of the ensemble constituents), and a final predictor, Genes 2020, 11, 286 5 of 26 further referred to as LRRpredictor, was chosen based on its out-of-sample performance on test set and overfitting behavior on the training data. LRRpredictor is composed of a set of eight classifiers (C1-C8) that use different strategies and consider all N, L, C motif types as a single class, aggregated within an ensemble based on the soft voting scheme, as shown in Figure 2d.
+
+Classifiers C1-C4 use solely sequence-based features while C5-C8 use both sequence and structural-based features. Classifiers C1 and C5 use the support vector classification (SVC) algorithm [40], with a radial basis function (RBF) kernel, one-vs.-rest ('ovr') decision function. The margin penalty and the RBF scale (gamma) parameters were optimized through grid search to 1 and 0.01 for C1 and 1 and 0.001 for C4, respectively. Class imbalance was treated by adjusting the SVM weights inversely proportional to class frequency and class probabilities were inferred using sigmoid probability calibration.
+
+Classifiers C2, C3, C6, C7 use multi-layer perceptron (MLP) [41,42]. A depth of three hidden layers was sufficient to describe the system, as adding additional hidden layers provided little to no difference in out-of-sample performance. The number of hidden nodes for each hidden layer was selected via grid search as follows: C2 (300-250-100), C3 (250-150-100), C5 (250-150-100), C6 (125-100-10). Classifiers C2, C3, C7 use the Limited-Memory BFGS [51] solver, while C6 uses Adam [52] optimizer for stochastic gradient descent [53] with early-stopping over a validation fraction of 0.2. All four classifiers use rectified linear unit (ReLU) activation function [54].
+
+Classifiers C3 and C7 approach the imbalance problem through synthetic resampling using the combined over-and under-sampling method SMOTETomek [48], as implemented in imbalanced-learn library v 0.6.1 [55].
+
+Classifiers C4 and C8 use a ensemble boosting approach-AdaBoost [43]-using tree classifiers of depth 1, as base estimators, SAMME.R real boosting algorithm, and sigmoid probability calibration. A maximum number of 50 base estimators was selected to maximize performance while avoiding overfitting.
+
+Assembly of Protein Family Sets Containing LRR Domains

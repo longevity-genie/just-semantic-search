@@ -1,0 +1,245 @@
+LDL cholesterol (mmol/L)
+
+3.16 ± 0.83
+
+3.27 ± 0.76
+
+0.489
+
+Homocysteine (µmol/L)
+
+16.62 ± 10.03
+
+10.70 ± 4.10
+
+< 0.001
+
+Blood urea nitrogen
+
+(mmol/L)
+
+6.36 ± 2.45
+
+5.72 ± 1.23
+
+0.113
+
+Serum creatine (µmol/L) 65.00 (57.00, 78.00) 78.00 (66.00, 85.00) 0.007 b
+
+Cystatin C (mg/L)
+
+0.72 (0.64, 0.91)
+
+0.76 (0.69, 0.86)
+
+0.639 b
+
+Uric acid (µmol/L)
+
+316.67 ± 79.72
+
+328.34 ± 69.09
+
+0.450
+
+Free triiodothyronine, FT3
+
+(pmol/L)
+
+4.31 ± 0.91
+
+5.13 ± 0.72
+
+< 0.001
+
+Free thyroxine, FT4 (pmol/L)
+
+15.52 ± 2.34
+
+16.48 ± 1.89
+
+0.032
+
+Thyroid
+
+stimulating
+
+hormone, TSH (mIU/L)
+
+2.12 ± 0.95
+
+2.57 ± 1.54
+
+0.090
+
+p < 0.05 indicates statistical significance. a χ 2 test for sex (n). b Mann-Whitney U-test for non-normally distributed data [median (QR)]. Independent t-test for the other normally distributed continuous data (means ± SD). T2DM, type 2 diabetes mellitus; HC, healthy control; BMI, body mass index; HDL, high-density lipoprotein; LDL, low-density lipoprotein.
+
+TABLE 2 | 2Comparison of the neuropsychological test results between the two groups.T2DM HC p-value
+
+GENERAL COGNITION
+
+MMSE 29.00 (27.00, 29.00) 29.00 (28.00, 29.00) 0.203 a
+
+MoCA
+
+23.17 ± 2.88
+
+24.51 ± 2.31
+
+0.015
+
+EXECUTIVE FUNCTION AND PSYCHOMOTOR SPEED
+
+TMT
+
+A
+
+74.67 ± 41.11
+
+64.17 ± 32.59
+
+0.173
+
+TMT
+
+B
+
+183.19 ± 89.90
+
+142.00 ± 58.35
+
+0.010
+
+MENTAL FLEXIBILITY
+
+VFT
+
+42.17 ± 7.33
+
+40.55 ± 7.05
+
+0.279
+
+WORKING MEMORY
+
+DST forwards
+
+8.83 ± 1.37
+
+9.60 ± 1.50
+
+0.011
+
+DST backwards
+
+4.00 (3.00, 5.00)
+
+4.00 (3.00, 4.00)
+
+0.911 a
+
+EPISODIC MEMORY
+
+AVLT immediate recall
+
+6.46 ± 1.69
+
+6.86 ± 1.49
+
+0.226
+
+AVLT short
+
+term delayed
+
+recall
+
+6.77 ± 3.18
+
+7.74 ± 2.41
+
+0.096
+
+AVLT long
+
+term delayed
+
+recall
+
+5.40 ± 3.77
+
+6.72 ± 2.43
+
+0.047
+
+AVLT long
+
+term delayed
+
+recognition
+
+11.00 (8.00, 13.00)
+
+12.00 (9.00, 13.00)
+
+0.327 a
+
+AVLT total score
+
+28.97 ± 9.94
+
+32.34 ± 7.45
+
+0.065
+
+p < 0.05 was considered statistically significant. a Mann-Whitney U-test for non-normally distributed data [median (QR)]. Independent t-test for the other normally distributed continuous data (means ± SD). MMSE, Mini-Mental State Examination; MoCA, Montreal Cognitive Assessment; TMT, Trail Making Test; VFT, Verbal Fluency Test; DST, Digital Span Test; AVLT, Auditory Verbal Learning Test.
+
+TABLE 3 | 3Brain regions with significant DC differences between the two groups.Brain regions BA Peak MNI t-value Cluster (voxels) X Y Z
+
+1 Left anterior cingulate gyrus 32 −9 42 9 3.1455 28
+
+2 Right lateral occipital cortex 19 27 −78 24 −3.1327 20
+
+3 Left lateral occipital cortex 19 −24 −84 21 −3.9907 147
+
+4 Right precentral gyrus
+
+43
+
+63
+
+−3 30 −3.4576
+
+55
+
+MNI, Montreal Neurological Institute; BA, Broadmann Area. R, Right; L, left; AlphaSim corrected (p < 0.001, cluster > 20 voxels).
+
+Frontiers in Aging Neuroscience | www.frontiersin.org March 2018 | Volume 10 | Article 55 ACKNOWLEDGMENTSThe authors thank all volunteers who participated in the study and the staff of the Department of Laboratory Medicine and Department of Nuclear Medicine at the Southwest Hospital of the Third Military Medical University (Army Medical University) in Chongqing, China for their selfless and valuable assistance.Conflict of Interest Statement:The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.Copyright © 2018 Liu, Duan, Zhou, Wei, Chen, Yin, Zhang and Wang. This is an open-access article distributed under the terms of the Creative Commons Attribution License (CC BY). The use, distribution or reproduction in other forums is permitted, provided the original author(s) and the copyright owner are credited and that the original publication in this journal is cited, in accordance with accepted academic practice. No use, distribution or reproduction is permitted which does not comply with these terms. Definition, diagnosis and classification of diabetes mellitus and its complications. Part 1: diagnosis and classification of diabetes mellitus provisional report of a WHO consultation. K G Alberti, P Z Zimmet, 10.1002/(SICI)1096-9136(199807)15:7<539::AID-DIA668>3.0.CO;2-SDiabet. Med. 15Alberti, K. G., and Zimmet, P. Z. (1998).
+
+Definition, diagnosis and classification of diabetes mellitus and its complications. Part 1: diagnosis and classification of diabetes mellitus provisional report of a WHO consultation. Diabet. Med. 15, 539-553. doi: 10.1002/(SICI)1096-9136(199807)15:7<539::AID-DIA668>3.0.CO;2-S
+
+Network medicine: a network-based approach to human disease. A L Barabasi, N Gulbahce, J Loscalzo, 10.1038/nrg2918Nat. Rev. Genet. 12Barabasi, A. L., Gulbahce, N., and Loscalzo, J. (2011). Network medicine: a network-based approach to human disease. Nat. Rev. Genet. 12, 56-68. doi: 10.1038/nrg2918
+
+Network biology: understanding the cell's functional organization. A L Barabasi, Z N Oltvai, 10.1038/nrg1272Nat. Rev. Genet. 5Barabasi, A. L., and Oltvai, Z. N. (2004). Network biology: understanding the cell's functional organization. Nat. Rev. Genet. 5, 101-113. doi: 10.1038/nrg1272
+
+Effects of cholinergic enhancement on visual stimulation, spatial attention, and spatial working memory. P Bentley, M Husain, R J Dolan, 10.1016/S0896-6273(04)00145-XNeuron. 41Bentley, P., Husain, M., and Dolan, R. J. (2004). Effects of cholinergic enhancement on visual stimulation, spatial attention, and spatial working memory. Neuron 41, 969-982. doi: 10.1016/S0896-6273(04)00145-X
+
+Abnormally high degree connectivity of the orbitofrontal cortex in obsessive-compulsive disorder. J C Beucke, J Sepulcre, T Talukdar, C Linnman, K Zschenderlein, T Endrass, 10.1001/jamapsychiatry.2013.173JAMA Psychiatry. 70Beucke, J. C., Sepulcre, J., Talukdar, T., Linnman, C., Zschenderlein, K., Endrass, T., et al. (2013). Abnormally high degree connectivity of the orbitofrontal cortex in obsessive-compulsive disorder. JAMA Psychiatry 70, 619-629. doi: 10.1001/jamapsychiatry.2013.173
+
+Functional connectivity in the motor cortex of resting human brain using echo-planar MRI. B Biswal, F Z Yetkin, V M Haughton, J S Hyde, 10.1002/mrm.1910340409Magn. Reson. Med. 34Biswal, B., Yetkin, F. Z., Haughton, V. M., and Hyde, J. S. (1995). Functional connectivity in the motor cortex of resting human brain using echo-planar MRI. Magn. Reson. Med. 34, 537-541. doi: 10.1002/mrm.1910340409
+
+Administration and interpretation of the trail making test. C R Bowie, P D Harvey, 10.1038/nprot.2006.390Nat. Protoc. 1Bowie, C. R., and Harvey, P. D. (2006). Administration and interpretation of the trail making test. Nat. Protoc. 1, 2277-2281. doi: 10.1038/nprot.2006.390
+
+Cortical hubs revealed by intrinsic functional connectivity: mapping, assessment of stability, and relation to Alzheimer's disease. R L Buckner, J Sepulcre, T Talukdar, F M Krienen, H Liu, T Hedden, 10.1523/JNEUROSCI.5062-08.2009J. Neurosci. 29Buckner, R. L., Sepulcre, J., Talukdar, T., Krienen, F. M., Liu, H., Hedden, T., et al. (2009). Cortical hubs revealed by intrinsic functional connectivity: mapping, assessment of stability, and relation to Alzheimer's disease. J. Neurosci. 29, 1860-1873. doi: 10.1523/JNEUROSCI.5062-08.2009
+
+Longevity network: construction and implications. A Budovsky, A Abramovich, R Cohen, V Chalifa-Caspi, V Fraifeld, 10.1016/j.mad.2006.11.018Mech. Ageing Dev. 128Budovsky, A., Abramovich, A., Cohen, R., Chalifa-Caspi, V., and Fraifeld, V. (2007). Longevity network: construction and implications. Mech. Ageing Dev. 128, 117-124. doi: 10.1016/j.mad.2006.11.018
+
+Aberrant brain functional connectivity related to insulin resistance in type 2 diabetes: a resting-state fMRI study. Y C Chen, Y Jiao, Y Cui, S A Shang, J Ding, Y Feng, 10.2337/dc13-2127Diabetes Care. 37Chen, Y. C., Jiao, Y., Cui, Y., Shang, S. A., Ding, J., Feng, Y., et al. (2014). Aberrant brain functional connectivity related to insulin resistance in type 2 diabetes: a resting-state fMRI study. Diabetes Care 37, 1689-1696. doi: 10.2337/dc13-2127
+
+Thalamic resting-state functional connectivity: disruption in patients with type 2 diabetes. Metab. Brain Dis. Y C Chen, W Xia, C Qian, J Ding, S Ju, G J Teng, 10.1007/s11011-015-9700-230Chen, Y. C., Xia, W., Qian, C., Ding, J., Ju, S., and Teng, G. J. (2015). Thalamic resting-state functional connectivity: disruption in patients with type 2 diabetes. Metab. Brain Dis. 30, 1227-1236. doi: 10.1007/s11011-015-9700-2
+
+Mapping the brain in type II diabetes: voxel-based morphometry using DARTEL. Z Chen, L Li, J Sun, L Ma, 10.1016/j.ejrad.2011.04.025Eur. J. Radiol. 81Chen, Z., Li, L., Sun, J., and Ma, L. (2012). Mapping the brain in type II diabetes: voxel-based morphometry using DARTEL. Eur. J. Radiol. 81, 1870-1876. doi: 10.1016/j.ejrad.2011.04.025
+
+Participation of primary motor cortical neurons in a distributed network during maze solution: representation of spatial parameters and time-course comparison with parietal area 7a. D A Crowe, M V Chafee, B B Averbeck, A P Georgopoulos, 10.1007/s00221-004-1876-3Exp. Brain Res. 158Crowe, D. A., Chafee, M. V., Averbeck, B. B., and Georgopoulos, A. P. (2004). Participation of primary motor cortical neurons in a distributed network during maze solution: representation of spatial parameters and time-course comparison with parietal area 7a. Exp. Brain Res. 158, 28-34. doi: 10.1007/s00221-004-1876-3
+
+Aberrant functional connectivity of default-mode network in type 2 diabetes patients. Y Cui, Y Jiao, H J Chen, J Ding, B Luo, C Y Peng, 10.1007/s00330-015-3746-8Eur. Radiol. 25Cui, Y., Jiao, Y., Chen, H. J., Ding, J., Luo, B., Peng, C. Y., et al. (2015). Aberrant functional connectivity of default-mode network in type 2 diabetes patients. Eur. Radiol. 25, 3238-3246. doi: 10.1007/s00330-015-3746-8
