@@ -3,9 +3,9 @@ from typing import List, Tuple, Optional
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from pathlib import Path
-from just_semantic_search.core.document import ArticleDocument
+from just_semantic_search.document import ArticleDocument
 from transformers import PreTrainedTokenizer
-from just_semantic_search.core.semanic_splitter import *
+from just_semantic_search.semanic_splitter import *
 
 
 
