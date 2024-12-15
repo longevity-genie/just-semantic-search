@@ -7,6 +7,13 @@ import numpy as np
 import pydantic_numpy.typing as pnd
 import yaml
 
+from yaml import YAMLObject, Dumper
+
+class BugFixDumper(Dumper):
+    def represent_str(self, data):
+        return self.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+    
+    
 class Document(BaseModel):
     content: Optional[str] = None
     metadata: dict = Field(default_factory=dict)
@@ -39,6 +46,7 @@ class Document(BaseModel):
                 sort_keys=False,
                 allow_unicode=True,
                 default_flow_style=False,
+                Dumper=BugFixDumper
             )
         return path
 

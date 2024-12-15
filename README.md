@@ -3,6 +3,8 @@ LLM-agnostic semantic-search library with hybrid search support and multiple bac
 
 ## Installation
 
+Make sure you have at least Python 3.11 installed.
+
 ### Using Poetry
 
 1. Add to your project:

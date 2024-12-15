@@ -34,10 +34,6 @@ def add_documents(
     file = Path("/home/antonkulaga/sources/just_semantic_search/data/tacutopapers_test_rsids_10k/108.txt")
     model = load_gte_mlm_en()
     documents = split_text_file_semantically_annotated(file, model, similarity_threshold=0.92, source="/home/antonkulaga/sources/just_semantic_search/data/tacutopapers_test_rsids_10k/108.txt")
-    
-    
-
-    
     count = client.add_documents(index_name, documents)
     typer.echo(f"Added {count} documents to the '{index_name}' index.")
 

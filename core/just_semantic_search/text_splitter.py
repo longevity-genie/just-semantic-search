@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 from abc import ABC, abstractmethod
 from transformers import AutoTokenizer, AutoModel, PreTrainedModel, PreTrainedTokenizer
-from just_semantic_search.core.document import Document
+from just_semantic_search.document import Document
 
 
 # Define type variables for input and output types

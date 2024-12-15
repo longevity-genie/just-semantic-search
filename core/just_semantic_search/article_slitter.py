@@ -1,8 +1,8 @@
 from sentence_transformers import SentenceTransformer
 from typing import List, TypeVar
-from just_semantic_search.core.text_splitter import AbstractSplitter
+from just_semantic_search.text_splitter import AbstractSplitter
 from pathlib import Path
-from just_semantic_search.core.document import Document, ArticleDocument
+from just_semantic_search.document import Document, ArticleDocument
 # Add at the top of the file, after imports
 DEFAULT_SIMILARITY_THRESHOLD = 0.92
 

@@ -1,5 +1,5 @@
-from just_semantic_search.core.document import Document
-from just_semantic_search.core.text_splitter import AbstractSplitter
+from just_semantic_search.document import Document
+from just_semantic_search.text_splitter import AbstractSplitter
 from sentence_transformers import SentenceTransformer
 from typing import List, Optional
 import re
