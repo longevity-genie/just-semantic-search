@@ -25,6 +25,7 @@ class Document(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,  # Allows both alias and original name to work
         exclude_none=True,      # Don't include None values in serialization
+        json_by_alias=True      # Always use aliases in JSON serialization
     )
 
     @property
@@ -60,7 +61,7 @@ class Document(BaseModel):
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open('w', encoding='utf-8') as f:
             yaml.dump(
-                self.model_dump(),
+                self.model_dump(by_alias=True),
                 f,
                 sort_keys=False,
                 allow_unicode=True,

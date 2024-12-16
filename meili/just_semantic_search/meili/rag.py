@@ -125,13 +125,11 @@ class MeiliRAG:
     def create_index(
         self, 
         index_name: str, 
-        primary_key: str = "id"
+        primary_key: str = "hash"
     ) -> None:
         # Remove the vector store check since it's done in initialization
         index = self.client.create_index(index_name, {'primaryKey': primary_key})
         self.configure_embedder(
-            index_name=index_name, 
-            model_name=self.model_name,
-            name=self.model_name
+            index_name=index_name
         )
         return index
