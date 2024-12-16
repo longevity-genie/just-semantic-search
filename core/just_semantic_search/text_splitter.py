@@ -14,8 +14,16 @@ IDocument = TypeVar('IDocument', bound=Document)  # Document type that must inhe
 
 class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
     """Abstract base class for splitting content into documents with optional embedding."""
+
+
+    def get_sentence_transformer_model_name(self, model: SentenceTransformer):
+        for module in model.modules():
+            if hasattr(module, 'auto_model'):
+                return module.auto_model.name_or_path
+        return None
+
     
-    def __init__(self, model: SentenceTransformer, max_seq_length: int | None = None, tokenizer: Optional[PreTrainedTokenizer | Any] = None):
+    def __init__(self, model: SentenceTransformer, max_seq_length: int | None = None, tokenizer: Optional[PreTrainedTokenizer | Any] = None, model_name: Optional[str] = None, write_token_counts: bool = True):
         """
         Initialize splitter with a transformer model and optional parameters.
         Args:
@@ -23,7 +31,10 @@ class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
             max_seq_length: Maximum sequence length for tokenization
             tokenizer: Custom tokenizer (uses model's tokenizer if None)
         """
+        self.write_token_counts = write_token_counts
         self.model = model
+        self.model_name = self.get_sentence_transformer_model_name(model) if model_name is None else model_name
+    
         if tokenizer is None:
             tokenizer = self.model.tokenizer
         self.tokenizer = tokenizer

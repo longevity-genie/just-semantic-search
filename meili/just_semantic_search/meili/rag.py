@@ -7,8 +7,6 @@ import requests
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field, ConfigDict
 
-# Add at the top of the file, after the imports
-DEFAULT_EMBEDDING_MODEL = "Alibaba-NLP/gte-en-mlm-large"
 
 class MeiliConfig(BaseModel):
     host: str = Field(default="127.0.0.1", description="Meilisearch host")
@@ -27,17 +25,20 @@ class MeiliConfig(BaseModel):
 
 class SearchResult(BaseModel):
     hits: List[Dict[str, Any]]
-    processing_time_ms: int
+    processing_time_ms: int = Field(alias="processingTimeMs")
+    estimated_total_hits: int = Field(alias="estimatedTotalHits")
     query: str
     model_config = ConfigDict(extra='allow')
 
 class MeiliRAG:
     def __init__(
         self, 
-        config: MeiliConfig
+        config: MeiliConfig,
+        model_name: str
     ):
         self.config = config
         self.client = meilisearch.Client(config.get_url(), config.api_key)
+        self.model_name = model_name
         
         # Enable vector store during initialization
         if not self._enable_vector_store():
@@ -78,10 +79,8 @@ class MeiliRAG:
     def configure_embedder(
         self,
         index_name: str,
-        name: str = "default",
         source: str = "userProvided",
-        dimensions: Optional[int] = 1024,
-        model_name: str = DEFAULT_EMBEDDING_MODEL
+        dimensions: Optional[int] = 1024
     ) -> bool:
         """Configure an embedder in Meilisearch with specified name."""
         embedder_config = {
@@ -95,13 +94,13 @@ class MeiliRAG:
             })
         else:
             embedder_config.update({
-                'modelUrl': model_name,
+                'modelUrl': self.model_name,
                 'documentTemplate': "{text}"
             })
 
         js = {
             "embedders": {
-                name: embedder_config
+                self.model_name: embedder_config
             }
         }
         
@@ -117,7 +116,7 @@ class MeiliRAG:
                 verify=True
             )
             response.raise_for_status()
-            typer.echo(f"Successfully configured embedder '{name}'")
+            typer.echo(f"Successfully configured embedder '{self.model_name}'")
             return True
         except requests.exceptions.RequestException as e:
             typer.echo(f"An error occurred while configuring embedder: {e} \n JSON: {js}")
@@ -126,13 +125,13 @@ class MeiliRAG:
     def create_index(
         self, 
         index_name: str, 
-        primary_key: str = "id",
-        model_name: str = DEFAULT_EMBEDDING_MODEL
+        primary_key: str = "id"
     ) -> None:
         # Remove the vector store check since it's done in initialization
         index = self.client.create_index(index_name, {'primaryKey': primary_key})
         self.configure_embedder(
             index_name=index_name, 
-            model_name=model_name
+            model_name=self.model_name,
+            name=self.model_name
         )
         return index
