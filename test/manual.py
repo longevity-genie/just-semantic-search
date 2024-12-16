@@ -63,7 +63,7 @@ def test_documents_index(
     
     # Create new index with the specific model name
     try:
-        task = client.create_index(index_name, primary_key, model_name)
+        task = client.create_index(index_name, primary_key)
         client.client.wait_for_task(task.task_uid)  # Wait for creation to complete
         print(f"Created new index '{index_name}' with primary key '{primary_key}'")
     except Exception as e:
@@ -72,14 +72,14 @@ def test_documents_index(
 
     # Get the actual index and add documents
     index = client.client.get_index(index_name)
-    index.update_searchable_attributes(['name', 'description'])
+    index.update_searchable_attributes(['title', 'abstract', 'text', 'content'])
     
     # Ensure documents have vectors with the correct model name key
     for doc in documents:
         if model_name not in doc.vectors:
             print(f"Warning: Document missing vector for model {model_name}")
     
-    documents_dict = [doc.model_dump() for doc in documents]
+    documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
     task = index.add_documents(documents_dict)
     client.client.wait_for_task(task.task_uid)  # Wait for documents to be added
     print(f"Added {len(documents)} documents to the index")
@@ -143,6 +143,7 @@ def main():
     Main function.
     """
 
+    print("--MAIN--")
     # Get the current file's directory and construct path to data file
     current_dir = Path(__file__).parent
     project_dir = current_dir.parent  # Go up 3 levels from test/core to project root

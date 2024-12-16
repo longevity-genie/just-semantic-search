@@ -20,7 +20,7 @@ class ArticleSemanticSplitter(SemanticSplitter):
         max_seq_length: Optional[int] = None,
         min_token_count: int = DEFAULT_MINIMAL_TOKENS,
         tokenizer: Optional[PreTrainedTokenizer] = None,
-        model_name: Optional[str] = "default",
+        model_name: Optional[str] = None,
         write_token_counts: bool = True
     ):
         if tokenizer is None:
