@@ -1,11 +1,12 @@
 from pathlib import Path
 import re
 from typing import Optional
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, computed_field
 from abc import ABC, abstractmethod
 import numpy as np
 import pydantic_numpy.typing as pnd
 import yaml
+import hashlib
 
 from yaml import YAMLObject, Dumper
 
@@ -13,29 +14,47 @@ class BugFixDumper(Dumper):
     def represent_str(self, data):
         return self.represent_scalar('tag:yaml.org,2002:str', data, style='|')
     
+
     
 class Document(BaseModel):
-    content: Optional[str] = None
+    text: Optional[str] = None
     metadata: dict = Field(default_factory=dict)
-    vectors: list[float] = Field(default_factory=list, alias="_vectors")  # Changed to match parent class
-
-
-    def set_vectors(self, vectors: np.ndarray | list[float]) -> None:
-        """Set the document's vector embeddings"""
-        self.vectors = vectors.tolist() if isinstance(vectors, np.ndarray) else vectors
-
-    def get_vectors(self) -> np.ndarray:
-        """Get the document's vector embeddings"""
-        return np.array(self.vectors)
-
+    vectors: dict[str, list[float]] = Field(default_factory=dict, alias='_vectors')
+    token_count: Optional[int] = Field(default=None)
+    
     model_config = ConfigDict(
-        populate_by_name=True,
-        exclude_defaults=True,
-        json_encoders={
-            np.ndarray: lambda x: x.tolist()
-        }
+        populate_by_name=True,  # Allows both alias and original name to work
+        exclude_none=True,      # Don't include None values in serialization
     )
 
+    @property
+    def content(self) -> Optional[str]:
+        """Returns the text value"""
+        return self.text
+    
+    @computed_field
+    def hash(self) -> Optional[str]:
+        """Returns MD5 hash of the text"""
+        if self.text is None:
+            return None
+        return hashlib.md5(self.text.encode('utf-8')).hexdigest()
+    
+    def with_vector(self, embedder_name: str | None, vector: list[float] | np.ndarray | None):
+        """Add a vector to the document
+        
+        Args:
+            embedder_name: Name of the embedder used to generate the vector
+            vector: Vector to add, can be list of floats or numpy array
+        """
+        if embedder_name is None or vector is None:
+            return self
+        
+        if isinstance(vector, np.ndarray):
+            vector = vector.tolist()
+        self.vectors[embedder_name] = vector
+        return self
+
+   
     def save_to_yaml(self, path: Path) -> Path:
         """Save document to a YAML file"""
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -59,6 +78,18 @@ class ArticleDocument(Document):
     source: str
     fragment_num: int
     total_fragments: int
+
+    @computed_field
+    def content(self) -> Optional[str]:
+       return self.to_formatted_string()
+    
+        
+    @computed_field
+    def hash(self) -> Optional[str]:
+        """Returns MD5 hash of the text"""
+        if self.text is None:
+            return None
+        return hashlib.md5(self.to_formatted_string().encode('utf-8')).hexdigest()
    
     
 
@@ -83,7 +114,7 @@ class ArticleDocument(Document):
         if has_multiple_fragments:
             parts.append("TEXT_FRAGMENT: ")
         
-        parts.append(self.content)
+        parts.append(self.text)
         
         parts.append(f"\n\nSOURCE: {self.source}")
         if mention_splits and has_multiple_fragments:
@@ -93,11 +124,6 @@ class ArticleDocument(Document):
         
         return "\n".join(parts)
     
-    def with_extended_content(self, mention_splits: bool = True) -> "ArticleDocument":
-        """Create a new document with extended content"""
-        if self.content is None or self.source not in self.content:
-            self.content = self.to_formatted_string(mention_splits)
-        return self
 
     @staticmethod
     def calculate_adjusted_chunk_size(

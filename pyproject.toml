@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search-all"
-version = "0.0.0"
+version = "0.0.1"
 package-mode = false
 description = "Semantic search implementation with hybrid search support and multiple backends"
 authors = [
@@ -22,8 +22,8 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.14"
-just-semantic-search = { path = "core", develop = true }
-just-semantic-search-meili = { path = "meili", develop = true }
+just-semantic-search = { path = "./core", develop = true }
+just-semantic-search-meili = { path = "./meili", develop = true }
 pyfunctional = ">=1.5.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"
@@ -35,6 +35,6 @@ requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
