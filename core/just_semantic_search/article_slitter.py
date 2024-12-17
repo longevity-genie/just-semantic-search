@@ -6,8 +6,6 @@ from just_semantic_search.document import Document, ArticleDocument
 # Add at the top of the file, after imports
 
 
-
-
 class ArticleSplitter(AbstractSplitter[str, ArticleDocument]):
     """
     A specialized text splitter designed for processing scientific articles and research papers.

@@ -24,96 +24,11 @@ key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 app = typer.Typer()
 
 
-
-
-def test_documents_index(
-    documents: List[ArticleDocument],
-    model_name: str,
-    index_name: str = "test",
-    primary_key: str = "hash",
-    host: str = "127.0.0.1",
-    port: int = 7700,
-    query: str = "test",
-) -> Dict[str, Any]:
-    """Run a complete test cycle: delete index, create index, add documents, and search.
-    
-    Args:
-        documents: List of documents to add to the index
-        index_name (str): Name of the index to test
-        primary_key (str): Primary key field name
-        host (str): Meilisearch host
-        port (int): Meilisearch port
-        model_name (str): Model name for embeddings
-        query (str): Search query to test
-        documents (Optional[List[Dict[str, Any]]]): List of documents to add to the index
-        
-    Returns:
-        Dict[str, Any]: Search results
-    """
-    config = MeiliConfig(host=host, port=port, api_key=key)
-    client = MeiliRAG(config, model_name)
-    
-    # Delete existing index if it exists
-    try:
-        task = client.delete_index(index_name)
-        client.client.wait_for_task(task.task_uid)  # Wait for deletion to complete
-        print(f"Deleted existing index '{index_name}'")
-    except Exception as e:
-        print(f"No existing index to delete or error occurred: {e}")
-    
-    # Create new index with the specific model name
-    try:
-        task = client.create_index(index_name, primary_key)
-        client.client.wait_for_task(task.task_uid)  # Wait for creation to complete
-        print(f"Created new index '{index_name}' with primary key '{primary_key}'")
-    except Exception as e:
-        print(f"Error creating index: {e}")
-        return {}
-
-    # Get the actual index and add documents
-    index = client.client.get_index(index_name)
-    index.update_searchable_attributes(['title', 'abstract', 'text', 'content'])
-    
-    # Ensure documents have vectors with the correct model name key
-    for doc in documents:
-        if model_name not in doc.vectors:
-            print(f"Warning: Document missing vector for model {model_name}")
-    
-    documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
-    task = index.add_documents(documents_dict)
-    client.client.wait_for_task(task.task_uid)  # Wait for documents to be added
-    print(f"Added {len(documents)} documents to the index")
-    
-    # After adding documents
-    all_docs = index.get_documents()
-    print("Documents in index:", all_docs)
-    
-    # Wait a moment for indexing to settle
-    print("Waiting for documents to be indexed...")
-    time.sleep(1)
-    
-    # After creating the index
-    index = client.client.get_index(index_name)
-    index.update_settings({
-        'searchableAttributes': ['name', 'content']
-    })
-    
-    # Test search
-    results = client.search(index_name, query)
-    print(f"\nSearch results for '{query}' in index '{index_name}':")
-    for hit in results.hits:
-       print("HIT:")
-       pprint(hit)
-    
-    return results
-
-
 from typing import Union
 
 
 def split_and_print_documents(splitter: Union[ArticleSplitter, ArticleSemanticSplitter], 
                             data_file: Path, 
-                            model: SentenceTransformer, 
                             tmp_dir: Path, 
                             abstract: str, 
                             title: str, 
@@ -143,7 +58,6 @@ def main():
     Main function.
     """
 
-    print("--MAIN--")
     # Get the current file's directory and construct path to data file
     current_dir = Path(__file__).parent
     project_dir = current_dir.parent  # Go up 3 levels from test/core to project root
@@ -179,7 +93,37 @@ def main():
 
     documents = splitter.split_file(data_file, embed=True, abstract=abstract, title=title, source=source)
 
-    test_documents_index(documents, splitter.model_name, "test", "hash", "127.0.0.1", 7700, query="expression network analysis")
+    #test_documents_index(documents, splitter.model_name, "test", "127.0.0.1", 7700, text_query="How are CAD-genes involved in aging?")
+    host = "127.0.0.1"
+    port = 7700
+    model_name = splitter.model_name
+    text_query = "Batman"
+    #text_query = "How are CAD-genes involved in aging?"
+    index_name = "test"
+
+    config = MeiliConfig(host=host, port=port, api_key=key)
+    rag = MeiliRAG("test", model_name, config, create_index_if_not_exists=True, recreate_index=True)
+    
+    # Ensure documents have vectors with the correct model name key
+    for doc in documents:
+        if model_name not in doc.vectors:
+            print(f"Warning: Document missing vector for model {model_name}")
+    
+    count = rag.add_documents(documents)
+    print(f"Added {count} documents to the index")
+   
+
+    rag.index.update_searchable_attributes(['title', 'abstract', 'text'])
+    # Test search
+    vector_query = model.encode("What are CAD-genes?")
+
+    results = rag.search(None, vector=vector_query)
+    print(f"\nSearch results for '{text_query}' in index '{index_name}':")
+    for hit in results.hits:
+       print("HIT:")
+       pprint(hit)
+    
+    return results
     
 
 if __name__ == "__main__":

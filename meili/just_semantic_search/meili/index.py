@@ -1,6 +1,5 @@
 from just_semantic_search.embeddings import load_gte_mlm_en
 import typer
-import meilisearch
 import os
 from dotenv import load_dotenv
 from just_semantic_search.meili.rag import *
