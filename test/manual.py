@@ -97,7 +97,7 @@ def main():
     host = "127.0.0.1"
     port = 7700
     model_name = splitter.model_name
-    text_query = "Batman"
+   
     #text_query = "How are CAD-genes involved in aging?"
     index_name = "test"
 
@@ -109,22 +109,24 @@ def main():
         if model_name not in doc.vectors:
             print(f"Warning: Document missing vector for model {model_name}")
     
-    count = rag.add_documents(documents)
-    print(f"Added {count} documents to the index")
-   
-
-    rag.index.update_searchable_attributes(['title', 'abstract', 'text'])
-    # Test search
+    rag.add_documents_sync(documents=documents)
+    
+    time.sleep(4)  # Add 4 second delay
+    
+    test = rag.get_documents()
+    print("==========SAVED DOCS===========")
+    for t in test.results:
+        print(t)
+    # let-s make weird stuff to check that one search can rescue anothe
+    text_query = "What are CAD-genes" #"Batman"
     vector_query = model.encode("What are CAD-genes?")
-
-    results = rag.search(None, vector=vector_query)
+    results = rag.search(text_query, vector=vector_query)
     print(f"\nSearch results for '{text_query}' in index '{index_name}':")
     for hit in results.hits:
        print("HIT:")
        pprint(hit)
     
-    return results
+    #return results
     
-
 if __name__ == "__main__":
-    app()
+   app()

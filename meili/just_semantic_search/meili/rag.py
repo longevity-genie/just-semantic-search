@@ -1,18 +1,18 @@
 from just_semantic_search.document import ArticleDocument, Document
 import typer
-import meilisearch
 import os
 from dotenv import load_dotenv
 from just_semantic_search.meili.rag import *
 import requests
 from typing import List, Dict, Any, Literal, Mapping, Optional, Union
-import meilisearch
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
 
 from meilisearch_python_sdk import AsyncClient, AsyncIndex
 from meilisearch_python_sdk import Client
+from meilisearch_python_sdk.errors import MeilisearchApiError
 from meilisearch_python_sdk.index import SearchResults, Hybrid
+from meilisearch_python_sdk.models.settings import MeilisearchSettings, UserProvidedEmbedder
 
 import asyncio
 
@@ -31,18 +31,20 @@ class MeiliConfig(BaseModel):
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
         return headers
-    
-"""
-class SearchResult(BaseModel):
-    hits: List[Dict[str, Any]]
-    processing_time_ms: int = Field(alias="processingTimeMs")
-    estimated_total_hits: int = Field(alias="estimatedTotalHits")
-    query: str
-    model_config = ConfigDict(extra='allow')
-"""     
+
     
 
 class MeiliRAG:
+    
+    def get_loop(self):
+        """Helper to get or create an event loop"""
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        return loop
+    
     
     def __init__(
         self,
@@ -51,7 +53,8 @@ class MeiliRAG:
         config: MeiliConfig,
         create_index_if_not_exists: bool = True,
         recreate_index: bool = False, 
-        indexable_attributes: List[str] = ['title', 'abstract', 'text', 'content', 'source']
+        searchable_attributes: List[str] = ['title', 'abstract', 'text', 'content', 'source'],
+        primary_key: str = "hash"
     ):
         """Initialize MeiliRAG instance.
         
@@ -70,19 +73,22 @@ class MeiliRAG:
         
         self.model_name = model_name
         self.index_name = index_name
-        self.indexable_attributes = indexable_attributes
-        self.index_async: AsyncIndex = asyncio.run(self.init_index(create_index_if_not_exists, recreate_index))
-        
+        self.primary_key = primary_key
+        self.searchable_attributes = searchable_attributes
+        if not self._enable_vector_store():
+            typer.echo("Warning: Failed to enable vector store feature during initialization")
+        self.index_async = self.get_loop().run_until_complete(
+            self.init_index(create_index_if_not_exists, recreate_index)
+        )
+        self.get_loop().run_until_complete(self.configure_index())
 
 
     async def init_index(self, create_index_if_not_exists: bool = True, recreate_index: bool = False) -> AsyncIndex:
-        if not self._enable_vector_store():
-            typer.echo("Warning: Failed to enable vector store feature during initialization")
         try:
             index = await self.client_async.get_index(self.index_name)
             if recreate_index:
                 typer.echo(f"Index '{self.index_name}' already exists, because recreate_index=True we will delete it and create a new one")
-                deleted = self.client.delete_index_if_exists(self.index_name)
+                deleted = await self.client_async.delete_index_if_exists(self.index_name)
                 index = await self.client_async.create_index(self.index_name)
                 return index
             else:
@@ -116,28 +122,15 @@ class MeiliRAG:
             response.raise_for_status()
             return True
         except requests.exceptions.RequestException as e:
+            typer.echo(f"An error occurred while enabling vector store: {e}")
             return False
         
-    async def add_documents(self, documents: List[ArticleDocument | Document]) -> int:
+    async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
         """Add ArticleDocument objects to the index.
         
         Args:
             documents (List[ArticleDocument | Document]): List of documents to add
-            
-        Returns:
-            int: Number of documents added
-        """
-        documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
-        return await self.add_document_dicts(documents_dict)
-    
-    def add_documents_sync(self, documents: List[ArticleDocument | Document]) -> int:
-        return asyncio.run(self.add_document_dicts(documents))
-
-    async def add_document_dicts(self, documents: List[Dict[str, Any]]) -> int:
-        """Add dictionary documents to the index.
-        
-        Args:
-            documents (List[Dict[str, Any]]): List of document dictionaries
+            compress (bool): Whether to compress the documents
             
         Returns:
             int: Number of documents added
@@ -146,9 +139,50 @@ class MeiliRAG:
             MeiliSearchApiError: If documents cannot be added
         """
         try:
-            return await self.index_async.add_documents(documents)
+            documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
+            return await self.add_document_dicts_async(documents_dict, compress=compress)
+        except Exception as e:
+            typer.echo(f"Error converting documents to dictionaries: {str(e)}")
+            raise
+
+    def add_documents_dicts_sync(self, documents: List[Dict[str, Any]], compress: bool = False):
+        return self.client.index(self.index_name).add_documents(documents, primary_key=self.primary_key, compress=compress)
+    
+    def add_documents_sync(self, documents: List[ArticleDocument | Document], compress: bool = False):
+        docs = [doc.model_dump(by_alias=True) for doc in documents]
+        return self.add_documents_dicts_sync(docs, compress=compress)
+
+    def get_documents(self):
+        return self.index.get_documents()
+
+    async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False):
+        """Add dictionary documents to the index.
+        
+        Args:
+            documents (List[Dict[str, Any]]): List of document dictionaries
+            compress (bool): Whether to compress the documents
+            
+        Returns:
+            int: Number of documents added
+            
+        Raises:
+            MeiliSearchApiError: If documents cannot be added
+        """
+        try:
+            typer.echo(f"Attempting to add {len(documents)} documents to index '{self.index_name}'")
+            result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
+            typer.echo(f"Successfully added documents. Result: {result}")
+            return result
         except MeilisearchApiError as e:
-            print(f"Error adding documents: {e}")
+            typer.echo(f"Meilisearch API Error while adding documents:")
+            typer.echo(f"Error type: {type(e).__name__}")
+            typer.echo(f"Error message: {str(e)}")
+            typer.echo(f"Error code: {getattr(e, 'code', 'unknown')}")
+            raise
+        except Exception as e:
+            typer.echo(f"Unexpected error while adding documents:")
+            typer.echo(f"Error type: {type(e).__name__}")
+            typer.echo(f"Error message: {str(e)}")
             raise
 
 
@@ -232,60 +266,16 @@ class MeiliRAG:
             locales=locales
         )
 
-    def configure_embedder(
-        self,
-        index_name: str,
-        source: str = "userProvided",
-        dimensions: Optional[int] = 1024
-    ) -> bool:
-        """Configure an embedder in Meilisearch.
-        
-        Args:
-            index_name (str): Name of the index to configure
-            source (str): Source of embeddings ('userProvided' or model URL)
-            dimensions (Optional[int]): Dimensions of embedding vectors
-            
-        Returns:
-            bool: True if configuration successful, False otherwise
-        """
-        embedder_config = {
-            'source': source,
+    async def configure_index(self):
+        embedder = UserProvidedEmbedder(
+            dimensions=1024,
+            source="userProvided"
+        )
+        embedders = {
+            self.model_name: embedder
         }
-        
-        # Add appropriate fields based on source
-        if source == "userProvided":
-            embedder_config.update({
-                'dimensions': dimensions
-            })
-        else:
-            embedder_config.update({
-                'modelUrl': self.model_name,
-                'documentTemplate': "{text}"
-            })
-
-        js = {
-            "embedders": {
-                self.model_name: embedder_config
-            }
-        }
-        
-        try:
-            headers = {
-                "Authorization": f"Bearer {self.config.api_key}",
-                "Content-Type": "application/json"
-            }
-            response = requests.patch(
-                f'{self.config.get_url()}/indexes/{index_name}/settings',
-                json=js,
-                headers=headers,
-                verify=True
-            )
-            response.raise_for_status()
-            typer.echo(f"Successfully configured embedder '{self.model_name}'")
-            return True
-        except requests.exceptions.RequestException as e:
-            typer.echo(f"An error occurred while configuring embedder: {e} \n JSON: {js}")
-            return False
+        settings = MeilisearchSettings(embedders=embedders, searchable_attributes=self.searchable_attributes)
+        return await self.index_async.update_settings(settings)
 
 
     @property
