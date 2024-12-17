@@ -3,7 +3,6 @@
 [![PyPI version](https://badge.fury.io/py/just-semantic-search.svg)](https://badge.fury.io/py/just-semantic-search)
 [![Python Version](https://img.shields.io/pypi/pyversions/just-semantic-search.svg)](https://pypi.org/project/just-semantic-search/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Downloads](https://static.pepy.tech/badge/just-semantic-search)](https://pepy.tech/project/just-semantic-search)
 
 LLM-agnostic semantic-search library with hybrid search support and multiple backends.
 
