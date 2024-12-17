@@ -31,7 +31,7 @@ class SemanticSplitter(AbstractSplitter[str, Document]):
         self.similarity_threshold = similarity_threshold
         self.min_token_count = min_token_count
 
-    def split(self, content: str, embed: bool = True, **kwargs) -> List[Document]:
+    def split(self, content: str, embed: bool = True, source: str | None = None, **kwargs) -> List[Document]:
         # Get parameters from kwargs or use defaults
         max_seq_length = kwargs.get('max_seq_length', self.max_seq_length)
         similarity_threshold = kwargs.get('similarity_threshold', self.similarity_threshold)
@@ -47,7 +47,7 @@ class SemanticSplitter(AbstractSplitter[str, Document]):
         vectors = self.model.encode(text_chunks) if embed else [None] * len(text_chunks)
         
         # Create Document objects
-        return [Document(content=text, vectors=vec) for text, vec in zip(text_chunks, vectors)]
+        return [Document(text=text, vectors=vec, source=source) for text, vec in zip(text_chunks, vectors)]
 
     def _content_from_path(self, file_path: Path) -> str:
         return file_path.read_text(encoding="utf-8")
@@ -56,13 +56,6 @@ class SemanticSplitter(AbstractSplitter[str, Document]):
         return self.model.encode(text, convert_to_numpy=True)
     
     def similarity(self, text1: str, text2: str) -> float:
-        # Add size checks and handling
-        MAX_COMPARISON_LENGTH = 10000  # Define reasonable maximum
-        if len(text1) > MAX_COMPARISON_LENGTH or len(text2) > MAX_COMPARISON_LENGTH:
-            # Truncate or handle differently for very long texts
-            text1 = text1[:MAX_COMPARISON_LENGTH]
-            text2 = text2[:MAX_COMPARISON_LENGTH]
-
         try:
             vec1 = self.model.encode(text1, convert_to_numpy=True).reshape(1, -1)
             vec2 = self.model.encode(text2, convert_to_numpy=True).reshape(1, -1)

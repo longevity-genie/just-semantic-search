@@ -4,7 +4,6 @@ from typing import Optional
 from pydantic import BaseModel, Field, ConfigDict, computed_field
 from abc import ABC, abstractmethod
 import numpy as np
-import pydantic_numpy.typing as pnd
 import yaml
 import hashlib
 
@@ -21,6 +20,7 @@ class Document(BaseModel):
     metadata: dict = Field(default_factory=dict)
     vectors: dict[str, list[float]] = Field(default_factory=dict, alias='_vectors')
     token_count: Optional[int] = Field(default=None)
+    source: Optional[str] = Field(default=None)
     
     model_config = ConfigDict(
         populate_by_name=True,  # Allows both alias and original name to work
@@ -76,7 +76,6 @@ class ArticleDocument(Document):
     """Represents a document or document fragment with its metadata"""
     title: str | None
     abstract: str | None
-    source: str
     fragment_num: int
     total_fragments: int
 

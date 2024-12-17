@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search"
-version = "0.0.1"
+version = "0.0.0"
 description = "Core interfaces for hybrid search implementations"
 authors = ["Alex Karmazin <karmazinalex@gmail.com>"]
 license = "Apache-2.0"
@@ -19,12 +19,10 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.11"
 transformers = ">=4.44.2"
-meilisearch = ">=0.33.0"
 triton = "*"
 sentence-transformers = "*"
 typer = "*"
 pydantic = ">=2.10.3"
-pydantic-numpy = ">=7.0.0"
 scikit-learn = ">=1.5.2"
 einops = ">=0.8.0"
 
@@ -34,6 +32,6 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry-dynamic-versioning]
-enable = false
+enable = true
 vcs = "git"
 style = "pep440"

@@ -44,7 +44,7 @@ class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
             self.max_seq_length = max_seq_length
 
     @abstractmethod
-    def split(self, content: CONTENT, embed: bool = True, **kwargs) -> List[IDocument]:
+    def split(self, content: CONTENT, embed: bool = True, source: str | None = None, **kwargs) -> List[IDocument]:
         """Split content into documents and optionally embed them."""
         pass
 
@@ -61,7 +61,7 @@ class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
         if isinstance(file_path, str):
             file_path = Path(file_path)
         content: CONTENT = self._content_from_path(file_path)
-        return self.split(content, embed, **kwargs)
+        return self.split(content, embed, source=str(file_path.absolute()), **kwargs)
 
 
 class TextSplitter(AbstractSplitter[str, Document]):

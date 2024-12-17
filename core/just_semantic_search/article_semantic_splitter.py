@@ -138,3 +138,4 @@ class ArticleSemanticSplitter(SemanticSplitter):
             source = str(file_path.absolute())
         content: str = self._content_from_path(file_path)
         return self.split(content, embed, title=title, abstract=abstract, source=source, **kwargs)
+    
