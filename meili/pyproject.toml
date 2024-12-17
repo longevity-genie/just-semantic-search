@@ -26,7 +26,7 @@ meilisearch-python-sdk = ">=3.6.2"
 triton = ">=2.0.0"
 sentence-transformers = ">=2.2.2"
 typer = ">=0.9.0"
-just-semantic-search = { path = "../core" }
+just-semantic-search = { version = "0.0.0", allow-prereleases = true }
 rich = ">=13.9.4"
 
 [build-system]
