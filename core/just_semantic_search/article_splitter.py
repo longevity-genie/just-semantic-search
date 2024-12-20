@@ -1,12 +1,15 @@
 from sentence_transformers import SentenceTransformer
 from typing import List, Optional
-from just_semantic_search.text_splitter import AbstractSplitter
+from just_semantic_search.text_splitter import TextSplitter
 from pathlib import Path
 from just_semantic_search.document import Document, ArticleDocument
 # Add at the top of the file, after imports
 
+import warnings
+import torch
 
-class ArticleSplitter(AbstractSplitter[str, ArticleDocument]):
+
+class ArticleSplitter(TextSplitter[ArticleDocument]):
     """
     A specialized text splitter designed for processing scientific articles and research papers.
     
@@ -20,8 +23,28 @@ class ArticleSplitter(AbstractSplitter[str, ArticleDocument]):
     transformer model while maintaining document attribution.
     """
 
-    def __init__(self, model: SentenceTransformer, model_name: Optional[str] = None, write_token_counts: bool = True):
-        super().__init__(model, model_name=model_name, write_token_counts=write_token_counts)
+    def __init__(self, model: SentenceTransformer, model_name: Optional[str] = None, write_token_counts: bool = True, 
+                 batch_size: int = 32,
+                 normalize_embeddings: bool = False):
+        super().__init__(model, model_name=model_name, write_token_counts=write_token_counts, batch_size=batch_size, normalize_embeddings=normalize_embeddings)
+        # Determine the device from the model
+        self.device = next(model.parameters()).device
+        
+        # Check for available CUDA devices
+        if hasattr(torch.cuda, 'device_count'):
+            cuda_count = torch.cuda.device_count()
+        else:
+            cuda_count = 0
+        
+        # Warn if running on CPU (but not other accelerators)
+        accelerators = {'cuda', 'triton', 'mps', 'xpu', 'tpu'}
+        if not any(acc in self.device.type.lower() for acc in accelerators):
+            warnings.warn(
+                f"Model is running on CPU (device is {self.device.type}). "
+                f"Found {cuda_count} CUDA device(s). For better performance, consider using an accelerator (GPU/TPU/etc).",
+                RuntimeWarning
+            )
+        
     
 
     def split(self, text: str, embed: bool = True, 

@@ -1,6 +1,6 @@
 from pathlib import Path
 import re
-from typing import Optional
+from typing import Optional, TypeVar
 from pydantic import BaseModel, Field, ConfigDict, computed_field
 from abc import ABC, abstractmethod
 import numpy as np
@@ -12,8 +12,6 @@ from yaml import YAMLObject, Dumper
 class BugFixDumper(Dumper):
     def represent_str(self, data):
         return self.represent_scalar('tag:yaml.org,2002:str', data, style='|')
-    
-
     
 class Document(BaseModel):
     text: Optional[str] = None
@@ -70,6 +68,8 @@ class Document(BaseModel):
             )
         return path
 
+    
+IDocument = TypeVar('IDocument', bound=Document)  # Document type that must inherit from Document class
 
 class ArticleDocument(Document):
 

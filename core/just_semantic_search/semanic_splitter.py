@@ -1,7 +1,7 @@
-from just_semantic_search.document import Document
-from just_semantic_search.text_splitter import AbstractSplitter
+from just_semantic_search.document import Document, IDocument
+from just_semantic_search.text_splitter import AbstractSplitter, TextSplitter
 from sentence_transformers import SentenceTransformer
-from typing import List, Optional
+from typing import Generic, List, Optional, TypeAlias
 import re
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
@@ -13,7 +13,50 @@ DEFAULT_SIMILARITY_THRESHOLD = 0.60
 DEFAULT_MINIMAL_TOKENS = 500
 
 
-class SemanticSplitter(AbstractSplitter[str, Document]):
+class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
+
+    """
+    Text Splitting Logic in SemanticSplitter
+
+    The SemanticSplitter class implements a sophisticated text chunking strategy that combines
+    semantic similarity with size constraints. Here's how it works:
+
+    1. Primary Split (split_text_semantically):
+    - First normalizes the text by:
+        * Reducing multiple newlines to double newlines
+        * Converting table-like spacing to pipe separators
+        * Fixing hyphenated words across lines
+    - Splits text into paragraphs using double newlines
+    - Processes paragraphs in batches of 5 for efficient similarity computation
+    - For single large paragraphs, delegates to sentence-level splitting
+    - Otherwise processes paragraphs sequentially, combining them based on:
+        * Semantic similarity (must be >= similarity_threshold)
+        * Size constraints (must not exceed max_chunk_size in tokens)
+        * Minimum token count (won't split if below min_token_count)
+
+    2. Secondary Split (_split_large_text):
+    - Used when paragraphs are too large
+    - Splits text into sentences using regex pattern
+    - Falls back to token-based splitting if sentence splitting fails
+    - Combines sentences based on:
+        * Semantic similarity
+        * Token count constraints
+
+    Key Parameters:
+    - similarity_threshold: Minimum cosine similarity (default: 0.60) required to combine chunks
+    - max_chunk_size: Maximum number of tokens allowed in a single chunk
+    - min_token_count: Minimum tokens required before splitting (default: 500)
+    - model: SentenceTransformer model used for encoding text and calculating similarity
+
+    The process ensures that:
+    1. Output chunks don't exceed the model's maximum sequence length
+    2. Related content stays together based on semantic similarity
+    3. Natural text boundaries (paragraphs, sentences) are preserved where possible
+    4. Edge cases (very long texts, malformed input) are handled gracefully
+    5. Performance is optimized through batch processing
+    6. Chunks maintain a minimum size for meaningful analysis
+    """
+
     
     def __init__(
         self, 
@@ -23,10 +66,12 @@ class SemanticSplitter(AbstractSplitter[str, Document]):
         min_token_count: int = DEFAULT_MINIMAL_TOKENS,
         tokenizer: Optional[PreTrainedTokenizer] = None,
         model_name: Optional[str] = None,
-        write_token_counts: bool = True
+        write_token_counts: bool = True,
+        batch_size: int = 32,
+        normalize_embeddings: bool = False
     ):
         # First call parent's init with correct parameter order
-        super().__init__(model, max_seq_length, tokenizer, model_name, write_token_counts)
+        super().__init__(model, max_seq_length, tokenizer, model_name, write_token_counts, batch_size, normalize_embeddings)
         # Then set additional parameters specific to SemanticSplitter
         self.similarity_threshold = similarity_threshold
         self.min_token_count = min_token_count
@@ -47,14 +92,9 @@ class SemanticSplitter(AbstractSplitter[str, Document]):
         vectors = self.model.encode(text_chunks) if embed else [None] * len(text_chunks)
         
         # Create Document objects
-        return [Document(text=text, vectors=vec, source=source) for text, vec in zip(text_chunks, vectors)]
+        return [Document(text=text, vectors={ self.model_name: vec }, source=source) for text, vec in zip(text_chunks, vectors)]
 
-    def _content_from_path(self, file_path: Path) -> str:
-        return file_path.read_text(encoding="utf-8")
-    
-    def _encode(self, text: str) -> np.ndarray:
-        return self.model.encode(text, convert_to_numpy=True)
-    
+
     def similarity(self, text1: str, text2: str) -> float:
         try:
             vec1 = self.model.encode(text1, convert_to_numpy=True).reshape(1, -1)
@@ -227,51 +267,13 @@ class SemanticSplitter(AbstractSplitter[str, Document]):
         
         return chunks
 
+
     def similarity_batch(self, texts: List[str]) -> np.ndarray:
         """Calculate similarity matrix for a batch of texts"""
         # Encode all texts at once
         embeddings = self.model.encode(texts, convert_to_numpy=True)
         # Calculate similarity matrix
         return cosine_similarity(embeddings)
+    
 
-"""
-Text Splitting Logic in SemanticSplitter
-
-The SemanticSplitter class implements a sophisticated text chunking strategy that combines
-semantic similarity with size constraints. Here's how it works:
-
-1. Primary Split (split_text_semantically):
-   - First normalizes the text by:
-     * Reducing multiple newlines to double newlines
-     * Converting table-like spacing to pipe separators
-     * Fixing hyphenated words across lines
-   - Splits text into paragraphs using double newlines
-   - Processes paragraphs in batches of 5 for efficient similarity computation
-   - For single large paragraphs, delegates to sentence-level splitting
-   - Otherwise processes paragraphs sequentially, combining them based on:
-     * Semantic similarity (must be >= similarity_threshold)
-     * Size constraints (must not exceed max_chunk_size in tokens)
-     * Minimum token count (won't split if below min_token_count)
-
-2. Secondary Split (_split_large_text):
-   - Used when paragraphs are too large
-   - Splits text into sentences using regex pattern
-   - Falls back to token-based splitting if sentence splitting fails
-   - Combines sentences based on:
-     * Semantic similarity
-     * Token count constraints
-
-Key Parameters:
-- similarity_threshold: Minimum cosine similarity (default: 0.60) required to combine chunks
-- max_chunk_size: Maximum number of tokens allowed in a single chunk
-- min_token_count: Minimum tokens required before splitting (default: 500)
-- model: SentenceTransformer model used for encoding text and calculating similarity
-
-The process ensures that:
-1. Output chunks don't exceed the model's maximum sequence length
-2. Related content stays together based on semantic similarity
-3. Natural text boundaries (paragraphs, sentences) are preserved where possible
-4. Edge cases (very long texts, malformed input) are handled gracefully
-5. Performance is optimized through batch processing
-6. Chunks maintain a minimum size for meaningful analysis
-"""
+SemanticDocumentSplitter: TypeAlias = SemanticSplitter[Document]
