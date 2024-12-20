@@ -18,13 +18,15 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
-transformers = ">=4.44.2"
+transformers = ">=4.47.1"
 triton = "*"
 sentence-transformers = "*"
 typer = "*"
 pydantic = ">=2.10.3"
 scikit-learn = ">=1.5.2"
 einops = ">=0.8.0"
+eliot = ">=1.16.0"
+eliot-tree = ">=24.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]

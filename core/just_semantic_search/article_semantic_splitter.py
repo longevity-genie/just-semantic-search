@@ -11,7 +11,7 @@ import re
 
 
 
-class ArticleSemanticSplitter(SemanticSplitter):
+class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
 
     def __init__(
         self, 
@@ -124,8 +124,6 @@ class ArticleSemanticSplitter(SemanticSplitter):
         
         return sections
     
-    def _content_from_path(self, file_path: Path) -> str:
-        return file_path.read_text(encoding="utf-8")
 
     def split_file(self, file_path: Path | str, embed: bool = True, 
                    title: str | None = None,
