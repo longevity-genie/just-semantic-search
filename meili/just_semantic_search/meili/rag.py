@@ -75,15 +75,28 @@ class MeiliRAG:
         self.index_name = index_name
         self.primary_key = primary_key
         self.searchable_attributes = searchable_attributes
-        if not self._enable_vector_store():
-            log_message(message_type="warning", message="Failed to enable vector store feature during initialization")
-        self.index_async = self.get_loop().run_until_complete(
-            self.init_index(create_index_if_not_exists, recreate_index)
-        )
-        self.get_loop().run_until_complete(self.configure_index())
+        with start_action(action_type="init_rag") as action:
+            if not self._enable_vector_store():
+                action.log(message_type="warning", message="Failed to enable vector store feature during initialization")
+            self.index_async = self.get_loop().run_until_complete(
+                self._init_index_async(create_index_if_not_exists, recreate_index)
+            )
+            self.get_loop().run_until_complete(self._configure_index())
+
+    async def delete_index_async(self):
+        return await self.client_async.delete_index_if_exists(self.index_name)
 
 
-    async def init_index(self, create_index_if_not_exists: bool = True, recreate_index: bool = False) -> AsyncIndex:
+    def delete_index(self):
+        """
+        synchronous version of delete_index_async
+        """
+        return self.get_loop().run_until_complete(self.delete_index_async())
+    
+
+    async def _init_index_async(self, 
+                         create_index_if_not_exists: bool = True, 
+                         recreate_index: bool = False) -> AsyncIndex:
         try:
             index = await self.client_async.get_index(self.index_name)
             if recreate_index:
@@ -92,7 +105,7 @@ class MeiliRAG:
                     index_name=self.index_name,
                     recreate_index=True
                 )
-                deleted = await self.client_async.delete_index_if_exists(self.index_name)
+                deleted = self.delete_index()
                 index = await self.client_async.create_index(self.index_name)
                 return index
             else:
@@ -125,33 +138,27 @@ class MeiliRAG:
     def _enable_vector_store(self) -> bool:
         """Enable vector store feature in Meilisearch."""
         with start_action(action_type="enable_vector_store") as action:
-            try:
-                response = requests.patch(
+            response = requests.patch(
                     f'{self.config.get_url()}/experimental-features',
                     json={'vectorStore': True, 'metrics': True},
                     headers=self.config.headers,
                     verify=True
                 )
-                response.raise_for_status()
-                return True
-            except requests.exceptions.RequestException as e:
-                action.add_exception(e)
-                return False
+            
+            response.raise_for_status()
+            return True
+        return False
         
     async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
         """Add ArticleDocument objects to the index."""
         with start_action(action_type="add_documents_async") as action:
-            try:
-                documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
-                log_message(
-                    message_type="documents_to_add",
-                    count=len(documents)
-                )
-                return await self.add_document_dicts_async(documents_dict, compress=compress)
-            except Exception as e:
-                action.add_exception(e)
-                raise
-
+            documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
+            log_message(
+                message_type="documents_to_add",
+                count=len(documents)
+            )
+            return await self.add_document_dicts_async(documents_dict, compress=compress)
+            
     
     def add_documents_sync(self, documents: List[ArticleDocument | Document], compress: bool = False):
         """Add documents synchronously by running the async method in the event loop.
@@ -173,25 +180,17 @@ class MeiliRAG:
     async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False):
         """Add dictionary documents to the index."""
         with start_action(action_type="add_document_dicts_async") as action:
-            try:
-                log_message(
-                    message_type="adding_documents",
-                    count=len(documents),
-                    index_name=self.index_name
-                )
-                result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
-                action.add_success_fields(
-                    documents_added=result.status,
-                    index_name=self.index_name
-                )
-                return result
-            except MeilisearchApiError as e:
-                action.add_exception(e)
-                raise
-            except Exception as e:
-                action.add_exception(e)
-                raise
-
+            log_message(
+                message_type="adding_documents",
+                count=len(documents),
+                index_name=self.index_name
+            )
+            result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
+            action.add_success_fields(
+                documents_added=result.status,
+                index_name=self.index_name
+            )
+            return result
 
 
     def search(self, 
@@ -273,7 +272,7 @@ class MeiliRAG:
             locales=locales
         )
 
-    async def configure_index(self):
+    async def _configure_index(self):
         embedder = UserProvidedEmbedder(
             dimensions=1024,
             source="userProvided"

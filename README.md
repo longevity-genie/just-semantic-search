@@ -117,6 +117,16 @@ The project consists of multiple components:
 - `meili`: Meilisearch backend implementation
 
 
+## Testing
+
+### Manual testing
+
+```bash
+poetry shell
+python test/meili/manual.py
+```
+
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.

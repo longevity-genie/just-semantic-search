@@ -14,8 +14,8 @@ from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 from rich.progress import track
+from just_semantic_search.embeddings import DEFAULT_EMBEDDING_MODEL_NAME
 
-from core.just_semantic_search.embeddings import DEFAULT_EMBEDDING_MODEL_NAME
 load_dotenv(override=True)
 key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 
