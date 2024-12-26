@@ -6,14 +6,51 @@ from pathlib import Path
 import time
 from eliot import start_action, log_message
 
-import typer
-import os
-from dotenv import load_dotenv
 from just_semantic_search.meili.rag import *
 from typing import Union
 from just_semantic_search.meili.rag import *
 import time
 from pathlib import Path
+from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter
+from just_semantic_search.embeddings import *
+from just_semantic_search.utils.tokens import *
+from pathlib import Path
+import time
+#from just_semantic_search.utils import RenderingFileDestination
+from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter
+from just_semantic_search.embeddings import *
+from just_semantic_search.utils.tokens import *
+from pathlib import Path
+import time
+#from just_semantic_search.utils import RenderingFileDestination
+
+
+import typer
+import os
+from just_semantic_search.meili.rag import *
+from just_semantic_search.meili.rag import *
+import time
+from pathlib import Path
+import subprocess
+import requests
+from eliot import log_message
+
+from eliot._output import *
+from eliot import start_action, start_task
+
+import typer
+import os
+from just_semantic_search.meili.rag import *
+from just_semantic_search.meili.rag import *
+import time
+from pathlib import Path
+import subprocess
+import requests
+from eliot import log_message
+import sys
+
+from eliot._output import *
+from eliot import start_action, start_task
 
 from typing import Union
 
@@ -51,3 +88,39 @@ def split_and_print_documents(splitter: Union[ArticleSplitter, ArticleSemanticSp
                 document.save_to_yaml(file_path)
         
         return split_time
+    
+def ensure_meili_is_running(project_root: Path, host: str = "127.0.0.1", port: int = 7700) -> bool:
+    """Start MeiliSearch container if not running and wait for it to be ready"""
+    
+    with start_task(action_type="ensure_meili_running") as action:
+        # Check if MeiliSearch is already running
+        url = f"http://{host}:{port}/health"
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                return True
+        except requests.exceptions.ConnectionError:
+            pass
+
+        action.log(message_type="server is not available, so starting_server", host=host, port=port)
+
+        # Start MeiliSearch in background
+        meili_script = project_root / "bin" / "meili.sh"
+        
+        process = subprocess.Popen(["/bin/bash", str(meili_script)], 
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        time.sleep(4)
+
+        # Wait for MeiliSearch to be ready
+        max_retries = 30
+        for i in range(max_retries):
+            try:
+                response = requests.get(url)
+                if response.status_code == 200:
+                    return True
+            except requests.exceptions.ConnectionError:
+                time.sleep(1)
+                continue
+        action.log(message_type="server is not started", host=host, port=port)
+        raise RuntimeError("MeiliSearch failed to start")
