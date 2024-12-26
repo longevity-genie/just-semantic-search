@@ -14,6 +14,7 @@ from datetime import datetime
 from eliot import log_call, log_message, start_action, Message, Action, preserve_context, ActionType, Field
 import logging
 from just_semantic_search.utils.logs import LogLevel
+from just_semantic_search.utils.models import get_sentence_transformer_model_name
 
 
 # Define type variables for input and output types
@@ -24,13 +25,6 @@ CONTENT = TypeVar('CONTENT')  # Generic content type
 
 class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
     """Abstract base class for splitting content into documents with optional embedding."""
-
-
-    def get_sentence_transformer_model_name(self, model: SentenceTransformer) -> str | None:
-        for module in model.modules():
-            if hasattr(module, 'auto_model'):
-                return module.auto_model.name_or_path
-        return None
 
     
     def __init__(self, 
@@ -50,7 +44,7 @@ class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
         """
         self.write_token_counts = write_token_counts
         self.model = model
-        self.model_name = self.get_sentence_transformer_model_name(model) if model_name is None else model_name
+        self.model_name = get_sentence_transformer_model_name(model) if model_name is None else model_name
     
         if tokenizer is None:
             tokenizer = self.model.tokenizer
@@ -85,36 +79,32 @@ class AbstractSplitter(ABC, Generic[CONTENT, IDocument]):
             action.add_success_fields(num_documents=len(documents))
             return documents
 
-    @log_call(
-        action_type="split_folder", 
-        include_args=["embed", "path_as_source"],
-        include_result=False
-    )
     def split_folder(self, folder_path: Path | str, embed: bool = True, path_as_source: bool = True, **kwargs) -> List[IDocument]:
         """Split all files in a folder into documents."""
-        start_time = time.time()
-        folder_path = Path(folder_path) if isinstance(folder_path, str) else folder_path
+        with start_action(action_type="split_folder", folder_path=str(folder_path.absolute()), log_level=LogLevel.DEBUG, embed=embed, path_as_source=path_as_source) as action:
+            start_time = time.time()
+            folder_path = Path(folder_path) if isinstance(folder_path, str) else folder_path
         
-        # Log the folder path separately as a string
-        log_message(message_type="processing_folder", folder_path=str(folder_path.absolute()), log_level=LogLevel.DEBUG)
-        
-        if not folder_path.exists() or not folder_path.is_dir():
-            raise ValueError(f"Invalid folder path: {folder_path}")
+            # Log the folder path separately as a string
+            action.log(message_type="processing_folder", folder_path=str(folder_path.absolute()), log_level=LogLevel.DEBUG)
+            
+            if not folder_path.exists() or not folder_path.is_dir():
+                raise ValueError(f"Invalid folder path: {folder_path}")
 
-        documents = []
-        for file_path in folder_path.iterdir():
-            if file_path.is_file():
-                documents.extend(self.split_file(file_path, embed, path_as_source, **kwargs))
-        
-        elapsed_time = time.time() - start_time
-        log_message(
-            message_type="folder_processing_complete",
-            processing_time_seconds=elapsed_time,
-            num_documents=len(documents),
-            log_level=LogLevel.INFO
-        )
-                
-        return documents
+            documents = []
+            for file_path in folder_path.iterdir():
+                if file_path.is_file():
+                    documents.extend(self.split_file(file_path, embed, path_as_source, **kwargs))
+            
+            elapsed_time = time.time() - start_time
+            action.log(
+                message_type="folder_processing_complete",
+                processing_time_seconds=elapsed_time,
+                num_documents=len(documents),
+                log_level=LogLevel.INFO
+            )
+                    
+            return documents
 
     @log_call(
         action_type="split_folder_with_batches", 

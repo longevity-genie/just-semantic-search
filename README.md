@@ -121,10 +121,41 @@ The project consists of multiple components:
 
 ### Manual testing
 
+For manual testing we provide manual.py script that allows to test different cases.
+
+To fill in the text index you should use index-folder command.
+
 ```bash
 poetry shell
-python test/meili/manual.py
+python test/meili/manual.py index-folder
 ```
+
+After the index is filled you can test the search cases.
+The index-folder command checks if meili serve is available and if not starts it by running ./bin/meili.sh under the hood.
+
+#### Test search
+
+```bash
+python test/meili/manual.py test-search
+```
+This test contains two cases:
+1. RSID test
+2. Comics superheroes test
+
+##### RSID test
+There are text pieces deliberately incorporated into tacutu papers data ( /data/tacutopapers_test_rsids_10k ) In particular for rs123456789 and rs123456788 as well as similar but misspelled rsids are added to the documents:
+
+10.txt contains both two times
+11.txt contains both one time
+12.txt and 13 contain only one rsid
+20.txt contains both wrong rsids two times
+21.txt contains both wrong rsids one time
+22.txt and 23 contain only one wrong rsid
+
+##### Comics superheroes test
+Also, similar test for "Comics superheroes" that will test embeddings:
+
+Only 114 document has text about superheroes, but text did not contain words 'comics' or 'superheroes'
 
 
 ## Contributing

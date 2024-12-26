@@ -15,6 +15,7 @@ from meilisearch_python_sdk.models.settings import MeilisearchSettings, UserProv
 
 import asyncio
 from eliot import start_action, log_message
+from sentence_transformers import SentenceTransformer
 
 
 class MeiliConfig(BaseModel):
@@ -97,41 +98,42 @@ class MeiliRAG:
     async def _init_index_async(self, 
                          create_index_if_not_exists: bool = True, 
                          recreate_index: bool = False) -> AsyncIndex:
-        try:
-            index = await self.client_async.get_index(self.index_name)
-            if recreate_index:
-                log_message(
-                    message_type="index_exists",
-                    index_name=self.index_name,
-                    recreate_index=True
-                )
-                deleted = self.delete_index()
-                index = await self.client_async.create_index(self.index_name)
-                return index
-            else:
-                log_message(
-                    message_type="index_exists",
-                    index_name=self.index_name,
-                    recreate_index=False
-                )
-                return index
-        except MeilisearchApiError:
-            if create_index_if_not_exists:
-                log_message(
-                    message_type="index_not_found",
-                    index_name=self.index_name,
-                    create_index_if_not_exists=True
-                )
-                index = await self.client_async.create_index(self.index_name)
-                await index.update_searchable_attributes(self.searchable_attributes)
-                return index
-            else:
-                log_message(
-                    message_type="index_not_found",
-                    index_name=self.index_name,
-                    create_index_if_not_exists=False
-                )
-        return await self.client_async.get_index(self.index_name)
+        with start_action(action_type="init_index_async") as action:
+            try:
+                index = await self.client_async.get_index(self.index_name)
+                if recreate_index:
+                    log_message(
+                        message_type="index_exists",
+                        index_name=self.index_name,
+                        recreate_index=True
+                    )
+                    deleted = await self.delete_index_async()
+                    index = await self.client_async.create_index(self.index_name)
+                    return index
+                else:
+                    action.add_success_fields(
+                        message_type="index_exists",
+                        index_name=self.index_name,
+                        recreate_index=False
+                    )
+                    return index
+            except MeilisearchApiError:
+                if create_index_if_not_exists:
+                    action.add_success_fields(
+                        message_type="index_not_found",
+                        index_name=self.index_name,
+                        create_index_if_not_exists=True
+                    )
+                    index = await self.client_async.create_index(self.index_name)
+                    await index.update_searchable_attributes(self.searchable_attributes)
+                    return index
+                else:
+                    action.log(
+                        message_type="index_not_found",
+                        index_name=self.index_name,
+                        create_index_if_not_exists=False
+                    )
+            return await self.client_async.get_index(self.index_name)
 
 
 
@@ -153,11 +155,13 @@ class MeiliRAG:
         """Add ArticleDocument objects to the index."""
         with start_action(action_type="add_documents_async") as action:
             documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
-            log_message(
-                message_type="documents_to_add",
-                count=len(documents)
+            count = len(documents)
+            result =  await self.add_document_dicts_async(documents_dict, compress=compress)
+            action.add_success_fields(
+                status=result.status,
+                count = len(documents)
             )
-            return await self.add_document_dicts_async(documents_dict, compress=compress)
+            return result
             
     
     def add_documents_sync(self, documents: List[ArticleDocument | Document], compress: bool = False):
@@ -175,22 +179,14 @@ class MeiliRAG:
         )
 
     def get_documents(self, limit: int = 100, offset: int = 0):
-        return self.index.get_documents(offset=offset, limit=limit)
+        with start_action(action_type="get_documents") as action:
+            result = self.index.get_documents(offset=offset, limit=limit)
+            action.log(message_type="documents_retrieved", count=len(result.results))
+            return result
 
     async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False):
-        """Add dictionary documents to the index."""
-        with start_action(action_type="add_document_dicts_async") as action:
-            log_message(
-                message_type="adding_documents",
-                count=len(documents),
-                index_name=self.index_name
-            )
-            result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
-            action.add_success_fields(
-                documents_added=result.status,
-                index_name=self.index_name
-            )
-            return result
+        result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
+        return result
 
 
     def search(self, 
@@ -219,6 +215,7 @@ class MeiliRAG:
             show_ranking_score_details: bool = True,
             ranking_score_threshold: float | None = None,
             locales: list[str] | None = None,
+            model: Optional[SentenceTransformer] = None
         ) -> SearchResults:
         """Search for documents in the index.
         
@@ -238,6 +235,9 @@ class MeiliRAG:
         # Convert numpy array to list if necessary
         if vector is not None and hasattr(vector, 'tolist'):
             vector = vector.tolist()
+        else:
+            if model is not None:
+                vector = model.encode(query).tolist()
         
         hybrid = Hybrid(
             embedder=self.model_name,

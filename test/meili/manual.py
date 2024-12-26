@@ -1,6 +1,7 @@
 from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter
 from just_semantic_search.semanic_splitter import SemanticSplitter
 from just_semantic_search.utils.logs import to_nice_file, to_nice_stdout
+from just_semantic_search.utils.models import get_sentence_transformer_model_name
 from sentence_transformers import SentenceTransformer
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
@@ -24,6 +25,11 @@ from datetime import datetime
 
 from eliot._output import *
 from eliot import start_action, start_task
+from pprint import pformat
+
+from utils import ensure_meili_is_running
+from test_cases import test_rsids, test_superhero_search
+
 
 load_dotenv(override=True)
 key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
@@ -57,62 +63,9 @@ to_nice_file(json_log, rendered_file=rendered_log)
 to_nice_stdout()
 
 
-def ensure_meili_is_running(project_root: Path, host: str = "127.0.0.1", port: int = 7700) -> bool:
-    """Start MeiliSearch container if not running and wait for it to be ready"""
-    
-    with start_task(action_type="ensure_meili_running") as action:
-        # Check if MeiliSearch is already running
-        url = f"http://{host}:{port}/health"
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                return True
-        except requests.exceptions.ConnectionError:
-            pass
 
-        action.log(message_type="server is not available, so starting_server", host=host, port=port)
 
-        # Start MeiliSearch in background
-        meili_script = project_root / "bin" / "meili.sh"
-        
-        process = subprocess.Popen(["/bin/bash", str(meili_script)], 
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-        time.sleep(4)
 
-        # Wait for MeiliSearch to be ready
-        max_retries = 30
-        for i in range(max_retries):
-            try:
-                response = requests.get(url)
-                if response.status_code == 200:
-                    return True
-            except requests.exceptions.ConnectionError:
-                time.sleep(1)
-                continue
-        action.log(message_type="server is not started", host=host, port=port)
-        raise RuntimeError("MeiliSearch failed to start")
-
-def test_rsids(rag: MeiliRAG):
-
-    """
-    :param ctx:
-    :return:
-    In particular for rs123456789 and rs123456788 as well as similar but misspelled rsids are added to the documents:
-        * 10.txt contains both two times
-        * 11.txt contains both one time
-        * 12.txt and 13 contain only one rsid
-        * 20.txt contains both wrong rsids two times
-        * 21.txt contains both wrong rsids one time
-        * 22.txt and 23 contain only one wrong rsid
-    """
-    with start_action(action_type="test_rsids") as action:
-        results = rag.search("rs123456789 and rs123456788")
-        for hit in results.hits:
-            action.log(f"Type of hit: {type(hit)}")
-            action.log(f"Hit: {str(hit)}")
-            #action.log(message_type="hit", hit=hit)
-        return (results)
 
 @app.command()
 def test_search(
@@ -123,15 +76,13 @@ def test_search(
     api_key: str = typer.Option(None, "--api-key", "-k"),
     ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running"),
     ):
-    """
-    :param ctx:
-    :return:
-    """
+
     if api_key is None:
         api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 
     if "gte" in model_name:
         model: SentenceTransformer = load_gte_large()
+        model_name = get_sentence_transformer_model_name(model)
     else:
         raise ValueError(f"Model {model_name} not found!")
     
@@ -144,7 +95,10 @@ def test_search(
         rag = MeiliRAG(index_name, model_name, config, 
                     create_index_if_not_exists=True, 
                     recreate_index=False)
-        return test_rsids(rag)
+        result1 = test_rsids(rag, model=model)
+        action.log(message_type="test_rsids_complete")
+        result2 = test_superhero_search(rag, model=model)
+        action.log(message_type="test_superhero_search_complete")
 
 @app.command()
 def index_folder(
@@ -163,6 +117,7 @@ def index_folder(
 
     if "gte" in model_name:
         model: SentenceTransformer = load_gte_large()
+        model_name = get_sentence_transformer_model_name(model)
     else:
         raise ValueError(f"Model {model_name} not found!")
     
@@ -171,50 +126,44 @@ def index_folder(
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(project_dir, host, port)
-        
+        splitter = SemanticSplitter(model, batch_size=64, normalize_embeddings=False)
         config = MeiliConfig(host=host, port=port, api_key=api_key)
-        rag = MeiliRAG(index_name, model_name, config, 
+        rag = MeiliRAG(index_name, splitter.model_name, config, 
                     create_index_if_not_exists=True, 
                     recreate_index=not skip_parsing)
 
         if not skip_parsing:
-            splitter = SemanticSplitter(model, batch_size=64, normalize_embeddings=False)
             documents = splitter.split_folder(tacutopapers_dir)
-
-        rag.add_documents_sync(documents)
-        dcs = rag.get_documents()
+            rag.add_documents_sync(documents)
         
-        log_message(
+        action.add_success_fields(
             message_type="index_folder_complete",
             index_name=index_name,
-            document_count=len(dcs.results)
+            documents_added_count=len(documents)
         )
         if test:
-            test_rsids(rag)
+            test_rsids(rag, model=model)
 
 
 @app.command()
-@log_call(
-    action_type="list_documents", 
-    include_args=["host", "port", "index_name", "model_name"]
-)
 def documents(
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
     port: int = typer.Option(7700, "--port", "-p", help="Meilisearch port"),
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n", help="Name of the index to create"),
     model_name: str = typer.Option("gte-large", "--model-name", "-m", help="Name of the model to use"),
 ):
-    ensure_meili_is_running(project_dir, host, port)
-    rag = MeiliRAG(index_name, model_name, MeiliConfig(host=host, port=port, api_key=key), 
-                   create_index_if_not_exists=True, recreate_index=False)
-    dcs = rag.get_documents()
-    log_message(message_type="documents_list", documents=dcs)
+    with start_task(action_type="documents") as action:
+            ensure_meili_is_running(project_dir, host, port)
+            rag = MeiliRAG(index_name, model_name, MeiliConfig(host=host, port=port, api_key=key), 
+                    create_index_if_not_exists=True, recreate_index=False)
+            info = rag.get_documents()
+            action.log(message_type="documents_list", count = len(info.results))
 
 
 @app.command()
 def delete_index(
     index_names: list[str] = typer.Option(
-        ["tacutopapers"], "--index-name", "-n", 
+        ["tacutopapers", "test"], "--index-name", "-n", 
         help="Names of the indexes to delete (can specify multiple times)"
     ),
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
@@ -288,8 +237,8 @@ def index_file(
         
         rag.add_documents_sync(documents=documents)
         time.sleep(4)  # Add 4 second delay
-        
         test = rag.get_documents()
+        action.log(message_type="documents in index count", count = len(test.results))
 
 if __name__ == "__main__":
    app()
