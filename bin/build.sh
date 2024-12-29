@@ -13,22 +13,47 @@ if ! command -v poetry &> /dev/null; then
     exit 1
 fi
 
-# Build core package first
+# Initialize error flag
+HAS_ERRORS=0
+
+# Build core package
 echo "Building core package..."
 cd core
 poetry build
 if [ $? -ne 0 ]; then
     echo "Core package build failed!"
-    exit 1
+    HAS_ERRORS=1
+else
+    echo "Core package built successfully!"
 fi
-echo "Core package built successfully!"
 
-# Build meili package next
+# Build meili package
 echo "Building meili package..."
 cd ../meili
 poetry build
 if [ $? -ne 0 ]; then
     echo "Meili package build failed!"
-    exit 1
+    HAS_ERRORS=1
+else
+    echo "Meili package built successfully!"
 fi
-echo "Meili package built successfully!"
+
+# Build scholar package
+echo "Building scholar package..."
+cd ../scholar
+poetry build
+if [ $? -ne 0 ]; then
+    echo "Scholar package build failed!"
+    HAS_ERRORS=1
+else
+    echo "Scholar package built successfully!"
+fi
+
+# Final error status
+if [ $HAS_ERRORS -ne 0 ]; then
+    echo "Completed with errors!"
+    exit 1
+else
+    echo "All packages built successfully!"
+    exit 0
+fi

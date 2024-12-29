@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "just-semantic-search-scholar"
+version = "0.0.0"
+description = "Semantic and hybrid search with scholar"
+authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
+license = "AGPL-3.0-or-later"
+readme = "README.md"
+keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: Unix",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+]
+
+packages = [
+    { include = "just_semantic_search" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.14"
+transformers = ">=4.44.2"
+scholarly = ">=1.7.11"
+triton = ">=2.0.0"
+sentence-transformers = ">=2.2.2"
+typer = ">=0.9.0"
+just-semantic-search = { version = "0.0.0", allow-prereleases = true }
+rich = ">=13.9.4"
+semanticscholar = ">=0.9.0"
+huggingface-hub = ">=0.27.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
+build-backend = "poetry.core.masonry.api" 
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "pep440"

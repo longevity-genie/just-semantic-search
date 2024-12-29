@@ -50,6 +50,23 @@ else
     fi
 fi
 
+# Build and publish scholar package
+echo "Building and publishing scholar package..."
+cd ../scholar
+poetry build
+if [ $? -ne 0 ]; then
+    echo "Scholar package build failed!"
+    HAS_ERRORS=1
+else
+    poetry publish
+    if [ $? -ne 0 ]; then
+        echo "Scholar package publish failed!"
+        HAS_ERRORS=1
+    else
+        echo "Scholar package built and published successfully!"
+    fi
+fi
+
 # Final error status
 if [ $HAS_ERRORS -ne 0 ]; then
     echo "Completed with errors!"
