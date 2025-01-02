@@ -1,5 +1,4 @@
-from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter
-from just_semantic_search.semanic_splitter import SemanticSplitter
+from just_semantic_search.text_splitters import *
 from just_semantic_search.utils.logs import to_nice_file, to_nice_stdout
 from just_semantic_search.utils.models import get_sentence_transformer_model_name
 from sentence_transformers import SentenceTransformer
@@ -7,8 +6,6 @@ from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path
 import time
-#from just_semantic_search.utils import RenderingFileDestination
-
 
 import typer
 import os
@@ -17,22 +14,18 @@ from just_semantic_search.meili.rag import *
 from just_semantic_search.meili.rag import *
 import time
 from pathlib import Path
-import subprocess
-import requests
-from eliot import log_call, to_file, log_message
-import sys
 from datetime import datetime
 
 from eliot._output import *
-from eliot import start_action, start_task
-from pprint import pformat
+from eliot import start_task
 
-from utils import ensure_meili_is_running
+from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from test_cases import test_rsids, test_superhero_search
 
 
 load_dotenv(override=True)
 key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
+
 
 
 app = typer.Typer()
@@ -42,6 +35,7 @@ project_dir = current_dir.parent.parent  # Go up 3 levels from test/meili to pro
 data_dir = project_dir / "data"
 logs = project_dir / "logs"
 tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
+meili_service_dir = project_dir / "services" / "meili"
 
 # Configure Eliot to output to both stdout and log files
 log_file_path = logs / f"meili_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
@@ -61,9 +55,6 @@ rendered_log = open(f"{log_file_path}.txt", "w")
 #to_file(sys.stdout)  # Keep console output
 to_nice_file(json_log, rendered_file=rendered_log)
 to_nice_stdout()
-
-
-
 
 
 
@@ -90,7 +81,7 @@ def test_search(
                     index_name=index_name, model_name=model_name, host=host, port=port, api_key=api_key) as action:
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
-            ensure_meili_is_running(project_dir, host, port)
+            ensure_meili_is_running(meili_service_dir, host, port)
         config = MeiliConfig(host=host, port=port, api_key=api_key)
         rag = MeiliRAG(index_name, model_name, config, 
                     create_index_if_not_exists=True, 
@@ -125,7 +116,7 @@ def index_folder(
                     index_name=index_name, model_name=model_name, host=host, port=port, api_key=api_key, skip_parsing=skip_parsing, test=test, ensure_server=ensure_server) as action:
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
-            ensure_meili_is_running(project_dir, host, port)
+            ensure_meili_is_running(meili_service_dir, host, port)
         splitter = SemanticSplitter(model, batch_size=64, normalize_embeddings=False)
         config = MeiliConfig(host=host, port=port, api_key=api_key)
         rag = MeiliRAG(index_name, splitter.model_name, config, 
@@ -153,7 +144,7 @@ def documents(
     model_name: str = typer.Option("gte-large", "--model-name", "-m", help="Name of the model to use"),
 ):
     with start_task(action_type="documents") as action:
-            ensure_meili_is_running(project_dir, host, port)
+            ensure_meili_is_running(meili_service_dir, host, port)
             rag = MeiliRAG(index_name, model_name, MeiliConfig(host=host, port=port, api_key=key), 
                     create_index_if_not_exists=True, recreate_index=False)
             info = rag.get_documents()
@@ -177,7 +168,7 @@ def delete_index(
     with start_task(action_type="delete_index") as action:
 
         if ensure_server:
-            ensure_meili_is_running(project_dir, host, port)
+            ensure_meili_is_running(meili_service_dir, host, port)
         
         config = MeiliConfig(host=host, port=port, api_key=api_key)
         for index_name in index_names:
@@ -218,7 +209,7 @@ def index_file(
         action.log(message_type="processing_file", filename=str(filename))
         if start_server:
             action.log(message_type="starting_server", host=host, port=port)
-            ensure_meili_is_running(project_dir, host, port)
+            ensure_meili_is_running(meili_service_dir, host, port)
         
         model: SentenceTransformer = load_gte_large()
         action.log(message_type="model_device", device=str(model.device))

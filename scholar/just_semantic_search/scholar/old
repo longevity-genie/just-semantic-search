@@ -1,0 +1,63 @@
+
+class Paperset:
+    """
+    The class that makes it easier to work with dataset or papers for indexing, can be either hugging face or parquet
+    """
+
+
+    @staticmethod
+    def load_dataset_lazy(filename: str = "aging_specific_pubmed.parquet", repo_id="longevity-genie/aging_papers_paragraphs", output_dir: Optional[Path] = default_output_dir):
+        file_path = Paperset.download_dataset(filename, repo_id, output_dir)
+        return pl.scan_parquet(file_path)
+    
+    def load_dataset(filename: str = "aging_specific_pubmed.parquet", repo_id="longevity-genie/aging_papers_paragraphs", output_dir: Optional[Path] = default_output_dir):
+        file_path = Paperset.download_dataset(filename, repo_id, output_dir)
+        return pl.read_parquet(file_path)
+
+    @staticmethod
+    def generate_id_from_data(data):
+        """
+        function to avoid duplicates
+        :param data:
+        :return:
+        """
+        if isinstance(data, str):  # check if data is a string
+            data = data.encode('utf-8')  # encode the string into bytes
+        return str(hex(int.from_bytes(hashlib.sha256(data).digest()[:32], 'little')))[-32:]
+
+    @staticmethod
+    def default_transform(content: list[str], size: int = 10, step: int = 10) -> list[str]:
+        result = content if len(content) <2 else seq(content).sliding(size, step).map(lambda s: s.reduce(lambda x, y: x + "\n" + y)).to_list()
+        #print(f"**************************************************************\nfrom {len(content)} to {len(result)}")
+        return result
+
+
+    lazy_frame: pl.LazyFrame
+    content_field: str #"content_text" #'annotations_paragraph'
+    splitter: Optional[TextSplitter] = None
+    columns: list[str]
+
+
+
+    transform_content: Optional[Callable[[list], list]]
+
+    
+    def __init__(self, df_name_or_path: Union[pl.LazyFrame, str, Path] = "hf://datasets/longevity-genie/aging_papers_paragraphs/aging_specific_pubmed.parquet",
+                 splitter: Optional[TextSplitter] = None,
+                 content_field: str = "annotations_paragraph",#'content_text',
+                 default_columns=SCHOLAR_MAIN_COLUMNS, low_memory: bool = False,
+                 transform_content: Optional[Callable[[list], list]] = None,
+                 paragraphs_together: int = 5
+                 ):
+        #self.splitter = splitter
+        if isinstance(df_name_or_path, pl.LazyFrame):
+            self.lazy_frame = df_name_or_path if default_columns is None else df_name_or_path.select(default_columns)
+        elif isinstance(df_name_or_path, Path) or "parquet" in df_name_or_path:
+            df = pl.scan_parquet(df_name_or_path, low_memory=low_memory)
+            self.lazy_frame = df if default_columns is None else df.select(default_columns)
+        else:
+            self.lazy_frame = Paperset.get_dataset(df_name_or_path, default_columns)
+        self.content_field = content_field
+        self.columns = self.lazy_frame.columns
+        self.transform_content = functools.partial(self.default_transform, size = paragraphs_together, step = paragraphs_together) if transform_content is None else transform_content
+        assert content_field in self.columns, f"{content_field} has not been found in dataframe columns {self.columns}"
