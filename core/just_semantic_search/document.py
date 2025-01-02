@@ -19,6 +19,9 @@ class Document(BaseModel):
     vectors: dict[str, list[float]] = Field(default_factory=dict, alias='_vectors')
     token_count: Optional[int] = Field(default=None)
     source: Optional[str] = Field(default=None)
+
+    fragment_num: int | None = None
+    total_fragments: int | None = None
     
     model_config = ConfigDict(
         populate_by_name=True,  # Allows both alias and original name to work
@@ -74,10 +77,9 @@ IDocument = TypeVar('IDocument', bound=Document)  # Document type that must inhe
 class ArticleDocument(Document):
 
     """Represents a document or document fragment with its metadata"""
-    title: str | None
-    abstract: str | None
-    fragment_num: int
-    total_fragments: int
+    title: str | None = None
+    abstract: str | None = None
+    references: str | None = None
 
     @computed_field
     def content(self) -> Optional[str]:
@@ -115,8 +117,11 @@ class ArticleDocument(Document):
             parts.append("TEXT_FRAGMENT: ")
         
         parts.append(self.text)
-        
+        if self.references:
+            parts.append(f"\n\nREFERENCES: {self.references}")
+
         parts.append(f"\n\nSOURCE: {self.source}")
+        
         if mention_splits and has_multiple_fragments:
             parts.append(f"\tFRAGMENT: {self.fragment_num}/{self.total_fragments}")
         
@@ -131,7 +136,8 @@ class ArticleDocument(Document):
         max_chunk_size: int,
         title: str | None = None,
         abstract: str | None = None,
-        source: str | None = None
+        source: str | None = None,
+        references: str | None = None
     ) -> int:
         """
         Calculate the adjusted chunk size accounting for metadata tokens.
@@ -152,6 +158,8 @@ class ArticleDocument(Document):
             metadata_text += f"TITLE: {title}\n"
         if abstract:
             metadata_text += f"ABSTRACT: {abstract}\n"
+        if references:
+            metadata_text += f"\n\nREFERENCES: {references}"
         if source:
             metadata_text += f"\n\nSOURCE: {source}"
         metadata_text += "\tFRAGMENT: 999/999\n"  # Account for worst-case fragment notation

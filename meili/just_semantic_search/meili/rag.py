@@ -57,26 +57,27 @@ class MeiliRAG:
         searchable_attributes: List[str] = ['title', 'abstract', 'text', 'content', 'source'],
         primary_key: str = "hash"
     ):
-        """Initialize MeiliRAG instance.
-        
-        Args:
-            index_name (str): Name of the Meilisearch index
-            model_name (str): Name of the embedding model
-            config (MeiliConfig): Meilisearch configuration
-            create_index_if_not_exists (bool): Create index if it doesn't exist
-            recreate_index (bool): Force recreate the index even if it exists
-        """
-        self.config = config
-        #self.client = meilisearch.Client(config.get_url(), config.api_key)
-        
-        self.client_async  = AsyncClient(config.get_url(), config.api_key)
-        self.client = Client(config.get_url(), config.api_key)
-        
-        self.model_name = model_name
-        self.index_name = index_name
-        self.primary_key = primary_key
-        self.searchable_attributes = searchable_attributes
         with start_action(action_type="init_rag") as action:
+            """Initialize MeiliRAG instance.
+            
+            Args:
+                index_name (str): Name of the Meilisearch index
+                model_name (str): Name of the embedding model
+                config (MeiliConfig): Meilisearch configuration
+                create_index_if_not_exists (bool): Create index if it doesn't exist
+                recreate_index (bool): Force recreate the index even if it exists
+            """
+            self.config = config
+            #self.client = meilisearch.Client(config.get_url(), config.api_key)
+            
+            self.client_async  = AsyncClient(config.get_url(), config.api_key)
+            self.client = Client(config.get_url(), config.api_key)
+            
+            self.model_name = model_name
+            self.index_name = index_name
+            self.primary_key = primary_key
+            self.searchable_attributes = searchable_attributes
+     
             if not self._enable_vector_store():
                 action.log(message_type="warning", message="Failed to enable vector store feature during initialization")
             self.index_async = self.get_loop().run_until_complete(
@@ -139,16 +140,15 @@ class MeiliRAG:
 
     def _enable_vector_store(self) -> bool:
         """Enable vector store feature in Meilisearch."""
-        with start_action(action_type="enable_vector_store") as action:
-            response = requests.patch(
-                    f'{self.config.get_url()}/experimental-features',
-                    json={'vectorStore': True, 'metrics': True},
-                    headers=self.config.headers,
-                    verify=True
-                )
-            
-            response.raise_for_status()
-            return True
+        response = requests.patch(
+                f'{self.config.get_url()}/experimental-features',
+                json={'vectorStore': True, 'metrics': True},
+                headers=self.config.headers,
+                verify=True
+            )
+        
+        response.raise_for_status()
+        return True
         return False
         
     async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
@@ -177,6 +177,7 @@ class MeiliRAG:
         return self.get_loop().run_until_complete(
             self.add_documents_async(documents, compress=compress)
         )
+
 
     def get_documents(self, limit: int = 100, offset: int = 0):
         with start_action(action_type="get_documents") as action:

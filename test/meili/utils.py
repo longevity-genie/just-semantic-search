@@ -89,38 +89,3 @@ def split_and_print_documents(splitter: Union[ArticleSplitter, ArticleSemanticSp
         
         return split_time
     
-def ensure_meili_is_running(project_root: Path, host: str = "127.0.0.1", port: int = 7700) -> bool:
-    """Start MeiliSearch container if not running and wait for it to be ready"""
-    
-    with start_task(action_type="ensure_meili_running") as action:
-        # Check if MeiliSearch is already running
-        url = f"http://{host}:{port}/health"
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                return True
-        except requests.exceptions.ConnectionError:
-            pass
-
-        action.log(message_type="server is not available, so starting_server", host=host, port=port)
-
-        # Start MeiliSearch in background
-        meili_script = project_root / "bin" / "meili.sh"
-        
-        process = subprocess.Popen(["/bin/bash", str(meili_script)], 
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-        time.sleep(4)
-
-        # Wait for MeiliSearch to be ready
-        max_retries = 30
-        for i in range(max_retries):
-            try:
-                response = requests.get(url)
-                if response.status_code == 200:
-                    return True
-            except requests.exceptions.ConnectionError:
-                time.sleep(1)
-                continue
-        action.log(message_type="server is not started", host=host, port=port)
-        raise RuntimeError("MeiliSearch failed to start")

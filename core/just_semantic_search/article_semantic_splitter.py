@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from pathlib import Path
 from just_semantic_search.document import ArticleDocument
+import torch
 from transformers import PreTrainedTokenizer
 from just_semantic_search.semanic_splitter import *
 import re
@@ -64,7 +65,7 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         all_chunks = []
         for section_title, section_content in sections:
             if section_content.strip():
-                chunks = self.split_text_semantically(
+                chunks: list[str] = self.split_text_semantically(
                     section_content,
                     max_chunk_size=adjusted_max_chunk_size,
                     similarity_threshold=similarity_threshold
@@ -93,6 +94,7 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
             embeddings = self.model.encode([doc.content for doc in documents])
             for doc, embedding in zip(documents, embeddings):
                 doc = doc.with_vector(self.model_name, embedding)
+
         
         return documents
     
@@ -136,4 +138,8 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
             source = str(file_path.absolute())
         content: str = self._content_from_path(file_path)
         return self.split(content, embed, title=title, abstract=abstract, source=source, **kwargs)
+    
+    @property
+    def document_type(self) -> type[ArticleDocument]:
+        return ArticleDocument
     

@@ -26,8 +26,9 @@ meilisearch-python-sdk = ">=3.6.2"
 triton = ">=2.0.0"
 sentence-transformers = ">=2.2.2"
 typer = ">=0.9.0"
-just-semantic-search = { version = "0.0.0", allow-prereleases = true }
 rich = ">=13.9.4"
+
+just-semantic-search = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
@@ -37,3 +38,6 @@ build-backend = "poetry.core.masonry.api"
 enable = true
 vcs = "git"
 style = "pep440"
+
+[tool.poetry.group.dev.dependencies]
+just-semantic-search = { path = "../core", develop = true }
