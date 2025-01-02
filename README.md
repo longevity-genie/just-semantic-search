@@ -157,6 +157,24 @@ Also, similar test for "Comics superheroes" that will test embeddings:
 
 Only 114 document has text about superheroes, but text did not contain words 'comics' or 'superheroes'
 
+## Indexing example hugginfa S2ORC datasets
+
+We uploaded many papers from S2ORC dataset as parquet files. As those papers are already split into paragraphs, we use paragraph splitters.
+You can try it out with the following command:
+
+```bash
+poetry shell
+python scholar/just_semantic_search/scholar/paperset.py index --index-name paperset --df-name-or-path hf://datasets/longevity-genie/tacutu_papers/tacutu_pubmed.parquet --model-name gte-large
+```
+
+By default it does not use semantic similarity threshold so it will split by maximum token length. However, you can specify similarity threshold as -s parameters to split by semantic similarity but it is very slow.
+If you add --recreate-index it will clean the index before adding which is useful for testing.
+
+You can also try to index all ageing research papers from Semantic Scholar dataset but it will take days to complete:
+```bash
+python scholar/just_semantic_search/scholar/paperset.py index --recreate-index --index-name paperset --df-name-or-path hf://datasets/longevity-genie/aging_papers_paragraphs/aging_specific_pubmed.parquet --model-name gte-large
+```
+
 
 ## Contributing
 
