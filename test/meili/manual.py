@@ -38,7 +38,7 @@ tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
 meili_service_dir = project_dir / "services" / "meili"
 
 # Configure Eliot to output to both stdout and log files
-log_file_path = logs / f"meili_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+log_file_path = logs / f"manual_meili_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 logs.mkdir(exist_ok=True)  # Ensure logs directory exists
 
 # Create both JSON and rendered log files
@@ -66,6 +66,8 @@ def test_search(
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
     ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running"),
+    score_threshold: float = typer.Option(0.8, "--score-threshold", "-s", help="Score threshold for hits"),
+    tell_text: bool = typer.Option(False, "--tell-text", "-t", help="Tell text of hits"),
     ):
 
     if api_key is None:
@@ -86,9 +88,9 @@ def test_search(
         rag = MeiliRAG(index_name, model_name, config, 
                     create_index_if_not_exists=True, 
                     recreate_index=False)
-        result1 = test_rsids(rag, model=model)
+        result1 = test_rsids(rag, model=model, tell_text=tell_text, score_threshold=score_threshold)
         action.log(message_type="test_rsids_complete")
-        result2 = test_superhero_search(rag, model=model)
+        result2 = test_superhero_search(rag, model=model, tell_text=tell_text, score_threshold=score_threshold)
         action.log(message_type="test_superhero_search_complete")
 
 @app.command()
@@ -117,7 +119,7 @@ def index_folder(
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(meili_service_dir, host, port)
-        splitter = SemanticSplitter(model, batch_size=64, normalize_embeddings=False)
+        splitter = SemanticSplitter(model=model, batch_size=64, normalize_embeddings=False)
         config = MeiliConfig(host=host, port=port, api_key=api_key)
         rag = MeiliRAG(index_name, splitter.model_name, config, 
                     create_index_if_not_exists=True, 
@@ -125,7 +127,7 @@ def index_folder(
 
         if not skip_parsing:
             documents = splitter.split_folder(tacutopapers_dir)
-            rag.add_documents_sync(documents)
+            rag.add_documents(documents)
         
         action.add_success_fields(
             message_type="index_folder_complete",
@@ -215,7 +217,7 @@ def index_file(
         action.log(message_type="model_device", device=str(model.device))
 
 
-        splitter = ArticleSemanticSplitter(model)
+        splitter = ArticleSemanticSplitter(model=model)
         documents = splitter.split_file(filename, embed=True, abstract=abstract, title=title, source=source)
 
         config = MeiliConfig(host=host, port=port, api_key=key)
@@ -226,7 +228,7 @@ def index_file(
             if splitter.model_name not in doc.vectors:
                 action.log(message_type="warning", warning=f"Document missing vector for model {splitter.model_name}")
         
-        rag.add_documents_sync(documents=documents)
+        rag.add_documents(documents=documents)
         time.sleep(4)  # Add 4 second delay
         test = rag.get_documents()
         action.log(message_type="documents in index count", count = len(test.results))
