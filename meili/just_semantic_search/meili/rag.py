@@ -1,3 +1,4 @@
+from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
 import os
 from dotenv import load_dotenv
@@ -153,18 +154,18 @@ class MeiliRAG:
         
     async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
         """Add ArticleDocument objects to the index."""
-        with start_action(action_type="add_documents_async") as action:
+        with start_action(action_type="add documents") as action:
             documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
             count = len(documents)
             result =  await self.add_document_dicts_async(documents_dict, compress=compress)
             action.add_success_fields(
                 status=result.status,
-                count = len(documents)
+                count = count
             )
             return result
             
     
-    def add_documents_sync(self, documents: List[ArticleDocument | Document], compress: bool = False):
+    def add_documents(self, documents: List[ArticleDocument | Document], compress: bool = False):
         """Add documents synchronously by running the async method in the event loop.
         
         Args:
@@ -174,9 +175,10 @@ class MeiliRAG:
         Returns:
             The result from add_documents_async
         """
-        return self.get_loop().run_until_complete(
+        result = self.get_loop().run_until_complete(
             self.add_documents_async(documents, compress=compress)
         )
+        return result
 
 
     def get_documents(self, limit: int = 100, offset: int = 0):
@@ -185,7 +187,7 @@ class MeiliRAG:
             action.log(message_type="documents_retrieved", count=len(result.results))
             return result
 
-    async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False):
+    async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False) -> TaskInfo:
         result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
         return result
 

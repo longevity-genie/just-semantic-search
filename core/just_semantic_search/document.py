@@ -29,6 +29,8 @@ class Document(BaseModel):
         json_by_alias=True      # Always use aliases in JSON serialization
     )
 
+ 
+
     @property
     def content(self) -> Optional[str]:
         """Returns the text value"""
@@ -70,6 +72,47 @@ class Document(BaseModel):
                 Dumper=BugFixDumper
             )
         return path
+    
+    @staticmethod
+    def metadata_overhead(
+        tokenizer,
+        **metadata
+    ) -> int:
+        """
+        Calculate the adjusted chunk size accounting for metadata tokens.
+        
+        Args:
+            tokenizer: The tokenizer to use for token counting
+            max_chunk_size: Original maximum chunk size
+            **metadata: Dictionary containing metadata fields
+            
+        Returns:
+            Adjusted maximum chunk size accounting for metadata
+        """
+        # Extract metadata fields with None as default
+        text = metadata.get('text')
+        title = metadata.get('title')
+        abstract = metadata.get('abstract')
+        references = metadata.get('references')
+        source = metadata.get('source')
+        
+        # Build sample metadata text
+        metadata_text = "" if text is None else text
+        if title:
+            metadata_text += f"TITLE: {title}\n"
+        if abstract:
+            metadata_text += f"ABSTRACT: {abstract}\n"
+        #if references:
+        #    metadata_text += f"\n\nREFERENCES: {references}"
+        if source:
+            metadata_text += f"\n\nSOURCE: {source}"
+        metadata_text += "\tFRAGMENT: 999/999\n"  # Account for worst-case fragment notation
+        
+        # Calculate tokens for metadata
+        metadata_tokens = len(tokenizer.tokenize(metadata_text))
+        
+        # Return adjusted size
+        return metadata_tokens
 
     
 IDocument = TypeVar('IDocument', bound=Document)  # Document type that must inherit from Document class
@@ -114,58 +157,19 @@ class ArticleDocument(Document):
             
         has_multiple_fragments = self.total_fragments > 1
         if has_multiple_fragments:
-            parts.append("TEXT_FRAGMENT: ")
+            parts.append("TEXT_FRAGMENT: \n\n")
         
         parts.append(self.text)
-        if self.references:
-            parts.append(f"\n\nREFERENCES: {self.references}")
+        #if self.references:
+        #    parts.append(f"\n\nREFERENCES: {self.references}")
 
         parts.append(f"\n\nSOURCE: {self.source}")
         
         if mention_splits and has_multiple_fragments:
             parts.append(f"\tFRAGMENT: {self.fragment_num}/{self.total_fragments}")
+            
         
         parts.append("\n")
         
         return "\n".join(parts)
     
-
-    @staticmethod
-    def calculate_adjusted_chunk_size(
-        tokenizer,
-        max_chunk_size: int,
-        title: str | None = None,
-        abstract: str | None = None,
-        source: str | None = None,
-        references: str | None = None
-    ) -> int:
-        """
-        Calculate the adjusted chunk size accounting for metadata tokens.
-        
-        Args:
-            tokenizer: The tokenizer to use for token counting
-            max_chunk_size: Original maximum chunk size
-            title: Optional title text
-            abstract: Optional abstract text
-            source: Optional source identifier
-            
-        Returns:
-            Adjusted maximum chunk size accounting for metadata
-        """
-        # Build sample metadata text
-        metadata_text = ""
-        if title:
-            metadata_text += f"TITLE: {title}\n"
-        if abstract:
-            metadata_text += f"ABSTRACT: {abstract}\n"
-        if references:
-            metadata_text += f"\n\nREFERENCES: {references}"
-        if source:
-            metadata_text += f"\n\nSOURCE: {source}"
-        metadata_text += "\tFRAGMENT: 999/999\n"  # Account for worst-case fragment notation
-        
-        # Calculate tokens for metadata
-        metadata_tokens = len(tokenizer.tokenize(metadata_text))
-        
-        # Return adjusted size
-        return max_chunk_size - metadata_tokens

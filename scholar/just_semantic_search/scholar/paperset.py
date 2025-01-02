@@ -3,7 +3,7 @@ import typer
 import polars as pl
 from pathlib import Path
 from typing import Optional, TypeVar
-from just_semantic_search.article_semantic_splitter import ArticleSemanticParagraphSplitter
+from just_semantic_search.paragraph_splitters import *
 import patito as pt
 from rich.pretty import pprint
 from just_semantic_search.utils.logs import to_nice_stdout
@@ -23,7 +23,7 @@ import time
 from pathlib import Path
 
 from eliot._output import *
-from eliot import start_task
+from eliot import Action, start_task
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 
 
@@ -74,6 +74,33 @@ def test(df_name_or_path: str = "hf://datasets/longevity-genie/tacutu_papers/tac
     pprint(frame.head(4))
 
 
+def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, rag: MeiliRAG):
+            """
+            Processes batch of papers to be added to the database"""
+            start_time = time.time()  # Start timing
+            with start_action(action_type="process batch") as action:
+                batch_documents = []
+                for paper in papers_batch:
+                    paper_start = time.time()  # Time individual paper
+                    paragraphs = paper.annotations_paragraph
+                    source = paper.externalids_doi if paper.externalids_doi else paper.externalids_pubmed
+                    documents = splitter.split(paragraphs, source=source, title=paper.title, abstract=paper.abstract, references=paper.references)
+                    batch_documents.extend(documents)
+                    token_counts = [d.token_count for d in documents]
+                    paper_time = time.time() - paper_start
+                    action.log(message_type="paper_processing_time", 
+                             paper_id=source, 
+                             time=paper_time)
+                rag.add_documents(batch_documents)
+                
+                batch_time = time.time() - start_time
+                action.add_success_fields(
+                    batch_size=len(batch_documents),
+                    batch_processing_time=batch_time,
+                    avg_time_per_paper=batch_time/len(papers_batch)
+                )
+            return batch_documents
+
 
 @app.command()
 def index(
@@ -87,7 +114,9 @@ def index(
     ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running"),
     recreate_index: bool = typer.Option(False, "--recreate-index", "-r", help="Recreate the index if it already exists"),
     offset: int = typer.Option(0, "--offset", "-o", help="Offset for the index"),
-    limit: Optional[int] = typer.Option(10, "--limit", "-l", help="Limit for the index")
+    limit: Optional[int] = typer.Option(10, "--limit", "-l", help="Limit for the index"),
+    similarity_threshold: float = typer.Option(None, "--semantic-similarity-threshold", "-s", help="Semantic similarity threshold for the index"),
+    batch_size: int = typer.Option(100, "--batch-size", "-b", help="Batch size for the index"),
 ) -> None:
     """Create and configure a MeiliRAG index."""
     if api_key is None:
@@ -105,7 +134,10 @@ def index(
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(project_dir, host, port)
         #splitter = DocumentParagraphSplitter(model=model, batch_size=32, normalize_embeddings=False) 
-        splitter = ArticleSemanticParagraphSplitter(model=model, batch_size=32, normalize_embeddings=False)
+        if similarity_threshold is None:
+            splitter = ArticleParagraphSplitter(model=model, batch_size=64, normalize_embeddings=False) 
+        else:   
+            splitter = ArticleSemanticParagraphSplitter(model=model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold) 
         config = MeiliConfig(host=host, port=port, api_key=api_key)
         rag = MeiliRAG(index_name, splitter.model_name, config, 
                     create_index_if_not_exists=True, 
@@ -113,17 +145,23 @@ def index(
         cols = SCHOLAR_MAIN_COLUMNS
         frame = pl.read_parquet(df_name_or_path, columns=cols).slice(offset=offset, length=limit)
         df = pt.DataFrame[Paper](frame).set_model(Paper)
-        for paper in df.iter_models():
-            paragraphs = paper.annotations_paragraph
-            source = paper.externalids_doi if paper.externalids_doi else paper.externalids_pubmed
-            action.log(message_type="splitting_paper", source=source, max_tokens=splitter.max_seq_length)
-            documents = splitter.split(paragraphs, source=source)
-            token_counts = [d.token_count for d in documents]
-            action.log(message_type="splitting_paper_done", count=len(documents), token_counts=token_counts)
-            #result = rag.add_documents_sync(documents)
-            #print(result)
-        #documents = splitter.split_df(df)
-        #rag.add_documents_sync(documents)
+
+        
+
+       
+        
+        # Process papers in batches
+        papers = list(df.iter_models())
+        if not papers:
+            action.log(message_type="no_papers_to_process")
+            return
+            
+        # If we have fewer papers than batch_size, process them all at once
+        batch_size = min(batch_size, len(papers))
+        for i in range(0, len(papers), batch_size):
+            batch = papers[i:i + batch_size]
+            process_batch(batch, splitter, rag)
+        action.log(message_type="papers_processed", papers_processed=limit, start_offset=offset)
 
 
 

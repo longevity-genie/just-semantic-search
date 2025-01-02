@@ -1,8 +1,6 @@
 from typing import Optional, List
 from pydantic import Field
 from just_semantic_search.document import ArticleDocument
-from just_semantic_search.semanic_splitter import DEFAULT_SIMILARITY_THRESHOLD, ParagraphSemanticSplitter
-from sentence_transformers import SentenceTransformer
 import patito as pt
 
 
@@ -76,6 +74,25 @@ class Paper(pt.Model):
     annotations_paragraph: Optional[List[str]] = Field(default=None)
     annotations_bibref: Optional[List[str]] = Field(default=None)
     annotations_bibentry: Optional[List[str]] = Field(default=None)
+
+    @property
+    def title(self) -> str:
+        return self.annotations_title[0] if self.annotations_title else None
+    
+    @property
+    def abstract(self) -> str:
+        return self.annotations_abstract[0] if self.annotations_abstract else None
+    
+    @property
+    def references(self) -> Optional[str]:
+        if self.annotations_bibentry is None or self.annotations_bibref is None:
+            return None
+        result_list = [f"{ref} {entry}" for ref, entry in zip(self.annotations_bibref, self.annotations_bibentry)]
+        return '\n'.join(result_list)
+    
+    @property
+    def references_entries(self) -> List[str]:
+        return self.annotations_bibentry if self.annotations_bibentry else None
     
 
     def to_article_document(self) -> ArticleDocument:
