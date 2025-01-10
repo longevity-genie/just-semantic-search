@@ -26,7 +26,7 @@ def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", po
         # Navigate to the services/meili directory
         #meili_service_dir = project_root / "services" / "meili"
         
-        with action.start_action(action_type="docker_cleanup") as cleanup_action:
+        with start_action(action_type="docker_cleanup") as cleanup_action:
             # Stop and remove existing container if it exists
             result = subprocess.run(
                 ["docker", "compose", "down"] if not old_docker_compose else ["docker-compose", "down"], 
@@ -54,7 +54,7 @@ def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", po
             )
         
         # Start the container using docker compose
-        with action.start_action(action_type="docker_startup") as startup_action:
+        with start_action(action_type="docker_startup") as startup_action:
             process = subprocess.Popen(
                 ["docker", "compose", "up"],
                 cwd=meili_service_dir,
@@ -67,7 +67,7 @@ def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", po
             time.sleep(4)
 
         # Wait for MeiliSearch to be ready
-        with action.start_action(action_type="wait_for_healthy") as health_action:
+        with start_action(action_type="wait_for_healthy") as health_action:
             max_retries = 30
             for i in range(max_retries):
                 try:

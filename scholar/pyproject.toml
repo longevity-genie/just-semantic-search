@@ -20,7 +20,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.14"
+python = ">=3.10,<3.14"
 transformers = ">=4.44.2"
 scholarly = ">=1.7.11"
 triton = ">=2.0.0"
@@ -34,7 +34,7 @@ pyfunctional = ">=1.5.0"
 just-semantic-search = "*"
 just-semantic-search-meili = "*"
 patito=">=0.8.3"
-
+seaborn=">=0.13.2"
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
 build-backend = "poetry.core.masonry.api" 
