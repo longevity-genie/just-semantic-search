@@ -20,7 +20,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.14"
+python = ">=3.10,<3.14"
 transformers = ">=4.44.2"
 meilisearch-python-sdk = ">=3.6.2"
 triton = ">=2.0.0"

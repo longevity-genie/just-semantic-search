@@ -1,4 +1,6 @@
 from sentence_transformers import SentenceTransformer
+import numpy as np
+from typing import List
 
 
 def get_sentence_transformer_model_name(model: SentenceTransformer) -> str | None:

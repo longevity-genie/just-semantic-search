@@ -102,7 +102,7 @@ def index_folder(
     api_key: str = typer.Option(None, "--api-key", "-k"),
     skip_parsing: bool = typer.Option(False, "--skip-parsing", "-s"),
     test: bool = typer.Option(True, "--test", "-t", help="Test the index"),
-    ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running")
+    ensure_server: bool = typer.Option(False, "--ensure-server", "-e", help="Ensure Meilisearch server is running")
 ) -> None:
     """Create and configure a MeiliRAG index."""
     if api_key is None:

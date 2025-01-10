@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.14"
+python = ">=3.10,<3.14"
 just-semantic-search = { path = "./core", develop = true }
 just-semantic-search-meili = { path = "./meili", develop = true }
 just-semantic-search-scholar = { path = "./scholar", develop = true }
