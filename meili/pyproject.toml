@@ -22,7 +22,7 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.10,<3.14"
 transformers = ">=4.44.2"
-meilisearch-python-sdk = ">=3.6.2"
+meilisearch-python-sdk = ">=4.0.0"
 triton = ">=2.0.0"
 sentence-transformers = ">=2.2.2"
 typer = ">=0.9.0"

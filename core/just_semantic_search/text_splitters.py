@@ -36,6 +36,9 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     write_token_counts: bool = Field(default=True)
     batch_size: int = Field(default=32)
     normalize_embeddings: bool = Field(default=False)
+    extra_embed_arguments: dict = Field(default_factory=dict)
+    
+    
     
     @property
     def document_type(self) -> type[IDocument]:
@@ -183,7 +186,10 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
         )
             
         return batches
-
+    
+    @abstractmethod
+    def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
+        pass
 
 
 class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
@@ -211,8 +217,9 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
         
 
         # Generate embeddings if requested
-        vectors = self.model.encode(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings) if embed else [None] * len(text_chunks)
-        
+        #vectors = self.model.encode(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings) if embed else [None] * len(text_chunks)
+        vectors  = self.embed_document(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings)
+
         # Create documents using the document_type property
         return [self.document_type.model_validate({
             'text': text,
@@ -226,8 +233,13 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
     def _content_from_path(self, file_path: Path) -> str:
         return file_path.read_text(encoding="utf-8")
     
-    def _encode(self, text: str) -> np.ndarray:
-        return self.model.encode(text, convert_to_numpy=True)
+    def embed_document(self, text: str, **kwargs) -> np.ndarray:
+        kwargs.update(self.extra_embed_arguments)
+        return self.model.encode(text, convert_to_numpy=True, **kwargs)
+    
+    def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
+        kwargs.update(self.extra_embed_arguments)
+        return self.model.encode(content, convert_to_numpy=True, **kwargs)
     
 
 # Option 1: Type alias
@@ -242,6 +254,8 @@ DEFAULT_MINIMAL_TOKENS = 500
 class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
     similarity_threshold: float = Field(default=DEFAULT_SIMILARITY_THRESHOLD)
     min_token_count: int = Field(default=DEFAULT_MINIMAL_TOKENS)
+    extra_separate_arguments: dict = Field(default_factory=dict)
+    
 
     """
     Text Splitting Logic in SemanticSplitter
@@ -477,10 +491,11 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
         return chunks
 
 
-    def similarity_batch(self, texts: List[str]) -> np.ndarray:
+    def similarity_batch(self, texts: List[str], **kwargs) -> np.ndarray:
         """Calculate similarity matrix for a batch of texts"""
         # Encode all texts at once
-        embeddings = self.model.encode(texts, convert_to_numpy=True)
+        kwargs.update(self.extra_separate_arguments)
+        embeddings = self.model.encode(texts, convert_to_numpy=True, **kwargs)
         # Calculate similarity matrix
         return cosine_similarity(embeddings)
     

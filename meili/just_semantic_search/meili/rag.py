@@ -1,3 +1,4 @@
+from just_semantic_search.embeddings import EmbeddingModel
 from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
 import os
@@ -51,7 +52,7 @@ class MeiliRAG:
     def __init__(
         self,
         index_name: str, 
-        model_name: str,
+        model: EmbeddingModel,
         config: MeiliConfig,
         create_index_if_not_exists: bool = True,
         recreate_index: bool = False, 
@@ -74,7 +75,11 @@ class MeiliRAG:
             self.client_async  = AsyncClient(config.get_url(), config.api_key)
             self.client = Client(config.get_url(), config.api_key)
             
-            self.model_name = model_name
+            model_value = model.value
+            if "/" in model_value or "\\" in model_value:
+                self.model_name = model_value.split("/")[-1].split("\\")[-1]
+            else:
+                self.model_name = model_value
             self.index_name = index_name
             self.primary_key = primary_key
             self.searchable_attributes = searchable_attributes
