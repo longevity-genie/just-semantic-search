@@ -1,7 +1,7 @@
 services:
   meilisearch:
     container_name: meilisearch
-    image: getmeili/meilisearch:latest
+    image: getmeili/meilisearch:v1.12.3 # v1.12.3 is the latest version at the time of writing
     environment:
       - http_proxy
       - https_proxy

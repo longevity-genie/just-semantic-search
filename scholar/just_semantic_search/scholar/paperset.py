@@ -117,7 +117,7 @@ def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, ra
 def index(
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
     df_name_or_path: str = typer.Option("hf://datasets/longevity-genie/tacutu_papers/tacutu_pubmed.parquet", "--df-name-or-path", "-d"),
-    model_name: str = typer.Option("gte-large", "--model-name", "-m"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.GTE_LARGE.value, "--model", "-m", help="Embedding model to use"),
     host: str = typer.Option("127.0.0.1", "--host"),
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
@@ -136,24 +136,19 @@ def index(
     if api_key is None:
         api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 
-    if "gte" in model_name:
-        model: SentenceTransformer = load_gte_large()
-        model_name = get_sentence_transformer_model_name(model)
-    else:
-        raise ValueError(f"Model {model_name} not found!")
     
     with start_task(action_type="index_paperset", 
-                    index_name=index_name, model_name=model_name, host=host, port=port, api_key=api_key, recreate_index=recreate_index, test=test, ensure_server=ensure_server) as action:
+                    index_name=index_name, model=model, host=host, port=port, api_key=api_key, recreate_index=recreate_index, test=test, ensure_server=ensure_server) as action:
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(project_dir, host, port)
-        #splitter = DocumentParagraphSplitter(model=model, batch_size=32, normalize_embeddings=False) 
+        sentence_transformer_model = load_sentence_transformer_from_enum(model)
         if similarity_threshold is None:
-            splitter = ArticleParagraphSplitter(model=model, batch_size=64, normalize_embeddings=False) 
+            splitter = ArticleParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False) 
         else:   
-            splitter = ArticleSemanticParagraphSplitter(model=model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold) 
+            splitter = ArticleSemanticParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold) 
         config = MeiliConfig(host=host, port=port, api_key=api_key)
-        rag = MeiliRAG(index_name, splitter.model_name, config, 
+        rag = MeiliRAG(index_name, model, config, 
                     create_index_if_not_exists=True, 
                     recreate_index=recreate_index)
         cols = SCHOLAR_MAIN_COLUMNS

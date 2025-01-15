@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from typing import List, Optional
-from just_semantic_search.text_splitter import TextSplitter
+from just_semantic_search.text_splitters import TextSplitter
 from pathlib import Path
 from just_semantic_search.document import Document, ArticleDocument
 # Add at the top of the file, after imports
