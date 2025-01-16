@@ -1,3 +1,4 @@
+from pydantic import BaseModel, Field
 import typer
 from sentence_transformers import SentenceTransformer
 from pprint import pprint
@@ -13,6 +14,8 @@ def load_auto_model_tokenizer(model_name_or_path: str, trust_remote_code: bool =
 def load_sentence_transformer_model(model_name_or_path: str) -> SentenceTransformer:
     model = SentenceTransformer(model_name_or_path, trust_remote_code=True)
     return model
+
+
 
 class EmbeddingModel(Enum):
     GTE_LARGE = "Alibaba-NLP/gte-large-en-v1.5"
@@ -42,6 +45,33 @@ def load_model_from_enum(model: EmbeddingModel) -> Union[SentenceTransformer, Tu
     if model in [EmbeddingModel.MEDCPT_QUERY, EmbeddingModel.MEDCPT_ARTICLE]:
         return load_auto_model_tokenizer(model.value)
     return load_sentence_transformer_model(model.value)
+
+
+class EmbeddingModelParams(BaseModel):
+    
+    retrival_passage: dict = Field(default_factory=dict, description="Used for passage embeddings in asymmetric retrieval tasks")
+    retrival_query: dict = Field(default_factory=dict, description="Used for query embeddings in asymmetric retrieval tasks")
+    separatation: dict = Field(default_factory=dict, description="Used for embeddings in clustering and re-ranking applications")
+    classification: dict = Field(default_factory=dict, description="Used for embeddings in classification tasks")
+    text_matching: dict = Field(default_factory=dict, description="Used for embeddings in tasks that quantify similarity between two texts, such as STS or symmetric retrieval tasks")
+
+def load_sentence_transformer_params_from_enum(model: EmbeddingModel) -> SentenceTransformer:
+    if model in [EmbeddingModel.JINA_EMBEDDINGS_V3]:
+        """
+        retrieval.query: Used for query embeddings in asymmetric retrieval tasks
+        retrieval.passage: Used for passage embeddings in asymmetric retrieval tasks
+        separation: Used for embeddings in clustering and re-ranking applications
+        classification: Used for embeddings in classification tasks
+        text-matching: Used for embeddings in tasks that quantify similarity between two texts, such as STS or symmetric retrieval tasks
+        """
+        return EmbeddingModelParams(
+            retrival_passage={"task": "retrieval.passage"},
+            retrival_query={"task": "retrieval.query"},
+            separatation={"task": "retrieval.split"},
+            classification={"task": "classification"},
+            text_matching={"task": "text-matching"}
+        )
+    else: EmbeddingModelParams()
 
 def load_sentence_transformer_from_enum(model: EmbeddingModel) -> SentenceTransformer:
     """

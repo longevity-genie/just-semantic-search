@@ -1,3 +1,4 @@
+from just_semantic_search.embeddings import EmbeddingModelParams
 from sentence_transformers import SentenceTransformer
 from typing import List, TypeAlias, TypeVar, Generic, Optional, Any
 import numpy as np
@@ -36,8 +37,8 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     write_token_counts: bool = Field(default=True)
     batch_size: int = Field(default=32)
     normalize_embeddings: bool = Field(default=False)
-    extra_embed_arguments: dict = Field(default_factory=dict)
-    
+    #extra_embed_arguments: dict = Field(default_factory=dict)
+    model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams)
     
     
     @property
@@ -52,7 +53,8 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
         if self.max_seq_length is None:
             self.max_seq_length = self.model.max_seq_length
         if self.model_name is None:
-            self.model_name = get_sentence_transformer_model_name(self.model)
+            model_value = get_sentence_transformer_model_name(self.model)
+            self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
 
     @abstractmethod
     def split(self, content: CONTENT, embed: bool = True, source: str | None = None, **kwargs) -> List[IDocument]:
@@ -187,9 +189,10 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
             
         return batches
     
-    @abstractmethod
+    
     def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
-        pass
+        kwargs.update(self.model_params.retrival_passage)
+        return self.model.encode(content, convert_to_numpy=True, **kwargs)
 
 
 class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
@@ -217,8 +220,7 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
         
 
         # Generate embeddings if requested
-        #vectors = self.model.encode(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings) if embed else [None] * len(text_chunks)
-        vectors  = self.embed_document(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings)
+        vectors  = self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
 
         # Create documents using the document_type property
         return [self.document_type.model_validate({
@@ -233,13 +235,6 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
     def _content_from_path(self, file_path: Path) -> str:
         return file_path.read_text(encoding="utf-8")
     
-    def embed_document(self, text: str, **kwargs) -> np.ndarray:
-        kwargs.update(self.extra_embed_arguments)
-        return self.model.encode(text, convert_to_numpy=True, **kwargs)
-    
-    def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
-        kwargs.update(self.extra_embed_arguments)
-        return self.model.encode(content, convert_to_numpy=True, **kwargs)
     
 
 # Option 1: Type alias
@@ -312,16 +307,17 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
         )
         
         # Generate embeddings if requested
-        vectors = self.model.encode(text_chunks) if embed else [None] * len(text_chunks)
+        vectors = self.embed_content(text_chunks,  batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
         
         # Create Document objects
         return [Document(text=text, vectors={ self.model_name: vec }, source=source) for text, vec in zip(text_chunks, vectors)]
 
 
-    def similarity(self, text1: str, text2: str) -> float:
+    def similarity(self, text1: str, text2: str, **kwargs) -> float:
+        kwargs.update(self.model_params.separatation)
         try:
-            vec1 = self.model.encode(text1, convert_to_numpy=True).reshape(1, -1)
-            vec2 = self.model.encode(text2, convert_to_numpy=True).reshape(1, -1)
+            vec1 = self.model.encode(text1, convert_to_numpy=True, **kwargs).reshape(1, -1)
+            vec2 = self.model.encode(text2, convert_to_numpy=True, **kwargs).reshape(1, -1)
             return cosine_similarity(vec1, vec2)[0][0]
         except Exception as e:
             # Log error and return minimum similarity to force split
@@ -494,7 +490,7 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
     def similarity_batch(self, texts: List[str], **kwargs) -> np.ndarray:
         """Calculate similarity matrix for a batch of texts"""
         # Encode all texts at once
-        kwargs.update(self.extra_separate_arguments)
+        kwargs.update(self.model_params.separatation)
         embeddings = self.model.encode(texts, convert_to_numpy=True, **kwargs)
         # Calculate similarity matrix
         return cosine_similarity(embeddings)
@@ -506,25 +502,6 @@ SemanticDocumentSplitter: TypeAlias = SemanticSplitter[Document]
 
 class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
 
-    def __init__(
-        self, 
-        model: SentenceTransformer,
-        similarity_threshold: float = DEFAULT_SIMILARITY_THRESHOLD,
-        max_seq_length: Optional[int] = None,
-        min_token_count: int = DEFAULT_MINIMAL_TOKENS,
-        tokenizer: Optional[PreTrainedTokenizer] = None,
-        model_name: Optional[str] = None,
-        write_token_counts: bool = True
-    ):
-        if tokenizer is None:
-            tokenizer = model.tokenizer
-        
-        super().__init__(model, similarity_threshold=similarity_threshold, 
-                         max_seq_length=max_seq_length, 
-                         min_token_count=min_token_count, 
-                         tokenizer=tokenizer, 
-                         model_name=model_name, 
-                         write_token_counts=write_token_counts)
 
     def split(
         self, 
@@ -584,7 +561,7 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.model.encode([doc.content for doc in documents])
+            embeddings = self.embed_content([doc.content for doc in documents])
             for doc, embedding in zip(documents, embeddings):
                 doc = doc.with_vector(self.model_name, embedding)
 

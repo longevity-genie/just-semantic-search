@@ -47,15 +47,21 @@ class Document(BaseModel):
         """Add a vector to the document
         
         Args:
-            embedder_name: Name of the embedder used to generate the vector
+            embedder_name: Name of the embedder used to generate the vector. If it contains '/',
+                          only the last segment will be used (e.g., 'model/name' becomes 'name')
             vector: Vector to add, can be list of floats or numpy array
         """
+        
         if embedder_name is None or vector is None:
             return self
         
+        # Extract last segment of embedder_name if it contains '/'
+        processed_name = embedder_name.split('/')[-1]
+        
         if isinstance(vector, np.ndarray):
             vector = vector.tolist()
-        self.vectors[embedder_name] = vector
+        self.vectors[processed_name] = vector
+
         return self
 
    

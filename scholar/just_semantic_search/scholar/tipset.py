@@ -3,13 +3,10 @@ from typing import TypeVar
 import typer
 import polars as pl
 from pathlib import Path
-from typing import Optional, TypeVar
+from typing import TypeVar
 from just_semantic_search.paragraph_splitters import *
 import patito as pt
-from rich.pretty import pprint
 from just_semantic_search.utils.logs import to_nice_file, to_nice_stdout
-from just_semantic_search.utils.models import get_sentence_transformer_model_name
-from sentence_transformers import SentenceTransformer
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path
@@ -25,11 +22,10 @@ import time
 from pathlib import Path
 
 from eliot._output import *
-from eliot import Action, start_task
+from eliot import start_task
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 
 
-from just_semantic_search.scholar.papers import SCHOLAR_MAIN_COLUMNS, Paper
 
 
 project_dir = Path(__file__).parent.parent.parent.parent
@@ -134,7 +130,7 @@ def data_frames(parsed: Path = Path("/home/antonkulaga/sources/just-semantic-sea
 def index(
     index_name: str = typer.Option("productivity", "--index-name", "-n"),
     parsed: Path = typer.Option("/home/antonkulaga/sources/just-semantic-search/data/productivity/parsed", "--parsed", "-p"),
-    model_name: str = typer.Option("gte-large", "--model-name", "-m"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     host: str = typer.Option("127.0.0.1", "--host"),
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
@@ -144,36 +140,36 @@ def index(
     similarity_threshold: float = typer.Option(0.8, "--similarity-threshold", "-s", help="Semantic similarity threshold for the index")
 ) -> None:
     """Create and configure a MeiliRAG index."""
-    start_index_time = time.time()  # Add this line here
-    total_batches = 0  # Keep track of total batches
+    start_index_time = time.time()
+    total_batches = 0
 
     if api_key is None:
         api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 
-    if "gte" in model_name:
-        model: SentenceTransformer = load_gte_large()
-        model_name = get_sentence_transformer_model_name(model)
-    else:
-        raise ValueError(f"Model {model_name} not found!")
+    transformer_model = load_sentence_transformer_from_enum(model)
     
-    ###
     with start_task(action_type="index_paperset", 
-                    index_name=index_name, model_name=model_name, host=host, port=port, api_key=api_key, recreate_index=recreate_index, test=test, ensure_server=ensure_server) as action:
+                    index_name=index_name, model_name=model, host=host, port=port, api_key=api_key, recreate_index=recreate_index, test=test, ensure_server=ensure_server) as action:
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(project_dir, host, port)
-        #splitter = DocumentParagraphSplitter(model=model, batch_size=32, normalize_embeddings=False) 
-        splitter = ParagraphSemanticDocumentSplitter(model=model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold) 
-        config = MeiliConfig(host=host, port=port, api_key=api_key)
-        rag = MeiliRAG(index_name, splitter.model_name, config, 
-                    create_index_if_not_exists=True, 
-                    recreate_index=recreate_index)
+
+        splitter = ParagraphSemanticDocumentSplitter(model=transformer_model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold)
+        
+        rag = MeiliRAG(
+            index_name=index_name,
+            model=model,
+            host=host,
+            port=port,
+            api_key=api_key,
+            create_index_if_not_exists=True,
+            recreate_index=recreate_index
+        )
         
         dfs = data_frames(parsed)
         for df in dfs:
             process_batch(df, splitter, rag)
-            total_batches += 1  # Increment batch counter
-            
+            total_batches += 1
             
         total_time = time.time() - start_index_time
         hours = int(total_time // 3600)
@@ -188,7 +184,6 @@ def index(
             total_time_seconds=seconds,
             total_time_str=f"{hours:02d}:{minutes:02d}:{seconds:02d}"
         )
-    ###
 
 
 
