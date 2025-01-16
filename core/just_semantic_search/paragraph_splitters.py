@@ -65,7 +65,7 @@ class ParagraphTextSplitter(AbstractSplitter[List[str], IDocument], Generic[IDoc
             chunk_token_counts.append(current_token_count)
 
         # Generate embeddings if requested
-        vectors = self.model.encode(chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings) if embed else [None] * len(chunks)
+        vectors = self.embed_content(chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(chunks)
         
         # Create documents
         results = [self.document_type.model_validate({
@@ -133,10 +133,11 @@ class ParagraphSemanticSplitter(ParagraphTextSplitter[IDocument], Generic[IDocum
             similarity = self.similarity(current_text, new_paragraph)
             return similarity >= self.similarity_threshold
 
-    def similarity(self, text1: str, text2: str) -> float:
+    def similarity(self, text1: str, text2: str, **kwargs) -> float:
+        kwargs.update(self.model_params.separatation)
         try:
-            vec1 = self.model.encode(text1, convert_to_numpy=True).reshape(1, -1)
-            vec2 = self.model.encode(text2, convert_to_numpy=True).reshape(1, -1)
+            vec1 = self.model.encode(text1, convert_to_numpy=True, **kwargs).reshape(1, -1)
+            vec2 = self.model.encode(text2, convert_to_numpy=True, **kwargs).reshape(1, -1)
             return util.cos_sim(vec1, vec2)[0][0]
         except Exception as e:
             print(f"Error calculating similarity: {e}")

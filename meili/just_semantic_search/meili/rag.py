@@ -1,11 +1,9 @@
-from just_semantic_search.embeddings import EmbeddingModel
+from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_params_from_enum
 from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
-import os
-from dotenv import load_dotenv
 from just_semantic_search.meili.rag import *
 import requests
-from typing import List, Dict, Any, Literal, Mapping, Optional, Union
+from typing import List, Dict, Any, Literal, Optional, Union
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
 
@@ -20,76 +18,78 @@ from eliot import start_action, log_message
 from sentence_transformers import SentenceTransformer
 
 
-class MeiliConfig(BaseModel):
-    host: str = Field(default="127.0.0.1", description="Meilisearch host")
-    port: int = Field(default=7700, description="Meilisearch port")
-    api_key: Optional[str] = Field(default="fancy_master_key", description="Meilisearch API key")
+class MeiliRAG(BaseModel):
+    # Configuration fields
+    host: str = Field(default="127.0.0.1", description="Meilisearch host address")
+    port: int = Field(default=7700, description="Meilisearch port number")
+    api_key: Optional[str] = Field(default="fancy_master_key", description="Meilisearch API key for authentication")
     
-    def get_url(self) -> str:
-        return f'http://{self.host}:{self.port}'
-    
+    # RAG-specific fields
+    index_name: str = Field(description="Name of the Meilisearch index")
+    model: EmbeddingModel = Field(description="Embedding model to use for vector search")
+    embedding_model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams, description="Embedding model parameters")
+    create_index_if_not_exists: bool = Field(default=True, description="Create index if it doesn't exist")
+    recreate_index: bool = Field(default=False, description="Force recreate the index even if it exists")
+    searchable_attributes: List[str] = Field(
+        default=['title', 'abstract', 'text', 'content', 'source'],
+        description="List of attributes that can be searched"
+    )
+    primary_key: str = Field(default="hash", description="Primary key field for documents")
+
+    # Private fields for internal state
+    model_name: Optional[str] = Field(default=None, exclude=True)
+    client: Optional[Client] = Field(default=None, exclude=True)
+    client_async: Optional[AsyncClient] = Field(default=None, exclude=True)
+    index_async: Optional[AsyncIndex] = Field(default=None, exclude=True)
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    def model_post_init(self, __context) -> None:
+        """Initialize clients and configure index after model initialization"""
+        # Set model name
+        model_value = self.model.value
+        self.embedding_model_params = load_sentence_transformer_params_from_enum(self.model)
+        self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
+        
+        # Initialize clients
+        base_url = f'http://{self.host}:{self.port}'
+        self.client = Client(base_url, self.api_key)
+        self.client_async = AsyncClient(base_url, self.api_key)
+        
+        # Enable vector store and initialize index
+        if not self._enable_vector_store():
+            log_message(message_type="warning", message="Failed to enable vector store feature during initialization")
+        
+        self.index_async = self.run_async(
+            self._init_index_async(self.create_index_if_not_exists, self.recreate_index)
+        )
+        self.run_async(self._configure_index())
+
     @property
     def headers(self) -> Dict[str, str]:
+        """Get headers for API requests"""
         headers = {"Content-Type": "application/json"}
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
         return headers
 
-    
-
-class MeiliRAG:
-    
     def get_loop(self):
-        """Helper to get or create an event loop"""
+        """Helper to get or create an event loop that works with both CLI and Jupyter"""
         try:
             loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            return loop
         except RuntimeError:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-        return loop
-    
-    
-    def __init__(
-        self,
-        index_name: str, 
-        model: EmbeddingModel,
-        config: MeiliConfig,
-        create_index_if_not_exists: bool = True,
-        recreate_index: bool = False, 
-        searchable_attributes: List[str] = ['title', 'abstract', 'text', 'content', 'source'],
-        primary_key: str = "hash"
-    ):
-        with start_action(action_type="init_rag") as action:
-            """Initialize MeiliRAG instance.
-            
-            Args:
-                index_name (str): Name of the Meilisearch index
-                model_name (str): Name of the embedding model
-                config (MeiliConfig): Meilisearch configuration
-                create_index_if_not_exists (bool): Create index if it doesn't exist
-                recreate_index (bool): Force recreate the index even if it exists
-            """
-            self.config = config
-            #self.client = meilisearch.Client(config.get_url(), config.api_key)
-            
-            self.client_async  = AsyncClient(config.get_url(), config.api_key)
-            self.client = Client(config.get_url(), config.api_key)
-            
-            model_value = model.value
-            if "/" in model_value or "\\" in model_value:
-                self.model_name = model_value.split("/")[-1].split("\\")[-1]
-            else:
-                self.model_name = model_value
-            self.index_name = index_name
-            self.primary_key = primary_key
-            self.searchable_attributes = searchable_attributes
-     
-            if not self._enable_vector_store():
-                action.log(message_type="warning", message="Failed to enable vector store feature during initialization")
-            self.index_async = self.get_loop().run_until_complete(
-                self._init_index_async(create_index_if_not_exists, recreate_index)
-            )
-            self.get_loop().run_until_complete(self._configure_index())
+            return loop
+
+    def run_async(self, coro):
+        """Helper method to run async code in both Jupyter and non-Jupyter environments"""
+        loop = self.get_loop()
+        return loop.run_until_complete(coro)
 
     async def delete_index_async(self):
         return await self.client_async.delete_index_if_exists(self.index_name)
@@ -142,14 +142,16 @@ class MeiliRAG:
                     )
             return await self.client_async.get_index(self.index_name)
 
+    def get_url(self) -> str:
+        return f'http://{self.host}:{self.port}'
 
 
     def _enable_vector_store(self) -> bool:
         """Enable vector store feature in Meilisearch."""
         response = requests.patch(
-                f'{self.config.get_url()}/experimental-features',
+                f'{self.get_url()}/experimental-features',
                 json={'vectorStore': True, 'metrics': True},
-                headers=self.config.headers,
+                headers=self.headers,
                 verify=True
             )
         
@@ -163,6 +165,7 @@ class MeiliRAG:
             documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
             count = len(documents)
             result =  await self.add_document_dicts_async(documents_dict, compress=compress)
+            #self.client.index(self.index_name).get_update_status(result.task_uid)
             action.add_success_fields(
                 status=result.status,
                 count = count
@@ -171,16 +174,8 @@ class MeiliRAG:
             
     
     def add_documents(self, documents: List[ArticleDocument | Document], compress: bool = False):
-        """Add documents synchronously by running the async method in the event loop.
-        
-        Args:
-            documents (List[ArticleDocument | Document]): List of documents to add
-            compress (bool): Whether to compress the documents
-            
-        Returns:
-            The result from add_documents_async
-        """
-        result = self.get_loop().run_until_complete(
+        """Add documents synchronously by running the async method in the event loop."""
+        result = self.run_async(
             self.add_documents_async(documents, compress=compress)
         )
         return result
@@ -193,8 +188,11 @@ class MeiliRAG:
             return result
 
     async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False) -> TaskInfo:
-        result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
-        return result
+        with start_action(action_type="add_document_dicts_async") as action:
+            test = documents[0]
+            result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
+            action.log(message_type="add_document_dicts_async", result=result)
+            return result
 
 
     def search(self, 
@@ -223,7 +221,8 @@ class MeiliRAG:
             show_ranking_score_details: bool = True,
             ranking_score_threshold: float | None = None,
             locales: list[str] | None = None,
-            model: Optional[SentenceTransformer] = None
+            model: Optional[SentenceTransformer] = None, 
+            **kwargs
         ) -> SearchResults:
         """Search for documents in the index.
         
@@ -245,7 +244,8 @@ class MeiliRAG:
             vector = vector.tolist()
         else:
             if model is not None:
-                vector = model.encode(query).tolist()
+                kwargs.update(self.embedding_model_params.retrival_query)
+                vector = model.encode(query, **kwargs).tolist()
         
         hybrid = Hybrid(
             embedder=self.model_name,
@@ -306,3 +306,4 @@ class MeiliRAG:
             return self.client.get_index(self.index_name)
         except MeilisearchApiError as e:
             raise ValueError(f"Index '{self.index_name}' not found: {e}")
+    

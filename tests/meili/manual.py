@@ -30,11 +30,38 @@ app = typer.Typer()
 to_nice_file(json_log, rendered_file=rendered_log)
 to_nice_stdout()
 
+@app.command()
+def embedders(
+    index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
+    host: str = typer.Option("127.0.0.1", "--host"),
+    port: int = typer.Option(7700, "--port", "-p"),
+    api_key: str = typer.Option(None, "--api-key", "-k"),
+    ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running")
+    ):
+
+    if api_key is None:
+        api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
+    if ensure_server:
+        ensure_meili_is_running(meili_service_dir, host, port)
+
+    rag = MeiliRAG(
+        index_name=index_name,
+        model=model,
+        host=host,
+        port=port,
+        api_key=api_key,
+        create_index_if_not_exists=True,
+        recreate_index=False
+    )
+    print("Embedders:")
+    pprint(rag.index.get_embedders())
+      
 
 @app.command()
 def test_search(
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
-    model: EmbeddingModel = EmbeddingModel.GTE_LARGE,
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     host: str = typer.Option("127.0.0.1", "--host"),
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
@@ -53,49 +80,78 @@ def test_search(
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(meili_service_dir, host, port)
-        config = MeiliConfig(host=host, port=port, api_key=api_key)
-        rag = MeiliRAG(index_name, model, config, 
-                    create_index_if_not_exists=True, 
-                    recreate_index=False)
-        result1 = test_rsids(rag, model=model, tell_text=tell_text, score_threshold=score_threshold)
+        rag = MeiliRAG(
+            index_name=index_name,
+            model=model,
+            host=host,
+            port=port,
+            api_key=api_key,
+            create_index_if_not_exists=True,
+            recreate_index=False
+        )
+        result1 = test_rsids(rag, transformer_model=transformer_model, tell_text=tell_text, score_threshold=score_threshold)
         action.log(message_type="test_rsids_complete")
-        result2 = test_superhero_search(rag, model=model, tell_text=tell_text, score_threshold=score_threshold)
+        result2 = test_superhero_search(rag, transformer_model=transformer_model, tell_text=tell_text, score_threshold=score_threshold)
         action.log(message_type="test_superhero_search_complete")
 
 
 @app.command("index-folder")
 def index_folder_command(
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
-    model: EmbeddingModel = typer.Option(EmbeddingModel.GTE_LARGE.value, "--model", "-m", help="Embedding model to use"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     folder: Path = typer.Option(tacutopapers_dir, "--folder", "-f", help="Folder containing documents to index"),
-    splitter: SplitterType = typer.Option(SplitterType.SEMANTIC.value, "--splitter", "-s", help="Splitter type to use"),
+    splitter: SplitterType = typer.Option(SplitterType.TEXT.value, "--splitter", "-s", help="Splitter type to use"),
     host: str = typer.Option("127.0.0.1", "--host"),
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
     skip_parsing: bool = typer.Option(False, "--skip-parsing", "-s"),
     test: bool = typer.Option(True, "--test", "-t", help="Test the index"),
-    ensure_server: bool = typer.Option(False, "--ensure-seсrver", "-e", help="Ensure Meilisearch server is running")
+    ensure_server: bool = typer.Option(False, "--ensure-seсrver", "-e", help="Ensure Meilisearch server is running"),
+    recreate_index: bool = typer.Option(False, "--recreate-index", "-r", help="Recreate index")
 ) -> None:
     with start_task(action_type="index_folder", 
                     index_name=index_name, model_name=model, host=host, port=port, 
                     api_key=api_key, skip_parsing=skip_parsing, test=test, ensure_server=ensure_server) as action:
-        rag = create_meili_rag(index_name, model, host, port, api_key, skip_parsing, ensure_server)
+        if api_key is None:
+            api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
+        if ensure_server:
+            ensure_meili_is_running(meili_service_dir, host, port)
+        
+        rag = MeiliRAG(
+            index_name=index_name,
+            model=model,
+            host=host,
+            port=port,
+            api_key=api_key,
+            create_index_if_not_exists=True,
+            recreate_index=recreate_index
+        )
         transformer_model = load_sentence_transformer_from_enum(model)
         index_folder(folder, rag, splitter, model)    
         if test:
             test_rsids(rag, model=transformer_model)
+            test_superhero_search(rag, model=transformer_model)
 
 @app.command()
 def documents(
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
     port: int = typer.Option(7700, "--port", "-p", help="Meilisearch port"),
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n", help="Name of the index to create"),
-    model_name: str = typer.Option("gte-large", "--model-name", "-m", help="Name of the model to use"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
+    ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running")
 ):
     with start_task(action_type="documents") as action:
+        if ensure_server:
             ensure_meili_is_running(meili_service_dir, host, port)
-            rag = MeiliRAG(index_name, model_name, MeiliConfig(host=host, port=port, api_key=key), 
-                    create_index_if_not_exists=True, recreate_index=False)
+            rag = MeiliRAG(
+                index_name=index_name,
+                model=model,
+                host=host,
+                port=port,
+                api_key=key,
+                create_index_if_not_exists=True,
+                recreate_index=False
+            )
             info = rag.get_documents()
             action.log(message_type="documents_list", count = len(info.results))
 
@@ -109,7 +165,7 @@ def delete_index(
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
     port: int = typer.Option(7700, "--port", "-p", help="Meilisearch port"),
     api_key: str = typer.Option(None, "--api-key", "-k", help="Meilisearch API key"),
-    model_name: str = typer.Option("gte-large", "--model-name", "-m", help="Name of the model to use"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     ensure_server: bool = typer.Option(True, "--ensure-server", "-e", help="Ensure Meilisearch server is running")
 ):
     if api_key is None:
@@ -119,11 +175,16 @@ def delete_index(
         if ensure_server:
             ensure_meili_is_running(meili_service_dir, host, port)
         
-        config = MeiliConfig(host=host, port=port, api_key=api_key)
         for index_name in index_names:
-            rag = MeiliRAG(index_name, model_name, config, 
-                        create_index_if_not_exists=True, 
-                        recreate_index=False)
+            rag = MeiliRAG(
+                index_name=index_name,
+                model=model,
+                host=host,
+                port=port,
+                api_key=api_key,
+                create_index_if_not_exists=True,
+                recreate_index=False
+            )
             rag.delete_index()
         action.log(message_type="delete_index_complete", index_names=index_names)
 
@@ -153,10 +214,13 @@ def index_file_command(
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
     port: int = typer.Option(7700, "--port", "-p", help="Meilisearch port"),
     start_server: bool = typer.Option(True, "--start-server", "-s", help="Start Meilisearch server"),
-    model: EmbeddingModel = typer.Option(EmbeddingModel.GTE_LARGE.value, "--model", "-m", help="Embedding model to use"),
+    api_key: str = typer.Option(None, "--api-key", "-k", help="Meilisearch API key"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
+    recreate_index: bool = typer.Option(True, "--recreate-index", "-r", help="Recreate index")
 ):
-    with start_task(action_type="index_file") as action:
-        index_file(filename, abstract, title, source, host, port, start_server)
+    if api_key is None:
+        api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
+    index_file(filename=filename, abstract=abstract, title=title, source=source, host=host, port=port, start_server=start_server, api_key=api_key, model=model, recreate_index=recreate_index)
 
 if __name__ == "__main__":
    app()

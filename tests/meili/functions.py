@@ -3,8 +3,6 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent)) #stupid bug fix
 
 from just_semantic_search.text_splitters import *
-from just_semantic_search.utils.models import get_sentence_transformer_model_name
-from sentence_transformers import SentenceTransformer
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path
@@ -20,12 +18,13 @@ from eliot._output import *
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from tests.config import *
 from just_semantic_search.splitter_factory import SplitterType, create_splitter
+from rich.pretty import pprint
 
 
 
 def create_meili_rag(
     index_name: str,
-    model: EmbeddingModel = EmbeddingModel.GTE_LARGE,
+    model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3,
     host: str = "127.0.0.1",
     port: int = 7700,
     api_key: Optional[str] = None,
@@ -42,10 +41,16 @@ def create_meili_rag(
             if action:
                 action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(meili_service_dir, host, port)
-        config = MeiliConfig(host=host, port=port, api_key=api_key)
-        return MeiliRAG(index_name, model, config, 
-                    create_index_if_not_exists=True, 
-                    recreate_index=not skip_parsing)
+        
+        return MeiliRAG(
+            index_name=index_name,
+            model=model,
+            host=host,
+            port=port,
+            api_key=api_key,
+            create_index_if_not_exists=True,
+            recreate_index=not skip_parsing
+        )
 
 def index_folder(
     folder: Path,
@@ -73,9 +78,10 @@ def index_file(
     host: str = "127.0.0.1",
     port: int = 7700,
     start_server: bool = True,
-    model: EmbeddingModel = EmbeddingModel.GTE_LARGE,
+    model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3,
     api_key: Optional[str] = None,
-    meili_service_dir: Path = meili_service_dir
+    meili_service_dir: Path = meili_service_dir,
+    recreate_index: bool = True
 ) -> None:
     """Implementation function to index a single file."""
     with start_action(message_type="index_file", filename=str(filename)) as action:
@@ -89,16 +95,24 @@ def index_file(
             if action:
                 action.log(message_type="starting_server", host=host, port=port)
             ensure_meili_is_running(meili_service_dir, host, port)
+        sentence_transformer_model = load_sentence_transformer_from_enum(model)
         
         if action:
-            action.log(message_type="model_device", device=str(model.device))
-        sentence_transformer_model = load_sentence_transformer_from_enum(model)
+            action.log(message_type="model_device", device=str(sentence_transformer_model.device))
 
         splitter = ArticleSemanticSplitter(model=sentence_transformer_model)
         documents = splitter.split_file(filename, embed=True, abstract=abstract, title=title, source=source)
+        pprint(documents)
 
-        config = MeiliConfig(host=host, port=port, api_key=api_key)
-        rag = MeiliRAG("test", model, config, create_index_if_not_exists=True, recreate_index=True)
+        rag = MeiliRAG(
+            index_name="test",
+            model=model,
+            host=host,
+            port=port,
+            api_key=api_key,
+            create_index_if_not_exists=True,
+            recreate_index=recreate_index
+        )
         
         # Ensure documents have vectors with the correct model name key
         for doc in documents:

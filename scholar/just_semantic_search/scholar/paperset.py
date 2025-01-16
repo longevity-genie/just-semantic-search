@@ -117,7 +117,7 @@ def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, ra
 def index(
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
     df_name_or_path: str = typer.Option("hf://datasets/longevity-genie/tacutu_papers/tacutu_pubmed.parquet", "--df-name-or-path", "-d"),
-    model: EmbeddingModel = typer.Option(EmbeddingModel.GTE_LARGE.value, "--model", "-m", help="Embedding model to use"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     host: str = typer.Option("127.0.0.1", "--host"),
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
@@ -143,10 +143,11 @@ def index(
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(project_dir, host, port)
         sentence_transformer_model = load_sentence_transformer_from_enum(model)
+        params = load_sentence_transformer_params_from_enum(model)
         if similarity_threshold is None:
-            splitter = ArticleParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False) 
+            splitter = ArticleParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False, model_params=params) 
         else:   
-            splitter = ArticleSemanticParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold) 
+            splitter = ArticleSemanticParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold, model_params=params) 
         config = MeiliConfig(host=host, port=port, api_key=api_key)
         rag = MeiliRAG(index_name, model, config, 
                     create_index_if_not_exists=True, 

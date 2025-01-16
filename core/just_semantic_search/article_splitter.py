@@ -23,12 +23,10 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
     transformer model while maintaining document attribution.
     """
 
-    def __init__(self, model: SentenceTransformer, model_name: Optional[str] = None, write_token_counts: bool = True, 
-                 batch_size: int = 32,
-                 normalize_embeddings: bool = False):
-        super().__init__(model, model_name=model_name, write_token_counts=write_token_counts, batch_size=batch_size, normalize_embeddings=normalize_embeddings)
+    def model_post_init(self, __context) -> None:
+        super().model_post_init(__context)
         # Determine the device from the model
-        self.device = next(model.parameters()).device
+        self.device = next(self.model.parameters()).device
         
         # Check for available CUDA devices
         if hasattr(torch.cuda, 'device_count'):
