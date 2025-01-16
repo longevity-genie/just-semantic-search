@@ -1,5 +1,5 @@
-from sentence_transformers import SentenceTransformer
-from typing import List, TypeAlias, TypeVar, Generic, Optional, Any
+
+from typing import List, TypeAlias, TypeVar, Generic, Optional, Any, Literal, Dict, Union
 import numpy as np
 from pathlib import Path
 import re
@@ -12,10 +12,10 @@ import time
 from eliot import log_call, log_message, start_action
 from just_semantic_search.utils.logs import LogLevel
 from just_semantic_search.utils.models import get_sentence_transformer_model_name
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, PrivateAttr
 
 from just_semantic_search.document import Document, IDocument
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, util
 from typing import Generic, List, Optional, TypeAlias
 import re
 from sklearn.metrics.pairwise import cosine_similarity
@@ -28,7 +28,7 @@ CONTENT = TypeVar('CONTENT')  # Generic content type
 
 class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     """Abstract base class for splitting content into documents with optional embedding."""
-    
+
     model: SentenceTransformer
     max_seq_length: Optional[int] = None
     tokenizer: Optional[PreTrainedTokenizer | Any] = None
@@ -36,7 +36,9 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     write_token_counts: bool = Field(default=True)
     batch_size: int = Field(default=32)
     normalize_embeddings: bool = Field(default=False)
-    
+
+    _pool : Dict[Literal["input", "output", "processes"], Any] = PrivateAttr(None)
+
     @property
     def document_type(self) -> type[IDocument]:
         return Document
@@ -44,6 +46,13 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     model_config = ConfigDict(arbitrary_types_allowed=True)  # Needed for SentenceTransformer type
 
     def model_post_init(self, __context) -> None:
+        # if torch.cuda.device_count() > 1:
+        #     print(f"Using {torch.cuda.device_count()} GPUs")
+        #     self.model = torch.nn.DataParallel(self.model)
+        #     self.model = self.model.to('cuda')
+        # Enable DataParallel for multi-GPU
+        if self._pool is None:
+            self._pool = self.model.start_multi_process_pool() #All CUDA or 4 cores
         if self.tokenizer is None:
             self.tokenizer = self.model.tokenizer
         if self.max_seq_length is None:
@@ -60,6 +69,29 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     def _content_from_path(self, file_path: Path) -> CONTENT:
         """Load content from a file path."""
         pass
+
+    def generate_embeddings(
+            self,
+            text_chunks : Union[list[str], str],
+            embed:bool=True
+    ) -> np.ndarray:
+        """
+        Generate embeddings for the given text chunks if embedding is enabled.
+
+        :param model: The model to use for generating embeddings.
+        :param text_chunks: List of text chunks to process.
+        :param batch_size: Batch size for embedding generation.
+        :param normalize_embeddings: Whether to normalize embeddings.
+        :param embed: Whether to generate embeddings. Defaults to True.
+        :return: List of embeddings or None values.
+        """
+        if isinstance(text_chunks, str):
+            sentences = [text_chunks]
+        else:
+            sentences = text_chunks
+        if embed:
+            return self.model.encode_multi_process(sentences, self._pool, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings)
+        return np.full(len(text_chunks), None, dtype=object)
 
     def split_file(self, file_path: Path | str, embed: bool = True, path_as_source: bool = True, **kwargs) -> List[IDocument]:
         """Convenience method to split content directly from a file."""
@@ -208,10 +240,9 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
         
         # Convert token chunks back to text
         text_chunks = [tokenizer.convert_tokens_to_string(chunk) for chunk in token_chunks]
-        
 
         # Generate embeddings if requested
-        vectors = self.model.encode(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings) if embed else [None] * len(text_chunks)
+        vectors = self.generate_embeddings(text_chunks,embed=embed)
         
         # Create documents using the document_type property
         return [self.document_type.model_validate({
@@ -226,8 +257,7 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
     def _content_from_path(self, file_path: Path) -> str:
         return file_path.read_text(encoding="utf-8")
     
-    def _encode(self, text: str) -> np.ndarray:
-        return self.model.encode(text, convert_to_numpy=True)
+
     
 
 # Option 1: Type alias
@@ -298,7 +328,7 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
         )
         
         # Generate embeddings if requested
-        vectors = self.model.encode(text_chunks) if embed else [None] * len(text_chunks)
+        vectors = self.generate_embeddings(text_chunks, embed=embed)
         
         # Create Document objects
         return [Document(text=text, vectors={ self.model_name: vec }, source=source) for text, vec in zip(text_chunks, vectors)]
@@ -306,9 +336,9 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
 
     def similarity(self, text1: str, text2: str) -> float:
         try:
-            vec1 = self.model.encode(text1, convert_to_numpy=True).reshape(1, -1)
-            vec2 = self.model.encode(text2, convert_to_numpy=True).reshape(1, -1)
-            return cosine_similarity(vec1, vec2)[0][0]
+            vec1 = self.generate_embeddings(text1).reshape(1, -1)
+            vec2 = self.generate_embeddings(text2).reshape(1, -1)
+            return float(util.cos_sim(vec1, vec2)[0][0])
         except Exception as e:
             # Log error and return minimum similarity to force split
             print(f"Error calculating similarity: {e}")
@@ -480,7 +510,7 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
     def similarity_batch(self, texts: List[str]) -> np.ndarray:
         """Calculate similarity matrix for a batch of texts"""
         # Encode all texts at once
-        embeddings = self.model.encode(texts, convert_to_numpy=True)
+        embeddings = self.generate_embeddings(texts)
         # Calculate similarity matrix
         return cosine_similarity(embeddings)
     
@@ -564,12 +594,12 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
             )
             # Add token count if enabled
             if self.write_token_counts:
-                doc.token_count = len(self.tokenizer.tokenize(doc.content))
+                doc.token_count = len(self.tokenizer.tokenize(doc.content if doc.content is not None else "None"))
             documents.append(doc)
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.model.encode([doc.content for doc in documents])
+            embeddings = self.generate_embeddings([doc.content if doc.content is not None else "None" for doc in documents], embed=embed)
             for doc, embedding in zip(documents, embeddings):
                 doc = doc.with_vector(self.model_name, embedding)
 
