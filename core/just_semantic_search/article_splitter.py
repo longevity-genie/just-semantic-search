@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from typing import List, Optional
-from just_semantic_search.text_splitter import TextSplitter
+from just_semantic_search.text_splitters import TextSplitter
 from pathlib import Path
 from just_semantic_search.document import Document, ArticleDocument
 # Add at the top of the file, after imports
@@ -91,7 +91,7 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
                 total_fragments=len(text_chunks),
                 token_count=token_counts[i] if self.write_token_counts else None
             )
-            updated_doc = doc.with_vector(self.model_name, self.model.encode(doc.content) if embed else None)
+            updated_doc = doc.with_vector(self.model_name, self.generate_embeddings(doc.content if doc.content is not None else "None", embed) if embed else None)
             if self.write_token_counts:
                 updated_doc.token_count =len(self.tokenizer.tokenize(updated_doc.content)) 
             documents.append(updated_doc)

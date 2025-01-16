@@ -85,12 +85,12 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
             )
             # Add token count if enabled
             if self.write_token_counts:
-                doc.token_count = len(self.tokenizer.tokenize(doc.content))
+                doc.token_count = len(self.tokenizer.tokenize(doc.content if doc.content is not None else "None"))
             documents.append(doc)
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.model.encode([doc.content for doc in documents])
+            embeddings = self.generate_embeddings([doc.content if doc.content is not None else "None" for doc in documents], embed=embed)
             for doc, embedding in zip(documents, embeddings):
                 doc = doc.with_vector(self.model_name, embedding)
 
@@ -219,12 +219,12 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
             )
             # Add token count if enabled
             if self.write_token_counts:
-                doc.token_count = len(self.tokenizer.tokenize(doc.content))
+                doc.token_count = len(self.tokenizer.tokenize(doc.content if doc.content is not None else "None"))
             documents.append(doc)
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.model.encode([doc.content for doc in documents])
+            embeddings = self.generate_embeddings([doc.content if doc.content is not None else "None" for doc in documents], embed=embed)
             for doc, embedding in zip(documents, embeddings):
                 doc = doc.with_vector(self.model_name, embedding)
 
