@@ -316,8 +316,8 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
     def similarity(self, text1: str, text2: str, **kwargs) -> float:
         kwargs.update(self.model_params.separatation)
         try:
-            vec1 = self.model.encode(text1, convert_to_numpy=True, **kwargs).reshape(1, -1)
-            vec2 = self.model.encode(text2, convert_to_numpy=True, **kwargs).reshape(1, -1)
+            vec1 = self.model.encode(text1, convert_to_numpy=True, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs).reshape(1, -1)
+            vec2 = self.model.encode(text2, convert_to_numpy=True, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs).reshape(1, -1)
             return cosine_similarity(vec1, vec2)[0][0]
         except Exception as e:
             # Log error and return minimum similarity to force split
@@ -561,7 +561,7 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.embed_content([doc.content for doc in documents])
+            embeddings = self.embed_content([doc.content for doc in documents], batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs)
             for doc, embedding in zip(documents, embeddings):
                 doc = doc.with_vector(self.model_name, embedding)
 

@@ -67,7 +67,7 @@ def load_sentence_transformer_params_from_enum(model: EmbeddingModel) -> Sentenc
         return EmbeddingModelParams(
             retrival_passage={"task": "retrieval.passage"},
             retrival_query={"task": "retrieval.query"},
-            separatation={"task": "retrieval.split"},
+            separatation={"task": "separation"},
             classification={"task": "classification"},
             text_matching={"task": "text-matching"}
         )

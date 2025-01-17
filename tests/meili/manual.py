@@ -105,7 +105,7 @@ def index_folder_command(
     port: int = typer.Option(7700, "--port", "-p"),
     api_key: str = typer.Option(None, "--api-key", "-k"),
     skip_parsing: bool = typer.Option(False, "--skip-parsing", "-s"),
-    test: bool = typer.Option(True, "--test", "-t", help="Test the index"),
+    test: bool = typer.Option(False, "--test", "-t", help="Test the index"),
     ensure_server: bool = typer.Option(False, "--ensure-seсrver", "-e", help="Ensure Meilisearch server is running"),
     recreate_index: bool = typer.Option(False, "--recreate-index", "-r", help="Recreate index")
 ) -> None:

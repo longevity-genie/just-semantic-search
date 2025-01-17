@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import TypeVar
+import torch
 import typer
 import polars as pl
 from pathlib import Path
@@ -63,30 +64,15 @@ pl.Config.set_fmt_str_lengths(1000)  # Increase string length in output
 app = typer.Typer()
 
 
-@app.command()
-def papers(df_name_or_path: str = "hf://datasets/longevity-genie/aging_papers_paragraphs/aging_specific_pubmed.parquet"):
-    #frame: pl.LazyFrame = pl.scan_parquet(df_name_or_path)
-    #df = pt.LazyFrame[Paper](frame).set_model(Paper)
-    frame = pl.read_parquet(df_name_or_path)
-    df = pt.DataFrame(frame).set_model(Paper)
-    results = df.head()
-    print("RESULTS:")
-    print(results)
-
-
-@app.command()
-def test(df_name_or_path: str = "hf://datasets/longevity-genie/tacutu_papers/tacutu_pubmed.parquet"):
-    cols = SCHOLAR_MAIN_COLUMNS
-    frame = pl.read_parquet(df_name_or_path, columns=cols)
-    #df = pt.DataFrame[Paper](frame).set_model(Paper)
-    #for paper in df.head().iter_models():
-    #    pprint(paper)
-    pprint(frame.head(4))
-
-
-def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, rag: MeiliRAG):
+def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, rag: MeiliRAG, clean_cuda: bool = False):
             """
             Processes batch of papers to be added to the database"""
+            if clean_cuda:
+                # Clean up CUDA memory before starting
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                    torch.cuda.memory.empty_cache()  # More thorough cleanup for newer PyTorch versions
+            
             start_time = time.time()  # Start timing
             with start_action(action_type="process batch") as action:
                 batch_documents = []
@@ -117,6 +103,10 @@ def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, ra
 def index(
     index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
     df_name_or_path: str = typer.Option("hf://datasets/longevity-genie/tacutu_papers/tacutu_pubmed.parquet", "--df-name-or-path", "-d"),
+    # use hf://datasets/longevity-genie/aging_papers_paragraphs for ageing papers
+    # use hf://datasets/longevity-genie/cultured_meat_paragraphs for cultured meat papers
+    # use hf://datasets/longevity-genie/tacutu_pubmed.parque for tacutu papers
+    
     model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     host: str = typer.Option("127.0.0.1", "--host"),
     port: int = typer.Option(7700, "--port", "-p"),
@@ -126,70 +116,98 @@ def index(
     recreate_index: bool = typer.Option(False, "--recreate-index", "-r", help="Recreate the index if it already exists"),
     offset: int = typer.Option(0, "--offset", "-o", help="Offset for the index"),
     limit: Optional[int] = typer.Option(None, "--limit", "-l", help="Limit for the index"),
-    similarity_threshold: float = typer.Option(None, "--similarity-threshold", "-s", help="Semantic similarity threshold for the index"),
+    similarity_threshold: float = typer.Option(None, "--similarity-threshold", "-s", help="Semantic similarity threshold for the index"), # so far semantic splitting is broken
+    embedding_batch_size: int = typer.Option(16, "--embedding-batch-size", "-b", help="Batch size for the index"),
     batch_size: int = typer.Option(100, "--batch-size", "-b", help="Batch size for the index"),
+    clean_cuda: bool = typer.Option(True, "--clean-cuda", "-c", help="Clean CUDA memory before starting")
 ) -> None:
     """Create and configure a MeiliRAG index."""
-    start_index_time = time.time()  # Add this line here
-    total_batches = 0  # Keep track of total batches
+    
+    start_index_time = time.time()
+    total_batches = 0
 
     if api_key is None:
         api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 
-    
     with start_task(action_type="index_paperset", 
-                    index_name=index_name, model=model, host=host, port=port, api_key=api_key, recreate_index=recreate_index, test=test, ensure_server=ensure_server) as action:
+                    index_name=index_name, 
+                    model=model, 
+                    host=host, 
+                    port=port, 
+                    api_key=api_key, 
+                    recreate_index=recreate_index, 
+                    test=test, 
+                    ensure_server=ensure_server) as action:
         if ensure_server:
             action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(project_dir, host, port)
+            
         sentence_transformer_model = load_sentence_transformer_from_enum(model)
         params = load_sentence_transformer_params_from_enum(model)
         if similarity_threshold is None:
-            splitter = ArticleParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False, model_params=params) 
+            splitter = ArticleParagraphSplitter(model=sentence_transformer_model, batch_size=embedding_batch_size, normalize_embeddings=False, model_params=params) 
         else:   
-            splitter = ArticleSemanticParagraphSplitter(model=sentence_transformer_model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold, model_params=params) 
-        config = MeiliConfig(host=host, port=port, api_key=api_key)
-        rag = MeiliRAG(index_name, model, config, 
-                    create_index_if_not_exists=True, 
-                    recreate_index=recreate_index)
-        cols = SCHOLAR_MAIN_COLUMNS
-        frame = pl.read_parquet(df_name_or_path, columns=cols).slice(offset=offset, length=limit)
-        df = pt.DataFrame[Paper](frame).set_model(Paper)
-       
-        
-        # Process papers in batches using streaming
-        papers_processed = 0
-        current_batch = []
-        
-        for paper in df.iter_models():
-            current_batch.append(paper)
-            if len(current_batch) >= batch_size:
-                process_batch(current_batch, splitter, rag)
-                papers_processed += len(current_batch)
-                total_batches += 1  # Increment batch counter
-                current_batch = []
-        
-        # Process any remaining papers
-        if current_batch:
-            process_batch(current_batch, splitter, rag)
-            papers_processed += len(current_batch)
-            total_batches += 1  # Increment batch counter
+            action.log(message_type="WARNING", similarity_threshold=similarity_threshold, warning="Semantic splitting so far is very inefficient, can go out of memory with cuda, dicrease embedding batch size 4-6 times for it")
+            splitter = ArticleSemanticParagraphSplitter(model=sentence_transformer_model, batch_size=embedding_batch_size, normalize_embeddings=False, similarity_threshold=similarity_threshold, model_params=params) 
             
-        total_time = time.time() - start_index_time
-        hours = int(total_time // 3600)
-        minutes = int((total_time % 3600) // 60)
-        seconds = int(total_time % 60)
-        
-        action.add_success_fields(
-            message_type="indexing_complete",
-            papers_processed=papers_processed,
-            total_batches=total_batches,
-            start_offset=offset,
-            total_time_hours=hours,
-            total_time_minutes=minutes,
-            total_time_seconds=seconds,
-            total_time_str=f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        rag = MeiliRAG(
+            index_name=index_name,
+            model=model,
+            host=host,
+            port=port,
+            api_key=api_key,
+            create_index_if_not_exists=True,
+            recreate_index=recreate_index
         )
+        
+        cols = SCHOLAR_MAIN_COLUMNS
+        with start_action(action_type="reading_papers", limit=limit, offset=offset) as action:
+            frame = pl.read_parquet(df_name_or_path, columns=cols).slice(offset=offset, length=limit)
+            df = pt.DataFrame[Paper](frame).set_model(Paper)
+        
+            # Process papers in batches using streaming
+            papers_processed = 0
+            current_batch = []
+            
+            for i, paper in enumerate(df.iter_models(), start=offset):
+                current_batch.append(paper)
+                if len(current_batch) >= batch_size:
+                    process_batch(current_batch, splitter, rag)
+                    papers_processed += len(current_batch)
+                    absolute_row = i + offset
+                    action.log(message_type="processing_batch", 
+                             batch_size=len(current_batch), 
+                             papers_processed=papers_processed,
+                             current_row=i, current_absolute_row = absolute_row)
+                    total_batches += 1
+                    current_batch = []
+            
+            # Process any remaining papers
+            if current_batch:
+                process_batch(current_batch, splitter, rag, clean_cuda=clean_cuda)
+                papers_processed += len(current_batch)
+                total_batches += 1
+                absolute_row = i + offset
+                action.log(message_type="processing_batch", 
+                          batch_size=len(current_batch), 
+                          papers_processed=papers_processed,
+                          current_row=i)
+                
+            total_time = time.time() - start_index_time
+            hours = int(total_time // 3600)
+            minutes = int((total_time % 3600) // 60)
+            seconds = int(total_time % 60)
+            
+            action.add_success_fields(
+                message_type="indexing_complete",
+                papers_processed=papers_processed,
+                total_batches=total_batches,
+                start_offset=offset,
+                total_time_hours=hours,
+                total_time_minutes=minutes,
+                total_time_seconds=seconds,
+                total_time_str=f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+            )
 
 
 

@@ -132,13 +132,14 @@ python test/meili/manual.py index-folder
 
 After the index is filled you can test the search cases.
 The index-folder command checks if meili serve is available and if not starts it by running ./bin/meili.sh under the hood.
+You can also add --test flat to run rsid and superhero search tests
 
 #### Test search
 
 ```bash
 python test/meili/manual.py test-search
 ```
-This test contains two cases:
+This test requires test folder to be indexed (see index-folder command) and contains two cases:
 1. RSID test
 2. Comics superheroes test
 
