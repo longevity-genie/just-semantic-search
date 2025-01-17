@@ -136,8 +136,8 @@ class ParagraphSemanticSplitter(ParagraphTextSplitter[IDocument], Generic[IDocum
     def similarity(self, text1: str, text2: str, **kwargs) -> float:
         kwargs.update(self.model_params.separatation)
         try:
-            vec1 = self.model.encode(text1, convert_to_numpy=True, **kwargs).reshape(1, -1)
-            vec2 = self.model.encode(text2, convert_to_numpy=True, **kwargs).reshape(1, -1)
+            vec1 = self.model.encode(text1, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, convert_to_numpy=True, **kwargs).reshape(1, -1)
+            vec2 = self.model.encode(text2, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, convert_to_numpy=True, **kwargs).reshape(1, -1)
             return util.cos_sim(vec1, vec2)[0][0]
         except Exception as e:
             print(f"Error calculating similarity: {e}")
