@@ -191,7 +191,6 @@ class MeiliRAG(BaseModel):
         with start_action(action_type="add_document_dicts_async") as action:
             test = documents[0]
             result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
-            action.log(message_type="add_document_dicts_async", result=result)
             return result
 
 

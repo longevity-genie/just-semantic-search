@@ -69,7 +69,6 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
                 doc.token_count = len(self.tokenizer.tokenize(doc.content))
             documents.append(doc)
         
-        # Batch encode all documents at once
         if embed:
             vectors = [self.model.encode(doc.content, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) 
                        for doc in documents]

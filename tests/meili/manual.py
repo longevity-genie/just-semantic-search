@@ -158,9 +158,9 @@ def documents(
 
 @app.command()
 def delete_index(
-    index_names: list[str] = typer.Option(
-        ["tacutopapers", "test"], "--index-name", "-n", 
-        help="Names of the indexes to delete (can specify multiple times)"
+    index_names: list[str] = typer.Argument(
+        None,
+        help="Names of the indexes to delete (space-separated list)"
     ),
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
     port: int = typer.Option(7700, "--port", "-p", help="Meilisearch port"),

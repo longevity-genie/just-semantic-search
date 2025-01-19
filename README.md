@@ -66,13 +66,13 @@ This will start a Meilisearch instance with vector search enabled and persistent
 
 ```python
 from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter
-from sentence_transformers import SentenceTransformer
+from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
 
-# Initialize model and splitter
-model = SentenceTransformer('thenlper/gte-base')
+# Initialize model using the embeddings enum (using Jina v3 by default)
+model = load_sentence_transformer_from_enum(EmbeddingModel.JINA_EMBEDDINGS_V3) #you can also use SentenceTransformer directly, we provided enums just for most popular ones
 splitter = ArticleSemanticSplitter(model)
 
-# Split document with metadata
+# Split document with metadata - embeddings will automatically use optimal parameters for passage encoding
 documents = splitter.split_file(
     "path/to/document.txt",
     embed=True,
@@ -84,30 +84,41 @@ documents = splitter.split_file(
 ### Hybrid Search with Meilisearch
 
 ```python
-from just_semantic_search.meili.rag import MeiliConfig, MeiliRAG
+from just_semantic_search.meili.rag import MeiliRAG
+from just_semantic_search.embeddings import EmbeddingModel
 
-# Configure Meilisearch
-config = MeiliConfig(
+# Initialize RAG with Jina embeddings
+rag = MeiliRAG(
+    index_name="test_index",
+    model=EmbeddingModel.JINA_EMBEDDINGS_V3,  # Uses optimal parameters for different tasks
     host="127.0.0.1",
     port=7700,
-    api_key="your_api_key"
-)
-
-# Initialize RAG
-rag = MeiliRAG(
-    "test_index",
-    "thenlper/gte-base",
-    config,
+    api_key="your_api_key",
     create_index_if_not_exists=True
 )
 
 # Add documents and search
-rag.add_documents_sync(documents)
+rag.add_documents(documents)
+
+# The search will automatically use the optimal query encoding parameters
 results = rag.search(
-    text_query="What are CAD-genes?",
-    vector=model.encode("What are CAD-genes?")
+    query="What are CAD-genes?",
+    semanticRatio=0.5  # Adjust the ratio between semantic and keyword search
 )
 ```
+
+The library uses Jina embeddings v3 by default, which automatically optimizes embedding parameters for different tasks:
+- Query encoding for search queries
+- Passage encoding for document content
+- Text matching for similarity comparisons
+- Classification for categorization tasks
+- Separation for clustering and reranking
+
+Other available models include:
+- `EmbeddingModel.GTE_LARGE` - General Text Embeddings (large)
+- `EmbeddingModel.BIOEMBEDDINGS` - Specialized for biomedical text
+- `EmbeddingModel.SPECTER` - Optimized for scientific papers
+- `EmbeddingModel.MEDCPT_QUERY` - Medical domain queries
 
 ## Project Structure
 
