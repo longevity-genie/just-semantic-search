@@ -65,38 +65,62 @@ app = typer.Typer()
 
 
 def process_batch(papers_batch: list[Paper], splitter: ParagraphTextSplitter, rag: MeiliRAG, clean_cuda: bool = False):
-            """
-            Processes batch of papers to be added to the database"""
-            if clean_cuda:
-                # Clean up CUDA memory before starting
-                if torch.cuda.is_available():
-                    torch.cuda.empty_cache()
-                    torch.cuda.memory.empty_cache()  # More thorough cleanup for newer PyTorch versions
+    """Processes batch of papers to be added to the database"""
+    with start_action(action_type="process batch") as action:
+        batch_documents = []
+        total_tokens = 0
+        batch_start = time.time()  # Move batch timing here
             
-            start_time = time.time()  # Start timing
-            with start_action(action_type="process batch") as action:
-                batch_documents = []
-                for paper in papers_batch:
-                    paper_start = time.time()  # Time individual paper
-                    paragraphs = paper.annotations_paragraph
-                    source = paper.externalids_doi if paper.externalids_doi else paper.externalids_pubmed
-                    documents = splitter.split(paragraphs, source=source, title=paper.title, abstract=paper.abstract, references=paper.references)
-                    batch_documents.extend(documents)
-                    token_counts = sum([d.token_count for d in documents])
-                    paper_time = time.time() - paper_start
-                    action.log(message_type="paper_processing_time", 
-                             paper_id=source, 
-                             time=paper_time)
-                rag.add_documents(batch_documents)
-                
-                batch_time = time.time() - start_time
-                action.add_success_fields(
-                    batch_size=len(batch_documents),
-                    batch_processing_time=batch_time,
-                    avg_time_per_paper=batch_time/len(papers_batch),
-                    total_tokens=token_counts
-                )
-            return batch_documents
+        for paper in papers_batch:
+
+            if clean_cuda:
+                # More aggressive CUDA cleanup
+                if torch.cuda.is_available():
+                    # Clear the cache
+                    torch.cuda.empty_cache()
+                    torch.cuda.memory.empty_cache()
+                    
+                    # Reset peak memory stats
+                    torch.cuda.reset_peak_memory_stats()
+                    
+                    # Force garbage collection
+                    import gc
+                    gc.collect()
+                    
+                    # Optional: wait for all CUDA operations to finish
+                    torch.cuda.synchronize()
+
+            paper_start = time.time()  # Individual paper timing
+            paragraphs = paper.annotations_paragraph
+            source = paper.externalids_doi if paper.externalids_doi else paper.externalids_pubmed
+            
+            try:
+                documents = splitter.split(paragraphs, source=source, title=paper.title, abstract=paper.abstract, references=paper.references)
+                batch_documents.extend(documents)
+                total_tokens += sum([d.token_count for d in documents])  # Fix token accumulation
+            finally:
+                # Clean up after each paper's processing, regardless of success/failure
+                if clean_cuda and torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                    torch.cuda.synchronize()
+            
+            paper_time = time.time() - paper_start
+            action.log(message_type="paper_processing_time", 
+                      paper_id=source, 
+                      time=paper_time)
+        
+        # Add all documents from the batch to the index
+        rag.add_documents(batch_documents)
+        
+        batch_time = time.time() - batch_start  # Use batch_start instead of paper_start
+        action.add_success_fields(
+            batch_size=len(batch_documents),
+            batch_processing_time=batch_time,
+            avg_time_per_paper=batch_time/len(papers_batch),
+            total_tokens=total_tokens  # Use accumulated tokens
+        )
+        
+        return batch_documents
 
 
 @app.command()
@@ -117,8 +141,8 @@ def index(
     offset: int = typer.Option(0, "--offset", "-o", help="Offset for the index"),
     limit: Optional[int] = typer.Option(None, "--limit", "-l", help="Limit for the index"),
     similarity_threshold: float = typer.Option(None, "--similarity-threshold", "-s", help="Semantic similarity threshold for the index"), # so far semantic splitting is broken
-    embedding_batch_size: int = typer.Option(16, "--embedding-batch-size", "-b", help="Batch size for the index"),
-    batch_size: int = typer.Option(100, "--batch-size", "-b", help="Batch size for the index"),
+    embedding_batch_size: int = typer.Option(8, "--embedding-batch-size", "-b", help="Batch size for the index"),
+    batch_size: int = typer.Option(10, "--batch-size", "-b", help="Batch size of papes for the index"),
     clean_cuda: bool = typer.Option(True, "--clean-cuda", "-c", help="Clean CUDA memory before starting")
 ) -> None:
     """Create and configure a MeiliRAG index."""

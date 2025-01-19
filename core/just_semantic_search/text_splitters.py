@@ -219,17 +219,17 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
         text_chunks = [tokenizer.convert_tokens_to_string(chunk) for chunk in token_chunks]
         
 
-        # Generate embeddings if requested
-        vectors  = self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
-
-        # Create documents using the document_type property
-        return [self.document_type.model_validate({
-            'text': text,
-            'vectors': {self.model_name: vec.tolist()} if vec is not None else {},
-            'source': source,
-            'token_count': len(tokens) if self.write_token_counts else None,
-            **kwargs
-        }) for text, vec in zip(text_chunks, vectors)]
+        # Generate embeddings and create documents in one go
+        return [
+            Document(
+                text=text, 
+                vectors={self.model_name: vec} if vec is not None else {}, 
+                source=source
+            ) for text, vec in zip(
+                text_chunks, 
+                self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
+            )
+        ]
     
 
     def _content_from_path(self, file_path: Path) -> str:
@@ -306,11 +306,17 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
             similarity_threshold=similarity_threshold
         )
         
-        # Generate embeddings if requested
-        vectors = self.embed_content(text_chunks,  batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
-        
-        # Create Document objects
-        return [Document(text=text, vectors={ self.model_name: vec }, source=source) for text, vec in zip(text_chunks, vectors)]
+        # Generate embeddings and create documents in one go
+        return [
+            Document(
+                text=text, 
+                vectors={self.model_name: vec} if vec is not None else {}, 
+                source=source
+            ) for text, vec in zip(
+                text_chunks, 
+                self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
+            )
+        ]
 
 
     def similarity(self, text1: str, text2: str, **kwargs) -> float:
@@ -561,9 +567,8 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.embed_content([doc.content for doc in documents], batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs)
-            for doc, embedding in zip(documents, embeddings):
-                doc = doc.with_vector(self.model_name, embedding)
+            vectors = [self.model.encode(doc.content, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) for doc in documents]
+            documents = [doc.with_vector(self.model_name, vec) for doc, vec in zip(documents, vectors)]
 
         
         return documents

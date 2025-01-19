@@ -11,8 +11,8 @@ def load_auto_model_tokenizer(model_name_or_path: str, trust_remote_code: bool =
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=trust_remote_code)
     return model, tokenizer
 
-def load_sentence_transformer_model(model_name_or_path: str) -> SentenceTransformer:
-    model = SentenceTransformer(model_name_or_path, trust_remote_code=True)
+def load_sentence_transformer_model(model_name_or_path: str, **model_kwargs) -> SentenceTransformer:
+    model = SentenceTransformer(model_name_or_path, trust_remote_code=True, **model_kwargs)
     return model
 
 
@@ -38,13 +38,14 @@ class EmbeddingModel(Enum):
         other._name_ = f"OTHER_{model_path.replace('/', '_')}"
         return other
 
-def load_model_from_enum(model: EmbeddingModel) -> Union[SentenceTransformer, Tuple[PreTrainedModel, PreTrainedTokenizer]]:
+def load_model_from_enum(model: EmbeddingModel, float16: bool = True) -> Union[SentenceTransformer, Tuple[PreTrainedModel, PreTrainedTokenizer]]:
     """
     Factory function to load a model based on the EmbeddingModel enum
     """
     if model in [EmbeddingModel.MEDCPT_QUERY, EmbeddingModel.MEDCPT_ARTICLE]:
         return load_auto_model_tokenizer(model.value)
-    return load_sentence_transformer_model(model.value)
+    model_kwargs = {"torch_dtype": "float16"} if float16 else {}
+    return load_sentence_transformer_model(model.value, **model_kwargs)
 
 
 class EmbeddingModelParams(BaseModel):
@@ -55,7 +56,7 @@ class EmbeddingModelParams(BaseModel):
     classification: dict = Field(default_factory=dict, description="Used for embeddings in classification tasks")
     text_matching: dict = Field(default_factory=dict, description="Used for embeddings in tasks that quantify similarity between two texts, such as STS or symmetric retrieval tasks")
 
-def load_sentence_transformer_params_from_enum(model: EmbeddingModel) -> SentenceTransformer:
+def load_sentence_transformer_params_from_enum(model: EmbeddingModel) -> EmbeddingModelParams:
     if model in [EmbeddingModel.JINA_EMBEDDINGS_V3]:
         """
         retrieval.query: Used for query embeddings in asymmetric retrieval tasks
@@ -71,16 +72,16 @@ def load_sentence_transformer_params_from_enum(model: EmbeddingModel) -> Sentenc
             classification={"task": "classification"},
             text_matching={"task": "text-matching"}
         )
-    else: EmbeddingModelParams()
+    return EmbeddingModelParams()  # Return empty params for other models
 
-def load_sentence_transformer_from_enum(model: EmbeddingModel) -> SentenceTransformer:
+def load_sentence_transformer_from_enum(model: EmbeddingModel, **kwargs) -> SentenceTransformer:
     """
     Factory function to load only SentenceTransformer models based on the EmbeddingModel enum.
     Raises ValueError if the model is not compatible with SentenceTransformer.
     """
     if model in [EmbeddingModel.MEDCPT_QUERY, EmbeddingModel.MEDCPT_ARTICLE]:
         raise ValueError(f"{model.name} is not compatible with SentenceTransformer")
-    return load_sentence_transformer_model(model.value)
+    return load_sentence_transformer_model(model.value, **kwargs)
 
 # You can now replace the individual loading functions with this more elegant solution
 # or keep them as convenience functions that use the enum internally

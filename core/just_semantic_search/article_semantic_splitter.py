@@ -71,9 +71,9 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         
         # Batch encode all documents at once
         if embed:
-            embeddings = self.model.encode([doc.content for doc in documents])
-            for doc, embedding in zip(documents, embeddings):
-                doc = doc.with_vector(self.model_name, embedding)
+            vectors = [self.model.encode(doc.content, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) 
+                       for doc in documents]
+            documents = [doc.with_vector(self.model_name, vec) for doc, vec in zip(documents, vectors)]
 
         
         return documents
