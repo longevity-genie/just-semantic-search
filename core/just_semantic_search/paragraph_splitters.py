@@ -64,8 +64,9 @@ class ParagraphTextSplitter(AbstractSplitter[List[str], IDocument], Generic[IDoc
             chunks.append(current_text)
             chunk_token_counts.append(current_token_count)
 
-        # Generate embeddings if requested
-        vectors = self.embed_content(chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(chunks)
+        # Generate embeddings one chunk at a time if requested
+        vectors = [self.embed_content([chunk], batch_size=1, normalize_embeddings=self.normalize_embeddings, **kwargs)[0] 
+                  for chunk in chunks] if embed else [None] * len(chunks)
         
         # Create documents
         results = [self.document_type.model_validate({

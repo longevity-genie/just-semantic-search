@@ -77,10 +77,9 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
             text_chunks.append(tokenizer.convert_tokens_to_string(chunk))
             token_counts.append(len(chunk))
         
-        # Create annotated ArticleDocument objects
-        documents = []
-        for i, chunk in enumerate(text_chunks):
-            doc = ArticleDocument(
+        # Create annotated ArticleDocument objects with vectors in one go
+        documents = [
+            ArticleDocument(
                 text=chunk,
                 title=title,
                 abstract=abstract,
@@ -88,11 +87,9 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
                 fragment_num=i + 1,
                 total_fragments=len(text_chunks),
                 token_count=token_counts[i] if self.write_token_counts else None
-            )
-            updated_doc = doc.with_vector(self.model_name, self.model.encode(doc.content) if embed else None)
-            if self.write_token_counts:
-                updated_doc.token_count =len(self.tokenizer.tokenize(updated_doc.content)) 
-            documents.append(updated_doc)
+            ).with_vector(self.model_name, self.model.encode(chunk) if embed else None)
+            for i, chunk in enumerate(text_chunks)
+        ]
         
         return documents
     
