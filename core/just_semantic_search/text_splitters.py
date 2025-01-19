@@ -320,7 +320,6 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
 
 
     def similarity(self, text1: str, text2: str, **kwargs) -> float:
-        kwargs.update(self.model_params.separatation)
         try:
             vec1 = self.model.encode(text1, convert_to_numpy=True, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs).reshape(1, -1)
             vec2 = self.model.encode(text2, convert_to_numpy=True, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs).reshape(1, -1)
