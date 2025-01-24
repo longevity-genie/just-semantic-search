@@ -17,7 +17,7 @@ LLM-agnostic semantic-search library with hybrid search support and multiple bac
 
 ## Installation
 
-Make sure you have at least Python 3.11 installed.
+Make sure you have at least Python 3.10 installed.
 
 ### Using pip
 
