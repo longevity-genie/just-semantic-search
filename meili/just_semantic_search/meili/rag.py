@@ -36,6 +36,9 @@ class MeiliRAG(BaseModel):
     )
     primary_key: str = Field(default="hash", description="Primary key field for documents")
 
+    # Add this new field near the other configuration fields
+    init_callback: Optional[callable] = Field(default=None, description="Optional callback function to run after initialization")
+
     # Private fields for internal state
     model_name: Optional[str] = Field(default=None, exclude=True)
     client: Optional[Client] = Field(default=None, exclude=True)
@@ -47,6 +50,9 @@ class MeiliRAG(BaseModel):
     def model_post_init(self, __context) -> None:
         """Initialize clients and configure index after model initialization"""
         # Set model name
+                # Add this at the end of model_post_init
+        if self.init_callback is not None:
+            self.init_callback(self)
         model_value = self.model.value
         self.embedding_model_params = load_sentence_transformer_params_from_enum(self.model)
         self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
@@ -64,6 +70,7 @@ class MeiliRAG(BaseModel):
             self._init_index_async(self.create_index_if_not_exists, self.recreate_index)
         )
         self.run_async(self._configure_index())
+        
 
     @property
     def headers(self) -> Dict[str, str]:

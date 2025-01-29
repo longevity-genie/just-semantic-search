@@ -107,7 +107,7 @@ def index_folder_command(
     skip_parsing: bool = typer.Option(False, "--skip-parsing", "-s"),
     test: bool = typer.Option(False, "--test", "-t", help="Test the index"),
     ensure_server: bool = typer.Option(False, "--ensure-seсrver", "-e", help="Ensure Meilisearch server is running"),
-    recreate_index: bool = typer.Option(False, "--recreate-index", "-r", help="Recreate index")
+    recreate_index: bool = typer.Option(True, "--recreate-index", "-r", help="Recreate index")
 ) -> None:
     with start_task(action_type="index_folder", 
                     index_name=index_name, model_name=model, host=host, port=port, 
@@ -130,6 +130,7 @@ def index_folder_command(
         index_folder(folder, rag, splitter, model)    
         if test:
             test_rsids(rag, model=transformer_model)
+            
             test_superhero_search(rag, model=transformer_model)
 
 @app.command()
@@ -221,6 +222,7 @@ def index_file_command(
     if api_key is None:
         api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
     index_file(filename=filename, abstract=abstract, title=title, source=source, host=host, port=port, start_server=start_server, api_key=api_key, model=model, recreate_index=recreate_index)
+
 
 if __name__ == "__main__":
    app()
