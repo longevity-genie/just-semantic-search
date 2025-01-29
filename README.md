@@ -3,6 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/just-semantic-search.svg)](https://badge.fury.io/py/just-semantic-search)
 [![Python Version](https://img.shields.io/pypi/pyversions/just-semantic-search.svg)](https://pypi.org/project/just-semantic-search/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Tests](https://github.com/antonkulaga/just-semantic-search/actions/workflows/test.yml/badge.svg)](https://github.com/antonkulaga/just-semantic-search/actions/workflows/test.yml)
 
 LLM-agnostic semantic-search library with hybrid search support and multiple backends.
 
@@ -45,6 +46,9 @@ cd just-semantic-search
 
 # Install dependencies and create virtual environment
 poetry install
+
+# Install Poetry Shell plugin
+poetry self add poetry-plugin-shell
 
 # Activate the virtual environment
 poetry shell
