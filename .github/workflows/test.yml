@@ -1,0 +1,63 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      meilisearch:
+        image: getmeili/meilisearch:v1.13.0-rc.0
+        env:
+          MEILI_MASTER_KEY: fancy_master_key
+          MEILI_NO_ANALYTICS: true
+          MEILI_ENV: development
+          MEILI_EXPERIMENTAL_ENABLE_METRICS: true
+          MEILI_EXPERIMENTAL_ENABLE_VECTORS: true
+        ports:
+          - 7700:7700
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install Poetry Shell plugin
+      run: poetry self add poetry-plugin-shell
+
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.create true
+        poetry config virtualenvs.in-project true
+
+    - name: Cache Poetry virtualenv
+      uses: actions/cache@v4
+      with:
+        path: ./.venv
+        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-poetry-
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Run tests
+      run: |
+        source $(poetry env info --path)/bin/activate
+        pytest
+      env:
+        MEILI_MASTER_KEY: fancy_master_key
+        MEILI_URL: http://localhost:7700

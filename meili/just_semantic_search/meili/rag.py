@@ -62,10 +62,6 @@ class MeiliRAG(BaseModel):
         self.client = Client(base_url, self.api_key)
         self.client_async = AsyncClient(base_url, self.api_key)
         
-        # Enable vector store and initialize index
-        if not self._enable_vector_store():
-            log_message(message_type="warning", message="Failed to enable vector store feature during initialization")
-        
         self.index_async = self.run_async(
             self._init_index_async(self.create_index_if_not_exists, self.recreate_index)
         )
@@ -152,19 +148,6 @@ class MeiliRAG(BaseModel):
     def get_url(self) -> str:
         return f'http://{self.host}:{self.port}'
 
-
-    def _enable_vector_store(self) -> bool:
-        """Enable vector store feature in Meilisearch."""
-        response = requests.patch(
-                f'{self.get_url()}/experimental-features',
-                json={'vectorStore': True, 'metrics': True},
-                headers=self.headers,
-                verify=True
-            )
-        
-        response.raise_for_status()
-        return True
-        return False
         
     async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
         """Add ArticleDocument objects to the index."""
@@ -179,7 +162,6 @@ class MeiliRAG(BaseModel):
             )
             return result
             
-    
     def add_documents(self, documents: List[ArticleDocument | Document], compress: bool = False):
         """Add documents synchronously by running the async method in the event loop."""
         result = self.run_async(
