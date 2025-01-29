@@ -206,3 +206,5 @@ yarn-error.log
 *.backup
 
 tmp/
+
+bin/tun.sh
