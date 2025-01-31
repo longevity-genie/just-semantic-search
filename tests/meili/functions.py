@@ -1,5 +1,7 @@
 from pathlib import Path
+import subprocess
 import sys
+import threading
 sys.path.append(str(Path(__file__).parent.parent.parent)) #stupid bug fix
 
 from just_semantic_search.text_splitters import *
@@ -86,57 +88,104 @@ def create_meili_rag(
         )
 
 def index_file(
+    rag: MeiliRAG,
     filename: Path,
     abstract: str,
     title: str,
     source: str,
-    host: str = "127.0.0.1",
-    port: int = 7700,
-    start_server: bool = True,
-    model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3,
-    api_key: Optional[str] = None,
-    meili_service_dir: Path = meili_service_dir,
-    recreate_index: bool = True
+    splitter_type: SplitterType = SplitterType.ARTICLE.value
 ) -> None:
     """Implementation function to index a single file."""
     with start_action(message_type="index_file", filename=str(filename)) as action:
         if action:
             action.log(message_type="processing_file", filename=str(filename))
         
-        if api_key is None:
-            api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
-        
-        if start_server:
-            if action:
-                action.log(message_type="starting_server", host=host, port=port)
-            ensure_meili_is_running(meili_service_dir, host, port)
-        sentence_transformer_model = load_sentence_transformer_from_enum(model)
+        sentence_transformer_model = load_sentence_transformer_from_enum(rag.model)
         
         if action:
             action.log(message_type="model_device", device=str(sentence_transformer_model.device))
 
-        splitter = ArticleSemanticSplitter(model=sentence_transformer_model)
+        splitter = create_splitter(splitter_type, sentence_transformer_model)
         documents = splitter.split_file(filename, embed=True, abstract=abstract, title=title, source=source)
-        pprint(documents)
+        action.log("documents count", documents_count=len(documents))   
 
-        rag = MeiliRAG(
-            index_name="test",
-            model=model,
-            host=host,
-            port=port,
-            api_key=api_key,
-            create_index_if_not_exists=True,
-            recreate_index=recreate_index
-        )
-        
         # Ensure documents have vectors with the correct model name key
         for doc in documents:
             if splitter.model_name not in doc.vectors:
                 if action:
                     action.log(message_type="warning", warning=f"Document missing vector for model {splitter.model_name}")
+                    
         
         rag.add_documents(documents=documents)
         time.sleep(4)  # Add 4 second delay
         test = rag.get_documents()
         if action:
             action.log(message_type="documents in index count", count=len(test.results))
+
+def simulate_meilisearch_disconnection(duration: int = 10):
+    """
+    Simulate a network disconnection for the MeiliSearch Docker container.
+
+    :param duration: Duration in seconds to keep the container disconnected.
+    """
+    def disconnect_and_reconnect():
+        container_name = "meilisearch"  # Matches the container_name in docker-compose.yaml
+        network_name = "meili_meilisearch"  # Docker Compose prefixes the network with the directory name
+        
+        try:
+            # Check if container exists and is running
+            container_check = subprocess.run(["docker", "container", "inspect", container_name], 
+                                          capture_output=True, check=False)
+            if container_check.returncode != 0:
+                print(f"Container {container_name} not found or not running")
+                return
+
+            # Check if network exists
+            network_check = subprocess.run(["docker", "network", "inspect", network_name], 
+                                        capture_output=True, check=False)
+            if network_check.returncode != 0:
+                print(f"Network {network_name} not found")
+                return
+
+            # Disconnect the container from the network
+            disconnect_result = subprocess.run(
+                ["docker", "network", "disconnect", network_name, container_name], 
+                capture_output=True, check=False)
+            
+            if disconnect_result.returncode == 0:
+                with start_action(action_type="network_disconnection") as action:
+                    action.log(
+                        message_type="disconnection_success",
+                        container_name=container_name,
+                        network_name=network_name
+                    )
+                time.sleep(duration)
+            else:
+                with start_action(action_type="network_disconnection") as action:
+                    action.log(
+                        message_type="disconnection_failure",
+                        error=disconnect_result.stderr.decode()
+                    )
+                
+        finally:
+            # Try to reconnect the container to the network
+            connect_result = subprocess.run(
+                ["docker", "network", "connect", network_name, container_name],
+                capture_output=True, check=False)
+            
+            if connect_result.returncode == 0:
+                with start_action(action_type="network_reconnection") as action:
+                    action.log(
+                        message_type="reconnection_success",
+                        container_name=container_name,
+                        network_name=network_name
+                    )
+            else:
+                with start_action(action_type="network_reconnection") as action:
+                    action.log(
+                        message_type="reconnection_failure",
+                        error=connect_result.stderr.decode()
+                    )
+
+    # Run the disconnection and reconnection in a separate thread
+    threading.Thread(target=disconnect_and_reconnect).start()

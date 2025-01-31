@@ -8,9 +8,11 @@ from rich.pretty import pprint
 from eliot import start_action
 from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
+from tests.meili.functions import index_folder, index_file, simulate_meilisearch_disconnection
 
-from tests.meili.functions import index_folder
-
+import subprocess
+import time
+import threading
 
 
 @pytest.fixture
@@ -19,25 +21,38 @@ def model() -> EmbeddingModel:
 
 
 @pytest.fixture
-def rag(model: EmbeddingModel) -> MeiliRAG:
+def rag(request, model: EmbeddingModel) -> MeiliRAG:
     host = "127.0.0.1"
     port = 7700
     api_key = "fancy_master_key"
-    # Create and return RAG instance with default connection settings
+    
+    # Set default parameters if not parametrized
+    if hasattr(request, 'param'):
+        recreate_index, index_name, populate = request.param
+    else:
+        recreate_index, index_name, populate = False, "robi-tacutu", True
+    
+    
+    # Create and return RAG instance with conditional recreate_index
     rag = MeiliRAG(
-        index_name="tacutopapers",
+        index_name=index_name,
         model=model,
         host=host,
         port=port,
         api_key=api_key,
         create_index_if_not_exists=True,
-        recreate_index=False,  # Don't recreate since we just created it
-        init_callback = lambda rag: ensure_meili_is_running(meili_service_dir, rag.host, rag.port)
+        recreate_index=recreate_index,
+        init_callback=lambda rag: ensure_meili_is_running(meili_service_dir, rag.host, rag.port)
     )
     stats = rag.index.get_stats()
-    if stats.number_of_documents == 0:
-        print("tacutopapers index is empty, filling it with the data")
-        index_folder(tacutopapers_dir, rag)
+    with start_action(action_type="index_population_check") as action:
+        if stats.number_of_documents == 0 and populate:
+            action.log(
+                message_type="index_population",
+                index_name=index_name,
+                message=f"{index_name} index is empty, filling it with the data"
+            )
+            index_folder(tacutopapers_dir, rag)
 
     return rag
 
@@ -64,8 +79,14 @@ def test_rsids(rag: MeiliRAG, tell_text: bool = False, score_threshold: float = 
 
         scores = [hit["_rankingScore"] for hit in hits]
         fields = results.hits[0].keys()
-        print('first hit:' , fields)
-        pprint(results.hits[0]["source"])
+        action.log(
+            message_type="first_hit_fields",
+            fields=fields
+        )
+        action.log(
+            message_type="first_hit_source",
+            source=results.hits[0]["source"]
+        )
         scored_sources = [{"source": source, "score": score} for source, score in zip(sources, scores)]
         assert "10.txt" in sources_last_part[:2] , "10.txt contains both two times"
         assert "11.txt" in sources_last_part[:2] , "11.txt contains both two times"
@@ -95,8 +116,8 @@ def test_superhero_search(rag: MeiliRAG, tell_text: bool = False, score_threshol
         sources_last_part = [source.split("/")[-1] for source in sources]
         scores = [hit["_rankingScore"] for hit in hits]
         
-        print('first hit:')
-        pprint(results.hits[0])
+        action.log('first hit:')
+        action.log(str(results.hits[0]))
         scored_sources = [{"source": source, "score": score} for source, score in zip(sources, scores)]
         assert "114.txt" in sources_last_part[0], "Only 114 document has text about superheroes, but text did not contain words 'comics' or 'superheroes'"
         
@@ -108,3 +129,25 @@ def test_superhero_search(rag: MeiliRAG, tell_text: bool = False, score_threshol
             semantic_hit_count=results.semantic_hit_count,
         )
         return results
+    
+
+@pytest.mark.parametrize('rag', [(True, "test", False)], indirect=True)
+def test_retry(rag: MeiliRAG) -> SearchResults:
+      
+    abstract: str = "Multiple studies characterizing the human ageing phenotype..."
+    title: str = "The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource"
+    source: str = "https://doi.org/10.1093/nar/gku843"
+    splitter_type: SplitterType = SplitterType.ARTICLE
+
+    file_1 = tacutopapers_dir / "108.txt"
+    file_2 = tacutopapers_dir / "109.txt"
+    
+    simulate_meilisearch_disconnection(duration=10)
+    index_file(rag, file_1, abstract, title, source, splitter_type)
+    
+    docs = list(rag.get_documents().results)
+    print(f"Loaded docs: {len(docs)}")
+
+    assert any("the human aging-related gene set presents" in doc["text"] for doc in docs), "No element satisfies the condition"
+
+

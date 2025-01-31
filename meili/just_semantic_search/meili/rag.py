@@ -1,11 +1,12 @@
 from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_params_from_enum
+from just_semantic_search.meili.utils.retry import create_retry_decorator
 from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
 from just_semantic_search.meili.rag import *
-import requests
 from typing import List, Dict, Any, Literal, Optional, Union
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
+import os
 
 from meilisearch_python_sdk import AsyncClient, AsyncIndex
 from meilisearch_python_sdk import Client
@@ -17,6 +18,13 @@ import asyncio
 from eliot import start_action, log_message
 from sentence_transformers import SentenceTransformer
 
+# Define a retry decorator with exponential backoff using environment variables
+retry_decorator = create_retry_decorator(
+    attempts=int(os.getenv('RETRY_ATTEMPTS', 5)),
+    multiplier=float(os.getenv('RETRY_MULTIPLIER', 1)),
+    min_wait=float(os.getenv('RETRY_MIN', 4)),
+    max_wait=float(os.getenv('RETRY_MAX', 10))
+)
 
 class MeiliRAG(BaseModel):
     # Configuration fields
@@ -94,6 +102,7 @@ class MeiliRAG(BaseModel):
         loop = self.get_loop()
         return loop.run_until_complete(coro)
 
+    @retry_decorator
     async def delete_index_async(self):
         return await self.client_async.delete_index_if_exists(self.index_name)
 
@@ -105,6 +114,7 @@ class MeiliRAG(BaseModel):
         return self.get_loop().run_until_complete(self.delete_index_async())
     
 
+    @retry_decorator
     async def _init_index_async(self, 
                          create_index_if_not_exists: bool = True, 
                          recreate_index: bool = False) -> AsyncIndex:
@@ -149,6 +159,7 @@ class MeiliRAG(BaseModel):
         return f'http://{self.host}:{self.port}'
 
         
+    @retry_decorator
     async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
         """Add ArticleDocument objects to the index."""
         with start_action(action_type="add documents") as action:
@@ -170,12 +181,14 @@ class MeiliRAG(BaseModel):
         return result
 
 
+    @retry_decorator
     def get_documents(self, limit: int = 100, offset: int = 0):
         with start_action(action_type="get_documents") as action:
             result = self.index.get_documents(offset=offset, limit=limit)
             action.log(message_type="documents_retrieved", count=len(result.results))
             return result
 
+    @retry_decorator
     async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False) -> TaskInfo:
         with start_action(action_type="add_document_dicts_async") as action:
             test = documents[0]
@@ -183,6 +196,7 @@ class MeiliRAG(BaseModel):
             return result
 
 
+    @retry_decorator
     def search(self, 
             query: str | None = None,
             vector: Optional[Union[List[float], 'numpy.ndarray']] = None,
@@ -268,6 +282,7 @@ class MeiliRAG(BaseModel):
             locales=locales
         )
 
+    @retry_decorator
     async def _configure_index(self):
         embedder = UserProvidedEmbedder(
             dimensions=1024,
@@ -281,6 +296,7 @@ class MeiliRAG(BaseModel):
 
 
     @property
+    @retry_decorator
     def index(self):
         """Get the Meilisearch index.
         

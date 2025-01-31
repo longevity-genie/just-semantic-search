@@ -190,39 +190,6 @@ def delete_index(
         action.log(message_type="delete_index_complete", index_names=index_names)
 
 
-@app.command("index-file")
-def index_file_command(
-    filename: Path = typer.Option(
-        tacutopapers_dir / "108.txt",
-        "--filename", "-f",
-        help="Path to the file to index"
-    ),
-    abstract: str = typer.Option(
-        "Multiple studies characterizing the human ageing phenotype...",
-        "--abstract", "-a",
-        help="Abstract text for the document"
-    ),
-    title: str = typer.Option(
-        "The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource",
-        "--title", "-t",
-        help="Title of the document"
-    ),
-    source: str = typer.Option(
-        "https://doi.org/10.1093/nar/gku843",
-        "--source", "-s",
-        help="Source URL or reference"
-    ),
-    host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
-    port: int = typer.Option(7700, "--port", "-p", help="Meilisearch port"),
-    start_server: bool = typer.Option(True, "--start-server", "-s", help="Start Meilisearch server"),
-    api_key: str = typer.Option(None, "--api-key", "-k", help="Meilisearch API key"),
-    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
-    recreate_index: bool = typer.Option(True, "--recreate-index", "-r", help="Recreate index")
-):
-    if api_key is None:
-        api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
-    index_file(filename=filename, abstract=abstract, title=title, source=source, host=host, port=port, start_server=start_server, api_key=api_key, model=model, recreate_index=recreate_index)
-
 
 if __name__ == "__main__":
    app()

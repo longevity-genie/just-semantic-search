@@ -7,6 +7,7 @@ from just_semantic_search.document import Document, ArticleDocument
 
 import warnings
 import torch
+from torch import device as torch_device
 
 
 class ArticleSplitter(TextSplitter[ArticleDocument]):
@@ -22,6 +23,7 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
     The splitter ensures that the resulting chunks are properly sized for the underlying
     transformer model while maintaining document attribution.
     """
+    device: Optional[torch_device] = None
 
     def model_post_init(self, __context) -> None:
         super().model_post_init(__context)
@@ -55,9 +57,8 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
         Note: Current implementation has an undefined max_seq_length variable
         and doesn't create Document objects as specified in return type.
         """
-        adjusted_max_chunk_size = ArticleDocument.calculate_adjusted_chunk_size(
+        adjusted_max_chunk_size = ArticleDocument.metadata_overhead(
                 self.model.tokenizer,
-                self.max_seq_length,
                 title=title,
                 abstract=abstract,
                 source=source
