@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "just-semantic-search-scholar"
+name = "just-semantic-search-agent"
 version = "0.0.0"
-description = "Semantic and hybrid search with scholar"
+description = "Semantic and hybrid search agent"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "AGPL-3.0-or-later"
 readme = "README.md"
-keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search"]
+keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search", "agent"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -21,20 +21,10 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.14"
-transformers = ">=4.44.2"
-scholarly = ">=1.7.11"
-triton = ">=2.0.0"
-sentence-transformers = ">=2.2.2"
-typer = ">=0.9.0"
-rich = ">=13.9.4"
-semanticscholar = ">=0.9.0"
-huggingface-hub = ">=0.27.0"
-polars = ">=1.20.0"
-pyfunctional = ">=1.5.0"
-just-semantic-search = "*"
 just-semantic-search-meili = "*"
-patito=">=0.8.3"
-seaborn=">=0.13.2"
+just-semantic-search-scholar = "*"
+just-agents-web = ">=0.5.2"
+
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
 build-backend = "poetry.core.masonry.api" 
@@ -44,5 +34,7 @@ enable = true
 vcs = "git"
 style = "pep440"
 
+
 [tool.poetry.group.dev.dependencies]
 just-semantic-search-meili = { path = "../meili", develop = true }
+just-semantic-search-scholar = { path = "../scholar", develop = true }

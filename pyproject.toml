@@ -22,11 +22,15 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
 ]
 
+[tool.poetry.scripts]
+meili-exec = "just_semantic_search.meili.meili_exec:app"
+
 [tool.poetry.dependencies]
-python = ">=3.10,<3.14"
+python = ">=3.11,<3.14"
 just-semantic-search = { path = "./core", develop = true }
 just-semantic-search-meili = { path = "./meili", develop = true }
 just-semantic-search-scholar = { path = "./scholar", develop = true }
+just-semantic-search-agent = { path = "./agent", develop = true }
 pyfunctional = ">=1.5.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
@@ -37,7 +41,7 @@ requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
 

@@ -19,10 +19,13 @@ packages = [
     { include = "just_semantic_search" },
 ]
 
+[tool.poetry.scripts]
+meili-exec = "just_semantic_search.meili.meili_exec:app"
+
 [tool.poetry.dependencies]
-python = ">=3.10,<3.14"
+python = ">=3.11,<3.14"
 transformers = ">=4.44.2"
-meilisearch-python-sdk = ">=4.0.0"
+meilisearch-python-sdk = ">=4.1.0"
 triton = ">=2.0.0"
 sentence-transformers = ">=2.2.2"
 typer = ">=0.9.0"
