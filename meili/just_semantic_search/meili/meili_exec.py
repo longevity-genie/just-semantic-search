@@ -74,23 +74,6 @@ def embedders(
     print("Embedders:")
     pprint(rag.index.get_embedders())
 
-def index_folder(
-    folder: Path,
-    rag: MeiliRAG,
-    splitter: SplitterType = SplitterType.SEMANTIC,
-    model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3
-) -> None:
-    """Index documents from a folder using the provided MeiliRAG instance."""
-    with start_action(message_type="index_folder", folder=str(folder)) as action:
-        sentence_transformer_model = load_sentence_transformer_from_enum(model)
-        splitter_instance = create_splitter(splitter, sentence_transformer_model)
-        documents = splitter_instance.split_folder(folder)
-        rag.add_documents(documents)
-        action.add_success_fields(
-            message_type="index_folder_complete",
-            index_name=rag.index_name,
-            documents_added_count=len(documents)
-        )
 
 @app.command("index-folder")
 def index_folder_command(
@@ -123,7 +106,7 @@ def index_folder_command(
             recreate_index=recreate_index
         )
         transformer_model = load_sentence_transformer_from_enum(model)
-        index_folder(Path(folder), rag, splitter, model)
+        rag.index_folder(Path(folder), splitter, model)
 
 @app.command()
 def documents(

@@ -1,18 +1,11 @@
-from just_semantic_search.splitter_factory import SplitterType, create_splitter
-from meilisearch_python_sdk import Index
+from just_semantic_search.splitter_factory import SplitterType
 import pytest
-from sentence_transformers import SentenceTransformer
 from just_semantic_search.meili.rag import MeiliRAG, SearchResults
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
-from rich.pretty import pprint
 from eliot import start_action
 from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
-from tests.meili.functions import index_folder, index_file, simulate_meilisearch_disconnection
-
-import subprocess
-import time
-import threading
+from tests.meili.functions import index_file, simulate_meilisearch_disconnection
 
 
 @pytest.fixture
@@ -52,7 +45,7 @@ def rag(request, model: EmbeddingModel) -> MeiliRAG:
                 index_name=index_name,
                 message=f"{index_name} index is empty, filling it with the data"
             )
-            index_folder(tacutopapers_dir, rag)
+            rag.index_folder(tacutopapers_dir)
 
     return rag
 
@@ -140,7 +133,6 @@ def test_retry(rag: MeiliRAG) -> SearchResults:
     splitter_type: SplitterType = SplitterType.ARTICLE
 
     file_1 = tacutopapers_dir / "108.txt"
-    file_2 = tacutopapers_dir / "109.txt"
     
     simulate_meilisearch_disconnection(duration=10)
     index_file(rag, file_1, abstract, title, source, splitter_type)

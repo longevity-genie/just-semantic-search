@@ -1,3 +1,4 @@
+from typing import Optional
 from pyrsistent import PClass, field, pset
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
@@ -7,8 +8,6 @@ from pathlib import Path
 
 import typer
 import os
-from just_semantic_search.meili.rag import *
-from just_semantic_search.meili.rag import *
 import time
 from pathlib import Path
 from eliot import FileDestination
