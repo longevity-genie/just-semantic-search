@@ -24,39 +24,6 @@ from rich.pretty import pprint
 
 
 
-"""
-index_name: str = typer.Option("tacutopapers", "--index-name", "-n"),
-    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
-    folder: Path = typer.Option(tacutopapers_dir, "--folder", "-f", help="Folder containing documents to index"),
-    splitter: SplitterType = typer.Option(SplitterType.TEXT.value, "--splitter", "-s", help="Splitter type to use"),
-    host: str = typer.Option("127.0.0.1", "--host"),
-    port: int = typer.Option(7700, "--port", "-p"),
-    api_key: str = typer.Option(None, "--api-key", "-k"),
-    skip_parsing: bool = typer.Option(False, "--skip-parsing", "-s"),
-    test: bool = typer.Option(False, "--test", "-t", help="Test the index"),
-    ensure_server: bool = typer.Option(False, "--ensure-seсrver", "-e", help="Ensure Meilisearch server is running"),
-    recreate_index: bool = typer.Option(False, "--recreate-index", "-r", help="Recreate index")
-"""
-
-def index_folder(
-    folder: Path,
-    rag: MeiliRAG,
-    splitter: SplitterType = SplitterType.SEMANTIC,
-    model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3
-) -> None:
-    """Index documents from a folder using the provided MeiliRAG instance."""
-    with start_action(message_type="index_folder", folder=str(folder)) as action:
-        sentence_transformer_model = load_sentence_transformer_from_enum(model)
-        splitter_instance = create_splitter(splitter, sentence_transformer_model)
-        documents = splitter_instance.split_folder(folder)
-        rag.add_documents(documents)
-        action.add_success_fields(
-            message_type="index_folder_complete",
-            index_name=rag.index_name,
-            documents_added_count=len(documents)
-        )
-
-
 def create_meili_rag(
     index_name: str,
     model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3,
