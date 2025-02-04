@@ -1,6 +1,6 @@
+from pathlib import Path
 from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_from_enum, load_sentence_transformer_params_from_enum
-from just_semantic_search.meili.utils.retry import create_retry_decorator
-from just_semantic_search.meta import IndexMultitonMeta, PydanticIndexMultitonMeta
+from just_semantic_search.splitter_factory import SplitterType, create_splitter
 from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
 from just_semantic_search.meili.rag import *
@@ -359,4 +359,26 @@ class MeiliRAG(MeiliBase):
             return self.client.get_index(self.index_name)
         except MeilisearchApiError as e:
             raise ValueError(f"Index '{self.index_name}' not found: {e}")
+        
+
+    def index_folder(
+        self,
+        folder: Path,
+        splitter: SplitterType = SplitterType.SEMANTIC,
+        model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3
+    ) -> None:
+        """Index documents from a folder using the provided MeiliRAG instance."""
+        with start_action(message_type="index_folder", folder=str(folder)) as action:
+            sentence_transformer_model = load_sentence_transformer_from_enum(model)
+            splitter_instance = create_splitter(splitter, sentence_transformer_model)
+            documents = splitter_instance.split_folder(folder)
+            result = self.add_documents(documents)
+            action.add_success_fields(
+                message_type="index_folder_complete",
+                index_name=self.index_name,
+                documents_added_count=len(documents)
+            )
+            return result
+
+
     
