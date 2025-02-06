@@ -1,9 +1,7 @@
 from pydantic import BaseModel, Field
-import typer
 from sentence_transformers import SentenceTransformer
-from pprint import pprint
 from transformers import AutoTokenizer, AutoModel, PreTrainedModel, PreTrainedTokenizer
-from typing import Tuple, Union, Any
+from typing import Tuple, Union
 from enum import Enum
 
 def load_auto_model_tokenizer(model_name_or_path: str, trust_remote_code: bool = True) -> Tuple[PreTrainedModel, PreTrainedTokenizer]:

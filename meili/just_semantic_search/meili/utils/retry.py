@@ -1,7 +1,5 @@
-import asyncio
-from eliot import start_action, log_message
-from sentence_transformers import SentenceTransformer
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential, before_sleep, after
+from eliot import start_action
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 from meilisearch_python_sdk.errors import MeilisearchApiError, MeilisearchCommunicationError
 
 def create_retry_decorator(

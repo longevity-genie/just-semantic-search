@@ -29,6 +29,7 @@ eliot = ">=1.16.0"
 eliot-tree = ">=24.0.0"
 flash-attn = {version = ">=2.7.3", optional = true} # optional because it needs ninja which is tricky to install
 
+
 [tool.poetry.extras]
 flash = ["flash-attn", "ninja"]
 

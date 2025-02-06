@@ -16,12 +16,21 @@ classifiers = [
 ]
 
 packages = [
-    { include = "just_semantic_search" },
+    { include = "just_semantic_search" }
 ]
+
+include = [
+    "bin/*.sh",
+    "bin/*.bat"
+]
+
+[tool.poetry.scripts]
+index-markdown = "just_semantic_search.agent.index_markdown:app"
+parse-papers = "just_semantic_search.agent.scripts:parse_papers"
+
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.14"
-just-semantic-search-meili = "*"
 just-semantic-search-scholar = "*"
 just-agents-web = ">=0.5.2"
 
@@ -38,3 +47,4 @@ style = "pep440"
 [tool.poetry.group.dev.dependencies]
 just-semantic-search-meili = { path = "../meili", develop = true }
 just-semantic-search-scholar = { path = "../scholar", develop = true }
+just-semantic-search = { path = "../core", develop = true }

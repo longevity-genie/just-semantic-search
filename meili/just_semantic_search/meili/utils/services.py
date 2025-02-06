@@ -1,11 +1,10 @@
-from just_semantic_search.meili.rag import *
 from pathlib import Path
 import time
 import subprocess
 import requests
 
 from eliot._output import *
-from eliot import start_task
+from eliot import start_action, start_task
 
 
 def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", port: int = 7700, old_docker_compose: bool = False) -> bool:

@@ -4,8 +4,7 @@ from typing import Union
 from sentence_transformers import SentenceTransformer
 from just_semantic_search.text_splitters import (
     TextSplitter, 
-    SemanticSplitter,
-    SemanticDocumentSplitter
+    SemanticSplitter
 )
 from just_semantic_search.article_splitter import ArticleSplitter
 from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter

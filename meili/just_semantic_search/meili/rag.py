@@ -1,9 +1,8 @@
 from pathlib import Path
 from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_from_enum, load_sentence_transformer_params_from_enum
-from just_semantic_search.splitter_factory import SplitterType, create_splitter
+from just_semantic_search.splitter_factory import create_splitter, SplitterType
 from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
-from just_semantic_search.meili.rag import *
 from typing import List, Dict, Any, Literal, Optional, Union
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
@@ -16,10 +15,13 @@ from meilisearch_python_sdk.index import SearchResults, Hybrid
 from meilisearch_python_sdk.models.settings import MeilisearchSettings, UserProvidedEmbedder
 
 import asyncio
-from eliot import start_action, log_message
+import eliot
+from eliot import start_action
 import pydantic
 from sentence_transformers import SentenceTransformer
 from tenacity import retry, stop_after_attempt, wait_exponential
+from functools import wraps
+import inspect
 
 # Define a retry decorator with exponential backoff using environment variables
 retry_decorator = retry(
@@ -29,23 +31,44 @@ retry_decorator = retry(
         min=float(os.getenv('RETRY_MIN', 4)),
         max=float(os.getenv('RETRY_MAX', 10))
     ),
-    before=lambda retry_state: log_message(
+    before=lambda retry_state: eliot.log_message(
         message_type="retry_attempt",
         attempt=retry_state.attempt_number,
         error_type=str(retry_state.outcome.exception.__class__.__name__) if retry_state.outcome and retry_state.outcome.exception else "None"
     )
 )
 
-# Modify the retry decorator to log errors using eliot with start_action
 def log_retry_errors(func):
-    @retry_decorator
-    async def wrapper(*args, **kwargs):
-        with start_action(action_type="retry_action") as action:
-            try:
-                return await func(*args, **kwargs)
-            except Exception as e:
-                action.log(message_type="retry_failed", error=str(e), error_type=str(type(e).__name__))
-                raise  # Re-raise the last exception
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if inspect.iscoroutinefunction(func):
+            @retry_decorator
+            async def async_wrapper(*args, **kwargs):
+                with start_action(action_type="retry_action", function=func.__name__) as action:
+                    try:
+                        return await func(*args, **kwargs)
+                    except Exception as e:
+                        action.log(
+                            message_type="retry_failed",
+                            error=str(e),
+                            error_type=str(type(e).__name__)
+                        )
+                        raise
+            return async_wrapper(*args, **kwargs)
+        else:
+            @retry_decorator
+            def sync_wrapper(*args, **kwargs):
+                with start_action(action_type="retry_action", function=func.__name__) as action:
+                    try:
+                        return func(*args, **kwargs)
+                    except Exception as e:
+                        action.log(
+                            message_type="retry_failed",
+                            error=str(e),
+                            error_type=str(type(e).__name__)
+                        )
+                        raise
+            return sync_wrapper(*args, **kwargs)
     return wrapper
 
 class MeiliBase(BaseModel):
@@ -173,7 +196,7 @@ class MeiliRAG(MeiliBase):
             try:
                 index = await self.client_async.get_index(self.index_name)
                 if recreate_index:
-                    log_message(
+                    action.log(
                         message_type="index_exists",
                         index_name=self.index_name,
                         recreate_index=True
@@ -364,12 +387,11 @@ class MeiliRAG(MeiliBase):
     def index_folder(
         self,
         folder: Path,
-        splitter: SplitterType = SplitterType.SEMANTIC,
-        model: EmbeddingModel = EmbeddingModel.JINA_EMBEDDINGS_V3
+        splitter: SplitterType = SplitterType.TEXT
     ) -> None:
         """Index documents from a folder using the provided MeiliRAG instance."""
         with start_action(message_type="index_folder", folder=str(folder)) as action:
-            sentence_transformer_model = load_sentence_transformer_from_enum(model)
+            sentence_transformer_model = load_sentence_transformer_from_enum(self.model)
             splitter_instance = create_splitter(splitter, sentence_transformer_model)
             documents = splitter_instance.split_folder(folder)
             result = self.add_documents(documents)

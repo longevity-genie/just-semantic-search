@@ -1,13 +1,11 @@
 from pathlib import Path
-import re
 from typing import Optional, TypeVar
 from pydantic import BaseModel, Field, ConfigDict, computed_field
-from abc import ABC, abstractmethod
 import numpy as np
 import yaml
 import hashlib
 
-from yaml import YAMLObject, Dumper
+from yaml import Dumper
 
 class BugFixDumper(Dumper):
     def represent_str(self, data):
@@ -148,9 +146,6 @@ class ArticleDocument(Document):
         """
         Convert the document to a formatted string representation.
         
-        Args:
-            mention_splits: Whether to include fragment information
-        
         Returns:
             Formatted string with metadata and content
         """
@@ -161,7 +156,7 @@ class ArticleDocument(Document):
         if self.abstract:
             parts.append(f"ABSTRACT: {self.abstract}\n")
             
-        has_multiple_fragments = self.total_fragments > 1
+        has_multiple_fragments = (self.total_fragments or 0) > 1
         if has_multiple_fragments:
             parts.append("TEXT_FRAGMENT: \n\n")
         
@@ -176,6 +171,9 @@ class ArticleDocument(Document):
             
         
         parts.append("\n")
+        
+        # Filter out None values and ensure all parts are strings
+        parts = [str(part) for part in parts if part is not None]
         
         return "\n".join(parts)
     

@@ -24,6 +24,7 @@ classifiers = [
 
 [tool.poetry.scripts]
 meili-exec = "just_semantic_search.meili.meili_exec:app"
+index-markdown = "just_semantic_search.agent.index_markdown:app"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.14"
@@ -32,6 +33,7 @@ just-semantic-search-meili = { path = "./meili", develop = true }
 just-semantic-search-scholar = { path = "./scholar", develop = true }
 just-semantic-search-agent = { path = "./agent", develop = true }
 pyfunctional = ">=1.5.0"
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 pycomfort = ">=0.0.17"

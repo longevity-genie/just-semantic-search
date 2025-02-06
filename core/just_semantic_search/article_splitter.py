@@ -1,4 +1,3 @@
-from sentence_transformers import SentenceTransformer
 from typing import List, Optional
 from just_semantic_search.text_splitters import TextSplitter
 from pathlib import Path
