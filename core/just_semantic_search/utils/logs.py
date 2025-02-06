@@ -1,14 +1,11 @@
 from typing import Optional
-from pyrsistent import PClass, field, pset
+from pyrsistent import PClass, field
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path
 #from just_semantic_search.utils import RenderingFileDestination
 
 
-import typer
-import os
-import time
 from pathlib import Path
 from eliot import FileDestination
 import sys
@@ -16,7 +13,6 @@ from datetime import datetime
 from eliottree import tasks_from_iterable, render_tasks
 from eliot import Logger
 from eliot.json import _dumps_bytes, _dumps_unicode, json_default
-import json
 
 from eliot._output import *
 import uuid

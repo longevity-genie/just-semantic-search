@@ -11,7 +11,6 @@ from multiprocessing import Pool, cpu_count
 import torch
 import time
 from eliot import log_call, log_message, start_action
-from just_semantic_search.utils.logs import LogLevel
 from just_semantic_search.utils.models import get_sentence_transformer_model_name
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -71,7 +70,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
         if isinstance(file_path, str):
             file_path = Path(file_path)
             
-        with start_action(action_type="processing_file", file_path=str(file_path.absolute()), log_level=LogLevel.DEBUG) as action:
+        with start_action(action_type="processing_file", file_path=str(file_path.absolute())) as action:
             content: CONTENT = self._content_from_path(file_path)
             documents = self.split(content, embed, 
                                source=str(file_path.absolute()) if path_as_source else file_path.name,
@@ -81,12 +80,12 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
 
     def split_folder(self, folder_path: Path | str, embed: bool = True, path_as_source: bool = True, **kwargs) -> List[IDocument]:
         """Split all files in a folder into documents."""
-        with start_action(action_type="split_folder", folder_path=str(folder_path.absolute()), log_level=LogLevel.DEBUG, embed=embed, path_as_source=path_as_source) as action:
+        with start_action(action_type="split_folder", folder_path=str(folder_path.absolute()), embed=embed, path_as_source=path_as_source) as action:
             start_time = time.time()
             folder_path = Path(folder_path) if isinstance(folder_path, str) else folder_path
         
             # Log the folder path separately as a string
-            action.log(message_type="processing_folder", folder_path=str(folder_path.absolute()), log_level=LogLevel.DEBUG)
+            action.log(message_type="processing_folder", folder_path=str(folder_path.absolute()))
             
             if not folder_path.exists() or not folder_path.is_dir():
                 raise ValueError(f"Invalid folder path: {folder_path}")
@@ -100,8 +99,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
             action.log(
                 message_type="folder_processing_complete",
                 processing_time_seconds=elapsed_time,
-                num_documents=len(documents),
-                log_level=LogLevel.INFO
+                num_documents=len(documents)
             )
                     
             return documents
@@ -127,7 +125,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
         folder_path = Path(folder_path) if isinstance(folder_path, str) else folder_path
         
         # Log the folder path separately as a string
-        log_message(message_type="processing_batched_folder", folder_path=str(folder_path.absolute()), log_level=LogLevel.DEBUG)
+        log_message(message_type="processing_batched_folder", folder_path=str(folder_path.absolute()))
         
         # Validate inputs
         if not folder_path.exists() or not folder_path.is_dir():
@@ -183,8 +181,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
             message_type="batched_folder_processing_complete",
             processing_time_seconds=elapsed_time,
             num_batches=len(batches),
-            total_documents=sum(len(batch) for batch in batches),
-            log_level=LogLevel.INFO
+            total_documents=sum(len(batch) for batch in batches)
         )
             
         return batches
