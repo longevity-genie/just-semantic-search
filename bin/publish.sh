@@ -67,6 +67,23 @@ else
     fi
 fi
 
+# Build and publish agent package
+echo "Building and publishing agent package..."
+cd ../agent
+poetry build
+if [ $? -ne 0 ]; then
+    echo "Agent package build failed!"
+    HAS_ERRORS=1
+else
+    poetry publish
+    if [ $? -ne 0 ]; then
+        echo "Agent package publish failed!"
+        HAS_ERRORS=1
+    else
+        echo "Agent package built and published successfully!"
+    fi
+fi
+
 # Final error status
 if [ $HAS_ERRORS -ne 0 ]; then
     echo "Completed with errors!"
