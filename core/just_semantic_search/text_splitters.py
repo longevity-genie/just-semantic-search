@@ -198,11 +198,8 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
     
     
     def split(self, text: str, embed: bool = True, source: str | None = None, **kwargs) -> List[IDocument]:
-        """
-        Split text into chunks based on token length.
-        Note: Current implementation has an undefined max_seq_length variable
-        and doesn't create Document objects as specified in return type.
-        """
+        
+        
         # Get the tokenizer from the model
         tokenizer = self.model.tokenizer
 

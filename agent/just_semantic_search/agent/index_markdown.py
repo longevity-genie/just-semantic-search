@@ -62,7 +62,7 @@ class Annotation(BaseModel):
     }
 
 
-def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000) -> List[dict]:
+def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md"]) -> List[dict]:
     """
     Index markdown files from a folder into MeiliSearch.
     
@@ -75,6 +75,8 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
         List of processed documents
     """
     with start_task(message_type="index_markdown", folder=str(folder)) as task:
+
+        fs = files.traverse(folder, lambda x: x.suffix in extensions)
         
         
         splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
@@ -89,11 +91,13 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
                 "abstract": "...",
                 "authors": ["...", "..."],
                 "title": "...",
-                "source": "..."
+                "source": "...",
+                "filename": "..."
             }
             For string either use one line or use proper escape characters (\n) for line breaks
             Make sure to provide the output in the correct format, do not add any other text or comments.
             For source you either give DOI, pubmed or filename (if doi or pubmed is not available).
+            File filename you give a filename of the file in the folder together with the extension.
             """)
         fs = files.files(folder)
         documents = []
@@ -117,8 +121,6 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
         return documents
 
 
-
-
 @app.command("index-markdown")
 def index_markdown_command(
     folder: Path = typer.Argument(..., help="Folder containing documents to index"),
@@ -130,7 +132,9 @@ def index_markdown_command(
     max_seq_length: int = typer.Option(3600, "--max-seq-length", "-s", help="Maximum sequence length for text splitting"),
     api_key: Optional[str] = typer.Option(os.getenv("MEILI_MASTER_KEY", "fancy_master_key"), "--api-key", "-k"),
     ensure_server: bool = typer.Option(False, "--ensure-server", "-e", help="Ensure Meilisearch server is running"),
-    recreate_index: bool = typer.Option(os.getenv("MEILI_RECREATE_INDEX", False), "--recreate-index", "-r", help="Recreate index")
+    recreate_index: bool = typer.Option(os.getenv("PARSING_RECREATE_MEILI_INDEX", False), "--recreate-index", "-r", help="Recreate index"),
+    depth: int = typer.Option(1, "--depth", "-d", help="Depth of folder parsing"),
+    extensions: List[str] = typer.Option([".md"], "--extensions", "-x", help="File extensions to include"),
 ) -> None:
     with start_task(action_type="index_markdown", 
                     index_name=index_name, model_name=str(model), host=host, port=port, 
@@ -139,7 +143,6 @@ def index_markdown_command(
             api_key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
         if ensure_server:
             ensure_meili_is_running(meili_service_dir, host, port)
-        
         
         rag = MeiliRAG(
             index_name=index_name,
@@ -150,7 +153,7 @@ def index_markdown_command(
             create_index_if_not_exists=True,
             recreate_index=recreate_index
         )
-        index_markdown(rag, Path(folder), max_seq_length, characters_limit)
+        index_markdown(rag, Path(folder), max_seq_length, characters_limit, depth, extensions)
         
 
 if __name__ == "__main__":
