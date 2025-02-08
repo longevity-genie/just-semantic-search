@@ -19,7 +19,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.10,<3.14"
 transformers = ">=4.48.0"
-triton = "*"
 sentence-transformers = ">=3.3.1"
 typer = "*"
 pydantic = ">=2.10.3"
@@ -27,16 +26,15 @@ scikit-learn = ">=1.5.2"
 einops = ">=0.8.0"
 eliot = ">=1.16.0"
 eliot-tree = ">=24.0.0"
-flash-attn = {version = ">=2.7.3", optional = true} # optional because it needs ninja which is tricky to install
-
+flash-attn = {version = ">=2.7.3", optional = true}
 
 [tool.poetry.extras]
 flash = ["flash-attn", "ninja"]
+cuda = ["triton"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
 
 [tool.poetry-dynamic-versioning]
 enable = true

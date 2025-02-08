@@ -1520,10 +1520,10 @@ pydantic = ">=2.10.3"
 scikit-learn = ">=1.5.2"
 sentence-transformers = ">=3.3.1"
 transformers = ">=4.48.0"
-triton = "*"
 typer = "*"
 
 [package.extras]
+cuda = []
 flash = ["flash-attn (>=2.7.3)"]
 
 [package.source]

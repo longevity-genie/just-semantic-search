@@ -1,13 +1,28 @@
 # syntax=docker/dockerfile:1
-FROM ghcr.io/longevity-genie/just-agents:main
+ARG base_image=ghcr.io/longevity-genie/just-agents:main-gpu
+FROM ${base_image}
 
 USER root
 
-ENV JUST_SEMANTIC_SEARCH_AGENT_VERSION=0.1.0
+# Check if conda Python exists and set Python path accordingly
+RUN if [ -f "/opt/conda/bin/python" ]; then \
+    echo "Using conda Python" && \
+    export PATH="/opt/conda/bin:${PATH}" && \
+    PYTHON_CMD="/opt/conda/bin/python3"; \
+    else \
+    echo "Using system Python" && \
+    PYTHON_CMD="python3"; \
+    fi && \
+    curl -sSL https://install.python-poetry.org | $PYTHON_CMD -
+
+ARG JUST_SEMANTIC_SEARCH_AGENT_VERSION=0.1.1
+
+# Configure poetry without virtualenvs
+RUN mkdir -p /root/.cache/pypoetry && \
+    /root/.local/bin/poetry config virtualenvs.create false
 
 # Install just-semantic-search-agent using poetry without creating a virtual environment
-RUN /root/.local/bin/poetry config virtualenvs.create false \
-    && /root/.local/bin/poetry add "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.14"
+RUN /root/.local/bin/poetry add "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.14"
 RUN /root/.local/bin/poetry lock
 RUN /root/.local/bin/poetry install
 
@@ -59,8 +74,5 @@ ENV PARSING_RECREATE_MEILI_INDEX=False
 
 #used for markdown parsing, characters to extract abstract from
 ENV MEILISEARCH_CROP_LENGTH=1000
-
-# do not forget to change MEILISEARCH_API_KEY in your .env file or docker-compose.yml file
-ENV MEILISEARCH_API_KEY=fancy_master_key 
 
 WORKDIR /app
