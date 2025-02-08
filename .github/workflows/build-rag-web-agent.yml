@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: rag-web-agent
+  IMAGE_NAME: ${{ github.repository }}/rag-web-agent
 
 jobs:
   build:
@@ -17,6 +17,18 @@ jobs:
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        variant: ['cpu', 'gpu']
+        include:
+          - variant: 'cpu'
+            base_image: 'ghcr.io/longevity-genie/just-agents:main'
+            suffix: ''
+            use_gpu: 'false'
+          - variant: 'gpu'
+            base_image: 'ghcr.io/longevity-genie/just-agents:main-gpu'
+            suffix: '-gpu'
+            use_gpu: 'true'
 
     steps:
       - name: Checkout repository
@@ -38,16 +50,20 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=sha
+            type=raw,value=latest${{ matrix.suffix }}
+            type=ref,event=branch,suffix=${{ matrix.suffix }}
+            type=ref,event=pr,suffix=${{ matrix.suffix }}
+            type=semver,pattern={{version}},suffix=${{ matrix.suffix }}
+            type=sha,suffix=${{ matrix.suffix }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
+          build-args: |
+            base_image=${{ matrix.base_image }}
+            USE_GPU=${{ matrix.use_gpu }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha

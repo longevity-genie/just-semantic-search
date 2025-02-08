@@ -169,22 +169,28 @@ class MeiliRAG(MeiliBase):
 
 
     def get_loop(self):
-        """Helper to get or create an event loop that works with both CLI and Jupyter"""
+        """Helper to get or create an event loop that works in all environments"""
         try:
-            loop = asyncio.get_event_loop()
-            if loop.is_closed():
-                loop = asyncio.new_event_loop()
-                asyncio.set_event_loop(loop)
-            return loop
+            loop = asyncio.get_running_loop()
         except RuntimeError:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-            return loop
+        return loop
 
     def run_async(self, coro):
-        """Helper method to run async code in both Jupyter and non-Jupyter environments"""
+        """Helper method to run async code safely in all environments"""
         loop = self.get_loop()
-        return loop.run_until_complete(coro)
+        if loop.is_running():
+            # Create a new loop for this operation if the current one is running
+            new_loop = asyncio.new_event_loop()
+            try:
+                asyncio.set_event_loop(new_loop)
+                return new_loop.run_until_complete(coro)
+            finally:
+                new_loop.close()
+                asyncio.set_event_loop(loop)
+        else:
+            return loop.run_until_complete(coro)
 
     
 
