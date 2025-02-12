@@ -22,7 +22,7 @@ RUN mkdir -p /root/.cache/pypoetry && \
     /root/.local/bin/poetry config virtualenvs.create false
 
 # Install just-semantic-search-agent using poetry without creating a virtual environment
-RUN /root/.local/bin/poetry add "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.14"
+RUN /root/.local/bin/poetry add "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.15"
 RUN /root/.local/bin/poetry lock
 RUN /root/.local/bin/poetry install
 

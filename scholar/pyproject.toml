@@ -20,7 +20,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.14"
+python = ">=3.11,<3.15"
 transformers = ">=4.44.2"
 scholarly = ">=1.7.11"
 triton = ">=2.0.0"
