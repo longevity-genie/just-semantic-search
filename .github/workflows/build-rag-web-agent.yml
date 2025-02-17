@@ -22,11 +22,11 @@ jobs:
         variant: ['cpu', 'gpu']
         include:
           - variant: 'cpu'
-            base_image: 'ghcr.io/longevity-genie/chat-ui-agents:main'
+            base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main'
             suffix: ''
             use_gpu: 'false'
           - variant: 'gpu'
-            base_image: 'ghcr.io/longevity-genie/chat-ui-agents:main-gpu'
+            base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main-gpu'
             suffix: '-gpu'
             use_gpu: 'true'
 
