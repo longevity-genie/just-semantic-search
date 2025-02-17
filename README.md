@@ -54,15 +54,28 @@ poetry self add poetry-plugin-shell
 poetry shell
 ```
 
-### Docker Setup for Meilisearch
+### Docker and Podman Setup for Meilisearch
 
-The project includes a Docker Compose configuration for running Meilisearch. Simply run:
+The project includes a Docker Compose configuration for running Meilisearch as a service to make it easier to run it locally. 
+Simply run:
 
 ```bash
 ./bin/meili.sh
 ```
 
 This will start a Meilisearch instance with vector search enabled and persistent data storage.
+
+**Podman Users:**
+
+If you prefer using Podman over Docker, you can use `podman compose` as a drop-in replacement. In many cases, the same configuration works, so you can start the service with:
+
+```bash
+podman compose up
+```
+
+Make sure that `podman compose` is installed and properly configured on your system.
+
+WARNING: on old Ubuntu systems (like Ubuntu 22.04 and older) do not install podman from apt, as it is outdated there. You need at least podman 4+ to make it work. 
 
 ## Quick Start
 
@@ -198,7 +211,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ## License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE.md) file for details.
 
 ## Citation
 

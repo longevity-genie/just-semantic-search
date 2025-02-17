@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG base_image=ghcr.io/longevity-genie/just-agents:main-gpu
+ARG base_image=ghcr.io/longevity-genie/just-agents/chat-ui-agents:main
 FROM ${base_image}
 
 USER root
@@ -15,16 +15,23 @@ RUN if [ -f "/opt/conda/bin/python" ]; then \
     fi && \
     curl -sSL https://install.python-poetry.org | $PYTHON_CMD -
 
-ARG JUST_SEMANTIC_SEARCH_AGENT_VERSION=0.1.1
+ARG JUST_SEMANTIC_SEARCH_AGENT_VERSION=0.1.3
 
-# Configure poetry without virtualenvs
-RUN mkdir -p /root/.cache/pypoetry && \
-    /root/.local/bin/poetry config virtualenvs.create false
+# Declare the extra dependency argument (defaults to empty)
+ARG EXTRA_DEPENDENCY=''
 
-# Install just-semantic-search-agent using poetry without creating a virtual environment
-RUN /root/.local/bin/poetry add "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.15"
-RUN /root/.local/bin/poetry lock
-RUN /root/.local/bin/poetry install
+# Use Bash to add the extra dependency if it is provided.
+RUN /bin/bash -c '\
+    if [ -n "$EXTRA_DEPENDENCY" ]; then \
+      echo "Adding extra dependency: $EXTRA_DEPENDENCY"; \
+      /root/.local/bin/poetry config virtualenvs.create false; \
+      /root/.local/bin/poetry add --no-interaction --no-cache "$EXTRA_DEPENDENCY"; \
+    else \
+      echo "No extra dependency provided"; \
+    fi'
+
+
+RUN /root/.local/bin/poetry add  --no-interaction --no-cache "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.15"
 
 USER appuser
 

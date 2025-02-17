@@ -2,13 +2,15 @@ from pathlib import Path
 import time
 import subprocess
 import requests
+import shutil
 
 from eliot._output import *
 from eliot import start_action, start_task
 
 
-def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", port: int = 7700, old_docker_compose: bool = False) -> bool:
-    """Start MeiliSearch container if not running and wait for it to be ready"""
+def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", port: int = 7700) -> bool:
+    """Start MeiliSearch container if not running and wait for it to be ready using Podman & podman compose,
+    falling back to Docker Compose if Podman is not available."""
     
     with start_task(action_type="ensure_meili_running") as action:
         # Check if MeiliSearch is already running
@@ -22,50 +24,66 @@ def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", po
 
         action.log(message_type="server is not available, so starting_server", host=host, port=port)
 
-        # Navigate to the services/meili directory
-        #meili_service_dir = project_root / "services" / "meili"
-        
-        with start_action(action_type="docker_cleanup") as cleanup_action:
-            # Stop and remove existing container if it exists
+        # Determine which compose command to use
+        compose_cmd = None
+        if shutil.which("podman"):
+            action.log(message_type="using_podman_compose")
+            compose_cmd = ["podman", "compose"]
+            container_runtime = "podman"
+        elif shutil.which("docker"):
+            # Try new "docker compose" first
             result = subprocess.run(
-                ["docker", "compose", "down"] if not old_docker_compose else ["docker-compose", "down"], 
+                ["docker", "compose", "version"],
+                capture_output=True,
+                text=True
+            )
+            if result.returncode == 0:
+                action.log(message_type="using_docker_compose_new")
+                compose_cmd = ["docker", "compose"]
+            elif shutil.which("docker-compose"):
+                action.log(message_type="using_docker_compose_legacy")
+                compose_cmd = ["docker-compose"]
+            container_runtime = "docker"
+            
+            if not compose_cmd:
+                action.log(message_type="no_docker_compose_available")
+                raise RuntimeError("Docker is installed but no compose command is available")
+        else:
+            action.log(message_type="no_container_runtime_available")
+            raise RuntimeError("Neither podman compose nor docker is installed")
+
+        # Cleanup existing containers
+        with start_action(action_type=f"{container_runtime}_cleanup") as cleanup_action:
+            result = subprocess.run(
+                compose_cmd + ["down"],
                 cwd=meili_service_dir,
                 capture_output=True,
                 text=True
             )
             cleanup_action.log(
-                message_type="docker_compose_down",
+                message_type=f"{container_runtime}_compose_down",
                 stdout=result.stdout,
                 stderr=result.stderr,
                 return_code=result.returncode
             )
+
+        # Start the container using the selected compose tool
+        with start_action(action_type="container_startup") as startup_action:
+            compose_up_cmd = compose_cmd + ["up"]
+            startup_action.log(message_type="starting_container", command=compose_up_cmd)
             
-            result = subprocess.run(
-                ["docker", "rm", "-f", "meilisearch"], 
-                stderr=subprocess.DEVNULL,
-                stdout=subprocess.PIPE,
-                text=True
-            )
-            cleanup_action.log(
-                message_type="docker_remove",
-                stdout=result.stdout,
-                return_code=result.returncode
-            )
-        
-        # Start the container using docker compose
-        with start_action(action_type="docker_startup") as startup_action:
             process = subprocess.Popen(
-                ["docker", "compose", "up"],
+                compose_up_cmd,
                 cwd=meili_service_dir,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True
             )
             
-            startup_action.log(message_type="docker_compose_started", pid=process.pid)
-            time.sleep(4)
+            startup_action.log(message_type="compose_started", pid=process.pid)
+            time.sleep(5)
 
-        # Wait for MeiliSearch to be ready
+        # Wait for MeiliSearch to be healthy
         with start_action(action_type="wait_for_healthy") as health_action:
             max_retries = 30
             for i in range(max_retries):
@@ -87,41 +105,8 @@ def ensure_meili_is_running(meili_service_dir: Path, host: str = "127.0.0.1", po
                     continue
                 
             action.log(message_type="server_failed_to_start", host=host, port=port)
-            raise RuntimeError("MeiliSearch failed to start") 
-
-"""
-def ensure_meili_is_running(project_root: Path, host: str = "127.0.0.1", port: int = 7700) -> bool:
-    
-    with start_task(action_type="ensure_meili_running") as action:
-        # Check if MeiliSearch is already running
-        url = f"http://{host}:{port}/health"
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                return True
-        except requests.exceptions.ConnectionError:
-            pass
-
-        action.log(message_type="server is not available, so starting_server", host=host, port=port)
-
-        # Start MeiliSearch in background
-        meili_script = project_root / "bin" / "meili.sh"
+            raise RuntimeError("MeiliSearch failed to start")
         
-        process = subprocess.Popen(["/bin/bash", str(meili_script)], 
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-        time.sleep(4)
-
-        # Wait for MeiliSearch to be ready
-        max_retries = 30
-        for i in range(max_retries):
-            try:
-                response = requests.get(url)
-                if response.status_code == 200:
-                    return True
-            except requests.exceptions.ConnectionError:
-                time.sleep(1)
-                continue
-        action.log(message_type="server is not started", host=host, port=port)
-        raise RuntimeError("MeiliSearch failed to start")
-"""
+if __name__ == "__main__":
+    print("trying compose")
+    ensure_meili_is_running(Path(__file__).parent.parent.parent.parent.parent / "services" / "meili")

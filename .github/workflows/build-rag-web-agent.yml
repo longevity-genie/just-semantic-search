@@ -22,11 +22,11 @@ jobs:
         variant: ['cpu', 'gpu']
         include:
           - variant: 'cpu'
-            base_image: 'ghcr.io/longevity-genie/just-agents:main'
+            base_image: 'ghcr.io/longevity-genie/chat-ui-agents:main'
             suffix: ''
             use_gpu: 'false'
           - variant: 'gpu'
-            base_image: 'ghcr.io/longevity-genie/just-agents:main-gpu'
+            base_image: 'ghcr.io/longevity-genie/chat-ui-agents:main-gpu'
             suffix: '-gpu'
             use_gpu: 'true'
 
@@ -64,6 +64,7 @@ jobs:
           build-args: |
             base_image=${{ matrix.base_image }}
             USE_GPU=${{ matrix.use_gpu }}
+            EXTRA_DEPENDENCY=$({{ matrix.variant == 'gpu' && 'torch==2.6.0+cu124' || '' }})
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
