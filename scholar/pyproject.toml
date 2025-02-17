@@ -41,11 +41,9 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry-dynamic-versioning]
 enable = true
 vcs = "git"
-style = "pep440"
+style = "semver"
+pattern = "(?P<base>\\d+\\.\\d+\\.\\d+)"
+format-jinja = "{{base}}"
 
 [tool.poetry.group.dev.dependencies]
 just-semantic-search-meili = { path = "../meili", develop = true }
-
-[[tool.poetry.source]]
-name = "cu124"
-url = "https://download.pytorch.org/whl/cu124"
