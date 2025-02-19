@@ -4,11 +4,11 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Navigate to the MeiliSearch service directory relative to script location
-cd "$SCRIPT_DIR/../services/meili"
+cd "$SCRIPT_DIR/../services/"
 
 # Stop and remove existing container if it exists
-docker compose down
-docker rm -f meilisearch 2>/dev/null || true
+podman compose down
+podman rm -f meilisearch 2>/dev/null || true
 
-# Run docker-compose (removing -d flag to run in foreground)
-docker compose up
+# Run podman compose (removing -d flag to run in foreground)
+podman compose up

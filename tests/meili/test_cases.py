@@ -35,7 +35,7 @@ def rag(request, model: EmbeddingModel) -> MeiliRAG:
         api_key=api_key,
         create_index_if_not_exists=True,
         recreate_index=recreate_index,
-        init_callback=lambda rag: ensure_meili_is_running(meili_service_dir, rag.host, rag.port)
+        init_callback=lambda rag: ensure_meili_is_running(host=rag.host, port=rag.port)
     )
     stats = rag.index.get_stats()
     with start_action(action_type="index_population_check") as action:

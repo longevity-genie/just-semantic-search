@@ -1123,14 +1123,14 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "huggingface-hub"
-version = "0.28.1"
+version = "0.29.0"
 description = "Client library to download and publish models, datasets and other repos on the huggingface.co hub"
 optional = false
 python-versions = ">=3.8.0"
 groups = ["main"]
 files = [
-    {file = "huggingface_hub-0.28.1-py3-none-any.whl", hash = "sha256:aa6b9a3ffdae939b72c464dbb0d7f99f56e649b55c3d52406f49e0a5a620c0a7"},
-    {file = "huggingface_hub-0.28.1.tar.gz", hash = "sha256:893471090c98e3b6efbdfdacafe4052b20b84d59866fb6f54c33d9af18c303ae"},
+    {file = "huggingface_hub-0.29.0-py3-none-any.whl", hash = "sha256:c02daa0b6bafbdacb1320fdfd1dc7151d0940825c88c4ef89837fdb1f6ea0afe"},
+    {file = "huggingface_hub-0.29.0.tar.gz", hash = "sha256:64034c852be270cac16c5743fe1f659b14515a9de6342d6f42cbb2ede191fc80"},
 ]
 
 [package.dependencies]
@@ -1410,19 +1410,19 @@ referencing = ">=0.31.0"
 
 [[package]]
 name = "just-agents-core"
-version = "0.5.6"
+version = "0.5.7"
 description = "Just Agents - Base Package"
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["main"]
 files = [
-    {file = "just_agents_core-0.5.6-py3-none-any.whl", hash = "sha256:3c4b64015c92568ae85f49fa5e28ad7dbad91f3890f8cb546ba877e98f935459"},
-    {file = "just_agents_core-0.5.6.tar.gz", hash = "sha256:6d25aa7770bd8aa167c5c395383796bcb951acedbc56651d7ff819bdb72eeb24"},
+    {file = "just_agents_core-0.5.7-py3-none-any.whl", hash = "sha256:156e359842e395a59a61502f0d1d7b4801b847ad4456fb545b0e49bc7e7e855b"},
+    {file = "just_agents_core-0.5.7.tar.gz", hash = "sha256:2d523777fa7fe805060f999c0624b86cba74d3a703e7ff69e295213cc06dfad1"},
 ]
 
 [package.dependencies]
 Deprecated = ">=1.2.15"
-litellm = ">=1.61.3"
+litellm = ">=1.61.8"
 numpydoc = "*"
 pydantic = ">=2.0.0,<3.0.0"
 python-dotenv = ">=1.0.1"
@@ -1431,14 +1431,14 @@ rich = ">=13.9.4"
 
 [[package]]
 name = "just-agents-web"
-version = "0.5.6"
+version = "0.5.7"
 description = "Just Agents - Web. It allows runing openai API for the agent in the browser."
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["main"]
 files = [
-    {file = "just_agents_web-0.5.6-py3-none-any.whl", hash = "sha256:fb890f92bf1d507b775089f0b9637e6eedc987029a636eea1b9474b97f427b85"},
-    {file = "just_agents_web-0.5.6.tar.gz", hash = "sha256:b03dcaed01ab3f37aff1b61c3fa533faa507dcbc94e5f4d4058849a92cb0918d"},
+    {file = "just_agents_web-0.5.7-py3-none-any.whl", hash = "sha256:3942514fb64b351fe53ac0120a0c0e475b338db1698839f7cce3ef7d806cbab7"},
+    {file = "just_agents_web-0.5.7.tar.gz", hash = "sha256:3b55e36e7547e59c2f3b96cee28ca543cf6b33ed79cb7704d766bd6ee230d7eb"},
 ]
 
 [package.dependencies]
@@ -1474,24 +1474,6 @@ flash = ["flash-attn (>=2.7.3)"]
 [package.source]
 type = "directory"
 url = "core"
-
-[[package]]
-name = "just-semantic-search-agent"
-version = "0.1.3"
-description = "Semantic and hybrid search agent"
-optional = false
-python-versions = ">=3.11,<3.15"
-groups = ["main"]
-files = []
-develop = true
-
-[package.dependencies]
-just-agents-web = ">=0.5.6"
-just-semantic-search-scholar = "*"
-
-[package.source]
-type = "directory"
-url = "agent"
 
 [[package]]
 name = "just-semantic-search-meili"
@@ -1544,6 +1526,24 @@ typer = ">=0.9.0"
 [package.source]
 type = "directory"
 url = "scholar"
+
+[[package]]
+name = "just-semantic-search-server"
+version = "0.1.3"
+description = "Semantic and hybrid search server"
+optional = false
+python-versions = ">=3.11,<3.15"
+groups = ["main"]
+files = []
+develop = true
+
+[package.dependencies]
+just-agents-web = ">=0.5.7"
+just-semantic-search-scholar = "*"
+
+[package.source]
+type = "directory"
+url = "server"
 
 [[package]]
 name = "kiwisolver"
@@ -1637,14 +1637,14 @@ files = [
 
 [[package]]
 name = "litellm"
-version = "1.61.6"
+version = "1.61.9"
 description = "Library to easily interface with LLM API providers"
 optional = false
 python-versions = "!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,!=3.7.*,>=3.8"
 groups = ["main"]
 files = [
-    {file = "litellm-1.61.6-py3-none-any.whl", hash = "sha256:eef4c4a84a2c93de4c6d5a05a785f9b0cc61f63bafb3b3dc83d977db649e1b13"},
-    {file = "litellm-1.61.6.tar.gz", hash = "sha256:2c613823f86ce2aa7956e2458857ab6aa62258dc7da9816bfdac90735be270be"},
+    {file = "litellm-1.61.9-py3-none-any.whl", hash = "sha256:b2ba755dc8bfbc095947cc2a548f08117ec29c9176d8f67b3a83eaf52776fbc2"},
+    {file = "litellm-1.61.9.tar.gz", hash = "sha256:792263ab0e40ce10e5bb05f789bbef4578a0caaf40b7a4fc1c373a6eabf9aa0d"},
 ]
 
 [package.dependencies]
@@ -2454,14 +2454,14 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.63.1"
+version = "1.63.2"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "openai-1.63.1-py3-none-any.whl", hash = "sha256:1e30a8131fbbd4859c104137cf152901870ba346060df1934a74a71ae330f071"},
-    {file = "openai-1.63.1.tar.gz", hash = "sha256:79e53b16b3b26d151300364e0df69a863db73e85fbe117158f2639efca0d70e7"},
+    {file = "openai-1.63.2-py3-none-any.whl", hash = "sha256:1f38b27b5a40814c2b7d8759ec78110df58c4a614c25f182809ca52b080ff4d4"},
+    {file = "openai-1.63.2.tar.gz", hash = "sha256:aeabeec984a7d2957b4928ceaa339e2ead19c61cfcf35ae62b7c363368d26360"},
 ]
 
 [package.dependencies]
@@ -3523,6 +3523,22 @@ pygments = ">=2.13.0,<3.0.0"
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
+name = "roman-numerals-py"
+version = "3.0.0"
+description = "Manipulate well-formed Roman numerals"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "roman_numerals_py-3.0.0-py3-none-any.whl", hash = "sha256:a1421ce66b3eab7e8735065458de3fa5c4a46263d50f9f4ac8f0e5e7701dd125"},
+    {file = "roman_numerals_py-3.0.0.tar.gz", hash = "sha256:91199c4373658c03d87d9fe004f4a5120a20f6cb192be745c2377cce274ef41c"},
+]
+
+[package.extras]
+lint = ["mypy (==1.15.0)", "pyright (==1.1.394)", "ruff (==0.9.6)"]
+test = ["pytest (>=8)"]
+
+[[package]]
 name = "rpds-py"
 version = "0.22.3"
 description = "Python bindings to Rust's persistent data structures (rpds)"
@@ -4003,14 +4019,14 @@ files = [
 
 [[package]]
 name = "sphinx"
-version = "8.1.3"
+version = "8.2.0"
 description = "Python documentation generator"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "sphinx-8.1.3-py3-none-any.whl", hash = "sha256:09719015511837b76bf6e03e42eb7595ac8c2e41eeb9c29c5b755c6b677992a2"},
-    {file = "sphinx-8.1.3.tar.gz", hash = "sha256:43c1911eecb0d3e161ad78611bc905d1ad0e523e4ddc202a58a821773dc4c927"},
+    {file = "sphinx-8.2.0-py3-none-any.whl", hash = "sha256:3c0a40ff71ace28b316bde7387d93b9249a3688c202181519689b66d5d0aed53"},
+    {file = "sphinx-8.2.0.tar.gz", hash = "sha256:5b0067853d6e97f3fa87563e3404ebd008fce03525b55b25da90706764da6215"},
 ]
 
 [package.dependencies]
@@ -4023,6 +4039,7 @@ Jinja2 = ">=3.1"
 packaging = ">=23.0"
 Pygments = ">=2.17"
 requests = ">=2.30.0"
+roman-numerals-py = ">=1.0.0"
 snowballstemmer = ">=2.2"
 sphinxcontrib-applehelp = ">=1.0.7"
 sphinxcontrib-devhelp = ">=1.0.6"
@@ -4033,8 +4050,8 @@ sphinxcontrib-serializinghtml = ">=1.1.9"
 
 [package.extras]
 docs = ["sphinxcontrib-websupport"]
-lint = ["flake8 (>=6.0)", "mypy (==1.11.1)", "pyright (==1.1.384)", "pytest (>=6.0)", "ruff (==0.6.9)", "sphinx-lint (>=0.9)", "tomli (>=2)", "types-Pillow (==10.2.0.20240822)", "types-Pygments (==2.18.0.20240506)", "types-colorama (==0.4.15.20240311)", "types-defusedxml (==0.7.0.20240218)", "types-docutils (==0.21.0.20241005)", "types-requests (==2.32.0.20240914)", "types-urllib3 (==1.26.25.14)"]
-test = ["cython (>=3.0)", "defusedxml (>=0.7.1)", "pytest (>=8.0)", "setuptools (>=70.0)", "typing_extensions (>=4.9)"]
+lint = ["betterproto (==2.0.0b6)", "mypy (==1.15.0)", "pypi-attestations (==0.0.21)", "pyright (==1.1.394)", "pytest (>=8.0)", "ruff (==0.9.6)", "sphinx-lint (>=0.9)", "types-Pillow (==10.2.0.20240822)", "types-Pygments (==2.19.0.20250107)", "types-colorama (==0.4.15.20240311)", "types-defusedxml (==0.7.0.20240218)", "types-docutils (==0.21.0.20241128)", "types-requests (==2.32.0.20241016)", "types-urllib3 (==1.26.25.14)"]
+test = ["cython (>=3.0)", "defusedxml (>=0.7.1)", "pytest (>=8.0)", "pytest-xdist[psutil] (>=3.4)", "setuptools (>=70.0)", "typing_extensions (>=4.9)"]
 
 [[package]]
 name = "sphinx-rtd-theme"
@@ -4514,17 +4531,18 @@ sortedcontainers = "*"
 
 [[package]]
 name = "trio-websocket"
-version = "0.12.0"
+version = "0.12.1"
 description = "WebSocket library for Trio"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "trio_websocket-0.12.0-py3-none-any.whl", hash = "sha256:d50abf361d94d72ffc5151502e5ac11dae4782f1515f8a9e4a4d0971b82f793b"},
-    {file = "trio_websocket-0.12.0.tar.gz", hash = "sha256:d9bc17ee061c66c9abf62a08fe9f36949ad6be17eed281c3b979be9293f3df74"},
+    {file = "trio_websocket-0.12.1-py3-none-any.whl", hash = "sha256:608ec746bb287e5d5a66baf483e41194193c5cf05ffaad6240e7d1fcd80d1e6f"},
+    {file = "trio_websocket-0.12.1.tar.gz", hash = "sha256:d55ccd4d3eae27c494f3fdae14823317839bdcb8214d1173eacc4d42c69fc91b"},
 ]
 
 [package.dependencies]
+outcome = ">=1.2.0"
 trio = ">=0.11"
 wsproto = ">=0.14"
 
@@ -4950,4 +4968,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.15"
-content-hash = "b65c432b1fb348d93ad92d337fad8b31b7a75a9976492cd8f4659d35dc5de074"
+content-hash = "583adb00ced25ca844a649a987bfbfe526f9e397dd751f15ad83321e15e1ec11"

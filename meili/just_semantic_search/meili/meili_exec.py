@@ -27,7 +27,7 @@ project_dir = current_dir.parent.parent.parent  # Go up 2 levels from test/meili
 data_dir = project_dir / "data"
 logs = project_dir / "logs"
 tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
-meili_service_dir = project_dir / "services" / "meili"
+meili_service_dir = project_dir
 
 # Configure Eliot to output to both stdout and log files
 log_file_path = logs / f"manual_meili_{datetime.now().strftime('%Y%m%d_%H%M%S')}"

@@ -15,7 +15,7 @@ RUN if [ -f "/opt/conda/bin/python" ]; then \
     fi && \
     curl -sSL https://install.python-poetry.org | $PYTHON_CMD -
 
-ARG JUST_SEMANTIC_SEARCH_AGENT_VERSION=0.1.3
+ARG JUST_SEMANTIC_SEARCH_SERVER_VERSION=0.1.3
 
 # Declare the extra dependency argument (defaults to empty)
 ARG EXTRA_DEPENDENCY=''
@@ -31,7 +31,7 @@ RUN /bin/bash -c '\
     fi'
 
 
-RUN /root/.local/bin/poetry add  --no-interaction --no-cache "just-semantic-search-agent==${JUST_SEMANTIC_SEARCH_AGENT_VERSION}" --python ">=3.11,<3.15"
+RUN /root/.local/bin/poetry add  --no-interaction --no-cache "just-semantic-search-server==${JUST_SEMANTIC_SEARCH_SERVER_VERSION}" --python ">=3.11,<3.15"
 
 USER appuser
 
