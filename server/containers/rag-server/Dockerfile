@@ -4,7 +4,8 @@ ARG BASE_IMAGE=ghcr.io/longevity-genie/just-agents/chat-ui-agents:main
 FROM ${BASE_IMAGE}
 
 # Create directory and add requirements
-RUN mkdir -p /app/agent_tools/ /app/env
+RUN mkdir -p /app/agent_tools/ 
+RUN mkdir -p /app/env
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 RUN ls -la /app/agent_tools/
 RUN /usr/local/bin/entrypoint.sh echo "Installing dependencies with the entrypoint!"
