@@ -7,20 +7,13 @@ agent_profiles:
     assistant_index: 70
     tools: # List of tools available to this agent. These will be automatically imported.
       - package: "just_semantic_search.server.meili.tools" # Corresponds to tools/toy_tools.py.
-        function: "generate_random_matrix" # Function available within the tool.
+        function: "search_documents" # Function available within the tool.
       - package: "agent_tools.toy_tools"
         function: "summarize_dataframe"
     llm_options:
       api_base: https://api.groq.com/openai/v1
       model: groq/llama-3.3-70b-versatile
-      temperature: 0.1 # Slightly increased randomness for better flexibility.
-    examples:
-      - prompt: Generate a random 3x4 matrix, please.
-        title: Random Matrix
-      - prompt: |
-          Summarize the following dataframe: 
-          "A": [1, 2, 3, 4, 5], "B": [10, 20, 30, 40, 50]
-        title: DataFrame Summarization
+      temperature: 0.0
     system_prompt: | 
       You are a helpful assistant that can search for documents in a MeiliSearch database. You can only search in glucosedao index. It is especially usefull for CGM-related questions.
       You MUST ALWAYS provide sources for all the documents. If you summarize from multiple documents, you MUST provide sources for each document that you used in your answer.

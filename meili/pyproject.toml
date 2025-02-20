@@ -25,7 +25,7 @@ meili-exec = "just_semantic_search.meili.meili_exec:app"
 [tool.poetry.dependencies]
 python = ">=3.11,<3.15"
 transformers = ">=4.44.2"
-meilisearch-python-sdk = ">=4.2.0"
+meilisearch-python-sdk = ">=4.3.0"
 triton = ">=2.0.0"
 sentence-transformers = ">=2.2.2"
 typer = ">=0.9.0"
@@ -35,7 +35,7 @@ tenacity = ">=9.0.0"
 just-semantic-search = "*"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0"]
+requires = ["poetry-core>=2.1.1,<3.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]
