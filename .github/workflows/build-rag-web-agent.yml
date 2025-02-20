@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/rag-web-agent
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -20,6 +20,7 @@ jobs:
     strategy:
       matrix:
         variant: ['cpu', 'gpu']
+        dockerfile: ['rag-chat', 'rag-server']
         include:
           - variant: 'cpu'
             base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main'
@@ -48,7 +49,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.dockerfile }}
           tags: |
             type=raw,value=latest${{ matrix.suffix }}
             type=ref,event=branch,suffix=${{ matrix.suffix }}
@@ -59,7 +60,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./server/containers/${{ matrix.dockerfile }}
+          file: ./server/containers/${{ matrix.dockerfile }}/Dockerfile
           push: true
           build-args: |
             base_image=${{ matrix.base_image }}

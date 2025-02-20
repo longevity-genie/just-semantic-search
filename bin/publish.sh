@@ -69,7 +69,7 @@ fi
 
 # Build and publish agent package
 echo "Building and publishing agent package..."
-cd ../agent
+cd ../server
 poetry build
 if [ $? -ne 0 ]; then
     echo "Agent package build failed!"
@@ -81,6 +81,23 @@ else
         HAS_ERRORS=1
     else
         echo "Agent package built and published successfully!"
+    fi
+fi
+
+# Build and publish server package
+echo "Building and publishing server package..."
+cd ../server
+poetry build
+if [ $? -ne 0 ]; then
+    echo "Server package build failed!"
+    HAS_ERRORS=1
+else
+    poetry publish
+    if [ $? -ne 0 ]; then
+        echo "Server package publish failed!"
+        HAS_ERRORS=1
+    else
+        echo "Server package built and published successfully!"
     fi
 fi
 
