@@ -27,7 +27,7 @@ meili-exec = "just_semantic_search.meili.meili_exec:app"
 index-markdown = "just_semantic_search.agent.index_markdown:app"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.15"
+python = ">=3.10,<3.15"
 just-semantic-search = { path = "./core", develop = true }
 just-semantic-search-meili = { path = "./meili", develop = true }
 just-semantic-search-scholar = { path = "./scholar", develop = true }

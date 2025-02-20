@@ -31,7 +31,7 @@ RUN /bin/bash -c '\
     fi'
 
 
-RUN /root/.local/bin/poetry add  --no-interaction --no-cache "just-semantic-search-server==${JUST_SEMANTIC_SEARCH_SERVER_VERSION}" --python ">=3.11,<3.15"
+RUN /root/.local/bin/poetry add  --no-interaction --no-cache "just-semantic-search-server==${JUST_SEMANTIC_SEARCH_SERVER_VERSION}" --python ">=3.10,<3.15"
 
 USER appuser
 

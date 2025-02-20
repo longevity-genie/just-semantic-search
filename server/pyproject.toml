@@ -30,7 +30,7 @@ parse-papers = "just_semantic_search.server.scripts:parse_papers"
 
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.15"
+python = ">=3.10,<3.15"
 just-semantic-search-scholar = "*"
 just-semantic-search-meili = "*"
 just-agents-web = ">=0.5.7"

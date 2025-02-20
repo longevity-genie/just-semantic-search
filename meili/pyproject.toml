@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search-meili"
-version = "0.0.0"
+version = "0.1.6"
 description = "Semantic and hybrid search with meilisearch"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "Apache-2.0"
@@ -23,7 +23,7 @@ packages = [
 meili-exec = "just_semantic_search.meili.meili_exec:app"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.15"
+python = ">=3.10,<3.15"
 transformers = ">=4.44.2"
 meilisearch-python-sdk = ">=4.3.0"
 triton = ">=2.0.0"
@@ -39,7 +39,7 @@ requires = ["poetry-core>=2.1.1,<3.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "semver"
 pattern = "(?P<base>\\d+\\.\\d+\\.\\d+)"
