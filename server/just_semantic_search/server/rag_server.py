@@ -1,10 +1,12 @@
 from typing import List, Dict, Optional
 from fastapi import Query
+from just_semantic_search.meili.tools import search_documents
 from pydantic import BaseModel
 from just_agents.base_agent import BaseAgent
 from just_agents.web.chat_ui_rest_api import ChatUIAgentRestAPI
 from just_agents.web.rest_api import AgentRestAPI
 from eliot import start_task
+from just_semantic_search.server.rag_agent import DEFAULT_RAG_AGENT
 
 class SearchRequest(BaseModel):
     query: str
@@ -27,21 +29,40 @@ class RAGServer(AgentRestAPI):
 
     def _configure_rag_routes(self):
         """Configure RAG-specific routes"""
-        self.post("/search", description="Perform semantic search with hybrid capabilities")(self.search)
-        
+        self.post("/search", description="Perform semantic search")(self.search)
+        self.post("/search_agent", description="Perform advanced RAG-based search")(self.search_advanced)
 
-    async def search(self, request: SearchRequest) -> List[Dict]:
+    async def search(self, query: str, index: str, limit: int = 10) -> List[Dict]:
         """
-        Perform a semantic search with optional hybrid search capabilities.
+        Perform a semantic search.
         
         Args:
-            request: SearchRequest containing search parameters
+            query: The search query string
+            index: The index to search in
+            limit: Maximum number of results to return (default: 10)
             
         Returns:
             List of matching documents with their metadata
         """
-        with start_task as action:
-            action.log("checking search request")
-            # Here you would implement the actual search logic
-            # This is a placeholder that should be implemented based on your specific RAG implementation
-            raise NotImplementedError("Search functionality needs to be implemented")
+        with start_task(action_type="rag_server_search", query=query, index=index, limit=limit) as action:
+            action.log("performing search")
+            return search_documents(
+                query=query,
+                index=index,
+                limit=limit
+            )
+
+    async def search_advanced(self, query: str) -> str:
+        """
+        Perform an advanced search using the RAG agent that can provide contextual answers.
+        
+        Args:
+            query: The search query string
+            
+        Returns:
+            A detailed response from the RAG agent incorporating retrieved documents
+        """
+        with start_task(action_type="rag_server_advanced_search", query=query) as action:
+            action.log("performing advanced RAG search")
+            result = DEFAULT_RAG_AGENT.query(query)
+            return result

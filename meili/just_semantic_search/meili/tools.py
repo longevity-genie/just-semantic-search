@@ -8,12 +8,13 @@ from typing import Optional, Callable
 
 from meilisearch_python_sdk.models.index import IndexStats
 
-def all_indexes() -> list[str]:
+def all_indexes(non_empty: bool = True) -> list[str]:
     """
     Get all indexes that you can use for search
+    non_empty: bool = True
     """
     db = MeiliBase()
-    return db.non_empty_indexes()
+    return db.non_empty_indexes() if non_empty else db.all_indexes()
 
 def search_documents_raw(query: str, index: str, limit: Optional[int] = 4) -> list[dict]:
     """
@@ -49,7 +50,7 @@ def search_documents_raw(query: str, index: str, limit: Optional[int] = 4) -> li
     )
     return rag.search(query, limit=limit)
 
-def search_documents(query: str, index: str, limit: Optional[int] = 4) -> list[dict]:
+def search_documents(query: str, index: str, limit: Optional[int] = 4) -> list[str]:
     """
     Search documents in MeiliSearch database.
     
@@ -71,9 +72,10 @@ def search_documents(query: str, index: str, limit: Optional[int] = 4) -> list[d
       ]
     """
     with start_action(action_type="search_documents", query=query, index=index, limit=limit) as action:
-        hits = search_documents_raw(query, index, limit).hits
+        hits: list[dict] = search_documents_raw(query, index, limit).hits
         action.log(message_type="search_documents_results_count", count=len(hits))
-        return [ h["text"] + "\n SOURCE: " + h["source"] for h in hits]
+        result: list[str] = [ h["text"] + "\n SOURCE: " + h["source"] for h in hits]
+        return result
     
 
 def search_documents_debug(query: str, index: str, limit: Optional[int] = 4) -> list[dict]:

@@ -1,8 +1,6 @@
 from semanticscholar import SemanticScholar
 import os
 from rich.pretty import pprint
-from scholarly import scholarly
-
 
 from semanticscholar.PaginatedResults import PaginatedResults
 

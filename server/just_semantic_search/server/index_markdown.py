@@ -92,7 +92,6 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
                 "authors": ["...", "..."],
                 "title": "...",
                 "source": "...",
-                "filename": "..."
             }
             For string either use one line or use proper escape characters (\n) for line breaks
             Make sure to provide the output in the correct format, do not add any other text or comments.
@@ -157,4 +156,8 @@ def index_markdown_command(
         
 
 if __name__ == "__main__":
-    app(prog_name="index-markdown", help=True)  # Show help by default
+    import sys
+    if len(sys.argv) == 1:
+        # If no arguments provided, show help
+        sys.argv.append("--help")
+    app(prog_name="index-markdown")

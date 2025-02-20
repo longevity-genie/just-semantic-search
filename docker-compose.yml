@@ -12,13 +12,13 @@ services:
       - MEILI_EXPERIMENTAL_ENABLE_METRICS=true
       - MEILI_EXPERIMENTAL_ENABLE_VECTORS=true
     ports:
-      - ${MEILI_PORT:-7700}:7700
+      - 7700:7700
     cap_add: # needed to work smoothly on rootless Ubuntu 24.04
       - DAC_OVERRIDE # feel free to remove it if you are not using Ubuntu 24.04
     networks:
       - meilisearch
     volumes:
-      - ./data.ms:/data.ms:U
+      - ./meilisearch_data:/data.ms
     restart: unless-stopped
     #env_file:
     #  - ../.env    

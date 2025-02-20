@@ -111,6 +111,10 @@ class MeiliBase(BaseModel):
     async def delete_index_async(self):
         return await self.client_async.delete_index_if_exists(self.index_name)
     
+
+    def all_indexes(self):
+        return [key for key in self.client.get_all_stats().indexes.keys()]
+    
     def non_empty_indexes(self):
         return [key for key, value in self.client.get_all_stats().indexes.items() if value.number_of_documents > 0]
 
