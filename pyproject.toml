@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search-all"
-version = "0.0.0"
+version = "0.1.5-post.1+67c7727"
 package-mode = false
 description = "Semantic search implementation with hybrid search support and multiple backends"
 authors = [
@@ -39,7 +39,7 @@ pytest = "^8.3.4"
 pycomfort = ">=0.0.17"
 
 [build-system]
-requires = ["poetry-core>=2.1.1", "poetry-dynamic-versioning>=1.0.0"]
+requires = ["poetry-core>=2.1.1", "poetry-dynamic-versioning>=1.4.1"]
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]

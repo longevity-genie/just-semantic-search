@@ -35,7 +35,7 @@ patito = ">=0.8.3"
 seaborn = ">=0.13.2"
 
 [build-system]
-requires = ["poetry-core>=2.1.1", "poetry-dynamic-versioning>=1.0.0"]
+requires = ["poetry-core>=2.1.1", "poetry-dynamic-versioning>=1.4.1"]
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]
