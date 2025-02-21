@@ -1,7 +1,7 @@
 from pathlib import Path
 import time
 import subprocess
-from just_semantic_search.utils.logs import to_nice_stdout
+from pycomfort.logging import to_nice_stdout
 import requests
 import shutil
 
@@ -9,7 +9,7 @@ from eliot._output import *
 from eliot import start_action, start_task
 
 
-def ensure_meili_is_running(meili_service_dir: Path = Path(__file__).parent.parent.parent.parent.parent, host: str = "127.0.0.1", port: int = 7700) -> bool:
+def ensure_meili_is_running(meili_service_dir: Path = Path(__file__).parent.parent.parent.parent, host: str = "127.0.0.1", port: int = 7700) -> bool:
     """Start MeiliSearch container if not running and wait for it to be ready using Podman & podman compose,
     falling back to Docker Compose if Podman is not available."""
     

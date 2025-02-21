@@ -1,4 +1,4 @@
-Example of the agent using RAG
+RAG Server package 
 
 Depends on the just-agents package
 
@@ -27,7 +27,7 @@ You can either user meilisearch separately from just-chat or you can extend the 
 ```
 meilisearch:
     container_name: meilisearch
-    image: getmeili/meilisearch:v1.13.0-rc.2 # we have to use it because migration got easier
+    image: getmeili/meilisearch:v1.13.0
     environment:
       - http_proxy
       - https_proxy

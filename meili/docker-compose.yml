@@ -1,0 +1,27 @@
+services:
+  meilisearch:
+    image: docker.io/getmeili/meilisearch:v1.13.0 # we have to use it because migration got easier
+    environment:
+      - http_proxy
+      - https_proxy
+      - MEILI_MASTER_KEY=fancy_master_key
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_ENV=development
+      - MEILI_LOG_LEVEL
+      - MEILI_DB_PATH=/data.ms
+      - MEILI_EXPERIMENTAL_ENABLE_METRICS=true
+      - MEILI_EXPERIMENTAL_ENABLE_VECTORS=true
+    networks:
+      - meilisearch
+    ports:
+      - 7700:7700
+    cap_add: # needed to work smoothly on rootless Ubuntu 24.04
+      - DAC_OVERRIDE # feel free to remove it if you are not using Ubuntu 24.04
+    volumes:
+      - ./meilisearch_data:/data.ms
+    restart: unless-stopped
+
+
+networks:
+  meilisearch:
+    driver: bridge

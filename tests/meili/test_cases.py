@@ -5,7 +5,10 @@ from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from eliot import start_action
 from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
+from pycomfort.logging import to_nice_stdout
 from tests.meili.functions import index_file, simulate_meilisearch_disconnection
+
+to_nice_stdout()
 
 
 @pytest.fixture

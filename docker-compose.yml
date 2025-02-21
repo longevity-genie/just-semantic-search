@@ -7,7 +7,7 @@ services:
       - MEILI_MASTER_KEY=fancy_master_key
       - MEILI_NO_ANALYTICS=true
       - MEILI_ENV=development
-      - MEILI_LOG_LEVEL
+      - MEILI_LOG_LEVEL=debug
       - MEILI_DB_PATH=/data.ms
       - MEILI_EXPERIMENTAL_ENABLE_METRICS=true
       - MEILI_EXPERIMENTAL_ENABLE_VECTORS=true
@@ -15,14 +15,42 @@ services:
       - 7700:7700
     cap_add: # needed to work smoothly on rootless Ubuntu 24.04
       - DAC_OVERRIDE # feel free to remove it if you are not using Ubuntu 24.04
-    networks:
-      - meilisearch
     volumes:
       - ./meilisearch_data:/data.ms
     restart: unless-stopped
     #env_file:
     #  - ../.env    
-
-networks:
-  meilisearch:
-    driver: bridge
+  rag-server:
+    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:local
+    depends_on:
+      - meilisearch
+    ports:
+      - 8088:8088
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s 0.0.0.0:8089 | grep -q REST && test -f ./env/.env.local"]
+      interval: 15s
+      retries: 10
+      start_period: 15s
+      timeout: 1s
+    environment:
+      - APP_PORT: "8089" #app port inside container
+      - APP_HOST: "0.0.0.0" #app host inside container, 0's to expose
+      - AGENT_PORT: "8089" #agent port for chat to access
+      - AGENT_HOST: "http://just-chat-ui-agents" #agent host for chat to access
+      - AGENT_TITLE: "Just Chat-UI REST API node"
+      - AGENT_PARENT_SECTION: "agent_profiles"
+      - AGENT_DEBUG: "false"
+      - AGENT_REMOVE_SYSTEM_PROMPT: "false"
+      - AGENT_CONFIG_PATH: "/app/chat_agent_profiles.yaml"
+      - USER_ID: ${USER_ID:-${UID}}
+      - GROUP_ID: ${GROUP_ID:-${GID}}
+      - MODELS_DIR: "/app/models.d"
+      - AGENT_FAILFAST: "true"
+      - EMBEDDING_MODEL: "jinaai/jina-embeddings-v3"
+      - MEILI_MASTER_KEY: "fancy_master_key"
+    restart: on-failure:3
+    volumes:
+      - "./data:/data"
+      - "./env:/app/env"
+      - "./logs:/app/logs"
+      - "./chat_agent_profiles.yaml:/app/chat_agent_profiles.yaml"

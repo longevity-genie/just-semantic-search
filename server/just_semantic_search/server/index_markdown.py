@@ -2,7 +2,7 @@ from just_semantic_search.article_splitter import ArticleSplitter
 from typing import List, Optional
 from pydantic import BaseModel
 from just_semantic_search.text_splitters import *
-from just_semantic_search.utils.logs import to_nice_file, to_nice_stdout
+from pycomfort.logging import to_nice_file, to_nice_stdout
 from just_semantic_search.embeddings import *
 
 from just_semantic_search.utils.tokens import *
@@ -31,7 +31,7 @@ project_dir = current_dir.parent.parent.parent  # Go up 2 levels from test/meili
 data_dir = project_dir / "data"
 logs = project_dir / "logs"
 tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
-meili_service_dir = project_dir
+meili_service_dir = project_dir / "meili"
 
 # Configure Eliot to output to both stdout and log files
 log_file_path = logs / f"manual_meili_{datetime.now().strftime('%Y%m%d_%H%M%S')}"

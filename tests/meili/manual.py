@@ -1,6 +1,7 @@
+from pprint import pprint
 from just_semantic_search.splitter_factory import SplitterType
 from just_semantic_search.text_splitters import *
-from just_semantic_search.utils.logs import to_nice_file, to_nice_stdout
+from pycomfort.logging import to_nice_file, to_nice_stdout
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path

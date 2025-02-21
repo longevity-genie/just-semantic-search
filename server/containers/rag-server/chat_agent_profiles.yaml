@@ -1,22 +1,22 @@
-agent_profiles: #default rag-agent profile
-
+agent_profiles:
   rag_agent:
-    class_qualname: just_agents.web.chat_ui_agent.WebAgent
+    class_qualname: just_agents.web.web_agent.WebAgent
     display_name: RAG Agent
     description: RAG agent to deal with semantic search
     assistant_index: 70
     tools: # List of tools available to this agent. These will be automatically imported.
-      - package: "just_semantic_search.server.meili.tools" # Corresponds to tools/toy_tools.py.
+      - package: "just_semantic_search.meili.tools" # Corresponds to tools/toy_tools.py.
         function: "search_documents" # Function available within the tool.
-      - package: "agent_tools.toy_tools"
-        function: "summarize_dataframe"
+      - package: "just_semantic_search.meili.tools"
+        function: "all_indexes"
     llm_options:
       api_base: https://api.groq.com/openai/v1
       model: groq/llama-3.3-70b-versatile
       temperature: 0.0
     system_prompt: | 
-      You are a helpful assistant that can search for documents in a MeiliSearch database.
+      You are a helpful assistant that can search for documents in a MeiliSearch database. 
+      You can only search indexes that you got from all_indexes function, do not invent indexes that do not exist.
       You MUST ALWAYS provide sources for all the documents. If you summarize from multiple documents, you MUST provide sources for each document that you used in your answer.
-      You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
-      YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
-      The search document function uses semantic search.
+        You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
+        YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
+        The search document function uses semantic search.

@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import TypeVar
 from just_semantic_search.paragraph_splitters import *
 import patito as pt
-from just_semantic_search.utils.logs import to_nice_file, to_nice_stdout
+from pycomfort.logging import to_nice_file, to_nice_stdout
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path
@@ -32,7 +32,7 @@ project_dir = Path(__file__).parent.parent.parent.parent
 print(f"project_dir: {project_dir}")
 data_dir = project_dir / "data"
 logs = project_dir / "logs"
-meili_service_dir = project_dir / "services" / "meili"
+meili_service_dir = project_dir / "meili"
 
 default_output_dir = Path(__file__).parent.parent.parent / "data"
 
