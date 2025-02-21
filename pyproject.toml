@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search-all"
-version = "0.1.5-post.1+67c7727"
+version = "0.0.0"
 package-mode = false
 description = "Semantic search implementation with hybrid search support and multiple backends"
 authors = [

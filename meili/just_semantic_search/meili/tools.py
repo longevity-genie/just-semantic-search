@@ -8,6 +8,7 @@ from typing import Optional, Callable
 
 from meilisearch_python_sdk.models.index import IndexStats
 
+
 def all_indexes(non_empty: bool = True) -> list[str]:
     """
     Get all indexes that you can use for search

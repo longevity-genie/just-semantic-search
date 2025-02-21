@@ -119,6 +119,20 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
         )
         return documents
 
+def index_markdown_tool(folder: Path, index_name: str,) -> List[dict]:
+    model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
+    model = EmbeddingModel(model_str)
+
+    max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
+    characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
+    
+    # Create and return RAG instance with conditional recreate_index
+    # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
+    rag = MeiliRAG(
+        index_name=index_name,
+        model=model,        # The embedding model used for the search
+    )
+    return index_markdown(rag, folder, max_seq_length, characters_for_abstract)
 
 @app.command("index-markdown")
 def index_markdown_command(

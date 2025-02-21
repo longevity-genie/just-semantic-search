@@ -18,14 +18,12 @@ services:
     volumes:
       - ./meilisearch_data:/data.ms
     restart: unless-stopped
-    #env_file:
-    #  - ../.env    
   rag-server:
     image: ghcr.io/longevity-genie/just-semantic-search/rag-server:local
     depends_on:
       - meilisearch
     ports:
-      - 8088:8088
+      - 8089:8089
     healthcheck:
       test: ["CMD-SHELL", "curl -s 0.0.0.0:8089 | grep -q REST && test -f ./env/.env.local"]
       interval: 15s
@@ -48,6 +46,8 @@ services:
       - AGENT_FAILFAST: "true"
       - EMBEDDING_MODEL: "jinaai/jina-embeddings-v3"
       - MEILI_MASTER_KEY: "fancy_master_key"
+      - MEILISEARCH_HOST: "127.0.0.1" # Meilisearch host address
+      - MEILISEARCH_PORT: 7700 # Meilisearch port number
     restart: on-failure:3
     volumes:
       - "./data:/data"

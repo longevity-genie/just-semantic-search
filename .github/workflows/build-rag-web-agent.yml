@@ -19,17 +19,18 @@ jobs:
       packages: write
     strategy:
       matrix:
-        variant: ['cpu', 'gpu']
-        dockerfile: ['rag-chat', 'rag-server']
+        # Temporarily disable GPU and rag-chat builds
+        variant: ['cpu'] # ['cpu', 'gpu']
+        dockerfile: ['rag-server'] # ['rag-chat', 'rag-server']
         include:
           - variant: 'cpu'
             base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main'
             suffix: ''
             use_gpu: 'false'
-          - variant: 'gpu'
-            base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main-gpu'
-            suffix: '-gpu'
-            use_gpu: 'true'
+          # - variant: 'gpu'
+          #   base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main-gpu'
+          #   suffix: '-gpu'
+          #   use_gpu: 'true'
 
     steps:
       - name: Checkout repository

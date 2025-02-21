@@ -10,12 +10,10 @@ agent_profiles:
       - package: "just_semantic_search.meili.tools"
         function: "all_indexes"
     llm_options:
-      api_base: https://api.groq.com/openai/v1
-      model: groq/llama-3.3-70b-versatile
+      model: gemini/gemini-2.0-flash
       temperature: 0.0
     system_prompt: | 
-      You are a helpful assistant that can search for documents in a MeiliSearch database. 
-      You can only search indexes that you got from all_indexes function, do not invent indexes that do not exist.
+      You are a helpful assistant that can search for documents in a MeiliSearch database.
       You MUST ALWAYS provide sources for all the documents. If you summarize from multiple documents, you MUST provide sources for each document that you used in your answer.
         You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
         YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.

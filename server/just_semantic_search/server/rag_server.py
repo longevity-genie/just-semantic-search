@@ -11,6 +11,7 @@ import uvicorn
 from just_agents.web.config import ChatUIAgentConfig
 import typer
 from pycomfort.logging import to_nice_stdout
+from just_semantic_search.server.index_markdown import index_markdown_tool
 
 env_config = ChatUIAgentConfig()
 app = typer.Typer()
@@ -48,14 +49,24 @@ class RAGServer(AgentRestAPI):
             description=description,
             *args, **kwargs
         )
+        self._indexes = None
         self._configure_rag_routes()
+
+    @property
+    def indexes(self) -> List[str]:
+        """Lazy property that returns cached list of indexes or fetches them if not cached"""
+        if self._indexes is None:
+            self._indexes = self.list_indexes()
+        return self._indexes
 
     def _configure_rag_routes(self):
         """Configure RAG-specific routes"""
         self.post("/search", description="Perform semantic search")(self.search)
-        self.post("/search_agent", description="Perform advanced RAG-based search")(self.search_advanced)
+        self.post("/search_agent", description="Perform advanced RAG-based search")(self.search_agent)
+        self.post("/list_indexes", description="Get all indexes")(self.list_indexes)
+        self.post("/index_markdown_folder", description="Index a folder with markdown files")(self.index_markdown_folder)
 
-    async def search(self, query: str, index: str, limit: int = 10) -> List[Dict]:
+    def search(self, query: str, index: str, limit: int = 10) -> list[str]:
         """
         Perform a semantic search.
         
@@ -75,26 +86,43 @@ class RAGServer(AgentRestAPI):
                 limit=limit
             )
 
-    async def search_advanced(self, query: str) -> str:
+    def search_agent(self, query: str, index: Optional[str] = None, additional_instructions: Optional[str] = None) -> str:
         """
         Perform an advanced search using the RAG agent that can provide contextual answers.
         
         Args:
             query: The search query string
+            index: The index to search in (takes all indexes if not specified)
+            additional_instructions: Additional instructions to the agent
             
         Returns:
             A detailed response from the RAG agent incorporating retrieved documents
         """
         with start_task(action_type="rag_server_advanced_search", query=query) as action:
             action.log("performing advanced RAG search")
+            indexes = self.indexes if index is None else [index]
+            query = f"Search the following query:```\n{query}\n```\nYou can only search in the following indexes: {indexes}"
+            if additional_instructions is not None:
+                query += f"\nADDITIONAL INSTRUCTIONS: {additional_instructions}"
             result = DEFAULT_RAG_AGENT.query(query)
             return result
     
-    async def list_indexes(self, non_empty: bool = True) -> List[Dict]:
+    def list_indexes(self, non_empty: bool = True) -> List[str]:
         """
-        Get all indexes.
+        Get all indexes and update the cache.
         """
-        return all_indexes(non_empty=non_empty)
+        self._indexes = all_indexes(non_empty=non_empty)
+        return self._indexes
+    
+    def index_markdown_folder(self, folder: str, index_name: str) -> List[str]:
+        """
+        Indexes a folder with markdown files. The server should have access to the folder.
+        """
+        if not Path(folder).exists():
+            raise FileNotFoundError(f"Folder {folder} does not existm or the server does not have access to it")
+        docs = index_markdown_tool(Path(folder), index_name)
+        sources = [doc["source"] for doc in docs]
+        return f"Indexed {len(docs)} documents from {folder} with sources: {sources}"
 
 def run_rag_server(
     config: Optional[Path] = None,
@@ -126,6 +154,7 @@ def run_rag_server(
         port=port,
         workers=workers
     )
+
 
 def run_rag_server_command(
     config: Optional[Path] = None,

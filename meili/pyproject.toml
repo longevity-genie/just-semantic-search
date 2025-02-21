@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search-meili"
-version = "0.1.6"
+version = "0.0.0"
 description = "Semantic and hybrid search with meilisearch"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "Apache-2.0"
