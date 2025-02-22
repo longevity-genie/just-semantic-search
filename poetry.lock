@@ -1315,7 +1315,7 @@ uvicorn = ">=0.34.0"
 
 [[package]]
 name = "just-semantic-search"
-version = "0.1.8"
+version = "0.2.1"
 description = "Core interfaces for hybrid search implementations"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1334,8 +1334,8 @@ transformers = ">=4.49.0"
 typer = "*"
 
 [package.extras]
-cuda = []
-flash = ["flash-attn (>=2.7.3)"]
+cpu = ["optimum (>=1.16.1)"]
+gpu = ["flash-attn (>=2.7.3)", "triton (>=2.3.0)"]
 
 [package.source]
 type = "directory"
@@ -1343,7 +1343,7 @@ url = "core"
 
 [[package]]
 name = "just-semantic-search-meili"
-version = "0.1.8"
+version = "0.2.1"
 description = "Semantic and hybrid search with meilisearch"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1355,10 +1355,7 @@ develop = true
 just-semantic-search = "*"
 meilisearch-python-sdk = ">=4.3.0"
 rich = ">=13.9.4"
-sentence-transformers = ">=2.2.2"
 tenacity = ">=9.0.0"
-transformers = ">=4.44.2"
-triton = ">=2.0.0"
 typer = ">=0.9.0"
 
 [package.source]
@@ -1367,7 +1364,7 @@ url = "meili"
 
 [[package]]
 name = "just-semantic-search-scholar"
-version = "0.1.8"
+version = "0.2.1"
 description = "Semantic and hybrid search with scholar"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1390,7 +1387,7 @@ url = "scholar"
 
 [[package]]
 name = "just-semantic-search-server"
-version = "0.1.8"
+version = "0.2.1"
 description = "Semantic and hybrid search server"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -2165,14 +2162,14 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.63.2"
+version = "1.64.0"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "openai-1.63.2-py3-none-any.whl", hash = "sha256:1f38b27b5a40814c2b7d8759ec78110df58c4a614c25f182809ca52b080ff4d4"},
-    {file = "openai-1.63.2.tar.gz", hash = "sha256:aeabeec984a7d2957b4928ceaa339e2ead19c61cfcf35ae62b7c363368d26360"},
+    {file = "openai-1.64.0-py3-none-any.whl", hash = "sha256:20f85cde9e95e9fbb416e3cb5a6d3119c0b28308afd6e3cc47bf100623dac623"},
+    {file = "openai-1.64.0.tar.gz", hash = "sha256:2861053538704d61340da56e2f176853d19f1dc5704bc306b7597155f850d57a"},
 ]
 
 [package.dependencies]
@@ -4179,6 +4176,7 @@ description = "A language and compiler for custom Deep Learning operations"
 optional = false
 python-versions = "*"
 groups = ["main"]
+markers = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
 files = [
     {file = "triton-3.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b3e54983cd51875855da7c68ec05c05cf8bb08df361b1d5b69e05e40b0c9bd62"},
     {file = "triton-3.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8009a1fb093ee8546495e96731336a33fb8856a38e45bb4ab6affd6dbc3ba220"},
