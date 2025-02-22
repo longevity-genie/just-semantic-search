@@ -1334,8 +1334,7 @@ transformers = ">=4.49.0"
 typer = "*"
 
 [package.extras]
-cpu = ["optimum (>=1.16.1)"]
-gpu = ["flash-attn (>=2.7.3)", "triton (>=2.3.0)"]
+cuda = ["torch (==2.6.0)", "torch (==2.6.0+cu124)", "triton (>=2.3.0)"]
 
 [package.source]
 type = "directory"

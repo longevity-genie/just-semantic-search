@@ -93,7 +93,7 @@ git clone https://github.com/your-username/just-semantic-search.git
 cd just-semantic-search
 
 # Install dependencies and create virtual environment
-poetry install
+poetry install #cpu by default, to install gpu version use poetry install --extras cuda
 
 # Install Poetry Shell plugin
 poetry self add poetry-plugin-shell
@@ -101,6 +101,13 @@ poetry self add poetry-plugin-shell
 # Activate the virtual environment
 poetry shell
 ```
+
+Note: to make proper GPU (CUDA) resolution you must apply:
+```bash
+poetry config installer.re-resolve false
+poetry install --extras cuda
+```
+
 
 ### Docker and Podman Setup for Meilisearch
 

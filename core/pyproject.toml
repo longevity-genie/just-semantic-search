@@ -1,8 +1,9 @@
+# IMPORTANT: to make proper cpu/gpu resolution you must apply poetry config installer.re-resolve false
 [tool.poetry]
 name = "just-semantic-search"
 version = "0.0.0"
 description = "Core interfaces for hybrid search implementations"
-authors = ["Anton Kulaga <antonkulaga@gmail.com>", "Alex Karmazin <karmazinalex@gmail.com>", "Newton Winter <isoutthere@gmail.com>"]
+authors = ["Alex Karmazin <karmazinalex@gmail.com>", "Anton Kulaga <antonkulaga@gmail.com>", "Newton Winter <isoutthere@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 packages = [{include = "just_semantic_search"}]
@@ -10,8 +11,13 @@ keywords = ["python", "llm", "science", "review", "hybrid search", "semantic sea
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Operating System :: Unix",
+    "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
 ]
@@ -37,18 +43,17 @@ einops = ">=0.8.0"
 eliot = ">=1.16.0"
 eliot-tree = ">=24.0.0"
 
-# Conditional dependencies with exclusive markers
+# Install Torch as CPU by default unless the 'cuda' extra is enabled.
 torch = [
-    { version = "2.6.0", source = "torch-cpu", markers = "extra == 'cpu' and extra != 'gpu'" },
-    { version = "2.6.0+cu124", source = "torch-gpu", markers = "extra == 'gpu' and extra != 'cpu'" }
+  { version = "2.6.0", source = "torch-cpu", markers = "extra != 'cuda'" },
+  { version = "2.6.0+cu124", source = "torch-gpu", markers = "extra == 'cuda'" }
 ]
-optimum = { version = ">=1.16.1", optional = true }
-flash-attn = { version = ">=2.7.3", optional = true }
-triton = { version = ">=2.3.0", optional = true }
+
+# Optional GPU-specific dependencies.
+triton = { version = ">=2.3.0", optional = true, markers = "extra == 'cuda'" }
 
 [tool.poetry.extras]
-cpu = ["optimum"]
-gpu = ["flash-attn", "triton"]
+cuda = ["torch", "triton"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.4.1"]
