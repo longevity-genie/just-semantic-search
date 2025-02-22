@@ -10,6 +10,8 @@ ADD server/containers/rag-server/init.py /app/agent_tools/init.py
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 RUN ls -la /app/agent_tools/
 
+RUN poetry config installer.re-resolve false
+
 # Add poetry remove command
 RUN poetry remove just-agents-web just-agents-core #we remove local version of just-agents-web because it will conflictwith just-semantic-search-server
 #RUN pip freeze  2>&1
