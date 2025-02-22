@@ -19,30 +19,42 @@ services:
       - ./meilisearch_data:/data.ms
     restart: unless-stopped
   rag-server:
-    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:local
+    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:main
+    # For Podman GPU support
+    devices:
+      - nvidia.com/gpu=all
+    # For Docker GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     depends_on:
       - meilisearch
     ports:
-      - 8089:8089
+      - 8090:8090
     healthcheck:
       test: ["CMD-SHELL", "curl -s 0.0.0.0:8089 | grep -q REST && test -f ./env/.env.local"]
       interval: 15s
       retries: 10
       start_period: 15s
       timeout: 1s
+    env_file:
+      - .env
     environment:
-      - APP_PORT: "8089" #app port inside container
-      - APP_HOST: "0.0.0.0" #app host inside container, 0's to expose
-      - AGENT_TITLE: "RAG agent REST API node"
-      - AGENT_PARENT_SECTION: "agent_profiles"
-      - AGENT_DEBUG: "false"
-      - AGENT_CONFIG_PATH: "/app/chat_agent_profiles.yaml"
-      - USER_ID: ${USER_ID:-${UID}}
-      - GROUP_ID: ${GROUP_ID:-${GID}}
-      - EMBEDDING_MODEL: "jinaai/jina-embeddings-v3"
-      - MEILI_MASTER_KEY: "fancy_master_key"
-      - MEILISEARCH_HOST: "127.0.0.1" # Meilisearch host address
-      - MEILISEARCH_PORT: 7700 # Meilisearch port number
+      - APP_PORT=8090 #app port inside container
+      - APP_HOST=0.0.0.0 #app host inside container, 0's to expose
+      - AGENT_PARENT_SECTION=agent_profiles
+      - AGENT_DEBUG=false
+      - AGENT_CONFIG_PATH=/app/chat_agent_profiles.yaml
+      - USER_ID=${USER_ID:-${UID}}
+      - GROUP_ID=${GROUP_ID:-${GID}}
+      - EMBEDDING_MODEL=jinaai/jina-embeddings-v3
+      - MEILI_MASTER_KEY=fancy_master_key
+      - MEILISEARCH_HOST=127.0.0.1
+      - MEILISEARCH_PORT=7700
     restart: on-failure:3
     volumes:
       - "./data:/data"

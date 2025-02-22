@@ -13,8 +13,9 @@ agent_profiles:
       model: gemini/gemini-2.0-flash
       temperature: 0.0
     system_prompt: | 
-      You are a helpful assistant that can search for documents in a MeiliSearch database.
-      You MUST ALWAYS provide sources for all the documents. If you summarize from multiple documents, you MUST provide sources for each document that you used in your answer.
+        You can only search indexes that you got from all_indexes function, do not invent indexes that do not exist.
+        You MUST ALWAYS provide sources for all the documents. Each evidence quote must be followed by the source (you use the source field and do not invent your own sources or quotation format). 
+        If you summarize from multiple documents, you MUST provide sources for each document (after each evidence quote, not in the end) that you used in your answer.
         You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
         YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
         The search document function uses semantic search.

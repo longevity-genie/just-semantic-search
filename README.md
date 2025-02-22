@@ -6,6 +6,54 @@
 [![Tests](https://github.com/longevity-genie/just-semantic-search/actions/workflows/test.yml/badge.svg)](https://github.com/longevity-genie/just-semantic-search/actions/workflows/test.yml)
 
 LLM-agnostic semantic-search library with hybrid search support and multiple backends.
+It also includes a REST API for semantic search which allows both meili-based search and agentic search.
+
+# Using Just Semantic Search Server
+
+We provide a REST API for semantic search that supports both Meilisearch-based and agentic search capabilities. The server includes:
+
+- Meilisearch backend for vector and hybrid search
+- RAG server with sentence-transformers for embeddings (CUDA-enabled but works without GPU)
+- API endpoints for document indexing and search
+- Optional Gemini integration for document summarization
+
+## Prerequisites
+
+- Docker or Podman installed
+- [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (optional, for GPU support)
+- At least 14GB free disk space (for container images)
+
+## Quick Start
+
+1. Copy and configure environment variables:
+
+```bash
+cp ./env.template ./env  # Then edit .env with your settings
+```
+
+2. Start the services:
+
+```bash
+podman compose up   # or 'docker compose up'
+```
+
+3. Access the services:
+- REST API documentation: http://localhost:8090/docs
+- Meilisearch dashboard: http://localhost:7700
+
+## Indexing Documents
+
+The server provides several ways to index documents:
+
+1. Using the REST API directly (see API docs)
+2. Using the `index-markdown` command for markdown files with optional Gemini summarization
+3. Using the PDF conversion utility (requires GPU):
+
+```bash
+server/bin/index_papers.sh -i /path/to/pdfs -o /path/to/output
+```
+
+# Using just-semantic-search as a library
 
 ## Features
 
@@ -222,6 +270,6 @@ If you use this software in your research, please cite:
   title = {just-semantic-search: LLM-agnostic semantic search library},
   author = {Karmazin, Alex and Kulaga, Anton},
   year = {2024},
-  url = {https://github.com/your-username/just-semantic-search}
+  url = {https://github.com/longevity-genie/just-semantic-search}
 }
 ```
