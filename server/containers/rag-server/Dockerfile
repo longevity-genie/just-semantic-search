@@ -9,6 +9,10 @@ RUN chmod -R 777 /app
 ADD server/containers/rag-server/init.py /app/agent_tools/init.py
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 RUN ls -la /app/agent_tools/
+
+# Add poetry remove command
+RUN poetry remove just-agents-web # we remove local version of just-agents-web because it will conflictwith just-semantic-search-server
+
 #RUN pip freeze  2>&1
 RUN bash /usr/local/bin/entrypoint.sh echo "Installing dependencies with the entrypoint!" 2>&1
 
