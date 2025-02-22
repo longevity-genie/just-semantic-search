@@ -19,7 +19,7 @@ services:
       - ./meilisearch_data:/data.ms
     restart: unless-stopped
   rag-server:
-    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:main
+    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:local
     # For Podman GPU support
     devices:
       - nvidia.com/gpu=all

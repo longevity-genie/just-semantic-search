@@ -11,11 +11,10 @@ ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.
 RUN ls -la /app/agent_tools/
 
 # Add poetry remove command
-RUN poetry remove just-agents-web # we remove local version of just-agents-web because it will conflictwith just-semantic-search-server
-
+RUN poetry remove just-agents-web just-agents-core #we remove local version of just-agents-web because it will conflictwith just-semantic-search-server
 #RUN pip freeze  2>&1
 RUN bash /usr/local/bin/entrypoint.sh echo "Installing dependencies with the entrypoint!" 2>&1
 
 # Add verification step
 RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')" || echo "PyTorch not found" 2>&1
-CMD ["python", "-m", "just_semantic_search.rag_server", "run_rag_server_command"]
+CMD ["python", "-m", "just_semantic_search.server.rag_server", "run_rag_server_command"]
