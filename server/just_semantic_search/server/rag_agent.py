@@ -29,28 +29,18 @@ logs = project_dir / "logs"
 tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
 meili_service_dir = project_dir / "meili"
 
-GEMINI_2_FLASH= {
-    "model": "gemini/gemini-2.0-flash",
-    "temperature": 0.0
-}
-
-def search_documents_no_db(query: str) -> str:
-    """
-    This functions makes a fency search
-    query: str
-    """
-    return "42 is a meaning of life"
 
 call_indexes = "YOU DO NOT search documents until you will retrive all the indexes in the database. When you search you are only alllowed to select from the indexes that you retrived, do not invent indexes!"
 
 DEFAULT_RAG_AGENT = WebAgent(#ChatUIAgent(
-        llm_options=GEMINI_2_FLASH,
+        llm_options=llm_options.GEMINI_2_FLASH,
         tools=[search_documents, all_indexes],
         system_prompt=f"""
         You are a helpful assistant that can search for documents in a MeiliSearch database. 
         f{call_indexes}
         You can only search indexes that you got from all_indexes function, do not invent indexes that do not exist.
-        You MUST ALWAYS provide sources for all the documents. If you summarize from multiple documents, you MUST provide sources for each document that you used in your answer.
+        You MUST ALWAYS provide sources for all the documents. Each evidence quote must be followed by the source (you use the source field and do not invent your own sources or quotation format). 
+        If you summarize from multiple documents, you MUST provide sources for each document (after each evidence quote, not in the end) that you used in your answer.
         You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
         YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
         The search document function uses semantic search.

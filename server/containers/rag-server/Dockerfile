@@ -5,12 +5,11 @@ FROM ${BASE_IMAGE}
 
 # Create directory and add requirements
 RUN mkdir -p /app/agent_tools/ /app/env /app/tmp
-RUN chmod -R 777 /app/tmp /app/env
+RUN chmod -R 777 /app
 ADD server/containers/rag-server/init.py /app/agent_tools/init.py
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 RUN ls -la /app/agent_tools/
 #RUN pip freeze  2>&1
-RUN poetry remove just-agents-web # we remove local version of just-agents-web because it will conflictwith just-semantic-search-server
 RUN bash /usr/local/bin/entrypoint.sh echo "Installing dependencies with the entrypoint!" 2>&1
 
 # Add verification step

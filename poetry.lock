@@ -1276,14 +1276,14 @@ referencing = ">=0.31.0"
 
 [[package]]
 name = "just-agents-core"
-version = "0.5.9"
+version = "0.6.0"
 description = "Just Agents - Base Package"
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["main"]
 files = [
-    {file = "just_agents_core-0.5.9-py3-none-any.whl", hash = "sha256:2d6bf7aebe2a727ac36b29da68b3cea751433679177cc4bd89ca2a4e3cc363d0"},
-    {file = "just_agents_core-0.5.9.tar.gz", hash = "sha256:2afb14e7cfc961b67cd6fd51b651dfcb8ba31d4d43fc175605434a0c0984310b"},
+    {file = "just_agents_core-0.6.0-py3-none-any.whl", hash = "sha256:0309c3e30ccf9440d331b018ae81c5eb35e0b961cd8be7c798d5dc9df2c8e368"},
+    {file = "just_agents_core-0.6.0.tar.gz", hash = "sha256:fc4d11eed8a97bdc763ee14f8dd35906120508f718584ab331fcff0f9792353d"},
 ]
 
 [package.dependencies]
@@ -1297,14 +1297,14 @@ rich = ">=13.9.4"
 
 [[package]]
 name = "just-agents-web"
-version = "0.5.9"
+version = "0.6.0"
 description = "Just Agents - Web. It allows runing openai API for the agent in the browser."
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["main"]
 files = [
-    {file = "just_agents_web-0.5.9-py3-none-any.whl", hash = "sha256:581a6b2951c379ff10cdac17b19ae487f9645e928fbc44a0a96879feb84b25aa"},
-    {file = "just_agents_web-0.5.9.tar.gz", hash = "sha256:31dcf814cc865de14f3af7400b629846ba07d9f1158679f8114a62cd6b079644"},
+    {file = "just_agents_web-0.6.0-py3-none-any.whl", hash = "sha256:cb840e4a3c7a00a8ec5ae75537603a636430620bc6aa8e53618b1c48a7d21873"},
+    {file = "just_agents_web-0.6.0.tar.gz", hash = "sha256:76b61e4b6fc4e9850b46d13ddb42d3856d0f6e69c1a7eebadcfe16b730d9343e"},
 ]
 
 [package.dependencies]
@@ -1399,7 +1399,7 @@ files = []
 develop = true
 
 [package.dependencies]
-just-agents-web = ">=0.5.9"
+just-agents-web = ">=0.6.0"
 just-semantic-search-meili = "*"
 just-semantic-search-scholar = "*"
 
@@ -3213,19 +3213,19 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
 name = "roman-numerals-py"
-version = "3.0.0"
+version = "3.1.0"
 description = "Manipulate well-formed Roman numerals"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "python_version >= \"3.11\""
 files = [
-    {file = "roman_numerals_py-3.0.0-py3-none-any.whl", hash = "sha256:a1421ce66b3eab7e8735065458de3fa5c4a46263d50f9f4ac8f0e5e7701dd125"},
-    {file = "roman_numerals_py-3.0.0.tar.gz", hash = "sha256:91199c4373658c03d87d9fe004f4a5120a20f6cb192be745c2377cce274ef41c"},
+    {file = "roman_numerals_py-3.1.0-py3-none-any.whl", hash = "sha256:9da2ad2fb670bcf24e81070ceb3be72f6c11c440d73bd579fbeca1e9f330954c"},
+    {file = "roman_numerals_py-3.1.0.tar.gz", hash = "sha256:be4bf804f083a4ce001b5eb7e3c0862479d10f94c936f6c4e5f250aa5ff5bd2d"},
 ]
 
 [package.extras]
-lint = ["mypy (==1.15.0)", "pyright (==1.1.394)", "ruff (==0.9.6)"]
+lint = ["mypy (==1.15.0)", "pyright (==1.1.394)", "ruff (==0.9.7)"]
 test = ["pytest (>=8)"]
 
 [[package]]
@@ -3673,15 +3673,15 @@ test = ["cython (>=3.0)", "defusedxml (>=0.7.1)", "pytest (>=8.0)", "setuptools 
 
 [[package]]
 name = "sphinx"
-version = "8.2.0"
+version = "8.2.1"
 description = "Python documentation generator"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 markers = "python_version >= \"3.11\""
 files = [
-    {file = "sphinx-8.2.0-py3-none-any.whl", hash = "sha256:3c0a40ff71ace28b316bde7387d93b9249a3688c202181519689b66d5d0aed53"},
-    {file = "sphinx-8.2.0.tar.gz", hash = "sha256:5b0067853d6e97f3fa87563e3404ebd008fce03525b55b25da90706764da6215"},
+    {file = "sphinx-8.2.1-py3-none-any.whl", hash = "sha256:b5d2bb3cdf6207fcacde9f92085d2b97667b05b9c346eaec426ca4be8af505e9"},
+    {file = "sphinx-8.2.1.tar.gz", hash = "sha256:e4b932951b9c18b039f73b72e4e63afe967d90408700ec222b981ac24647c01e"},
 ]
 
 [package.dependencies]
@@ -3705,7 +3705,7 @@ sphinxcontrib-serializinghtml = ">=1.1.9"
 
 [package.extras]
 docs = ["sphinxcontrib-websupport"]
-lint = ["betterproto (==2.0.0b6)", "mypy (==1.15.0)", "pypi-attestations (==0.0.21)", "pyright (==1.1.394)", "pytest (>=8.0)", "ruff (==0.9.6)", "sphinx-lint (>=0.9)", "types-Pillow (==10.2.0.20240822)", "types-Pygments (==2.19.0.20250107)", "types-colorama (==0.4.15.20240311)", "types-defusedxml (==0.7.0.20240218)", "types-docutils (==0.21.0.20241128)", "types-requests (==2.32.0.20241016)", "types-urllib3 (==1.26.25.14)"]
+lint = ["betterproto (==2.0.0b6)", "mypy (==1.15.0)", "pypi-attestations (==0.0.21)", "pyright (==1.1.394)", "pytest (>=8.0)", "ruff (==0.9.7)", "sphinx-lint (>=0.9)", "types-Pillow (==10.2.0.20240822)", "types-Pygments (==2.19.0.20250219)", "types-colorama (==0.4.15.20240311)", "types-defusedxml (==0.7.0.20240218)", "types-docutils (==0.21.0.20241128)", "types-requests (==2.32.0.20241016)", "types-urllib3 (==1.26.25.14)"]
 test = ["cython (>=3.0)", "defusedxml (>=0.7.1)", "pytest (>=8.0)", "pytest-xdist[psutil] (>=3.4)", "setuptools (>=70.0)", "typing_extensions (>=4.9)"]
 
 [[package]]

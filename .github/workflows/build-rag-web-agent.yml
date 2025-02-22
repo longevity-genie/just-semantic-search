@@ -26,7 +26,7 @@ jobs:
           - variant: 'cpu'
             base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main'
             suffix: ''
-            use_gpu: 'false'
+          #  use_gpu: 'false'
           # - variant: 'gpu'
           #   base_image: 'ghcr.io/longevity-genie/just-agents/chat-ui-agents:main-gpu'
           #   suffix: '-gpu'
@@ -61,7 +61,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./server/containers/${{ matrix.dockerfile }}
+          context: .
           file: ./server/containers/${{ matrix.dockerfile }}/Dockerfile
           push: true
           build-args: |

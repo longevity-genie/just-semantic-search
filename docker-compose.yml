@@ -33,17 +33,12 @@ services:
     environment:
       - APP_PORT: "8089" #app port inside container
       - APP_HOST: "0.0.0.0" #app host inside container, 0's to expose
-      - AGENT_PORT: "8089" #agent port for chat to access
-      - AGENT_HOST: "http://just-chat-ui-agents" #agent host for chat to access
-      - AGENT_TITLE: "Just Chat-UI REST API node"
+      - AGENT_TITLE: "RAG agent REST API node"
       - AGENT_PARENT_SECTION: "agent_profiles"
       - AGENT_DEBUG: "false"
-      - AGENT_REMOVE_SYSTEM_PROMPT: "false"
       - AGENT_CONFIG_PATH: "/app/chat_agent_profiles.yaml"
       - USER_ID: ${USER_ID:-${UID}}
       - GROUP_ID: ${GROUP_ID:-${GID}}
-      - MODELS_DIR: "/app/models.d"
-      - AGENT_FAILFAST: "true"
       - EMBEDDING_MODEL: "jinaai/jina-embeddings-v3"
       - MEILI_MASTER_KEY: "fancy_master_key"
       - MEILISEARCH_HOST: "127.0.0.1" # Meilisearch host address
