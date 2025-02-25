@@ -44,7 +44,7 @@ services:
     env_file:
       - .env
     environment:
-      - APP_PORT=8090 #app port inside container
+      - APP_PORT=8090
       - APP_HOST=0.0.0.0 #app host inside container, 0's to expose
       - AGENT_PARENT_SECTION=agent_profiles
       - AGENT_DEBUG=false

@@ -96,28 +96,88 @@ def simulate_meilisearch_disconnection(duration: int = 10):
     :param duration: Duration in seconds to keep the container disconnected.
     """
     def disconnect_and_reconnect():
-        container_name = "meilisearch"  # Matches the container_name in docker-compose.yaml
-        network_name = "meili_meilisearch"  # Docker Compose prefixes the network with the directory name
+        # Look for container names that contain 'meilisearch'
+        container_name_cmd = subprocess.run(
+            ["docker", "ps", "--format", "{{.Names}}", "--filter", "name=meilisearch"], 
+            capture_output=True, text=True, check=False
+        )
+        
+        if container_name_cmd.returncode != 0 or not container_name_cmd.stdout.strip():
+            # Try with podman if docker fails
+            container_name_cmd = subprocess.run(
+                ["podman", "ps", "--format", "{{.Names}}", "--filter", "name=meilisearch"], 
+                capture_output=True, text=True, check=False
+            )
+        
+        container_names = container_name_cmd.stdout.strip().split('\n')
+        container_name = container_names[0] if container_names and container_names[0] else "meilisearch"
+        
+        with start_action(action_type="container_detection") as action:
+            action.log(message_type="container_name", container_name=container_name)
+        
+        # Get the network the container is connected to
+        network_cmd = subprocess.run(
+            ["docker", "inspect", "--format", "{{range $k, $v := .NetworkSettings.Networks}}{{$k}}{{end}}", container_name],
+            capture_output=True, text=True, check=False
+        )
+        
+        if network_cmd.returncode != 0 or not network_cmd.stdout.strip():
+            # Try with podman if docker fails
+            network_cmd = subprocess.run(
+                ["podman", "inspect", "--format", "{{range $k, $v := .NetworkSettings.Networks}}{{$k}}{{end}}", container_name],
+                capture_output=True, text=True, check=False
+            )
+        
+        network_name = network_cmd.stdout.strip() if network_cmd.stdout.strip() else "meili_meilisearch"
+        
+        with start_action(action_type="network_detection") as action:
+            action.log(message_type="network_name", network_name=network_name)
         
         try:
             # Check if container exists and is running
             container_check = subprocess.run(["docker", "container", "inspect", container_name], 
                                           capture_output=True, check=False)
+            
+            # Try with podman if docker fails
             if container_check.returncode != 0:
-                print(f"Container {container_name} not found or not running")
+                container_check = subprocess.run(["podman", "container", "inspect", container_name], 
+                                              capture_output=True, check=False)
+            
+            if container_check.returncode != 0:
+                with start_action(action_type="network_disconnection") as action:
+                    action.log(
+                        message_type="container_not_found",
+                        container_name=container_name
+                    )
                 return
 
             # Check if network exists
             network_check = subprocess.run(["docker", "network", "inspect", network_name], 
                                         capture_output=True, check=False)
+            
+            # Try with podman if docker fails
             if network_check.returncode != 0:
-                print(f"Network {network_name} not found")
+                network_check = subprocess.run(["podman", "network", "inspect", network_name], 
+                                            capture_output=True, check=False)
+            
+            if network_check.returncode != 0:
+                with start_action(action_type="network_disconnection") as action:
+                    action.log(
+                        message_type="network_not_found",
+                        network_name=network_name
+                    )
                 return
 
             # Disconnect the container from the network
             disconnect_result = subprocess.run(
                 ["docker", "network", "disconnect", network_name, container_name], 
                 capture_output=True, check=False)
+            
+            # Try with podman if docker fails
+            if disconnect_result.returncode != 0:
+                disconnect_result = subprocess.run(
+                    ["podman", "network", "disconnect", network_name, container_name], 
+                    capture_output=True, check=False)
             
             if disconnect_result.returncode == 0:
                 with start_action(action_type="network_disconnection") as action:
@@ -139,6 +199,12 @@ def simulate_meilisearch_disconnection(duration: int = 10):
             connect_result = subprocess.run(
                 ["docker", "network", "connect", network_name, container_name],
                 capture_output=True, check=False)
+            
+            # Try with podman if docker fails
+            if connect_result.returncode != 0:
+                connect_result = subprocess.run(
+                    ["podman", "network", "connect", network_name, container_name],
+                    capture_output=True, check=False)
             
             if connect_result.returncode == 0:
                 with start_action(action_type="network_reconnection") as action:

@@ -39,16 +39,36 @@ publish_package() {
         sed -i.bak "s/name = \"$original_name\"/name = \"$cuda_name\"/" pyproject.toml
         
         # Update the description to indicate CUDA version
-        sed -i.bak "s/description = \"Core interfaces for hybrid search implementations (CPU version)\"/description = \"Core interfaces for hybrid search implementations (CUDA version)\"/" pyproject.toml
+        sed -i.bak "s/description = \".*CPU version.*/description = \"Core interfaces for hybrid search implementations (CUDA version)\"/" pyproject.toml
         
         # Update keywords to indicate CUDA support
         sed -i.bak "s/\"cpu\"/\"gpu\", \"cuda\"/" pyproject.toml
         
-        # Replace the torch dependency with the CUDA version
-        sed -i.bak "/torch = { version = \"2.6.0\", source = \"torch-cpu\" }/c\torch = { version = \"2.6.0+cu124\", source = \"torch-gpu\" }" pyproject.toml
+        # Replace the torch dependency with the CUDA version if it exists
+        if grep -q "torch = { version" pyproject.toml; then
+            sed -i.bak "/torch = { version = \"2.6.0\", source = \"torch-cpu\" }/c\torch = { version = \"2.6.0+cu124\", source = \"torch-gpu\" }" pyproject.toml
+        fi
         
-        # Make triton a direct dependency for CUDA version
-        sed -i.bak "/triton = { version = \">=2.3.0\", optional = true, markers = \"extra == 'cuda'\" }/c\triton = { version = \">=2.3.0\" }" pyproject.toml
+        # Make triton a direct dependency for CUDA version if it exists
+        if grep -q "triton = { version" pyproject.toml; then
+            sed -i.bak "/triton = { version = \">=2.3.0\", optional = true, markers = \"extra == 'cuda'\" }/c\triton = { version = \">=2.3.0\" }" pyproject.toml
+        fi
+        
+        # Update dependencies to use CUDA versions
+        if [ "$dir" != "core" ]; then
+            # Update just-semantic-search dependency to use CUDA version
+            sed -i.bak "s/just-semantic-search = \"\\*\"/just-semantic-search-cuda = \"\\*\"/" pyproject.toml
+            
+            # For scholar and server, update meili dependency to use CUDA version
+            if [ "$dir" = "scholar" ] || [ "$dir" = "server" ]; then
+                sed -i.bak "s/just-semantic-search-meili = \"\\*\"/just-semantic-search-meili-cuda = \"\\*\"/" pyproject.toml
+            fi
+            
+            # For server, update scholar dependency to use CUDA version
+            if [ "$dir" = "server" ]; then
+                sed -i.bak "s/just-semantic-search-scholar = \"\\*\"/just-semantic-search-scholar-cuda = \"\\*\"/" pyproject.toml
+            fi
+        fi
         
         echo "Publishing CUDA version as $cuda_name..."
     else
