@@ -17,11 +17,17 @@ from just_semantic_search.server.index_markdown import index_markdown_tool
 class RAGServerConfig(WebAgentConfig):
     """Configuration for the RAG server"""
     port: int = Field(
-        default_factory=lambda: int(os.getenv("APP_PORT", "8090")),
+        default_factory=lambda: int(os.getenv("APP_PORT", "8090").split()[0]),
         description="Port number for the server",
         ge=1024,  # Recommended to use ports above 1024 for non-root users
         le=65535,
         examples=[8088, 8000, 5000]
+    )
+    
+    host: str = Field(
+        default_factory=lambda: os.getenv("APP_HOST", "0.0.0.0").split()[0],
+        description="Host address to bind the server to",
+        examples=["0.0.0.0", "127.0.0.1"]
     )
    
     

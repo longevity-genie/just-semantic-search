@@ -11,6 +11,18 @@ def load_auto_model_tokenizer(model_name_or_path: str, trust_remote_code: bool =
 
 def load_sentence_transformer_model(model_name_or_path: str, **model_kwargs) -> SentenceTransformer:
     model = SentenceTransformer(model_name_or_path, trust_remote_code=True, **model_kwargs)
+    
+    # Try to apply PyTorch 2.0+ compilation if available
+    try:
+        import torch
+        if hasattr(torch, 'compile'):
+            # For CUDA, torch.compile() is actually beneficial
+            # For CPU, it also helps with vectorization and other optimizations
+            model.model = torch.compile(model.model)
+            print(f"Applied torch.compile() optimization to {model_name_or_path}")
+    except Exception as e:
+        print(f"Couldn't apply torch.compile: {e}")
+        
     return model
 
 

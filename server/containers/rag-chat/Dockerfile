@@ -15,7 +15,7 @@ RUN if [ -f "/opt/conda/bin/python" ]; then \
     fi && \
     curl -sSL https://install.python-poetry.org | $PYTHON_CMD -
 
-ARG JUST_SEMANTIC_SEARCH_SERVER_VERSION=0.1.3
+ARG JUST_SEMANTIC_SEARCH_SERVER_VERSION=0.2.3
 
 # Declare the extra dependency argument (defaults to empty)
 ARG EXTRA_DEPENDENCY=''
