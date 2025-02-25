@@ -70,8 +70,14 @@ Make sure you have at least Python 3.10 installed (3.11 and higher is recommende
 
 ### Using pip
 
+
+The packages come in two flavors:
+- Standard CPU version: `pip install just-semantic-search`
+- CUDA-enabled version: `pip install just-semantic-search-cuda`
+
+For meilisearch backend you need to install:
+
 ```bash
-pip install just-semantic-search        # Core package
 pip install just-semantic-search-meili  # Meilisearch backend
 ```
 

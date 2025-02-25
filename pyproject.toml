@@ -27,6 +27,17 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
 ]
 
+# Add these repository definitions
+[[tool.poetry.source]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[[tool.poetry.source]]
+name = "torch-gpu"
+url = "https://download.pytorch.org/whl/cu124"
+priority = "explicit"
+
 [tool.poetry.scripts]
 meili-exec = "just_semantic_search.meili.meili_exec:app"
 index-markdown = "just_semantic_search.agent.index_markdown:app"

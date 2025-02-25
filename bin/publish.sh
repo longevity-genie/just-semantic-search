@@ -16,90 +16,81 @@ fi
 # Initialize error flag
 HAS_ERRORS=0
 
-# Build and publish core package first
-echo "Building and publishing core package..."
-cd core
-poetry build
-if [ $? -ne 0 ]; then
-    echo "Core package build failed!"
-    HAS_ERRORS=1
-else
-    poetry publish
+# Function to build and publish a package
+publish_package() {
+    local dir=$1
+    local is_cuda=$2
+    local original_name=""
+    local cuda_suffix=""
+    
+    cd "$SCRIPT_DIR/../$dir"
+    
+    # If CUDA version, modify pyproject.toml
+    if [ "$is_cuda" = true ]; then
+        cuda_suffix="-cuda"
+        # Save original file
+        cp pyproject.toml pyproject.toml.orig
+        
+        # Get the original package name and modify it for CUDA
+        original_name=$(grep 'name = ' pyproject.toml | sed 's/name = //; s/"//g; s/^[[:space:]]*//; s/[[:space:]]*$//')
+        cuda_name="$original_name$cuda_suffix"
+        
+        # Replace the package name in pyproject.toml
+        sed -i.bak "s/name = \"$original_name\"/name = \"$cuda_name\"/" pyproject.toml
+        
+        # Update the description to indicate CUDA version
+        sed -i.bak "s/description = \"Core interfaces for hybrid search implementations (CPU version)\"/description = \"Core interfaces for hybrid search implementations (CUDA version)\"/" pyproject.toml
+        
+        # Update keywords to indicate CUDA support
+        sed -i.bak "s/\"cpu\"/\"gpu\", \"cuda\"/" pyproject.toml
+        
+        # Replace the torch dependency with the CUDA version
+        sed -i.bak "/torch = { version = \"2.6.0\", source = \"torch-cpu\" }/c\torch = { version = \"2.6.0+cu124\", source = \"torch-gpu\" }" pyproject.toml
+        
+        # Make triton a direct dependency for CUDA version
+        sed -i.bak "/triton = { version = \">=2.3.0\", optional = true, markers = \"extra == 'cuda'\" }/c\triton = { version = \">=2.3.0\" }" pyproject.toml
+        
+        echo "Publishing CUDA version as $cuda_name..."
+    else
+        echo "Publishing CPU version..."
+    fi
+    
+    # Build and publish
+    poetry build
     if [ $? -ne 0 ]; then
-        echo "Core package publish failed!"
+        echo "Package build failed!"
         HAS_ERRORS=1
     else
-        echo "Core package built and published successfully!"
+        poetry publish
+        if [ $? -ne 0 ]; then
+            echo "Package publish failed!"
+            HAS_ERRORS=1
+        else
+            echo "Package built and published successfully!"
+        fi
     fi
-fi
+    
+    # Restore original pyproject.toml if CUDA version
+    if [ "$is_cuda" = true ]; then
+        mv pyproject.toml.orig pyproject.toml
+        rm -f pyproject.toml.bak
+        echo "Restored original pyproject.toml"
+    fi
+}
 
-# Build and publish meili package next
-echo "Building and publishing meili package..."
-cd ../meili
-poetry build
-if [ $? -ne 0 ]; then
-    echo "Meili package build failed!"
-    HAS_ERRORS=1
-else
-    poetry publish
-    if [ $? -ne 0 ]; then
-        echo "Meili package publish failed!"
-        HAS_ERRORS=1
-    else
-        echo "Meili package built and published successfully!"
-    fi
-fi
+# List of packages to build and publish
+packages=("core" "meili" "scholar" "server")
 
-# Build and publish scholar package
-echo "Building and publishing scholar package..."
-cd ../scholar
-poetry build
-if [ $? -ne 0 ]; then
-    echo "Scholar package build failed!"
-    HAS_ERRORS=1
-else
-    poetry publish
-    if [ $? -ne 0 ]; then
-        echo "Scholar package publish failed!"
-        HAS_ERRORS=1
-    else
-        echo "Scholar package built and published successfully!"
-    fi
-fi
-
-# Build and publish agent package
-echo "Building and publishing agent package..."
-cd ../server
-poetry build
-if [ $? -ne 0 ]; then
-    echo "Agent package build failed!"
-    HAS_ERRORS=1
-else
-    poetry publish
-    if [ $? -ne 0 ]; then
-        echo "Agent package publish failed!"
-        HAS_ERRORS=1
-    else
-        echo "Agent package built and published successfully!"
-    fi
-fi
-
-# Build and publish server package
-echo "Building and publishing server package..."
-cd ../server
-poetry build
-if [ $? -ne 0 ]; then
-    echo "Server package build failed!"
-    HAS_ERRORS=1
-else
-    poetry publish
-    if [ $? -ne 0 ]; then
-        echo "Server package publish failed!"
-        HAS_ERRORS=1
-    else
-        echo "Server package built and published successfully!"
-    fi
-fi
+# Process each package - first CPU version, then CUDA version
+for pkg in "${packages[@]}"; do
+    echo "Processing $pkg package..."
+    
+    # Publish CPU version (default)
+    publish_package "$pkg" false
+    
+    # Publish CUDA version
+    publish_package "$pkg" true
+done
 
 # Final error status
 if [ $HAS_ERRORS -ne 0 ]; then
