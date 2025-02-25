@@ -8,14 +8,10 @@ FROM ${BASE_IMAGE}
 ADD server/containers/rag-server/init.py /app/init.py
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 
-RUN poetry config installer.re-resolve false
-
-# Add poetry remove command
-#RUN poetry remove just-agents-web just-agents-core #we remove local version of just-agents-web because it will conflictwith just-semantic-search-server
-#RUN pip freeze  2>&1
-#RUN bash /usr/local/bin/entrypoint.sh echo "Installing dependencies with the entrypoint!" 2>&1
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.2.1
-RUN poetry show && poetry add \
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.2.4
+RUN poetry source add --priority explicit pytorch_cpu https://download.pytorch.org/whl/cpu \
+    && poetry add --no-cache --verbose --source pytorch_cpu torch>=2.6 \
+    && poetry add --no-cache --verbose \
     just-semantic-search-meili>=$JUST_SEMANTIC_SEARCH_VERSION \
     just-semantic-search-scholar>=$JUST_SEMANTIC_SEARCH_VERSION \
     just-semantic-search-server>=$JUST_SEMANTIC_SEARCH_VERSION
