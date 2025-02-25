@@ -54,3 +54,21 @@ format-jinja = "{{base}}"
 
 [tool.poetry.group.dev.dependencies]
 just-semantic-search = { path = "../core", develop = true }
+
+# Function to ensure dynamic versioning is correctly configured
+fix_dynamic_versioning() {
+    local dir=$1
+    
+    cd "$SCRIPT_DIR/../$dir"
+    
+    # Make sure we're using the correct pattern for v-prefixed tags
+    if grep -q 'pattern = "(?P<base>\\d+\\.\\d+\\.\\d+)"' pyproject.toml; then
+        echo "Updating tag pattern for $dir package..."
+        sed -i.bak 's/pattern = "(?P<base>\\d+\\.\\d+\\.\\d+)"/pattern = "v(?P<base>\\d+\\.\\d+\\.\\d+)"/' pyproject.toml
+        rm -f pyproject.toml.bak
+    fi
+    
+    # Force poetry to use dynamic versioning
+    echo "Forcing dynamic versioning refresh for $dir..."
+    PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring poetry dynamic-versioning
+}
