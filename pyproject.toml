@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "just-semantic-search-all"
-version = "0.0.0"
+version = "0.0.0-post.57+755adc7"
 package-mode = false
 description = "Semantic search implementation with hybrid search support and multiple backends"
 authors = [
@@ -59,7 +59,7 @@ requires = ["poetry-core>=2.1.1", "poetry-dynamic-versioning>=1.7.1"]
 build-backend = "poetry.core.masonry.api" 
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "semver"
 

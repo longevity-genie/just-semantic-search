@@ -2,12 +2,12 @@
 [tool.poetry]
 name = "just-semantic-search"
 version = "0.0.0"
-description = "Core interfaces for hybrid search implementations (CPU version)"
+description = "Core interfaces for hybrid search implementations (CUDA version)"
 authors = ["Alex Karmazin <karmazinalex@gmail.com>", "Anton Kulaga <antonkulaga@gmail.com>", "Newton Winter <isoutthere@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 packages = [{include = "just_semantic_search"}]
-keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search", "cpu"]
+keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search", "gpu", "cuda"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -60,5 +60,5 @@ build-backend = "poetry.core.masonry.api"
 enable = true
 vcs = "git"
 style = "semver"
-pattern = "(?P<base>\\d+\\.\\d+\\.\\d+)"
+pattern = "v(?P<base>\\d+\\.\\d+\\.\\d+)"
 format-jinja = "{{base}}"

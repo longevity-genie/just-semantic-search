@@ -16,19 +16,11 @@ fi
 # Initialize error flag
 HAS_ERRORS=0
 
-# Function to ensure dynamic versioning is enabled in pyproject.toml
-ensure_dynamic_versioning() {
+# Function to clean up backup files
+cleanup_backups() {
     local dir=$1
-    
     cd "$SCRIPT_DIR/../$dir"
-    
-    # Check if dynamic versioning is disabled
-    if grep -q "enable = false" pyproject.toml; then
-        echo "Enabling dynamic versioning for $dir package..."
-        # Replace 'enable = false' with 'enable = true'
-        sed -i.bak "s/enable = false/enable = true/" pyproject.toml
-        rm -f pyproject.toml.bak
-    fi
+    rm -f *.bak pyproject.toml.orig
 }
 
 # Function to build and publish a package
@@ -40,51 +32,45 @@ publish_package() {
     
     cd "$SCRIPT_DIR/../$dir"
     
-    # Ensure dynamic versioning is enabled
-    ensure_dynamic_versioning "$dir"
-    
     # If CUDA version, modify pyproject.toml
     if [ "$is_cuda" = true ]; then
         cuda_suffix="-cuda"
-        # Save original file
-        cp pyproject.toml pyproject.toml.orig
         
         # Get the original package name and modify it for CUDA
-        original_name=$(grep 'name = ' pyproject.toml | sed 's/name = //; s/"//g; s/^[[:space:]]*//; s/[[:space:]]*$//')
+        original_name=$(grep 'name = ' pyproject.toml | head -1 | sed 's/name = //; s/"//g; s/^[[:space:]]*//; s/[[:space:]]*$//')
         cuda_name="$original_name$cuda_suffix"
+        
+        # Backup the original file
+        cp pyproject.toml pyproject.toml.orig
         
         # Replace the package name in pyproject.toml
         sed -i.bak "s/name = \"$original_name\"/name = \"$cuda_name\"/" pyproject.toml
         
         # Update the description to indicate CUDA version
-        sed -i.bak "s/description = \".*CPU version.*/description = \"Core interfaces for hybrid search implementations (CUDA version)\"/" pyproject.toml
+        sed -i.bak 's/description = ".*"/description = "Core interfaces for hybrid search implementations (CUDA version)"/' pyproject.toml
         
         # Update keywords to indicate CUDA support
-        sed -i.bak "s/\"cpu\"/\"gpu\", \"cuda\"/" pyproject.toml
+        sed -i.bak 's/"python", "llm"/"python", "llm", "gpu", "cuda"/' pyproject.toml
         
         # Replace the torch dependency with the CUDA version if it exists
-        if grep -q "torch = { version" pyproject.toml; then
-            sed -i.bak "/torch = { version = \"2.6.0\", source = \"torch-cpu\" }/c\torch = { version = \"2.6.0+cu124\", source = \"torch-gpu\" }" pyproject.toml
-        fi
+        sed -i.bak 's/torch = { version = "2.6.0", source = "torch-cpu" }/torch = { version = "2.6.0+cu124", source = "torch-gpu" }/' pyproject.toml
         
-        # Make triton a direct dependency for CUDA version if it exists
-        if grep -q "triton = { version" pyproject.toml; then
-            sed -i.bak "/triton = { version = \">=2.3.0\", optional = true, markers = \"extra == 'cuda'\" }/c\triton = { version = \">=2.3.0\" }" pyproject.toml
-        fi
+        # Make triton a direct dependency for CUDA version
+        sed -i.bak 's/triton = { version = ">=2.3.0", optional = true, markers = "extra == '\''cuda'\''" }/triton = { version = ">=2.3.0" }/' pyproject.toml
         
         # Update dependencies to use CUDA versions
         if [ "$dir" != "core" ]; then
             # Update just-semantic-search dependency to use CUDA version
-            sed -i.bak "s/just-semantic-search = \"\\*\"/just-semantic-search-cuda = \"\\*\"/" pyproject.toml
+            sed -i.bak 's/just-semantic-search = "\*"/just-semantic-search-cuda = "\*"/' pyproject.toml
             
             # For scholar and server, update meili dependency to use CUDA version
             if [ "$dir" = "scholar" ] || [ "$dir" = "server" ]; then
-                sed -i.bak "s/just-semantic-search-meili = \"\\*\"/just-semantic-search-meili-cuda = \"\\*\"/" pyproject.toml
+                sed -i.bak 's/just-semantic-search-meili = "\*"/just-semantic-search-meili-cuda = "\*"/' pyproject.toml
             fi
             
             # For server, update scholar dependency to use CUDA version
             if [ "$dir" = "server" ]; then
-                sed -i.bak "s/just-semantic-search-scholar = \"\\*\"/just-semantic-search-scholar-cuda = \"\\*\"/" pyproject.toml
+                sed -i.bak 's/just-semantic-search-scholar = "\*"/just-semantic-search-scholar-cuda = "\*"/' pyproject.toml
             fi
         fi
         
@@ -108,11 +94,12 @@ publish_package() {
         fi
     fi
     
-    # Restore original pyproject.toml if CUDA version
-    if [ "$is_cuda" = true ]; then
+    # Restore original pyproject.toml if it exists and clean up backup files
+    if [ -f "pyproject.toml.orig" ]; then
         mv pyproject.toml.orig pyproject.toml
-        rm -f pyproject.toml.bak
+        echo "Restored original pyproject.toml for $dir"
     fi
+    cleanup_backups "$dir"
 }
 
 # List of packages to build and publish
