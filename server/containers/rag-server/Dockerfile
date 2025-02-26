@@ -8,11 +8,11 @@ FROM ${BASE_IMAGE}
 ADD server/containers/rag-server/init.py /app/init.py
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.2.4
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.2.6
 
 RUN poetry source add --priority explicit pytorch_cpu https://download.pytorch.org/whl/cpu \
-    && poetry add --no-cache --verbose --source pytorch_cpu torch>=2.6 \
-    && poetry add --no-cache --verbose \
+    && poetry add --no-cache --verbose --source pytorch_cpu torch>=2.6
+RUN poetry add --no-cache --verbose \
     just-semantic-search-meili>=$JUST_SEMANTIC_SEARCH_VERSION \
     just-semantic-search-scholar>=$JUST_SEMANTIC_SEARCH_VERSION \
     just-semantic-search-server>=$JUST_SEMANTIC_SEARCH_VERSION
