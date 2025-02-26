@@ -37,7 +37,7 @@ services:
     ports:
       - 8090:8090
     healthcheck:
-      test: ["CMD-SHELL", "curl -s 0.0.0.0:8089 | grep -q REST && test -f ./env/.env.local"]
+      test: ["CMD-SHELL", "curl -s 0.0.0.0:8090 | grep -q REST && test -f ./env/.env.local"]
       interval: 15s
       retries: 10
       start_period: 15s

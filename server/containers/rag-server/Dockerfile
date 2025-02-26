@@ -17,8 +17,8 @@ RUN poetry add --no-cache --verbose \
     just-semantic-search-scholar>=$JUST_SEMANTIC_SEARCH_VERSION \
     just-semantic-search-server>=$JUST_SEMANTIC_SEARCH_VERSION
 
-RUN mkdir /app/meili && chmod 777 /app/poetry.lock /app/meili
+RUN mkdir /app/meili && chmod 777 /app/init.py /app/poetry.lock /app/meili
 
 # Add verification step
 RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')" || echo "PyTorch not found" 2>&1
-CMD ["python", "-m", "just_semantic_search.server.rag_server", "run_rag_server_command"]
+CMD ["python", "-m", "just_semantic_search.server.rag_server"]
