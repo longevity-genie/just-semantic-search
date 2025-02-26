@@ -50,6 +50,9 @@ just-semantic-search-scholar = { path = "./scholar", develop = true }
 just-semantic-search-server = { path = "./server", develop = true }
 pyfunctional = ">=1.5.0"
 
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = ["plugin"] }
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 pycomfort = ">=0.0.17"

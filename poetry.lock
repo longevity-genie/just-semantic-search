@@ -1323,20 +1323,20 @@ referencing = ">=0.31.0"
 
 [[package]]
 name = "just-agents-core"
-version = "0.6.0"
+version = "0.6.1"
 description = "Just Agents - Base Package"
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["main"]
 markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "just_agents_core-0.6.0-py3-none-any.whl", hash = "sha256:0309c3e30ccf9440d331b018ae81c5eb35e0b961cd8be7c798d5dc9df2c8e368"},
-    {file = "just_agents_core-0.6.0.tar.gz", hash = "sha256:fc4d11eed8a97bdc763ee14f8dd35906120508f718584ab331fcff0f9792353d"},
+    {file = "just_agents_core-0.6.1-py3-none-any.whl", hash = "sha256:c9e600f4f288a5fdb2602671b77765ceb7f0bc9d9e68db80e584ce44bf5a9e42"},
+    {file = "just_agents_core-0.6.1.tar.gz", hash = "sha256:0bd117a8e79411522e09cb57066222e57fa4f8533ac3582ce6c691a489484dff"},
 ]
 
 [package.dependencies]
 Deprecated = ">=1.2.15"
-litellm = ">=1.61.13"
+litellm = ">=1.61.16"
 numpydoc = "*"
 pydantic = ">=2.0.0,<3.0.0"
 python-dotenv = ">=1.0.1"
@@ -1345,15 +1345,15 @@ rich = ">=13.9.4"
 
 [[package]]
 name = "just-agents-web"
-version = "0.6.0"
+version = "0.6.1"
 description = "Just Agents - Web. It allows runing openai API for the agent in the browser."
 optional = false
 python-versions = "<3.15,>=3.10"
 groups = ["main"]
 markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "just_agents_web-0.6.0-py3-none-any.whl", hash = "sha256:cb840e4a3c7a00a8ec5ae75537603a636430620bc6aa8e53618b1c48a7d21873"},
-    {file = "just_agents_web-0.6.0.tar.gz", hash = "sha256:76b61e4b6fc4e9850b46d13ddb42d3856d0f6e69c1a7eebadcfe16b730d9343e"},
+    {file = "just_agents_web-0.6.1-py3-none-any.whl", hash = "sha256:74f0d47c21c58c63124623d1637caf8a4b18a644e1e624eadc55f13561710f46"},
+    {file = "just_agents_web-0.6.1.tar.gz", hash = "sha256:80b04573abc0f9f4fbf4c5784e1475de394ba808fa5fb49dde17c1b860f189b6"},
 ]
 
 [package.dependencies]
@@ -1364,7 +1364,7 @@ uvicorn = ">=0.34.0"
 
 [[package]]
 name = "just-semantic-search"
-version = "0.0.0"
+version = "2.5.0"
 description = "Core interfaces for hybrid search implementations (CUDA version)"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1393,7 +1393,7 @@ url = "core"
 
 [[package]]
 name = "just-semantic-search-meili"
-version = "0.0.0"
+version = "2.5.0"
 description = "Semantic and hybrid search with meilisearch (CPU version)"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1415,7 +1415,7 @@ url = "meili"
 
 [[package]]
 name = "just-semantic-search-scholar"
-version = "0.0.0"
+version = "2.5.0"
 description = "Semantic and hybrid search with scholar (CPU version)"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1439,7 +1439,7 @@ url = "scholar"
 
 [[package]]
 name = "just-semantic-search-server"
-version = "0.0.0"
+version = "2.5.0"
 description = "Semantic and hybrid search server"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -3224,28 +3224,28 @@ files = [
 
 [[package]]
 name = "safetensors"
-version = "0.5.2"
+version = "0.5.3"
 description = ""
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
 markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "safetensors-0.5.2-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:45b6092997ceb8aa3801693781a71a99909ab9cc776fbc3fa9322d29b1d3bef2"},
-    {file = "safetensors-0.5.2-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:6d0d6a8ee2215a440e1296b843edf44fd377b055ba350eaba74655a2fe2c4bae"},
-    {file = "safetensors-0.5.2-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:86016d40bcaa3bcc9a56cd74d97e654b5f4f4abe42b038c71e4f00a089c4526c"},
-    {file = "safetensors-0.5.2-cp38-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:990833f70a5f9c7d3fc82c94507f03179930ff7d00941c287f73b6fcbf67f19e"},
-    {file = "safetensors-0.5.2-cp38-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:3dfa7c2f3fe55db34eba90c29df94bcdac4821043fc391cb5d082d9922013869"},
-    {file = "safetensors-0.5.2-cp38-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:46ff2116150ae70a4e9c490d2ab6b6e1b1b93f25e520e540abe1b81b48560c3a"},
-    {file = "safetensors-0.5.2-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3ab696dfdc060caffb61dbe4066b86419107a24c804a4e373ba59be699ebd8d5"},
-    {file = "safetensors-0.5.2-cp38-abi3-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:03c937100f38c9ff4c1507abea9928a6a9b02c9c1c9c3609ed4fb2bf413d4975"},
-    {file = "safetensors-0.5.2-cp38-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:a00e737948791b94dad83cf0eafc09a02c4d8c2171a239e8c8572fe04e25960e"},
-    {file = "safetensors-0.5.2-cp38-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:d3a06fae62418ec8e5c635b61a8086032c9e281f16c63c3af46a6efbab33156f"},
-    {file = "safetensors-0.5.2-cp38-abi3-musllinux_1_2_i686.whl", hash = "sha256:1506e4c2eda1431099cebe9abf6c76853e95d0b7a95addceaa74c6019c65d8cf"},
-    {file = "safetensors-0.5.2-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:5c5b5d9da594f638a259fca766046f44c97244cc7ab8bef161b3e80d04becc76"},
-    {file = "safetensors-0.5.2-cp38-abi3-win32.whl", hash = "sha256:fe55c039d97090d1f85277d402954dd6ad27f63034fa81985a9cc59655ac3ee2"},
-    {file = "safetensors-0.5.2-cp38-abi3-win_amd64.whl", hash = "sha256:78abdddd03a406646107f973c7843276e7b64e5e32623529dc17f3d94a20f589"},
-    {file = "safetensors-0.5.2.tar.gz", hash = "sha256:cb4a8d98ba12fa016f4241932b1fc5e702e5143f5374bba0bbcf7ddc1c4cf2b8"},
+    {file = "safetensors-0.5.3-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:bd20eb133db8ed15b40110b7c00c6df51655a2998132193de2f75f72d99c7073"},
+    {file = "safetensors-0.5.3-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:21d01c14ff6c415c485616b8b0bf961c46b3b343ca59110d38d744e577f9cce7"},
+    {file = "safetensors-0.5.3-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:11bce6164887cd491ca75c2326a113ba934be596e22b28b1742ce27b1d076467"},
+    {file = "safetensors-0.5.3-cp38-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:4a243be3590bc3301c821da7a18d87224ef35cbd3e5f5727e4e0728b8172411e"},
+    {file = "safetensors-0.5.3-cp38-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:8bd84b12b1670a6f8e50f01e28156422a2bc07fb16fc4e98bded13039d688a0d"},
+    {file = "safetensors-0.5.3-cp38-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:391ac8cab7c829452175f871fcaf414aa1e292b5448bd02620f675a7f3e7abb9"},
+    {file = "safetensors-0.5.3-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cead1fa41fc54b1e61089fa57452e8834f798cb1dc7a09ba3524f1eb08e0317a"},
+    {file = "safetensors-0.5.3-cp38-abi3-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:1077f3e94182d72618357b04b5ced540ceb71c8a813d3319f1aba448e68a770d"},
+    {file = "safetensors-0.5.3-cp38-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:799021e78287bac619c7b3f3606730a22da4cda27759ddf55d37c8db7511c74b"},
+    {file = "safetensors-0.5.3-cp38-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:df26da01aaac504334644e1b7642fa000bfec820e7cef83aeac4e355e03195ff"},
+    {file = "safetensors-0.5.3-cp38-abi3-musllinux_1_2_i686.whl", hash = "sha256:32c3ef2d7af8b9f52ff685ed0bc43913cdcde135089ae322ee576de93eae5135"},
+    {file = "safetensors-0.5.3-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:37f1521be045e56fc2b54c606d4455573e717b2d887c579ee1dbba5f868ece04"},
+    {file = "safetensors-0.5.3-cp38-abi3-win32.whl", hash = "sha256:cfc0ec0846dcf6763b0ed3d1846ff36008c6e7290683b61616c4b040f6a54ace"},
+    {file = "safetensors-0.5.3-cp38-abi3-win_amd64.whl", hash = "sha256:836cbbc320b47e80acd40e44c8682db0e8ad7123209f69b093def21ec7cafd11"},
+    {file = "safetensors-0.5.3.tar.gz", hash = "sha256:b6b0d6ecacec39a4fdd99cc19f4576f5219ce858e6fd8dbe7609df0b8dc56965"},
 ]
 
 [package.extras]
