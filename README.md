@@ -28,7 +28,7 @@ We provide a REST API for semantic search that supports both Meilisearch-based a
 1. Copy and configure environment variables:
 
 ```bash
-cp ./env.template ./env  # Then edit .env with your settings
+cp ./.env.template ./.env  # Then edit .env with your settings
 ```
 
 2. Start the services:
