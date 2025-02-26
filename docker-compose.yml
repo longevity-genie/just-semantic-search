@@ -21,16 +21,17 @@ services:
   rag-server:
     image: ghcr.io/longevity-genie/just-semantic-search/rag-server:latest
     # For Podman GPU support
-    devices:
-      - nvidia.com/gpu=all
+    #devices:
+    #  - nvidia.com/gpu=all
     # For Docker GPU support
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: all
+    #          capabilities: [gpu]
+    working_dir: /app
     depends_on:
       - meilisearch
     ports:
