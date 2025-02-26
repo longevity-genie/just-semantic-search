@@ -1,6 +1,6 @@
 services:
   meilisearch:
-    image: docker.io/getmeili/meilisearch:v1.13.0 # we have to use it because migration got easier
+    image: docker.io/getmeili/meilisearch:v1.13.1 # we have to use it because migration got easier
     environment:
       - http_proxy
       - https_proxy
@@ -56,7 +56,7 @@ services:
       - GROUP_ID=${GROUP_ID:-${GID}}
       - EMBEDDING_MODEL=jinaai/jina-embeddings-v3
       - MEILI_MASTER_KEY=fancy_master_key
-      - MEILISEARCH_HOST=127.0.0.1
+      - MEILISEARCH_HOST=meilisearch
       - MEILISEARCH_PORT=7700
     restart: on-failure:3
     volumes:

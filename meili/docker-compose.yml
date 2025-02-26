@@ -1,6 +1,6 @@
 services:
   meilisearch:
-    image: docker.io/getmeili/meilisearch:v1.13.0 # we have to use it because migration got easier
+    image: docker.io/getmeili/meilisearch:v1.13.1 # we have to use it because migration got easier
     environment:
       - http_proxy
       - https_proxy
@@ -18,9 +18,11 @@ services:
     cap_add: # needed to work smoothly on rootless Ubuntu 24.04
       - DAC_OVERRIDE # feel free to remove it if you are not using Ubuntu 24.04
     volumes:
-      - ./meilisearch_data:/data.ms
+      - meili-data:/data.ms
     restart: unless-stopped
 
+volumes:
+  meili-data:
 
 networks:
   meilisearch:

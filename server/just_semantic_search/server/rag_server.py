@@ -1,6 +1,8 @@
 import os
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Union
 from fastapi import Query
+from just_semantic_search.embeddings import EmbeddingModel
+from just_semantic_search.meili.rag import MeiliRAG
 from just_semantic_search.meili.tools import search_documents, all_indexes
 from pydantic import BaseModel, Field
 from just_agents.base_agent import BaseAgent
@@ -12,7 +14,9 @@ import uvicorn
 from just_agents.web.config import WebAgentConfig
 import typer
 from pycomfort.logging import to_nice_stdout
-from just_semantic_search.server.index_markdown import index_markdown_tool
+from just_agents import llm_options
+from just_semantic_search.server.index_markdown import index_markdown, index_markdown_tool
+from just_semantic_search.document import Document
 
 class RAGServerConfig(WebAgentConfig):
     """Configuration for the RAG server"""
@@ -138,15 +142,66 @@ class RAGServer(AgentRestAPI):
         self._indexes = all_indexes(non_empty=non_empty)
         return self._indexes
     
-    def index_markdown_folder(self, folder: str, index_name: str) -> List[str]:
+    def index_markdown_folder(self, folder: str, index_name: str) -> str:
         """
         Indexes a folder with markdown files. The server should have access to the folder.
+        Uses defensive checks for documents that might be either dicts or Document instances.
+        Reports errors to Eliot logs without breaking execution; problematic documents are skipped.
         """
-        if not Path(folder).exists():
-            raise FileNotFoundError(f"Folder {folder} does not existm or the server does not have access to it")
-        docs = index_markdown_tool(Path(folder), index_name)
-        sources = [doc["source"] for doc in docs]
-        return f"Indexed {len(docs)} documents from {folder} with sources: {sources}"
+        
+        with start_task(action_type="rag_server_index_markdown_folder", folder=folder, index_name=index_name) as action:
+            folder_path = Path(folder)
+            if not folder_path.exists():
+                msg = f"Folder {folder} does not exist or the server does not have access to it"
+                action.log(msg)
+                return msg
+            
+            model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
+            model = EmbeddingModel(model_str)
+
+            max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
+            characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
+            
+            # Create and return RAG instance with conditional recreate_index
+            # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
+            rag = MeiliRAG(
+                index_name=index_name,
+                model=model,        # The embedding model used for the search
+            )
+            options = llm_options.GEMINI_2_FLASH if self.agent is None else self.agent.llm_options
+            docs = index_markdown(rag, folder, max_seq_length, characters_for_abstract, options=options)
+            
+            docs = index_markdown_tool(folder_path, index_name)
+            sources = []
+            valid_docs_count = 0
+            error_count = 0
+
+            for doc in docs:
+                try:
+                    if isinstance(doc, dict):
+                        source = doc.get("source")
+                        if source is None:
+                            raise ValueError(f"Document (dict) missing 'source' key: {doc}")
+                    elif isinstance(doc, Document):
+                        source = getattr(doc, "source", None)
+                        if source is None:
+                            raise ValueError(f"Document instance missing 'source' attribute: {doc}")
+                    else:
+                        raise TypeError(f"Unexpected document type: {type(doc)} encountered in documents list")
+
+                    sources.append(source)
+                    valid_docs_count += 1
+                except Exception as e:
+                    error_count += 1
+                    action.log(message="Error processing document", doc=doc, error=str(e))
+                    # Continue processing the next document
+                    continue
+
+            result_msg = (
+                f"Indexed {valid_docs_count} valid documents from {folder} with sources: {sources}. "
+                f"Encountered {error_count} errors."
+            )
+            return result_msg
 
 def run_rag_server(
     config: Optional[Path] = None,

@@ -62,7 +62,8 @@ class Annotation(BaseModel):
     }
 
 
-def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md"]) -> List[dict]:
+def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md"],
+                   options: Optional[llm_options.LLMOptions] = None) -> List[dict]:
     """
     Index markdown files from a folder into MeiliSearch.
     
@@ -81,8 +82,10 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
         
         splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
 
+        options = options or llm_options.OPENAI_GPT4oMINI
+
         agent = BaseAgent(  # type: ignore
-            llm_options=llm_options.OPENAI_GPT4oMINI,
+            llm_options=options,
             system_prompt="""
             You are a paper annotator. You extract the abstract, authors and titles of the papers.
             Abstract and authors must be exactly he way they are in the paper, do not edit them.
@@ -118,6 +121,8 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
             documents_added_count=len(documents)
         )
         return documents
+    
+
 
 def index_markdown_tool(folder: Path, index_name: str,) -> List[dict]:
     model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)

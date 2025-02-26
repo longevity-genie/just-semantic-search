@@ -103,8 +103,19 @@ class MeiliBase(BaseModel):
             self.init_callback(self)
         # Initialize clients
         base_url = f'http://{self.host}:{self.port}'
-        self.client = Client(base_url, self.api_key)
-        self.client_async = AsyncClient(base_url, self.api_key)
+        with start_action(action_type="init_clients") as action:
+            action.log(
+                message_type="initializing_clients",
+                base_url=base_url,
+                api_key=self.api_key
+            )
+            self.client = Client(base_url, self.api_key)
+            self.client_async = AsyncClient(base_url, self.api_key)
+            action.add_success_fields(
+                message_type="clients_initialized",
+                base_url=base_url,
+                api_key=self.api_key
+            )
         
     
     @log_retry_errors
@@ -392,8 +403,6 @@ class MeiliRAG(MeiliBase):
             return self.client.get_index(self.index_name)
         except MeilisearchApiError as e:
             raise ValueError(f"Index '{self.index_name}' not found: {e}")
-        
-
     def index_folder(
         self,
         folder: Path,
