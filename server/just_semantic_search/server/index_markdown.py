@@ -27,9 +27,9 @@ from pycomfort import files
 from eliot import start_task
 
 current_dir = Path(__file__).parent
-project_dir = current_dir.parent.parent.parent  # Go up 2 levels from test/meili to project root
-data_dir = project_dir / "data"
-logs = project_dir / "logs"
+project_dir = Path(os.getenv("APP_DIR", str(current_dir.parent.parent.parent))).absolute()   # Go up 2 levels from test/meili to project root
+data_dir = project_dir / os.getenv("DATA_DIR", "data")
+logs = project_dir / os.getenv("LOG_DIR", "logs")
 tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
 meili_service_dir = project_dir / "meili"
 

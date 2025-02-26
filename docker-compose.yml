@@ -19,7 +19,7 @@ services:
       - ./meilisearch_data:/data.ms
     restart: unless-stopped
   rag-server:
-    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:latest
+    image: ghcr.io/longevity-genie/just-semantic-search/rag-server:main
     # For Podman GPU support
     #devices:
     #  - nvidia.com/gpu=all
@@ -45,6 +45,7 @@ services:
     env_file:
       - .env
     environment:
+      - APP_DIR=/app
       - APP_PORT=8090
       - APP_HOST=0.0.0.0 #app host inside container, 0's to expose
       - AGENT_PARENT_SECTION=agent_profiles
