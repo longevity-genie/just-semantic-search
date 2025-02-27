@@ -52,8 +52,15 @@ publish_package() {
         # Update keywords to indicate CUDA support
         sed -i.bak 's/"python", "llm"/"python", "llm", "gpu", "cuda"/' pyproject.toml
         
-        # Replace the torch dependency with the CUDA version if it exists
-        sed -i.bak 's/torch = { version = "2.6.0", source = "torch-cpu" }/torch = { version = "2.6.0+cu124", source = "torch-gpu" }/' pyproject.toml
+        # Extract torch CPU version from pyproject.toml dynamically
+        TORCH_CPU_VERSION=$(grep -oP 'torch = \{ version = "\K[^\"]+' pyproject.toml)
+        if [ -z "$TORCH_CPU_VERSION" ]; then
+            echo "Could not detect torch version in pyproject.toml"
+            HAS_ERRORS=1
+        else
+            TORCH_CUDA_VERSION="${TORCH_CPU_VERSION}+cu124"
+            sed -i.bak "s/torch = { version = \"$TORCH_CPU_VERSION\", source = \"torch-cpu\" }/torch = { version = \"$TORCH_CUDA_VERSION\", source = \"torch-gpu\" }/" pyproject.toml
+        fi
         
         # Make triton a direct dependency for CUDA version
         sed -i.bak 's/triton = { version = ">=2.3.0", optional = true, markers = "extra == '\''cuda'\''" }/triton = { version = ">=2.3.0" }/' pyproject.toml

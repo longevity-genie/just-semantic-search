@@ -52,7 +52,7 @@ The server provides several ways to index documents:
 3. Using the PDF conversion utility (requires GPU):
 
 ```bash
-server/bin/index_papers.sh -i /path/to/pdfs -o /path/to/output
+server/bin/parse-papers.sh -i /path/to/pdfs -o /path/to/output
 ```
 
 # Using just-semantic-search as a library

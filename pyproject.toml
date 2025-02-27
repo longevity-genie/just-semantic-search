@@ -40,7 +40,7 @@ priority = "explicit"
 
 [tool.poetry.scripts]
 meili-exec = "just_semantic_search.meili.meili_exec:app"
-index-markdown = "just_semantic_search.agent.index_markdown:app"
+index-markdown = "just_semantic_search.server.index_markdown:app"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
@@ -65,6 +65,8 @@ build-backend = "poetry.core.masonry.api"
 enable = true
 vcs = "git"
 style = "semver"
+pattern = "v?(?P<base>\\d+\\.\\d+\\.\\d+)"
+format-jinja = "{{base}}"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

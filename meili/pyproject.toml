@@ -49,7 +49,7 @@ build-backend = "poetry.core.masonry.api"
 enable = true
 vcs = "git"
 style = "semver"
-pattern = "(?P<base>\\d+\\.\\d+\\.\\d+)"
+pattern = "v?(?P<base>\\d+\\.\\d+\\.\\d+)"
 format-jinja = "{{base}}"
 
 [tool.poetry.group.dev.dependencies]

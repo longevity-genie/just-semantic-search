@@ -26,6 +26,8 @@ from pathlib import Path
 from pycomfort import files
 from eliot import start_task
 
+import json
+
 current_dir = Path(__file__).parent
 project_dir = Path(os.getenv("APP_DIR", str(current_dir.parent.parent.parent))).absolute()   # Go up 2 levels from test/meili to project root
 data_dir = project_dir / os.getenv("DATA_DIR", "data")
@@ -62,7 +64,24 @@ class Annotation(BaseModel):
     }
 
 
-def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md"],
+def clean_fallback_result(raw: str) -> str:
+    """
+    Remove any markdown formatting from the fallback result.
+    For example, if the JSON response is wrapped with ```json and ``` markers,
+    these will be stripped out.
+    """
+    raw = raw.strip()
+    # Remove starting markdown markers if they exist
+    if raw.startswith("```json"):
+        raw = raw[len("```json"):].strip()
+    elif raw.startswith("```"):
+        raw = raw[3:].strip()
+    # Remove ending markdown markers if they exist
+    if raw.endswith("```"):
+        raw = raw[:-3].strip()
+    return raw
+
+def index_md_txt(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"],
                    options: Optional[llm_options.LLMOptions] = None) -> List[dict]:
     """
     Index markdown files from a folder into MeiliSearch.
@@ -77,7 +96,7 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
     """
     with start_task(message_type="index_markdown", folder=str(folder)) as task:
 
-        fs = files.traverse(folder, lambda x: x.suffix in extensions)
+        fs = files.traverse(folder, lambda x: x.suffix in extensions, depth=depth)
         
         
         splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
@@ -96,6 +115,7 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
                 "title": "...",
                 "source": "...",
             }
+            Make sure to provide the output in the correct format, do not add any other text or comments, do not add ```json or other surrounding.
             For string either use one line or use proper escape characters (\n) for line breaks
             Make sure to provide the output in the correct format, do not add any other text or comments.
             For source you either give DOI, pubmed or filename (if doi or pubmed is not available).
@@ -105,10 +125,24 @@ def index_markdown(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 
         documents = []
         for f in fs:
             text = f.read_text()[:characters_for_abstract]
-            response = agent.query_structural(
-                f"Extract the abstract, authors and title of the following paper (from file {f.name}:\n {text}",
-                Annotation
-            )
+            try:
+                response = agent.query_structural(
+                    f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}",
+                    Annotation
+                )
+            except Exception as e:
+                # Fallback: use agent.query instead.
+                fallback_result = agent.query(
+                    f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}"
+                )
+                try:
+                    # Clean the fallback_result in case it's wrapped in markdown formatting
+                    cleaned_result = clean_fallback_result(fallback_result)
+                    response = json.loads(cleaned_result)
+                except Exception as parse_error:
+                    raise ValueError(
+                        f"Fallback call failed to produce a valid JSON response: {fallback_result}"
+                    ) from parse_error
             paper = Annotation.model_validate(response)
             docs = splitter_instance.split(text, title=paper.title, abstract=paper.abstract, authors=paper.authors, source=paper.source)
             rag.add_documents(docs)
@@ -137,7 +171,7 @@ def index_markdown_tool(folder: Path, index_name: str,) -> List[dict]:
         index_name=index_name,
         model=model,        # The embedding model used for the search
     )
-    return index_markdown(rag, folder, max_seq_length, characters_for_abstract)
+    return index_md_txt(rag, folder, max_seq_length, characters_for_abstract)
 
 @app.command("index-markdown")
 def index_markdown_command(
@@ -171,7 +205,7 @@ def index_markdown_command(
             create_index_if_not_exists=True,
             recreate_index=recreate_index
         )
-        index_markdown(rag, Path(folder), max_seq_length, characters_limit, depth, extensions)
+        index_md_txt(rag, Path(folder), max_seq_length, characters_limit, depth, extensions)
         
 
 if __name__ == "__main__":

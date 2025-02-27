@@ -4,6 +4,7 @@ from fastapi import Query
 from just_semantic_search.embeddings import EmbeddingModel
 from just_semantic_search.meili.rag import MeiliRAG
 from just_semantic_search.meili.tools import search_documents, all_indexes
+from just_semantic_search.server import indexing
 from pydantic import BaseModel, Field
 from just_agents.base_agent import BaseAgent
 from just_agents.web.rest_api import AgentRestAPI
@@ -15,7 +16,6 @@ from just_agents.web.config import WebAgentConfig
 import typer
 from pycomfort.logging import to_nice_stdout
 from just_agents import llm_options
-from just_semantic_search.server.index_markdown import index_markdown, index_markdown_tool
 from just_semantic_search.document import Document
 
 class RAGServerConfig(WebAgentConfig):
@@ -168,10 +168,10 @@ class RAGServer(AgentRestAPI):
                 index_name=index_name,
                 model=model,        # The embedding model used for the search
             )
-            options = llm_options.GEMINI_2_FLASH if self.agent is None else self.agent.llm_options
-            docs = index_markdown(rag, folder, max_seq_length, characters_for_abstract, options=options)
+            options = llm_options.GEMINI_2_FLASH if self.agents is None else list(self.agents.values())[0].llm_options
+            docs = indexing(rag, folder, max_seq_length, characters_for_abstract, options=options)
             
-            docs = index_markdown_tool(folder_path, index_name)
+            docs = indexing.index_md_txt(rag, folder_path, index_name)
             sources = []
             valid_docs_count = 0
             error_count = 0
