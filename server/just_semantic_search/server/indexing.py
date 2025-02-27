@@ -27,6 +27,7 @@ from pycomfort import files
 from eliot import start_task
 
 import json
+import re
 
 current_dir = Path(__file__).parent
 project_dir = Path(os.getenv("APP_DIR", str(current_dir.parent.parent.parent))).absolute()   # Go up 2 levels from test/meili to project root
@@ -66,19 +67,15 @@ class Annotation(BaseModel):
 
 def clean_fallback_result(raw: str) -> str:
     """
-    Remove any markdown formatting from the fallback result.
-    For example, if the JSON response is wrapped with ```json and ``` markers,
-    these will be stripped out.
+    Remove any markdown code fences from the fallback JSON response.
+    This regex checks if the entire string is enclosed within triple-backticks with an
+    optional "json" language tag, and if so, returns just the content.
     """
     raw = raw.strip()
-    # Remove starting markdown markers if they exist
-    if raw.startswith("```json"):
-        raw = raw[len("```json"):].strip()
-    elif raw.startswith("```"):
-        raw = raw[3:].strip()
-    # Remove ending markdown markers if they exist
-    if raw.endswith("```"):
-        raw = raw[:-3].strip()
+    pattern = re.compile(r"^```(?:json)?\s*(.*?)\s*```$", re.DOTALL)
+    match = pattern.match(raw)
+    if match:
+        return match.group(1)
     return raw
 
 def index_md_txt(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"],

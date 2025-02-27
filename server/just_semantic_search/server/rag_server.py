@@ -169,7 +169,9 @@ class RAGServer(AgentRestAPI):
                 index_name=index_name,
                 model=model,        # The embedding model used for the search
             )
-            options = llm_options.GEMINI_2_FLASH if self.agents is None else list(self.agents.values())[0].llm_options
+            index_openai = os.getenv("INDEX_OPENAI", False) # ugly hack to use openai for indexing
+            default_options = llm_options.OPENAI_GPT4oMINI if index_openai else llm_options.GEMINI_2_FLASH
+            options = default_options if self.agents is None else list(self.agents.values())[0].llm_options
             docs = index_md_txt(rag, folder, max_seq_length, characters_for_abstract, options=options)
             sources = []
             valid_docs_count = 0
@@ -237,7 +239,7 @@ def run_rag_server(
 def run_rag_server_command(
     config: Optional[Path] = None,
     host: str = env_config.host,
-    port: int = env_config.port,
+    port: int = 8091, #env_config.port,
     workers: int = env_config.workers,
     title: str = env_config.title,
     section: Optional[str] = env_config.section,
