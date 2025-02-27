@@ -86,6 +86,14 @@ publish_package() {
         echo "Publishing CPU version..."
     fi
     
+    # Debug: Show dynamic versioning configuration from pyproject.toml
+    echo "=== Dynamic versioning section before build ==="
+    grep -A 5 "\[tool.poetry-dynamic-versioning\]" pyproject.toml
+
+    # (Optional) Show current git tag description for debugging:
+    echo "Git describe:"
+    git describe --tags --always
+    
     # Build and publish
     poetry build
     if [ $? -ne 0 ]; then

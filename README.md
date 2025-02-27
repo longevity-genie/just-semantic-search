@@ -49,10 +49,10 @@ The server provides several ways to index documents:
 
 1. Using the REST API directly (see API docs)
 2. Using the `index-markdown` command for markdown files with optional Gemini summarization
-3. Using the PDF conversion utility (requires GPU):
+3. Using the PDF conversion utility (requires GPU, should be run with sudo):
 
 ```bash
-server/bin/parse-papers.sh -i /path/to/pdfs -o /path/to/output
+sudo server/bin/parse-papers.sh -i /path/to/pdfs -o /path/to/output
 ```
 
 # Using just-semantic-search as a library

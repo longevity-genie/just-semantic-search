@@ -17,6 +17,7 @@ import typer
 from pycomfort.logging import to_nice_stdout
 from just_agents import llm_options
 from just_semantic_search.document import Document
+from just_semantic_search.server.indexing import index_md_txt
 
 class RAGServerConfig(WebAgentConfig):
     """Configuration for the RAG server"""
@@ -169,9 +170,7 @@ class RAGServer(AgentRestAPI):
                 model=model,        # The embedding model used for the search
             )
             options = llm_options.GEMINI_2_FLASH if self.agents is None else list(self.agents.values())[0].llm_options
-            docs = indexing(rag, folder, max_seq_length, characters_for_abstract, options=options)
-            
-            docs = indexing.index_md_txt(rag, folder_path, index_name)
+            docs = index_md_txt(rag, folder, max_seq_length, characters_for_abstract, options=options)
             sources = []
             valid_docs_count = 0
             error_count = 0
