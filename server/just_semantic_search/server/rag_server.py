@@ -168,7 +168,7 @@ class RAGServer(AgentRestAPI):
                 index_name=index_name,
                 model=model,        # The embedding model used for the search
             )
-            options = llm_options.GEMINI_2_FLASH if self.agent is None else self.agent.llm_options
+            options = llm_options.GEMINI_2_FLASH if self.agents is None else list(self.agents.values())[0].llm_options
             docs = index_markdown(rag, folder, max_seq_length, characters_for_abstract, options=options)
             
             docs = index_markdown_tool(folder_path, index_name)
