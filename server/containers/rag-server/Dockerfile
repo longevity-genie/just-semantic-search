@@ -9,7 +9,7 @@ ADD server/containers/rag-server/init.py /app/init.py
 ADD server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 ADD server/containers/rag-server/chat_agent_profiles.yaml /app/chat_agent_profiles.yaml
 
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.2.9
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.0
 
 RUN poetry source add --priority explicit pytorch_cpu https://download.pytorch.org/whl/cpu \
     && poetry add --no-cache --verbose --source pytorch_cpu torch>=2.6
