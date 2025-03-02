@@ -2,7 +2,6 @@ from just_semantic_search.article_splitter import ArticleSplitter
 from typing import List, Optional
 from pydantic import BaseModel
 from just_semantic_search.text_splitters import *
-from pycomfort.logging import to_nice_file, to_nice_stdout
 from just_semantic_search.embeddings import *
 
 from just_semantic_search.utils.tokens import *
@@ -12,43 +11,17 @@ from just_agents.base_agent import BaseAgent
 
 import typer
 import os
-from dotenv import load_dotenv
 from just_semantic_search.meili.rag import *
 from pathlib import Path
 
 from eliot._output import *
 from eliot import start_task
 
-from just_semantic_search.meili.utils.services import ensure_meili_is_running
 
-from datetime import datetime
 from pathlib import Path
 from pycomfort import files
 from eliot import start_task
 
-import json
-import re
-
-current_dir = Path(__file__).parent
-project_dir = Path(os.getenv("APP_DIR", str(current_dir.parent.parent.parent))).absolute()   # Go up 2 levels from test/meili to project root
-data_dir = project_dir / os.getenv("DATA_DIR", "data")
-logs = project_dir / os.getenv("LOG_DIR", "logs")
-tacutopapers_dir = data_dir / "tacutopapers_test_rsids_10k"
-meili_service_dir = project_dir / "meili"
-
-# Configure Eliot to output to both stdout and log files
-log_file_path = logs / f"manual_meili_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-logs.mkdir(exist_ok=True)  # Ensure logs directory exists
-
-# Create both JSON and rendered log files
-json_log = open(f"{log_file_path}.json", "w")
-rendered_log = open(f"{log_file_path}.txt", "w")
-
-
-load_dotenv(override=True)
-to_nice_file(json_log, rendered_file=rendered_log)
-to_nice_stdout()
-key = os.getenv("MEILI_MASTER_KEY", "fancy_master_key")
 
 
 app = typer.Typer()
@@ -64,112 +37,148 @@ class Annotation(BaseModel):
         "arbitrary_types_allowed": True
     }
 
-
-def clean_fallback_result(raw: str) -> str:
-    """
-    Remove any markdown code fences from the fallback JSON response.
-    This regex checks if the entire string is enclosed within triple-backticks with an
-    optional "json" language tag, and if so, returns just the content.
-    """
-    raw = raw.strip()
-    pattern = re.compile(r"^```(?:json)?\s*(.*?)\s*```$", re.DOTALL)
-    match = pattern.match(raw)
-    if match:
-        return match.group(1)
-    return raw
-
-def index_md_txt(rag: MeiliRAG, folder: Path, max_seq_length: Optional[int] = 3600, characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"],
-                   options: Optional[llm_options.LLMOptions] = None) -> List[dict]:
-    """
-    Index markdown files from a folder into MeiliSearch.
+class Indexing(BaseModel):
     
-    Args:
-        rag: MeiliRAG instance for document storage and retrieval
-        folder: Path to the folder containing markdown files
-        characters_limit: Maximum number of characters to process per file
-        
-    Returns:
-        List of processed documents
-    """
-    with start_task(message_type="index_markdown", folder=str(folder)) as task:
+    annotation_agent: BaseAgent
+    embedding_model: EmbeddingModel
 
-        fs = files.traverse(folder, lambda x: x.suffix in extensions, depth=depth)
+    def index_md_txt(self, rag: MeiliRAG, folder: Path, 
+                     max_seq_length: Optional[int] = 3600, 
+                     characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"],
+                     enforce_validation: bool = False,
+                     ) -> List[dict]:
+        """
+        Index markdown files from a folder into MeiliSearch.
         
-        
-        splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
+        Args:
+            rag: MeiliRAG instance for document storage and retrieval
+            folder: Path to the folder containing markdown files
+            characters_limit: Maximum number of characters to process per file
+            
+        Returns:
+            List of processed documents
+        """
+        with start_task(message_type="index_markdown", folder=str(folder)) as task:
 
-        options = options or llm_options.OPENAI_GPT4oMINI
+            fs = files.traverse(folder, lambda x: x.suffix in extensions, depth=depth)
+            
+            
+            splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
 
-        agent = BaseAgent(  # type: ignore
-            llm_options=options,
-            system_prompt="""
-            You are a paper annotator. You extract the abstract, authors and titles of the papers.
-            Abstract and authors must be exactly he way they are in the paper, do not edit them.
-            You provide your output as json object of the following JSON format:
-            {
-                "abstract": "...",
-                "authors": ["...", "..."],
-                "title": "...",
-                "source": "...",
-            }
-            Make sure to provide the output in the correct format, do not add any other text or comments, do not add ```json or other surrounding.
-            For string either use one line or use proper escape characters (\n) for line breaks
-            Make sure to provide the output in the correct format, do not add any other text or comments.
-            For source you either give DOI, pubmed or filename (if doi or pubmed is not available).
-            File filename you give a filename of the file in the folder together with the extension.
-            """)
-        fs = files.files(folder)
-        documents = []
-        for f in fs:
-            text = f.read_text()[:characters_for_abstract]
-            try:
-                response = agent.query_structural(
-                    f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}",
-                    Annotation
-                )
-            except Exception as e:
-                # Fallback: use agent.query instead.
-                fallback_result = agent.query(
-                    f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}"
-                )
-                try:
-                    # Clean the fallback_result in case it's wrapped in markdown formatting
-                    cleaned_result = clean_fallback_result(fallback_result)
-                    response = json.loads(cleaned_result)
-                except Exception as parse_error:
-                    raise ValueError(
-                        f"Fallback call failed to produce a valid JSON response: {fallback_result}"
-                    ) from parse_error
-            paper = Annotation.model_validate(response)
-            docs = splitter_instance.split(text, title=paper.title, abstract=paper.abstract, authors=paper.authors, source=paper.source)
-            rag.add_documents(docs)
-            documents.extend(docs)
-            task.log(message_type="index_markdown_document.indexed", document_count=len(documents))
+            options = options or llm_options.OPENAI_GPT4oMINI
+
+
+            fs = files.files(folder)
+            documents = []
+            for f in fs:
+                text = f.read_text()[:characters_for_abstract]
+                response = self.annotation_agent.query_structural(
+                        f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}", Annotation, enforce_validation=enforce_validation)
+                paper = Annotation.model_validate(response)
+                docs = splitter_instance.split(text, title=paper.title, abstract=paper.abstract, authors=paper.authors, source=paper.source)
+                rag.add_documents(docs)
+                documents.extend(docs)
+                task.log(message_type="index_markdown_document.indexed", document_count=len(documents))
+            
+            task.add_success_fields(
+                message_type="index_markdown_complete",
+                index_name=rag.index_name,
+                documents_added_count=len(documents)
+            )
+            return documents
+
+
+    def index_markdown_tool(self, folder: Path, index_name: str,) -> List[dict]:
+        model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
+        model = EmbeddingModel(model_str)
+
+        max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
+        characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
         
-        task.add_success_fields(
-            message_type="index_markdown_complete",
-            index_name=rag.index_name,
-            documents_added_count=len(documents)
+        # Create and return RAG instance with conditional recreate_index
+        # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
+        rag = MeiliRAG(
+            index_name=index_name,
+            model=model,        # The embedding model used for the search
         )
-        return documents
+        return self.index_md_txt(rag, folder, max_seq_length, characters_for_abstract)
     
 
 
-def index_markdown_tool(folder: Path, index_name: str,) -> List[dict]:
-    model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
-    model = EmbeddingModel(model_str)
+    def index_markdown_tool(self, folder: Path, index_name: str,) -> List[dict]:
+        model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
+        model = EmbeddingModel(model_str)
 
-    max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
-    characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
+        max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
+        characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
+        
+        # Create and return RAG instance with conditional recreate_index
+        # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
+        rag = MeiliRAG(
+            index_name=index_name,
+            model=model,        # The embedding model used for the search
+        )
+        return self.index_md_txt(rag, folder, max_seq_length, characters_for_abstract)
     
-    # Create and return RAG instance with conditional recreate_index
-    # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
-    rag = MeiliRAG(
-        index_name=index_name,
-        model=model,        # The embedding model used for the search
-    )
-    return index_md_txt(rag, folder, max_seq_length, characters_for_abstract)
+    def index_markdown_folder(self, folder: str, index_name: str) -> str:
+        """
+        Indexes a folder with markdown files. The server should have access to the folder.
+        Uses defensive checks for documents that might be either dicts or Document instances.
+        Reports errors to Eliot logs without breaking execution; problematic documents are skipped.
+        """
+        
+        with start_task(action_type="rag_server_index_markdown_folder", folder=folder, index_name=index_name) as action:
+            folder_path = Path(folder)
+            if not folder_path.exists():
+                msg = f"Folder {folder} does not exist or the server does not have access to it"
+                action.log(msg)
+                return msg
+            
+            model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
+            model = EmbeddingModel(model_str)
 
+            max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
+            characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
+            
+            # Create and return RAG instance with conditional recreate_index
+            # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
+            rag = MeiliRAG(
+                index_name=index_name,
+                model=model,        # The embedding model used for the search
+            )
+            docs = self.index_md_txt(rag, folder, max_seq_length, characters_for_abstract)
+            sources = []
+            valid_docs_count = 0
+            error_count = 0
+
+            for doc in docs:
+                try:
+                    if isinstance(doc, dict):
+                        source = doc.get("source")
+                        if source is None:
+                            raise ValueError(f"Document (dict) missing 'source' key: {doc}")
+                    elif isinstance(doc, Document):
+                        source = getattr(doc, "source", None)
+                        if source is None:
+                            raise ValueError(f"Document instance missing 'source' attribute: {doc}")
+                    else:
+                        raise TypeError(f"Unexpected document type: {type(doc)} encountered in documents list")
+
+                    sources.append(source)
+                    valid_docs_count += 1
+                except Exception as e:
+                    error_count += 1
+                    action.log(message="Error processing document", doc=doc, error=str(e))
+                    # Continue processing the next document
+                    continue
+
+            result_msg = (
+                f"Indexed {valid_docs_count} valid documents from {folder} with sources: {sources}. "
+                f"Encountered {error_count} errors."
+            )
+            return result_msg
+
+"""
 @app.command("index-markdown")
 def index_markdown_command(
     folder: Path = typer.Argument(..., help="Folder containing documents to index"),
@@ -211,3 +220,4 @@ if __name__ == "__main__":
         # If no arguments provided, show help
         sys.argv.append("--help")
     app(prog_name="index-markdown")
+"""

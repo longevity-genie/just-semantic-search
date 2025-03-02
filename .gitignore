@@ -211,3 +211,6 @@ bin/tun.sh
 
 meili/meilisearch_data/*
 meilisearch_data/*
+
+
+models.d/*

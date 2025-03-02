@@ -1,25 +1,22 @@
+from functools import cached_property
 import os
-from typing import List, Dict, Optional, Union
-from fastapi import Query
+from typing import List, Dict, Optional
+from dotenv import load_dotenv
 from just_semantic_search.embeddings import EmbeddingModel
-from just_semantic_search.meili.rag import MeiliRAG
 from just_semantic_search.meili.tools import search_documents, all_indexes
-from just_semantic_search.server import indexing
+from just_semantic_search.server.rag_agent import default_annotation_agent, default_rag_agent
 from pydantic import BaseModel, Field
 from just_agents.base_agent import BaseAgent
-from just_agents.web.rest_api import AgentRestAPI
+from just_agents.web.chat_ui_rest_api import ChatUIAgentRestAPI, ChatUIAgentConfig
 from eliot import start_task
-from just_semantic_search.server.rag_agent import DEFAULT_RAG_AGENT
 from pathlib import Path
-import uvicorn
-from just_agents.web.config import WebAgentConfig
 import typer
-from pycomfort.logging import to_nice_stdout
-from just_agents import llm_options
-from just_semantic_search.document import Document
-from just_semantic_search.server.indexing import index_md_txt
+import uvicorn
+from just_semantic_search.server.indexing import Indexing
+from pathlib import Path
 
-class RAGServerConfig(WebAgentConfig):
+
+class RAGServerConfig(ChatUIAgentConfig):
     """Configuration for the RAG server"""
     port: int = Field(
         default_factory=lambda: int(os.getenv("APP_PORT", "8090").split()[0]),
@@ -37,8 +34,6 @@ class RAGServerConfig(WebAgentConfig):
    
     
 
-env_config = RAGServerConfig()
-app = typer.Typer()
 
 class SearchRequest(BaseModel):
     """Request model for basic semantic search"""
@@ -54,9 +49,29 @@ class SearchAgentRequest(BaseModel):
     index: Optional[str] = Field(default=None, example="glucosedao")
     additional_instructions: Optional[str] = Field(default=None, example="You must always provide quotes from evidence followed by the sources (not in the end but immediately after the quote)")
 
-
-class RAGServer(AgentRestAPI):
+class RAGServer(ChatUIAgentRestAPI):
     """Extended REST API implementation that adds RAG (Retrieval-Augmented Generation) capabilities"""
+
+    indexing: Indexing
+
+    @cached_property
+    def rag_agent(self):
+        if "rag_agent" in self.agents:
+            return self.agents["rag_agent"]
+        elif "default" in self.agents:
+            return self.agents["default"]
+        else:
+            raise ValueError("RAG agent not found")
+
+    @cached_property
+    def annotation_agent(self):
+        if "annotation_agent" in self.agents:
+            return self.agents["annotation_agent"]
+        elif "annotator" in self.agents:
+            return self.agents["annotator"]
+        else:
+            raise ValueError("Annotation agent not found")
+
 
     def __init__(self, 
                  agents: Optional[Dict[str, BaseAgent]] = None,
@@ -66,9 +81,12 @@ class RAGServer(AgentRestAPI):
                  debug: bool = False,
                  title: str = "Just-Agent endpoint",
                  description: str = "OpenAI-compatible API endpoint for Just-Agents",
+                 embedding_model: EmbeddingModel =EmbeddingModel.JINA_EMBEDDINGS_V3,
                  *args, **kwargs):
         if agents is not None:
             kwargs["agents"] = agents
+
+       
         super().__init__(
             agent_config=agent_config,
             agent_section=agent_section,
@@ -78,8 +96,29 @@ class RAGServer(AgentRestAPI):
             description=description,
             *args, **kwargs
         )
+        self.indexing = Indexing(
+            annotation_agent=self.annotation_agent,
+            embedding_model=embedding_model
+        )
         self._indexes = None
         self._configure_rag_routes()
+        
+    
+    def _initialize_config(self):
+        """Overriding initialization from config"""
+        with start_task(action_type="rag_server_initialize_config") as action:
+            self.config = ChatUIAgentConfig()
+            if Path(self.config.env_keys_path).resolve().absolute().exists():
+                load_dotenv(self.config.env_keys_path, override=True)
+            if not Path(self.config.models_dir).exists():
+                action.log(f"Creating models directory {self.config.models_dir} which does not exist")
+                Path(self.config.models_dir).mkdir(parents=True, exist_ok=True)
+            if "env/" in self.config.env_models_path:
+                if not Path("env").exists():
+                    action.log(f"Creating env directory {self.config.env_models_path} which does not exist")
+                    Path("env").mkdir(parents=True, exist_ok=True)
+            
+                    
 
     @property
     def indexes(self) -> List[str]:
@@ -90,10 +129,23 @@ class RAGServer(AgentRestAPI):
 
     def _configure_rag_routes(self):
         """Configure RAG-specific routes"""
-        self.post("/search", description="Perform semantic search")(self.search)
-        self.post("/search_agent", description="Perform advanced RAG-based search")(self.search_agent)
-        self.post("/list_indexes", description="Get all indexes")(self.list_indexes)
-        self.post("/index_markdown_folder", description="Index a folder with markdown files")(self.index_markdown_folder)
+        # Add a check to prevent duplicate route registration
+        route_paths = [route.path for route in self.routes]
+        
+        if "/search" not in route_paths:
+            self.post("/search", description="Perform semantic search")(self.search)
+        
+        if "/search_agent" not in route_paths:
+            self.post("/search_agent", description="Perform advanced RAG-based search")(self.search_agent)
+        
+        if "/list_indexes" not in route_paths:
+            self.post("/list_indexes", description="Get all indexes")(self.list_indexes)
+        
+        if "/index_markdown_folder" not in route_paths:
+            self.post("/index_markdown_folder", description="Index a folder with markdown files")(self.indexing.index_markdown_folder)
+
+
+    
 
     def search(self, request: SearchRequest) -> list[str]:
         """
@@ -127,13 +179,20 @@ class RAGServer(AgentRestAPI):
         Returns:
             A detailed response from the RAG agent incorporating retrieved documents
         """
+
         with start_task(action_type="rag_server_advanced_search", query=request.query) as action:
-            action.log("performing advanced RAG search")
+            import uuid
+            request_id = str(uuid.uuid4())[:8]
+            action.log(f"[{request_id}] Received search_agent request")
+            
             indexes = self.indexes if request.index is None else [request.index]
             query = f"Search the following query:```\n{request.query}\n```\nYou can only search in the following indexes: {indexes}"
             if request.additional_instructions is not None:
                 query += f"\nADDITIONAL INSTRUCTIONS: {request.additional_instructions}"
-            result = DEFAULT_RAG_AGENT.query(query)
+            
+            action.log(f"[{request_id}] Querying RAG agent")
+            result = self.rag_agent.query(query)
+            action.log(f"[{request_id}] Completed search_agent request")
             return result
     
     def list_indexes(self, non_empty: bool = True) -> List[str]:
@@ -143,66 +202,7 @@ class RAGServer(AgentRestAPI):
         self._indexes = all_indexes(non_empty=non_empty)
         return self._indexes
     
-    def index_markdown_folder(self, folder: str, index_name: str) -> str:
-        """
-        Indexes a folder with markdown files. The server should have access to the folder.
-        Uses defensive checks for documents that might be either dicts or Document instances.
-        Reports errors to Eliot logs without breaking execution; problematic documents are skipped.
-        """
-        
-        with start_task(action_type="rag_server_index_markdown_folder", folder=folder, index_name=index_name) as action:
-            folder_path = Path(folder)
-            if not folder_path.exists():
-                msg = f"Folder {folder} does not exist or the server does not have access to it"
-                action.log(msg)
-                return msg
-            
-            model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
-            model = EmbeddingModel(model_str)
-
-            max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
-            characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
-            
-            # Create and return RAG instance with conditional recreate_index
-            # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
-            rag = MeiliRAG(
-                index_name=index_name,
-                model=model,        # The embedding model used for the search
-            )
-            index_openai = os.getenv("INDEX_OPENAI", False) # ugly hack to use openai for indexing
-            default_options = llm_options.OPENAI_GPT4oMINI if index_openai else llm_options.GEMINI_2_FLASH
-            options = default_options if self.agents is None else list(self.agents.values())[0].llm_options
-            docs = index_md_txt(rag, folder, max_seq_length, characters_for_abstract, options=options)
-            sources = []
-            valid_docs_count = 0
-            error_count = 0
-
-            for doc in docs:
-                try:
-                    if isinstance(doc, dict):
-                        source = doc.get("source")
-                        if source is None:
-                            raise ValueError(f"Document (dict) missing 'source' key: {doc}")
-                    elif isinstance(doc, Document):
-                        source = getattr(doc, "source", None)
-                        if source is None:
-                            raise ValueError(f"Document instance missing 'source' attribute: {doc}")
-                    else:
-                        raise TypeError(f"Unexpected document type: {type(doc)} encountered in documents list")
-
-                    sources.append(source)
-                    valid_docs_count += 1
-                except Exception as e:
-                    error_count += 1
-                    action.log(message="Error processing document", doc=doc, error=str(e))
-                    # Continue processing the next document
-                    continue
-
-            result_msg = (
-                f"Indexed {valid_docs_count} valid documents from {folder} with sources: {sources}. "
-                f"Encountered {error_count} errors."
-            )
-            return result_msg
+    
 
 def run_rag_server(
     config: Optional[Path] = None,
@@ -213,11 +213,9 @@ def run_rag_server(
     section: Optional[str] = None,
     parent_section: Optional[str] = None,
     debug: bool = True,
-    agents: Optional[Dict[str, BaseAgent]] = None,
+    agents: Optional[Dict[str, BaseAgent]] = None
 ) -> None:
     """Run the RAG server with the given configuration."""
-    to_nice_stdout()
-
     # Initialize the API class with the updated configuration
     api = RAGServer(
         agent_config=config,
@@ -236,6 +234,9 @@ def run_rag_server(
     )
 
 
+env_config = ChatUIAgentConfig()
+
+
 def run_rag_server_command(
     config: Optional[Path] = None,
     host: str = env_config.host,
@@ -247,7 +248,13 @@ def run_rag_server_command(
     debug: bool = env_config.debug,
 ) -> None:
     """Run the FastAPI server for RAGServer with the given configuration."""
-    agents = {"default": DEFAULT_RAG_AGENT} if config is None else None
+    if config is None:
+        with start_task(action_type="rag_server_run_rag_server_command", config=config) as action:
+            action.log("config is None, using default RAG agent")
+            agents = {"rag_agent": default_rag_agent(), "annotation_agent": default_annotation_agent()}
+    else:
+        agents = None
+    
     run_rag_server(
         config=config,
         host=host,
@@ -259,6 +266,8 @@ def run_rag_server_command(
         debug=debug,
         agents=agents
     )
+    
+    
 
 if __name__ == "__main__":
     env_config = RAGServerConfig()

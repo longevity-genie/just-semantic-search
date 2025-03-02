@@ -1,8 +1,9 @@
 agent_profiles:
   rag_agent:
-    class_qualname: just_agents.web.web_agent.WebAgent
-    display_name: RAG Agent
+    class_qualname: just_agents.web.web_agent.ChatUIAgent
+    display_name: 🕵 RAG Agent
     description: RAG agent to deal with semantic search
+    hidden: true
     assistant_index: 70
     tools: # List of tools available to this agent. These will be automatically imported.
       - package: "just_semantic_search.meili.tools" # Corresponds to tools/toy_tools.py.
