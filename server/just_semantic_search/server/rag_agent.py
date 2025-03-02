@@ -13,12 +13,16 @@ warnings.filterwarnings('ignore', message='.*flash_attn.*')
 from dotenv import load_dotenv
 
 from just_agents import llm_options
+from just_agents.llm_options import LLAMA3_3, GEMINI_2_FLASH, GEMINI_2_FLASH_EXP
 from just_agents.web.web_agent import WebAgent
 from just_semantic_search.meili.tools import all_indexes, search_documents
 import os
+from just_agents import tools
+from just_agents.tools.semantic_search import semantic_search, list_search_indexes
 
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 load_dotenv(override=True)
+
 
 current_dir = Path(__file__).parent
 project_dir = Path(os.getenv("APP_DIR", str(current_dir.parent.parent.parent))).absolute()   # Go up 2 levels from test/meili to project root
@@ -115,6 +119,24 @@ def query_agent(
     print(result)
 
 if __name__ == "__main__":
+
+    #agent = WebAgent(
+    #    llm_options=LLAMA3_3,
+    #    system_prompt="""
+    #    You MUST ALWAYS provide sources for all the documents. Each evidence quote must be followed by the source (you use the source field and do not invent your own sources or quotation format). 
+    #    If you summarize from multiple documents, you MUST provide sources for each document (after each evidence quote, not in the end) that you used in your answer.
+    #    You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
+    #    YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
+    #    You only use semantic_search when you know which indexes are available. Please, call list_search_indexes tool first and then use semantic_search.
+    #    """,
+    #    tools=[semantic_search, list_search_indexes],
+    #)
+    #print("=====================================")
+    #result = agent.query("Which machine learning models are used for CGM?")
+    #print(result)
+    #agent.memory.pretty_print_all_messages()
+
     print("Starting RAG agent")
     app()
+
    

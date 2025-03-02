@@ -95,3 +95,7 @@ def load_sentence_transformer_from_enum(model: EmbeddingModel, **kwargs) -> Sent
 # You can now replace the individual loading functions with this more elegant solution
 # or keep them as convenience functions that use the enum internally
 
+if __name__ == "__main__":
+    print("PRELOADING JINA EMBEDDINGS")
+    model = load_sentence_transformer_from_enum(EmbeddingModel.JINA_EMBEDDINGS_V3)
+    print(model.encode("Hello, world!"))

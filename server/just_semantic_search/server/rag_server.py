@@ -25,8 +25,16 @@ class RAGServerConfig(ChatUIAgentConfig):
         description="Host address to bind the server to",
         examples=["0.0.0.0", "127.0.0.1"]
     )
-   
-    
+
+    embedding_model: EmbeddingModel = Field(
+        default=EmbeddingModel.JINA_EMBEDDINGS_V3,
+        description="Embedding model to use"
+    )
+
+    def set_general_port(self, port: int):
+        self.agent_port = port
+        self.port = port
+
 
 
 class SearchRequest(BaseModel):
@@ -69,20 +77,20 @@ class RAGServer(ChatUIAgentRestAPI):
 
     def __init__(self, 
                  agents: Optional[Dict[str, BaseAgent]] = None,
-                 agent_config: Optional[Path | str] = None,
+                 agent_profiles: Optional[Path | str] = None,
                  agent_section: Optional[str] = None,
                  agent_parent_section: Optional[str] = None,
                  debug: bool = False,
                  title: str = "Just-Agent endpoint",
                  description: str = "OpenAI-compatible API endpoint for Just-Agents",
-                 embedding_model: EmbeddingModel =EmbeddingModel.JINA_EMBEDDINGS_V3,
+                 config: Optional[RAGServerConfig] = None,
                  *args, **kwargs):
         if agents is not None:
             kwargs["agents"] = agents
 
-       
+        self.config = RAGServerConfig() if config is None else config
         super().__init__(
-            agent_config=agent_config,
+            agent_config=agent_profiles,
             agent_section=agent_section,
             agent_parent_section=agent_parent_section,
             debug=debug,
@@ -92,16 +100,20 @@ class RAGServer(ChatUIAgentRestAPI):
         )
         self.indexing = Indexing(
             annotation_agent=self.annotation_agent,
-            embedding_model=embedding_model
+            embedding_model=config.embedding_model
         )
         self._indexes = None
         self._configure_rag_routes()
         
-    
+    def _prepare_model_jsons(self):
+        with start_task(action_type="rag_server_prepare_model_jsons") as action:
+            action.log("PREPARING MODEL JSONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            super()._prepare_model_jsons()
+        
     def _initialize_config(self):
         """Overriding initialization from config"""
         with start_task(action_type="rag_server_initialize_config") as action:
-            self.config = ChatUIAgentConfig()
+            action.log(f"Config: {self.config}")
             if Path(self.config.env_keys_path).resolve().absolute().exists():
                 load_dotenv(self.config.env_keys_path, override=True)
             if not Path(self.config.models_dir).exists():
@@ -120,6 +132,7 @@ class RAGServer(ChatUIAgentRestAPI):
         if self._indexes is None:
             self._indexes = self.list_indexes()
         return self._indexes
+    
 
     def _configure_rag_routes(self):
         """Configure RAG-specific routes"""
@@ -199,9 +212,9 @@ class RAGServer(ChatUIAgentRestAPI):
     
 
 def run_rag_server(
-    config: Optional[Path] = None,
+    agent_profiles: Optional[Path] = None,
     host: str = "0.0.0.0",
-    port: int = 8088,
+    port: int = 8091,
     workers: int = 1,
     title: str = "Just-Agent endpoint",
     section: Optional[str] = None,
@@ -211,13 +224,17 @@ def run_rag_server(
 ) -> None:
     """Run the RAG server with the given configuration."""
     # Initialize the API class with the updated configuration
+    config = RAGServerConfig()
+    config.set_general_port(port)
+
     api = RAGServer(
-        agent_config=config,
+        agent_profiles=agent_profiles,
         agent_parent_section=parent_section,
         agent_section=section,
         debug=debug,
         title=title,
-        agents=agents
+        agents=agents,
+        config=config
     )
     
     uvicorn.run(
@@ -228,11 +245,12 @@ def run_rag_server(
     )
 
 
-env_config = ChatUIAgentConfig()
+env_config = RAGServerConfig()
+env_config.set_general_port(8091)
 
 
 def run_rag_server_command(
-    config: Optional[Path] = None,
+    agent_profiles: Optional[Path] = None,
     host: str = env_config.host,
     port: int = env_config.port,
     workers: int = env_config.workers,
@@ -242,15 +260,15 @@ def run_rag_server_command(
     debug: bool = env_config.debug,
 ) -> None:
     """Run the FastAPI server for RAGServer with the given configuration."""
-    if config is None:
-        with start_task(action_type="rag_server_run_rag_server_command", config=config) as action:
+    if agent_profiles is None:
+        with start_task(action_type="rag_server_run_rag_server_command", agent_profiles=agent_profiles) as action:
             action.log("config is None, using default RAG agent")
             agents = {"rag_agent": default_rag_agent(), "annotation_agent": default_annotation_agent()}
     else:
         agents = None
     
     run_rag_server(
-        config=config,
+        agent_profiles=agent_profiles,
         host=host,
         port=port,
         workers=workers,

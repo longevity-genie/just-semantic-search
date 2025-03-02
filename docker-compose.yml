@@ -36,18 +36,20 @@ services:
       meilisearch:
         condition: service_started
     ports:
-      - 8090:8090
+      - 8091:8091
     healthcheck:
-      test: ["CMD-SHELL", "curl -s 0.0.0.0:8090 | grep -q REST && test -f ./env/.env.local"]
+      test: ["CMD-SHELL", "curl -s 0.0.0.0:8091 | grep -q REST && test -f ./env/.env.local"]
       interval: 15s
       retries: 10
       start_period: 15s
       timeout: 1s
+    command: "python -m just_semantic_search.server.rag_server --agent-profiles ./chat_agent_profiles.yaml"
     env_file:
       - .env
     environment:
       - APP_DIR=/app
-      - APP_PORT=8090
+      - APP_PORT=8091
+      - PORT=8091
       - APP_HOST=0.0.0.0 #app host inside container, 0's to expose
       - AGENT_PARENT_SECTION=agent_profiles
       - AGENT_DEBUG=false

@@ -1,4 +1,5 @@
 agent_profiles:
+  
   rag_agent:
     class_qualname: just_agents.web.chat_ui_agent.ChatUIAgent
     display_name: 🕵 RAG Agent
@@ -14,12 +15,12 @@ agent_profiles:
       model: gemini/gemini-2.0-flash
       temperature: 0.0
     system_prompt: | 
-        You can only search indexes that you got from all_indexes function, do not invent indexes that do not exist.
         You MUST ALWAYS provide sources for all the documents. Each evidence quote must be followed by the source (you use the source field and do not invent your own sources or quotation format). 
         If you summarize from multiple documents, you MUST provide sources for each document (after each evidence quote, not in the end) that you used in your answer.
         You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
         YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
         The search document function uses semantic search.
+  
   annotation_agent:
     class_qualname: just_agents.web.chat_ui_agent.ChatUIAgent
     display_name: 📝 Annotation Agent
@@ -48,19 +49,26 @@ agent_profiles:
   sugar_genie: # Short agent identifier in snake_case format.
     class_qualname: just_agents.web.chat_ui_agent.ChatUIAgent # For web agents, always use this class name.
     display_name: 🍬 A Blood Sugar Prediction Genie # Name displayed in the UI.
-    assistant_index: 20 # Determines the agent's position in the selection list. The first agent is set as the default.
-    llm_options: # Configuration options for the language model.
-      # tools: []  # Do not set tools here! They should be configured separately.
-      api_base: https://api.groq.com/openai/v1 # API endpoint URL.
-      model: groq/llama-3.3-70b-versatile # Specifies the model provider and name.
-      temperature: 0.0 # Controls response randomness (0.0 = deterministic).
-      tool_choice: auto # Automatically selects tools when applicable.
+    assistant_index: 21 # Determines the agent's position in the selection list. The first agent is set as the default.
+    tools: # List of tools available to this agent. These will be automatically imported.
+      - package: "just_agents.tools.semantic_search" # Meilisearch semantic search tool
+        function: "list_search_indexes" # Function available within the tool.
+    llm_options:
+      api_base: https://api.groq.com/openai/v1
+      model: groq/llama-3.3-70b-versatile
+      temperature: 0.0
+    enforce_agent_prompt: "true"
     examples: # Sample user queries for reference.
       - prompt: Why are glucose prediction models important?
         title: Glucose Level Prediction
-
-    system_prompt: | # System prompt defining the AI's role and behavior.
-       You are a Glucose Level Prediction Advisor.
+      - prompt: Tell me about GlucoseDAO, its mission, goals, links, founders and how it works.
+        title: What is GlucoseDAO?
+      - prompt: Why do we need an open source foundational glucose prediction model?
+        title: Why do we need a glucose prediction model?
+      - prompt: What machine learning models are used for CGM glucose prediction?
+        title: Machine Learning Models for CGM Glucose Prediction
+      - prompt: What is Gluformer?
+        title: What is Gluformer?
 
   
   chat_naming_agent: # Fallback agent used for naming chats in the UI’s sidebar.
