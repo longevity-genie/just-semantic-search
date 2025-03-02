@@ -13,10 +13,7 @@ ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.1
 
 RUN poetry source add --priority explicit pytorch_cpu https://download.pytorch.org/whl/cpu \
     && poetry add --no-cache --verbose --source pytorch_cpu torch>=2.6
-RUN poetry add --no-cache --verbose \
-    just-semantic-search-meili>=$JUST_SEMANTIC_SEARCH_VERSION \
-    just-semantic-search-scholar>=$JUST_SEMANTIC_SEARCH_VERSION \
-    just-semantic-search-server>=$JUST_SEMANTIC_SEARCH_VERSION
+RUN poetry add --no-cache --verbose just-semantic-search-server==$JUST_SEMANTIC_SEARCH_VERSION
 
 RUN mkdir /app/meili && chmod 777 /app/init.py /app/poetry.lock /app/meili
 
