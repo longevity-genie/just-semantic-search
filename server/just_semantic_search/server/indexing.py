@@ -44,8 +44,7 @@ class Indexing(BaseModel):
 
     def index_md_txt(self, rag: MeiliRAG, folder: Path, 
                      max_seq_length: Optional[int] = 3600, 
-                     characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"],
-                     enforce_validation: bool = False,
+                     characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"]
                      ) -> List[dict]:
         """
         Index markdown files from a folder into MeiliSearch.
@@ -65,13 +64,12 @@ class Indexing(BaseModel):
             
             splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
 
-            options = options or llm_options.OPENAI_GPT4oMINI
-
-
+            
             fs = files.files(folder)
             documents = []
             for f in fs:
                 text = f.read_text()[:characters_for_abstract]
+                enforce_validation = "gemini" in self.annotation_agent.llm_options["model"]
                 response = self.annotation_agent.query_structural(
                         f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}", Annotation, enforce_validation=enforce_validation)
                 paper = Annotation.model_validate(response)

@@ -18,13 +18,7 @@ from pathlib import Path
 
 class RAGServerConfig(ChatUIAgentConfig):
     """Configuration for the RAG server"""
-    port: int = Field(
-        default_factory=lambda: int(os.getenv("APP_PORT", "8090").split()[0]),
-        description="Port number for the server",
-        ge=1024,  # Recommended to use ports above 1024 for non-root users
-        le=65535,
-        examples=[8088, 8000, 5000]
-    )
+
     
     host: str = Field(
         default_factory=lambda: os.getenv("APP_HOST", "0.0.0.0").split()[0],
@@ -240,7 +234,7 @@ env_config = ChatUIAgentConfig()
 def run_rag_server_command(
     config: Optional[Path] = None,
     host: str = env_config.host,
-    port: int = 8091, #env_config.port,
+    port: int = env_config.port,
     workers: int = env_config.workers,
     title: str = env_config.title,
     section: Optional[str] = env_config.section,
