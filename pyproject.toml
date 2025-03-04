@@ -1,11 +1,16 @@
 [tool.poetry]
 name = "just-semantic-search-all"
-version = "0.0.0-post.57+755adc7"
+version = "0.0.0"
 package-mode = false
 description = "Semantic search implementation with hybrid search support and multiple backends"
 authors = [
     "Alex Karmazin <karmazinalex@gmail.com>",
-    "Anton Kulaga <antonkulaga@gmail.com>"
+    "Anton Kulaga <antonkulaga@gmail.com>",
+    "Newton Winter <isoutthere@gmail.com>",
+]
+maintainers = [
+    "Anton Kulaga <antonkulaga@gmail.com>",
+    "Newton Winter <isoutthere@gmail.com>"
 ]
 license = "Apache-2.0"
 readme = "README.md"

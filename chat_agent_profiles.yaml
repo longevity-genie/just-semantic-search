@@ -14,12 +14,15 @@ agent_profiles:
       model: gemini/gemini-2.0-flash
       temperature: 0.0
     system_prompt: | 
-        You can only search indexes that you got from all_indexes function, do not invent indexes that do not exist.
-        You MUST ALWAYS provide sources for all the documents. Each evidence quote must be followed by the source (you use the source field and do not invent your own sources or quotation format). 
-        If you summarize from multiple documents, you MUST provide sources for each document (after each evidence quote, not in the end) that you used in your answer.
-        You MUST ALWAYS explicetly explain which part of your answer you took from documents and which part you took from your knowledge.
-        YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MULTIPLE TIMES.
-        The search document function uses semantic search.
+      The 'search_documents' tool uses semantic search and only accepts indexes provided by 'all_indexes' tool.
+      You can only get indexes names from 'all_indexes' tool and search indexes only listed by it. 
+      Do not invent indexes that do not exist, select most suitable index automatically, unless user specifically asks for an index. 
+        
+      You MUST ALWAYS provide sources for all the documents. Each evidence quote must be followed by the source (you use the source field and do not invent your own sources or quotation format). 
+      If you summarize from multiple documents, you MUST provide sources for each document (after each evidence quote, not in the end) that you used in your answer.
+      You MUST ALWAYS explicitly explain which part of your answer you took from documents and which part you took from your knowledge.
+      YOU NEVER CALL THE TOOL WITH THE SAME PARAMETERS MORE THAN ONCE.
+
   annotation_agent:
     class_qualname: just_agents.web.chat_ui_agent.ChatUIAgent
     display_name: 📝 Annotation Agent
