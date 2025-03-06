@@ -22,6 +22,7 @@ from sentence_transformers import SentenceTransformer
 from tenacity import retry, stop_after_attempt, wait_exponential
 from functools import wraps
 import inspect
+import time
 
 # Define a retry decorator with exponential backoff using environment variables
 retry_decorator = retry(
@@ -340,40 +341,90 @@ class MeiliRAG(MeiliBase):
             sentence_transformer = self.sentence_transformer if sentence_transformer is None else sentence_transformer
             if sentence_transformer is not None:
                 kwargs.update(self.embedding_model_params.retrival_query)
-                vector = sentence_transformer.encode(query, **kwargs).tolist()
+                with start_action(action_type="encode_query") as action:
+                    # Check if CUDA is available and being used
+                    import torch
+                    device = next(sentence_transformer.parameters()).device
+                    is_cuda = device.type == 'cuda'
+                    cuda_device_name = torch.cuda.get_device_name(device) if is_cuda else "N/A"
+                    
+                    action.log(
+                        message_type="encoding_query_start", 
+                        query_length=len(query) if query else 0,
+                        device_type=device.type,
+                        is_cuda=is_cuda,
+                        cuda_device=cuda_device_name if is_cuda else None
+                    )
+                    
+                    start_time = time.time()
+                    vector = sentence_transformer.encode(query, **kwargs).tolist()
+                    encoding_time = time.time() - start_time
+                    # Format time as minutes:seconds
+                    minutes = int(encoding_time // 60)
+                    seconds = encoding_time % 60
+                    time_formatted = f"{minutes}:{seconds:.2f}"
+                    action.add_success_fields(
+                        message_type="encoding_query_complete",
+                        encoding_time=time_formatted,
+                        encoding_time_seconds=encoding_time,
+                        vector_dimensions=len(vector) if vector else 0,
+                        device_type=device.type
+                    )
         
         hybrid = Hybrid(
             embedder=self.model_name,
             semanticRatio=semanticRatio
         )
         
-        return self.index.search(
-            query,
-            offset=offset,
-            limit=limit,
-            filter=filter,
-            facets=facets,
-            attributes_to_retrieve=attributes_to_retrieve,
-            attributes_to_crop=attributes_to_crop,
-            crop_length=crop_length,
-            attributes_to_highlight=attributes_to_highlight,
-            sort=sort,
-            show_matches_position=show_matches_position,
-            highlight_pre_tag=highlight_pre_tag,
-            highlight_post_tag=highlight_post_tag,
-            crop_marker=crop_marker,
-            matching_strategy=matching_strategy,
-            hits_per_page=hits_per_page,
-            page=page,
-            attributes_to_search_on=attributes_to_search_on,
-            distinct=distinct,
-            show_ranking_score=show_ranking_score,
-            show_ranking_score_details=show_ranking_score_details,
-            ranking_score_threshold=ranking_score_threshold,
-            vector=vector,
-            hybrid=hybrid,
-            locales=locales
-        )
+        with start_action(action_type="execute_search_query") as action:
+            action.log(message_type="search_query_start", 
+                      query_text=query, 
+                      limit=limit,
+                      semantic_ratio=semanticRatio)
+            search_start_time = time.time()
+            
+            results = self.index.search(
+                query,
+                offset=offset,
+                limit=limit,
+                filter=filter,
+                facets=facets,
+                attributes_to_retrieve=attributes_to_retrieve,
+                attributes_to_crop=attributes_to_crop,
+                crop_length=crop_length,
+                attributes_to_highlight=attributes_to_highlight,
+                sort=sort,
+                show_matches_position=show_matches_position,
+                highlight_pre_tag=highlight_pre_tag,
+                highlight_post_tag=highlight_post_tag,
+                crop_marker=crop_marker,
+                matching_strategy=matching_strategy,
+                hits_per_page=hits_per_page,
+                page=page,
+                attributes_to_search_on=attributes_to_search_on,
+                distinct=distinct,
+                show_ranking_score=show_ranking_score,
+                show_ranking_score_details=show_ranking_score_details,
+                ranking_score_threshold=ranking_score_threshold,
+                vector=vector,
+                hybrid=hybrid,
+                locales=locales
+            )
+            
+            search_time = time.time() - search_start_time
+            # Format time as minutes:seconds
+            minutes = int(search_time // 60)
+            seconds = search_time % 60
+            search_time_formatted = f"{minutes}:{seconds:.2f}"
+            
+            action.add_success_fields(
+                message_type="search_query_complete",
+                search_time=search_time_formatted,
+                search_time_seconds=search_time,
+                hits_count=len(results.hits) if hasattr(results, 'hits') else 0
+            )
+            
+            return results
 
     @retry_decorator
     async def _configure_index(self):

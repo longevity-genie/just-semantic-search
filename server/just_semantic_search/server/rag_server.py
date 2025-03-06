@@ -14,6 +14,7 @@ import typer
 import uvicorn
 from just_semantic_search.server.indexing import Indexing
 from pathlib import Path
+from just_semantic_search.server.utils import load_environment_files
 
 
 class RAGServerConfig(ChatUIAgentConfig):
@@ -114,8 +115,11 @@ class RAGServer(ChatUIAgentRestAPI):
         """Overriding initialization from config"""
         with start_task(action_type="rag_server_initialize_config") as action:
             action.log(f"Config: {self.config}")
-            if Path(self.config.env_keys_path).resolve().absolute().exists():
-                load_dotenv(self.config.env_keys_path, override=True)
+            
+            # Use the shared utility function
+            env_loaded = load_environment_files(self.config.env_keys_path)
+            
+            # Continue with the rest of the initialization
             if not Path(self.config.models_dir).exists():
                 action.log(f"Creating models directory {self.config.models_dir} which does not exist")
                 Path(self.config.models_dir).mkdir(parents=True, exist_ok=True)
