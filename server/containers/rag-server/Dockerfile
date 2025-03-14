@@ -24,8 +24,8 @@ RUN export POETRY_VERSION="2.1.1" && \
 ENV POETRY_HOME="/opt/poetry"
 ENV PATH="/opt/poetry/bin:$PATH"
 
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.1
-ARG JUST_AGENTS_WEB_VERSION=0.6.4
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.2
+ARG JUST_AGENTS_WEB_VERSION=0.6.6
 
 # Create necessary directories
 RUN export CONTAINER_DIRS="/app /app/models.d /app/agent_tools /app/scripts /app/data /app/meili /app/logs /app/tmp /app/env" && \
@@ -63,19 +63,9 @@ ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 
 
-
-
-
-
-
-
-
 ## Add verification step
 RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')" || echo "PyTorch not found" 2>&1 
 RUN python -m  just_semantic_search.embeddings 2>&1 #to preload the embeddings
-
-
-
 
 # WebAgentConfig environment variables
 ENV APP_HOST="0.0.0.0"
