@@ -1,0 +1,39 @@
+[project]
+name = "just-semantic-search-docker"
+version = "0.1.1"
+description = "Docker image of just-semantic-search"
+authors = [
+    {name = "Alex Karmazin", email = "karmazinalex@gmail.com"},
+    {name = "Newton Winter", email = "isoutthere@gmail.com"},
+    {name = "Anton Kulaga", email = "antonkulaga@gmail.com"},
+    {name = "Livia Zaharia", email = "liviazaharia2020@gmail.com"}
+]
+maintainers = [
+    {name = "Anton Kulaga", email = "antonkulaga@gmail.com"},
+    {name = "Newton Winter", email = "isoutthere@gmail.com"}
+]
+
+license = {text = "Apache 2.0"}
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+package-mode = false
+
+[[tool.poetry.source]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[tool.poetry.dependencies]
+just-agents = '>=0.6.6'
+langfuse = '>=2.59.2'
+opik = '>=1.4.12'
+pandas = '>=2.2'
+# CPU version (default) - explicitly from CPU source
+torch = { version = "2.6.0", source = "torch-cpu" }
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

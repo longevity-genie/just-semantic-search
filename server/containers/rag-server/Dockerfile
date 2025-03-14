@@ -36,7 +36,7 @@ RUN export CONTAINER_DIRS="/app /app/models.d /app/agent_tools /app/scripts /app
 WORKDIR /app
 COPY ./server/containers/rag-server/requirements.txt /app/agent_tools/requirements.txt
 COPY ./server/containers/rag-server/chat_agent_profiles.yaml /app/chat_agent_profiles.yaml
-COPY ./server/containers/rag-server/pyproject.t__l /app/pyproject.toml
+COPY ./server/containers/rag-server/pyproject.toml.template /app/pyproject.toml
 COPY ./LICENSE.md /app/LICENSE.md
 COPY ./README.md /app/README.md
 
