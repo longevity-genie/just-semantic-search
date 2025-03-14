@@ -52,11 +52,15 @@ class IndexMultitonMeta(type):
         # Convert index_name to string to ensure it can be used as a dictionary key
         index_key = str(index_name)
         
-        # Ensure that the __init__ method of the class is called correctly
+        # Check if an instance with this index_key already exists
+        if index_key in cls._instances:
+            return cls._instances[index_key]
+        
+        # If not, create a new instance
         instance = super(IndexMultitonMeta, cls).__call__(*args, **kwargs)
         cls._instances[index_key] = instance
         
-        return cls._instances[index_key]
+        return instance
     
 
     def get_instances(cls: Type[T]) -> Dict[str, T]:
@@ -64,13 +68,20 @@ class IndexMultitonMeta(type):
         Returns all instances created for this class as a dictionary with index keys.
         """
         return cls._instances
-
+    
 class PydanticIndexMultitonMeta(ModelMetaclass, IndexMultitonMeta):
     """
     A metaclass that combines Pydantic's ModelMetaclass with IndexMultitonMeta.
     This allows a class to be both a Pydantic model and use the index-based multiton pattern.
     """
     def __call__(cls: Type[T], *args, **kwargs) -> T:
-        # Call the __call__ method of IndexMultitonMeta first
+        # Add this line to capture if we're creating a new instance or reusing one
+        is_new_instance = str(kwargs.get('index_name', '')) not in cls._instances
+        
+        # Call the __call__ method of IndexMultitonMeta first to get/create instance
         instance = super(IndexMultitonMeta, cls).__call__(*args, **kwargs)
-        return instance
+        
+        # Add a flag that model_post_init can check
+        instance._is_new_instance = is_new_instance
+        
+        return instance 

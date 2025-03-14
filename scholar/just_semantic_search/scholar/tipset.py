@@ -156,7 +156,7 @@ def index(
 
         splitter = ParagraphSemanticDocumentSplitter(model=transformer_model, batch_size=64, normalize_embeddings=False, similarity_threshold=similarity_threshold)
         
-        rag = MeiliRAG(
+        rag = MeiliRAG.get_instance(
             index_name=index_name,
             model=model,
             host=host,

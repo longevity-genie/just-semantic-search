@@ -171,7 +171,7 @@ def index(
             action.log(message_type="WARNING", similarity_threshold=similarity_threshold, warning="Semantic splitting so far is very inefficient, can go out of memory with cuda, dicrease embedding batch size 4-6 times for it")
             splitter = ArticleSemanticParagraphSplitter(model=sentence_transformer_model, batch_size=embedding_batch_size, normalize_embeddings=False, similarity_threshold=similarity_threshold, model_params=params) 
             
-        rag = MeiliRAG(
+        rag = MeiliRAG.get_instance(
             index_name=index_name,
             model=model,
             host=host,

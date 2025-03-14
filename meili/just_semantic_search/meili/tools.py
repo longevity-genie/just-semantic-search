@@ -58,12 +58,13 @@ def search_documents_raw(query: str, index: str, limit: Optional[int] = 4, seman
     
     # Get the embedding model from environment variables, defaulting to JINA_EMBEDDINGS_V3
     model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
-    model = EmbeddingModel(model_str)
-    semantic_ratio = os.getenv("MEILISEARCH_SEMANTIC_RATIO", 0.5)
+    if semantic_ratio is None:
+        semantic_ratio = os.getenv("MEILISEARCH_SEMANTIC_RATIO", 0.5)
     
     # Create and return RAG instance with conditional recreate_index
     # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
-    rag = MeiliRAG(
+    model = EmbeddingModel(model_str)
+    rag = MeiliRAG.get_instance(
         index_name=index,
         model=model,        # The embedding model used for the search
     )
@@ -103,7 +104,9 @@ def search_documents(query: str, index: str, limit: Optional[int] = 30, semantic
           ]
     """
     with start_action(action_type="search_documents", query=query, index=index, limit=limit) as action:
-        semantic_ratio = os.getenv("MEILISEARCH_SEMANTIC_RATIO", 0.5)
+        if semantic_ratio is None:
+            semantic_ratio = os.getenv("MEILISEARCH_SEMANTIC_RATIO", 0.5)
+            action.log("as semantic ratio, using default value", semantic_ratio=semantic_ratio)
         hits: list[dict] = search_documents_raw(query, index, limit, semantic_ratio=semantic_ratio).hits
         action.log(message_type="search_documents_results_count", count=len(hits))
         result: list[str] = [ h["text"] + "\n SOURCE: " + h["source"] for h in hits]

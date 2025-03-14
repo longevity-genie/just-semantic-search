@@ -1,5 +1,6 @@
 from pathlib import Path
 from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_from_enum, load_sentence_transformer_params_from_enum
+from just_semantic_search.meta import IndexMultitonMeta, PydanticIndexMultitonMeta
 from just_semantic_search.splitter_factory import create_splitter, SplitterType
 from meilisearch_python_sdk.models.task import TaskInfo
 from just_semantic_search.document import ArticleDocument, Document
@@ -36,7 +37,7 @@ retry_decorator = retry(
         message_type="retry_attempt",
         attempt=retry_state.attempt_number,
         error_type=str(retry_state.outcome.exception.__class__.__name__) if retry_state.outcome and retry_state.outcome.exception else "None"
-    )
+    ) if retry_state.attempt_number > 1 else None
 )
 
 def log_retry_errors(func):
@@ -143,6 +144,9 @@ class MeiliBase(BaseModel):
       
         
 
+# Module-level dictionary to store instances by index name
+MEILIRAG_INSTANCES = {}
+
 class MeiliRAG(MeiliBase):
     
     # RAG-specific fields
@@ -165,8 +169,6 @@ class MeiliRAG(MeiliBase):
   
     def model_post_init(self, __context) -> None:
         """Initialize clients and configure index after model initialization"""
-        # Set model name
-                # Add this at the end of model_post_init
         if self.init_callback is not None:
             self.init_callback(self)
         model_value = self.model.value
@@ -182,7 +184,26 @@ class MeiliRAG(MeiliBase):
         self.run_async(self._configure_index())
         
 
-
+    @classmethod
+    def get_instance(cls, index_name: str, **kwargs):
+        """Get an existing MeiliRAG instance from the pool or create a new one.
+        
+        Args:
+            index_name: Name of the index
+            **kwargs: Additional arguments to pass to the constructor if creating a new instance
+            
+        Returns:
+            MeiliRAG: An existing or new MeiliRAG instance
+        """
+        global MEILIRAG_INSTANCES
+        
+        if index_name in MEILIRAG_INSTANCES:
+            return MEILIRAG_INSTANCES[index_name]
+        
+        # Create a new instance and store it in the pool
+        instance = cls(index_name=index_name, **kwargs)
+        MEILIRAG_INSTANCES[index_name] = instance
+        return instance
 
     def get_loop(self):
         """Helper to get or create an event loop that works in all environments"""
@@ -337,7 +358,40 @@ class MeiliRAG(MeiliBase):
         # Convert numpy array to list if necessary
         if vector is not None and hasattr(vector, 'tolist'):
             vector = vector.tolist()
-        else:
+        
+        # First check if semanticRatio is 0.0 - no need for vectorization
+        if semanticRatio <= 0.0:
+            with start_action(action_type="execute_search_query_text_only") as action:
+                action.log(message_type="search_query_start", 
+                          query_text=query, 
+                          limit=limit,
+                          semantic_ratio=semanticRatio)
+                results = self.index.search( query,
+                    offset=offset,
+                    limit=limit,
+                    filter=filter,
+                    facets=facets,
+                    attributes_to_retrieve=attributes_to_retrieve,
+                    attributes_to_crop=attributes_to_crop,
+                    crop_length=crop_length,
+                    attributes_to_highlight=attributes_to_highlight,
+                    sort=sort,
+                    show_matches_position=show_matches_position,
+                    highlight_pre_tag=highlight_pre_tag,
+                    highlight_post_tag=highlight_post_tag,
+                    crop_marker=crop_marker,
+                    matching_strategy=matching_strategy,
+                    hits_per_page=hits_per_page,
+                    page=page,
+                    attributes_to_search_on=attributes_to_search_on,
+                    distinct=distinct,
+                    show_ranking_score=show_ranking_score,
+                    show_ranking_score_details=show_ranking_score_details,
+                    ranking_score_threshold=ranking_score_threshold,
+                    locales=locales)
+                return results
+        # Only vectorize if semanticRatio > 0
+        elif vector is None:
             sentence_transformer = self.sentence_transformer if sentence_transformer is None else sentence_transformer
             if sentence_transformer is not None:
                 kwargs.update(self.embedding_model_params.retrival_query)

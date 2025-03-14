@@ -168,17 +168,31 @@ class RAGServer(ChatUIAgentRestAPI):
         Returns:
             List of matching documents with their metadata
         """
+        import time
+        start_time = time.time()
+        
         with start_task(action_type="rag_server_search", 
                        query=request.query, 
                        index=request.index, 
                        limit=request.limit) as action:
-            action.log("performing search")
-            return search_documents(
+            action.log(f"Search method entered, time since request: {time.time() - start_time:.2f}s")
+            
+            # Log before search_documents call
+            pre_search_time = time.time()
+            action.log(f"About to perform search, time so far: {pre_search_time - start_time:.2f}s")
+            
+            results = search_documents(
                 query=request.query,
                 index=request.index,
                 limit=request.limit,
                 semantic_ratio=request.semantic_ratio
             )
+            
+            # Log after search_documents call
+            post_search_time = time.time()
+            action.log(f"Search completed in {post_search_time - pre_search_time:.2f}s, total time: {post_search_time - start_time:.2f}s")
+            
+            return results
 
     def search_agent(self, request: SearchAgentRequest) -> str:
         """

@@ -44,7 +44,7 @@ def create_meili_rag(
                 action.log(message_type="ensuring_server", host=host, port=port)
             ensure_meili_is_running(meili_service_dir, host, port)
         
-        return MeiliRAG(
+        return MeiliRAG.get_instance(
             index_name=index_name,
             model=model,
             host=host,

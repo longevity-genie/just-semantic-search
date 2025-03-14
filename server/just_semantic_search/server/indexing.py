@@ -146,7 +146,7 @@ class Indexing(BaseModel):
         
         # Create and return RAG instance with conditional recreate_index
         # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
-        rag = MeiliRAG(
+        rag = MeiliRAG.get_instance(
             index_name=index_name,
             model=model,        # The embedding model used for the search
         )
@@ -178,7 +178,7 @@ class Indexing(BaseModel):
             
             # Create and return RAG instance with conditional recreate_index
             with start_task(action_type="rag_server_index_markdown_folder.create_rag") as rag_task:
-                rag = MeiliRAG(
+                rag = MeiliRAG.get_instance(
                     index_name=index_name,
                     model=model,        # The embedding model used for the search
                 )
@@ -272,7 +272,7 @@ def index_markdown_command(
             ensure_meili_is_running(meili_service_dir, host, port)
         
         # Create RAG instance
-        rag = MeiliRAG(
+        rag = MeiliRAG.get_instance(
             index_name=index_name,
             model=model,
             host=host,
