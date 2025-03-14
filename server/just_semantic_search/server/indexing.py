@@ -66,14 +66,15 @@ class Indexing(BaseModel):
             paper = None
             
             with start_task(message_type="process_paper.annotation") as annotation_task:
-                enforce_validation = True
+                enforce_validation = os.environ.get("INDEXING_ENFORCE_VALIDATION", "False").lower() in ("true", "1", "yes")
                 query = f"Extract the abstract, authors and title of the following paper (from file {f.name}):\n{text}"
                 try:
-                    
+                    annotation_task.log(self.annotation_agent.llm_options)
                     response = self.annotation_agent.query_structural(
                             query, 
                             Annotation, 
-                            enforce_validation=enforce_validation)
+                            enforce_validation=enforce_validation, 
+                            remember_query=False)
                     # Keep only system messages in memory
                     
                     paper = Annotation.model_validate(response)
@@ -293,7 +294,7 @@ def index_markdown_command(
             max_seq_length=max_seq_length,
             characters_for_abstract=characters_limit,
             depth=depth,
-            extensions=extensions
+            extensions=extensions)
         action.log(message_type="indexing_complete", index_name=index_name)
         
 

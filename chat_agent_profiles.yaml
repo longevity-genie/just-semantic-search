@@ -11,7 +11,7 @@ agent_profiles:
       - package: "just_semantic_search.meili.tools"
         function: "all_indexes"
     llm_options:
-      model: gemini/gemini-2.0-flash
+      model: gemini/gemma-3-27b-it #gemini-2.0-flash
       temperature: 0.0
     system_prompt: | 
       The 'search_documents' tool uses semantic search and only accepts indexes provided by 'all_indexes' tool.
@@ -30,7 +30,7 @@ agent_profiles:
     hidden: true
     assistant_index: 71
     llm_options:
-      model: gemini/gemini-2.0-flash
+      model: groq/llama-3.3-70b-versatile
       temperature: 0.0
     system_prompt: |
         You are a paper annotator. You extract the abstract, authors and titles of the papers.
@@ -40,9 +40,10 @@ agent_profiles:
                     "abstract": "...",
                     "authors": ["...", "..."],
                     "title": "...",
-                    "source": "...",
+                    "source": "..."
                 }
-                Make sure to provide the output in the correct format, do not add any other text or comments, do not add ```json or other surrounding.
+                Make sure to provide the output in the correct format, do not add any other text or comments, do not add ```json or other surrounding. 
+                If you cannot find authors provide an empty list.
                 For string either use one line or use proper escape characters (\n) for line breaks
                 Make sure to provide the output in the correct format, do not add any other text or comments.
                 For source you either give DOI, pubmed or filename (if doi or pubmed is not available).

@@ -1,0 +1,24 @@
+{
+    "name": "ChatUIAgent",
+    "displayName": "ChatUIAgent",
+    "description": "Generic all-purpose Web AI agent",
+    "parameters": {
+        "temperature": 0.0,
+        "max_new_tokens": 4096,
+        "stop": [
+            "[DONE]"
+        ]
+    },
+    "endpoints": [
+        {
+            "type": "openai",
+            "baseURL": "http://127.0.0.1:8091/v1"
+        }
+    ],
+    "promptExamples": [
+        {
+            "title": "Is aging a disease?",
+            "prompt": "Explain why biological aging can be classified as a disease"
+        }
+    ]
+}

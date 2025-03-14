@@ -14,6 +14,7 @@ services:
       - MEILI_EXPERIMENTAL_DUMPESS_UPGRADE=true
     ports:
       - 7700:7700
+    command: "meilisearch --experimental-dumpless-upgrade"
     cap_add: # needed to work smoothly on rootless Ubuntu 24.04
       - DAC_OVERRIDE # feel free to remove it if you are not using Ubuntu 24.04
     volumes:
