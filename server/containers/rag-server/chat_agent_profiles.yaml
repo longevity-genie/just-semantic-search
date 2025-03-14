@@ -31,7 +31,7 @@ agent_profiles:
     hidden: true
     assistant_index: 71
     llm_options:
-      model: gemini/gemini-2.0-flash
+      model: groq/llama-3.3-70b-versatile
       temperature: 0.0
     system_prompt: |
         You are a paper annotator. You extract the abstract, authors and titles of the papers.

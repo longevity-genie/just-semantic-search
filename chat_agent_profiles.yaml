@@ -11,7 +11,7 @@ agent_profiles:
       - package: "just_semantic_search.meili.tools"
         function: "all_indexes"
     llm_options:
-      model: gemini/gemma-3-27b-it #gemini-2.0-flash
+      model: groq/llama-3.3-70b-versatile
       temperature: 0.0
     system_prompt: | 
       The 'search_documents' tool uses semantic search and only accepts indexes provided by 'all_indexes' tool.

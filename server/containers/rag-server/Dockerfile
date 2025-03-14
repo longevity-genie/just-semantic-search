@@ -57,7 +57,7 @@ RUN chmod 777 /app -R && \
     chmod 777 /usr/local/bin/entrypoint.sh /app/init.py /app/poetry.lock
 
 # Expose ports and set environment variables
-EXPOSE 8088
+EXPOSE 8091
 
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
@@ -69,7 +69,7 @@ RUN python -m  just_semantic_search.embeddings 2>&1 #to preload the embeddings
 
 # WebAgentConfig environment variables
 ENV APP_HOST="0.0.0.0"
-ENV APP_PORT=8089
+ENV APP_PORT=8091
 ENV AGENT_WORKERS=1
 ENV AGENT_TITLE="Just-Agent endpoint"
 ENV AGENT_SECTION=""
@@ -90,7 +90,7 @@ ENV ENV_MODELS_PATH="env/.env.local"
 ENV REMOVE_DD_CONFIGS="true"
 ENV TRAP_CHAT_NAMES="true"
 ENV AGENT_HOST="http://127.0.0.1"
-ENV AGENT_PORT=8088
+ENV AGENT_PORT=8091
 ENV JSON_FILE_PATTERN="[0123456789][0123456789]_*.json"
 
 # Keep running as root - let entrypoint handle user switching
