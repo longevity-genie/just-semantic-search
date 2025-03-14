@@ -3,6 +3,7 @@ import os
 from typing import List, Dict, Optional
 from dotenv import load_dotenv
 from just_semantic_search.embeddings import EmbeddingModel
+from just_semantic_search.meili.rag import MeiliRAG
 from just_semantic_search.meili.tools import search_documents, all_indexes
 from just_semantic_search.server.rag_agent import default_annotation_agent, default_rag_agent
 from pydantic import BaseModel, Field
@@ -15,6 +16,12 @@ import uvicorn
 from just_semantic_search.server.indexing import Indexing
 from pathlib import Path
 from just_semantic_search.server.utils import load_environment_files
+from fastapi import routing
+from starlette.middleware import Middleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from fastapi.responses import RedirectResponse
+from starlette.requests import Request
+from starlette.responses import Response
 
 
 class RAGServerConfig(ChatUIAgentConfig):
@@ -82,8 +89,8 @@ class RAGServer(ChatUIAgentRestAPI):
                  agent_section: Optional[str] = None,
                  agent_parent_section: Optional[str] = None,
                  debug: bool = False,
-                 title: str = "Just-Agent endpoint",
-                 description: str = "OpenAI-compatible API endpoint for Just-Agents",
+                 title: str = "Just-Semantic-Search and Just-Agents endpoint, go to /docs for more information about REST API",
+                 description: str = "Welcome to the Just-Semantic-Search and Just-Agents API! <br><br>Explore the complete API documentation in your browser by visiting <a href='/docs'>/docs</a>. <br><br>There you can: <ul><li>Run agentic LLM completions</li><li>Index documents with Meilisearch</li><li>Perform semantic searches</li><li>Upload and process various document types</li></ul>",
                  config: Optional[RAGServerConfig] = None,
                  *args, **kwargs):
         if agents is not None:
@@ -106,6 +113,22 @@ class RAGServer(ChatUIAgentRestAPI):
         self._indexes = None
         self._configure_rag_routes()
         
+        # Add a middleware to handle the root route with highest priority
+        class RootRedirectMiddleware(BaseHTTPMiddleware):
+            async def dispatch(self, request: Request, call_next):
+                if request.url.path == "/":
+                    return RedirectResponse(url="/docs", status_code=307)
+                return await call_next(request)
+        
+        # Add the middleware to the application
+        self.add_middleware(RootRedirectMiddleware) #ugly way to redirect to docs as other ways failed
+        
+        default_index = os.getenv("DEFAULT_INDEX")
+        if default_index is not None:
+            with start_task(action_type="rag_server_set_default_index") as action:
+                action.log("preloading default index", index=default_index)
+                rag = MeiliRAG.get_instance(index_name=default_index)
+
     def _prepare_model_jsons(self):
         with start_task(action_type="rag_server_prepare_model_jsons") as action:
             action.log("PREPARING MODEL JSONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -143,6 +166,9 @@ class RAGServer(ChatUIAgentRestAPI):
         # Add a check to prevent duplicate route registration
         route_paths = [route.path for route in self.routes]
         
+        # DON'T register the root route here anymore
+        # We'll handle it directly in __init__
+        
         if "/search" not in route_paths:
             self.post("/search", description="Perform semantic search")(self.search)
         
@@ -154,7 +180,19 @@ class RAGServer(ChatUIAgentRestAPI):
         
         if "/index_markdown_folder" not in route_paths:
             self.post("/index_markdown_folder", description="Index a folder with markdown files")(self.indexing.index_markdown_folder)
+        
+        if "/upload_markdown_folder" not in route_paths:
+            self.post("/upload_markdown_folder", description="Upload a folder with markdown files")(self.indexing.index_upload_markdown_folder)
+        
+        # Add new routes for PDF and text file upload
+        if "/upload_pdf" not in route_paths:
+            self.post("/upload_pdf", description="Upload and index a PDF file")(self.indexing.index_pdf_file)
+        
+        if "/upload_text" not in route_paths:
+            self.post("/upload_text", description="Upload and index a text file")(self.indexing.index_text_file)
 
+        if "/delete_by_source" not in route_paths:
+            self.post("/delete_by_source", description="Delete documents by their sources")(self.indexing.delete_by_source)
 
     
 
@@ -229,12 +267,18 @@ class RAGServer(ChatUIAgentRestAPI):
     
     
 
+    def root_endpoint(self):
+        """Redirect to the API documentation"""
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/docs")
+
 def run_rag_server(
     agent_profiles: Optional[Path] = None,
     host: str = "0.0.0.0",
     port: int = 8091,
     workers: int = 1,
     title: str = "Just-Agent endpoint",
+    description: str = "Welcome to the Just-Semantic-Search and Just-Agents API! <br><br>Explore the complete API documentation in your browser by visiting <a href='/docs'>/docs</a>. <br><br>There you can: <ul><li>Run agentic LLM completions</li><li>Index documents with Meilisearch</li><li>Perform semantic searches</li><li>Upload and process various document types</li></ul>",
     section: Optional[str] = None,
     parent_section: Optional[str] = None,
     debug: bool = True,
@@ -251,6 +295,7 @@ def run_rag_server(
         agent_section=section,
         debug=debug,
         title=title,
+        description=description,
         agents=agents,
         config=config
     )
@@ -273,6 +318,7 @@ def run_rag_server_command(
     port: int = env_config.port,
     workers: int = env_config.workers,
     title: str = env_config.title,
+    description: str = "Welcome to the Just-Semantic-Search and Just-Agents API! <br><br>Explore the complete API documentation in your browser by visiting <a href='/docs'>/docs</a>. <br><br>There you can: <ul><li>Run agentic LLM completions</li><li>Index documents with Meilisearch</li><li>Perform semantic searches</li><li>Upload and process various document types</li></ul>",
     section: Optional[str] = env_config.section,
     parent_section: Optional[str] = env_config.parent_section,
     debug: bool = env_config.debug,
@@ -291,6 +337,7 @@ def run_rag_server_command(
         port=port,
         workers=workers,
         title=title,
+        description=description,
         section=section,
         parent_section=parent_section,
         debug=debug,

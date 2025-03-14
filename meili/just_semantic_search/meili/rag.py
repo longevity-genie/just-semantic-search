@@ -156,9 +156,15 @@ class MeiliRAG(MeiliBase):
     create_index_if_not_exists: bool = Field(default=os.getenv("MEILISEARCH_CREATE_INDEX_IF_NOT_EXISTS", True), description="Create index if it doesn't exist")
     recreate_index: bool = Field(default=os.getenv("MEILISEARCH_RECREATE_INDEX", False), description="Force recreate the index even if it exists")
     searchable_attributes: List[str] = Field(
-        default=['title', 'abstract', 'text', 'content', 'source'],
+        default=['title', 'abstract', 'text', 'content', 'source', "authors", "references"],
         description="List of attributes that can be searched"
     )
+    filterable_attributes: List[str] = Field(
+       default=['title', 'abstract', 'source', "authors", "references"],
+        description="List of attributes that can be used for filtering"
+    )
+
+    # Primary key field for documents
     primary_key: str = Field(default="hash", description="Primary key field for documents")
 
      # Private fields for internal state
@@ -263,6 +269,7 @@ class MeiliRAG(MeiliBase):
                     )
                     index = await self.client_async.create_index(self.index_name)
                     await index.update_searchable_attributes(self.searchable_attributes)
+                    await index.update_filterable_attributes(self.filterable_attributes)
                     return index
                 else:
                     action.log(
@@ -294,6 +301,10 @@ class MeiliRAG(MeiliBase):
             self.add_documents_async(documents, compress=compress)
         )
         return result
+    
+    def delete_by_source(self, source:str):
+        """Delete documents by their sources from the MeiliRAG index."""
+        self.index.delete_documents_by_filter(filters=f"source={source}")
 
 
     @retry_decorator
