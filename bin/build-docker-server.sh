@@ -12,6 +12,6 @@ fi
 
 # Build the Docker image
 docker build $CACHE_FLAG \
-    -f "${PROJECT_ROOT}/Dockerfile.rag-server" \
+    -f "${PROJECT_ROOT}/server/containers/rag-server/Dockerfile" \
     -t ghcr.io/longevity-genie/just-semantic-search/rag-server:main \
     "${PROJECT_ROOT}"

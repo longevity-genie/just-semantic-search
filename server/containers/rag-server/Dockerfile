@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -65,7 +65,16 @@ ENV PYTHONUNBUFFERED=1
 
 ## Add verification step
 RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')" || echo "PyTorch not found" 2>&1 
-RUN python -m  just_semantic_search.embeddings 2>&1 #to preload the embeddings
+
+# Create a specific directory for model cache and set permissions
+RUN mkdir -p /app/model_cache && chmod 777 /app/model_cache
+
+# Set the Hugging Face cache directory
+ENV TRANSFORMERS_CACHE="/app/model_cache"
+ENV HF_HOME="/app/model_cache"
+
+# Preload models with the correct cache location
+RUN TRANSFORMERS_CACHE="/app/model_cache" HF_HOME="/app/model_cache" python -m just_semantic_search.embeddings 2>&1
 
 # WebAgentConfig environment variables
 ENV APP_HOST="0.0.0.0"
