@@ -25,7 +25,7 @@ ENV POETRY_HOME="/opt/poetry"
 ENV PATH="/opt/poetry/bin:$PATH"
 
 ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.2
-ARG JUST_AGENTS_WEB_VERSION=0.6.6
+ARG JUST_AGENTS_WEB_VERSION=0.6.7
 
 # Create necessary directories
 RUN export CONTAINER_DIRS="/app /app/models.d /app/agent_tools /app/scripts /app/data /app/meili /app/logs /app/tmp /app/env" && \
