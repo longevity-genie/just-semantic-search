@@ -55,7 +55,6 @@ agent_profiles:
     assistant_index: 20 # Determines the agent's position in the selection list. The first agent is set as the default.
     llm_options: # Configuration options for the language model.
       # tools: []  # Do not set tools here! They should be configured separately.
-      api_base: https://api.groq.com/openai/v1 # API endpoint URL.
       model: groq/llama-3.3-70b-versatile # Specifies the model provider and name.
       temperature: 0.0 # Controls response randomness (0.0 = deterministic).
       tool_choice: auto # Automatically selects tools when applicable.
@@ -74,7 +73,6 @@ agent_profiles:
     assistant_index: 99 # This agent is positioned last in the selection list.
     hidden: true
     llm_options:
-      api_base: https://api.groq.com/openai/v1
       model: groq/llama-3.3-70b-versatile
       temperature: 0.7 # Allows more creative name generation.
     examples:

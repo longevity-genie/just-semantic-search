@@ -80,7 +80,6 @@ class Indexing(BaseModel):
                                        error_type=str(type(e).__name__), query=query)
                     # Re-raise the exception to maintain original behavior
                     raise
-            self.clean_agent_history()
             with start_task(message_type="process_paper.splitting") as splitting_task:
                 splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
                 docs = splitter_instance.split(text, title=paper.title, abstract=paper.abstract, authors=paper.authors, source=paper.source)

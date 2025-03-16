@@ -79,7 +79,7 @@ def search_documents(query: str, index: str, limit: Optional[int] = 30, semantic
         index (str): The name of the index to search within.
                     It should be one of the allowed list of indexes.
         limit (int): The number of documents to return. 30 by default.
-
+        semantic_ratio (float): The ratio of semantic search. 0.5 by default.
     Returns:
         list[str]: A list of strings containing the search results.
         Each string contains the following keys:
@@ -111,6 +111,41 @@ def search_documents(query: str, index: str, limit: Optional[int] = 30, semantic
         action.log(message_type="search_documents_results_count", count=len(hits))
         result: list[str] = [ h["text"] + "\n SOURCE: " + h["source"] for h in hits]
         return result
+    
+def search_documents_text(query: str, index: str, limit: Optional[int] = 30) -> list[str]:
+    """
+    Search documents in MeiliSearch database.
+    
+    Args:
+        query (str): The search query string used to find relevant documents.
+        index (str): The name of the index to search within.
+                    It should be one of the allowed list of indexes.
+        limit (int): The number of documents to return. 30 by default.
+
+    Returns:
+        list[str]: A list of strings containing the search results.
+        Each string contains the following keys:
+        - '_rankingScore': The relevance score of the document.
+        - '_rankingScoreDetails': A dictionary containing details about the ranking score.
+        - 'hash': The unique identifier of the document.  
+        - 'source': The source document path.
+        - 'text': The content of the document.
+        - 'token_count': The number of tokens in the document.
+        - 'total_fragments': The total number of fragments in the document.
+
+    Example:
+        Example result:
+        [ {'_rankingScore': 0.718,  # Relevance score of the document
+          '_rankingScoreDetails': {'vectorSort': {'order': 0,  # Ranking order
+                                                  'similarity': 0.718}},  # Similarity score
+          'hash': 'e22c1616...',  # Unique document identifier
+          'source': '/path/to/document.txt',  # Source document path
+          'text': 'Ageing as a risk factor...',  # Document content
+          'token_count': None,  # Number of tokens (if applicable)
+          'total_fragments': None},  # Total fragments (if applicable)
+          ]
+    """
+    return search_documents(query, index, limit, semantic_ratio=0.0)
     
 
 def search_documents_debug(query: str, index: str, limit: Optional[int] = 30) -> list[dict]:
