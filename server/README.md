@@ -2,7 +2,7 @@ RAG Server package
 
 Depends on the just-agents package
 
-This package also has some features which are specific for [Just-Chat](https://github.com/longevity-genie/just-agents/tree/main/just_chat) integration.
+This package also has some features which are specific for [Just-Chat](https://github.com/longevity-genie/just-chat) integration.
 
 It allows easier index for markdown files.
 
