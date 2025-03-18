@@ -58,7 +58,13 @@ def run_server_command(
     host: str = typer.Option("0.0.0.0", help="Host to bind the server to"),
     port: int = typer.Option(8091, help="Port to run the server on"),
     workers: int = typer.Option(1, help="Number of worker processes"),
-    debug: bool = typer.Option(False, help="Enable debug mode")
+    debug: bool = typer.Option(False, help="Enable debug mode"),
+    agent_profiles: Optional[Path] = typer.Option(None, help="Path to agent profiles config"),
+    title: str = typer.Option("Just-Agent endpoint", help="Title for the API"),
+    description: str = typer.Option("Welcome to the Just-Semantic-Search and Just-Agents API!", 
+                                   help="Description for the API"),
+    section: Optional[str] = typer.Option(None, help="Agent section in profiles"),
+    parent_section: Optional[str] = typer.Option(None, help="Agent parent section in profiles")
 ) -> None:
     """Run the RAG server with the given configuration."""
     with start_task(action_type="run_rag_server_command", workers=workers) as action:
@@ -84,6 +90,16 @@ def run_server_command(
             os.environ["JUST_SERVER_HOST"] = host
             os.environ["JUST_SERVER_DEBUG"] = "1" if debug else "0"
             
+            # Add the new parameters to environment variables
+            if agent_profiles:
+                os.environ["JUST_SERVER_AGENT_PROFILES"] = str(agent_profiles)
+            if section:
+                os.environ["JUST_SERVER_SECTION"] = section
+            if parent_section:
+                os.environ["JUST_SERVER_PARENT_SECTION"] = parent_section
+            os.environ["JUST_SERVER_TITLE"] = title
+            os.environ["JUST_SERVER_DESCRIPTION"] = description
+            
             action.log(f"Using module:app pattern for multi-worker setup")
             
             # Run using the module:app pattern
@@ -100,7 +116,16 @@ def run_server_command(
             config.host = host
             config.debug = debug
             
-            app = create_app(agents=agents, config=config)
+            app = create_app(
+                agents=agents, 
+                config=config,
+                agent_profiles=agent_profiles,
+                agent_section=section,
+                agent_parent_section=parent_section,
+                debug=debug,
+                title=title,
+                description=description
+            )
             
             action.log(f"Running with single worker")
             
@@ -120,6 +145,14 @@ def get_app():
     host = os.environ.get("JUST_SERVER_HOST", "0.0.0.0")
     debug = os.environ.get("JUST_SERVER_DEBUG", "0") == "1"
     
+    # Get the new parameters from environment variables
+    agent_profiles_path = os.environ.get("JUST_SERVER_AGENT_PROFILES")
+    agent_profiles = Path(agent_profiles_path) if agent_profiles_path else None
+    section = os.environ.get("JUST_SERVER_SECTION")
+    parent_section = os.environ.get("JUST_SERVER_PARENT_SECTION")
+    title = os.environ.get("JUST_SERVER_TITLE", "Just-Agent endpoint")
+    description = os.environ.get("JUST_SERVER_DESCRIPTION", "Welcome to the Just-Semantic-Search and Just-Agents API!")
+    
     # Create and return the application
     config = RAGServerConfig()
     config.set_general_port(port)
@@ -132,7 +165,16 @@ def get_app():
         "annotation_agent": default_annotation_agent()
     }
     
-    return create_app(agents=agents, config=config)
+    return create_app(
+        agents=agents, 
+        config=config,
+        agent_profiles=agent_profiles,
+        agent_section=section,
+        agent_parent_section=parent_section,
+        debug=debug,
+        title=title,
+        description=description
+    )
 
 if __name__ == "__main__":
     run_server_with_cli() 
