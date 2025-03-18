@@ -309,6 +309,7 @@ def run_rag_server(
 
 
 env_config = RAGServerConfig()
+env_config.workers = 4
 env_config.set_general_port(8091)
 
 

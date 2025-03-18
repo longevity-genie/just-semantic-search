@@ -1,5 +1,7 @@
-from just_semantic_search.splitter_factory import SplitterType
 import pytest
+import random
+import concurrent.futures
+from just_semantic_search.splitter_factory import SplitterType
 from just_semantic_search.meili.rag import MeiliRAG, SearchResults
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from eliot import start_action
@@ -7,6 +9,7 @@ from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
 from pycomfort.logging import to_nice_stdout
 from tests.meili.functions import index_file, simulate_meilisearch_disconnection
+
 
 to_nice_stdout()
 
@@ -50,7 +53,7 @@ def rag(request, model: EmbeddingModel) -> MeiliRAG:
             )
             rag.index_folder(tacutopapers_dir)
 
-    return rag
+    yield rag
 
 
 def test_rsids(rag: MeiliRAG, tell_text: bool = False, score_threshold: float = 0.75) -> SearchResults:
@@ -144,5 +147,152 @@ def test_retry(rag: MeiliRAG) -> SearchResults:
     print(f"Loaded docs: {len(docs)}")
 
     assert any("the human aging-related gene set presents" in doc["text"] for doc in docs), "No element satisfies the condition"
+
+
+@pytest.mark.parametrize('rag', [(False, "robi-tacutu", False)], indirect=True)
+def test_concurrent_search_resilience(rag: MeiliRAG) -> None:
+    """Test the resilience of MeiliRAG singleton pattern in concurrent multi-worker scenarios."""
+    with start_action(action_type="test_concurrent_search_resilience") as action:
+        # Ensure we're using an existing index with data
+        index_name = rag.index_name
+        host = rag.host
+        port = rag.port
+        api_key = rag.api_key
+        model = rag.model
+        
+        # Validate that the index exists and has documents
+        docs_count = rag.index.get_stats().number_of_documents
+        assert docs_count > 0, f"Index '{index_name}' is empty, cannot proceed with test"
+        
+        action.log(
+            message_type="test_setup",
+            index_name=index_name,
+            host=host,
+            port=port,
+            document_count=docs_count
+        )
+        
+        action.log(message_type="model_warm_up", model_name=model.value)
+        
+        # Define a function that gets a MeiliRAG instance and performs search
+        def perform_search(query: str, worker_id: int) -> dict:
+            try:
+                # Get a new instance of MeiliRAG (testing the get_instance mechanism)
+                instance = MeiliRAG.get_instance(
+                    index_name=index_name,
+                    host=host,
+                    port=port,
+                    api_key=api_key,
+                    model=model
+                )
+                
+                # Store the instance ID to verify singleton behavior
+                instance_id = id(instance)
+                
+                # Verify instance is properly initialized
+                assert instance.client is not None, "MeiliRAG instance client not initialized"
+                
+                # Perform the search
+                results = instance.search(query)
+                
+                return {
+                    "worker_id": worker_id,
+                    "query": query,
+                    "success": True,
+                    "instance_id": instance_id,
+                    "hit_count": len(results.hits) if hasattr(results, 'hits') else 0
+                }
+            except Exception as e:
+                # Record the exception but don't fail the test
+                return {
+                    "worker_id": worker_id,
+                    "query": query,
+                    "success": False,
+                    "error": str(e),
+                    "error_type": type(e).__name__
+                }
+        
+        # Set of queries to run - using queries we know work from other tests
+        queries = [
+            "rs123456789 and rs123456788",  # We know this from test_rsids
+            "comic superheroes",            # We know this from test_superhero_search
+            "aging phenotype",              # Common in aging papers
+            "digital atlas",                # Likely in the dataset
+            "human genes",                  # Common in genetics papers
+        ]
+        
+        # Number of concurrent workers
+        num_workers = 8
+        # Number of search iterations per worker
+        iterations_per_worker = 5
+        
+        # Create a list of tasks (query, worker_id)
+        tasks = []
+        for worker_id in range(num_workers):
+            for _ in range(iterations_per_worker):
+                # Each worker gets random queries from the list
+                query = random.choice(queries)
+                tasks.append((query, worker_id))
+        
+        action.log(
+            message_type="starting_concurrent_searches",
+            num_workers=num_workers,
+            iterations_per_worker=iterations_per_worker,
+            total_tasks=len(tasks)
+        )
+        
+        # Run the tasks in a thread pool
+        with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+            future_results = [executor.submit(perform_search, query, worker_id) for query, worker_id in tasks]
+            results = [future.result() for future in concurrent.futures.as_completed(future_results)]
+        
+        # Analyze results
+        successful = [r for r in results if r["success"]]
+        failed = [r for r in results if not r["success"]]
+        
+        # Extract and count unique instance IDs from successful results
+        instance_ids = {r["instance_id"] for r in successful if "instance_id" in r}
+        
+        # Log statistics
+        action.log(
+            message_type="concurrent_search_results",
+            total_tasks=len(tasks),
+            successful_count=len(successful),
+            failed_count=len(failed),
+            success_rate=f"{len(successful)/len(tasks)*100:.2f}%",
+            unique_instance_count=len(instance_ids),
+            failures=failed if failed else None
+        )
+        
+        # We should have at least one successful result
+        assert len(successful) > 0, "No successful search operations"
+        
+        # The key test: verify we got exactly one instance ID across all searches
+        assert len(instance_ids) == 1, f"Expected 1 singleton instance, got {len(instance_ids)}"
+        
+        # Additional verification of singleton pattern
+        instances = {}
+        for _ in range(5):
+            instance = MeiliRAG.get_instance(
+                index_name=index_name,
+                host=host,
+                port=port,
+                api_key=api_key,
+                model=model
+            )
+            instances[id(instance)] = instance
+        
+        # We should have only one instance per index
+        assert len(instances) == 1, f"Expected 1 singleton instance, got {len(instances)}"
+        
+        # Final verification - the instance from the concurrent searches should be the same
+        # as what we get now
+        assert list(instance_ids)[0] == list(instances.keys())[0], "Instance IDs don't match between concurrent and sequential calls"
+        
+        action.add_success_fields(
+            message_type="test_concurrent_search_resilience_complete",
+            success_rate=f"{len(successful)/len(tasks)*100:.2f}%",
+            unique_instance_count=len(instance_ids)
+        )
 
 

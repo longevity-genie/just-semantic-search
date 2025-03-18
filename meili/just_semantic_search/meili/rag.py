@@ -9,8 +9,7 @@ from pydantic import BaseModel, Field, ConfigDict
 import numpy
 import os
 
-from meilisearch_python_sdk import AsyncClient, AsyncIndex
-from meilisearch_python_sdk import Client
+from meilisearch_python_sdk import AsyncClient, AsyncIndex, Client, Index
 from meilisearch_python_sdk.errors import MeilisearchApiError
 from meilisearch_python_sdk.index import SearchResults, Hybrid
 from meilisearch_python_sdk.models.settings import MeilisearchSettings, UserProvidedEmbedder
@@ -24,25 +23,31 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from functools import wraps
 import inspect
 import time
+import threading
+from typing import ClassVar
 
 # Define a retry decorator with exponential backoff using environment variables
-retry_decorator = retry(
-    stop=stop_after_attempt(int(os.getenv('RETRY_ATTEMPTS', 5))),
-    wait=wait_exponential(
-        multiplier=float(os.getenv('RETRY_MULTIPLIER', 1)),
-        min=float(os.getenv('RETRY_MIN', 4)),
-        max=float(os.getenv('RETRY_MAX', 10))
-    ),
-    before=lambda retry_state: eliot.log_message(
-        message_type="retry_attempt",
-        attempt=retry_state.attempt_number,
-        error_type=str(retry_state.outcome.exception.__class__.__name__) if retry_state.outcome and retry_state.outcome.exception else "None"
-    ) if retry_state.attempt_number > 1 else None
-)
+def create_retry_decorator(func):
+    return retry(
+        stop=stop_after_attempt(int(os.getenv('RETRY_ATTEMPTS', 5))),
+        wait=wait_exponential(
+            multiplier=float(os.getenv('RETRY_MULTIPLIER', 1)),
+            min=float(os.getenv('RETRY_MIN', 4)),
+            max=float(os.getenv('RETRY_MAX', 10))
+        ),
+        before=lambda retry_state: eliot.log_message(
+            message_type="retry_attempt",
+            function=func.__name__,
+            attempt=retry_state.attempt_number,
+            error_type=str(retry_state.outcome.exception.__class__.__name__) if retry_state.outcome and retry_state.outcome.exception else "None"
+        ) if retry_state.attempt_number > 1 else None
+    )
 
 def log_retry_errors(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        retry_decorator = create_retry_decorator(func)
+        
         if inspect.iscoroutinefunction(func):
             @retry_decorator
             async def async_wrapper(*args, **kwargs):
@@ -72,6 +77,10 @@ def log_retry_errors(func):
                         raise
             return sync_wrapper(*args, **kwargs)
     return wrapper
+
+
+    
+
 
 class MeiliBase(BaseModel):
     
@@ -112,18 +121,23 @@ class MeiliBase(BaseModel):
                 api_key=self.api_key
             )
             self.client = Client(base_url, self.api_key)
-            self.client_async = AsyncClient(base_url, self.api_key)
             action.add_success_fields(
                 message_type="clients_initialized",
                 base_url=base_url,
                 api_key=self.api_key
             )
         
-    
     @log_retry_errors
-    async def delete_index_async(self):
-        return await self.client_async.delete_index_if_exists(self.index_name)
-    
+    async def _configure_index(self):
+        embedder = UserProvidedEmbedder(
+            dimensions=1024,
+            source="userProvided"
+        )
+        embedders = {
+            self.model_name: embedder
+        }
+        settings = MeilisearchSettings(embedders=embedders, searchable_attributes=self.searchable_attributes)
+        return await self.index_async.update_settings(settings)
 
     def all_indexes(self):
         return [key for key in self.client.get_all_stats().indexes.keys()]
@@ -136,80 +150,25 @@ class MeiliBase(BaseModel):
         """
         synchronous version of delete_index_async
         """
-        return self.get_loop().run_until_complete(self.delete_index_async())
+        self.client.delete_index_if_exists(self.index_name)
     
 
     def get_url(self) -> str:
         return f'http://{self.host}:{self.port}'
-      
+    
+    
         
 
 # Module-level dictionary to store instances by index name
 MEILIRAG_INSTANCES = {}
+INSTANCE_LOCK = threading.RLock()  # Use RLock to allow reentrant locking
 
-class MeiliRAG(MeiliBase):
-    
-    # RAG-specific fields
-    index_name: str = Field(description="Name of the Meilisearch index")
-    model: EmbeddingModel = Field(default=EmbeddingModel.JINA_EMBEDDINGS_V3, description="Embedding model to use for vector search")
-    embedding_model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams, description="Embedding model parameters")
-    create_index_if_not_exists: bool = Field(default=os.getenv("MEILISEARCH_CREATE_INDEX_IF_NOT_EXISTS", True), description="Create index if it doesn't exist")
-    recreate_index: bool = Field(default=os.getenv("MEILISEARCH_RECREATE_INDEX", False), description="Force recreate the index even if it exists")
-    searchable_attributes: List[str] = Field(
-        default=['title', 'abstract', 'text', 'content', 'source', "authors", "references"],
-        description="List of attributes that can be searched"
-    )
-    filterable_attributes: List[str] = Field(
-       default=['title', 'abstract', 'source', "authors", "references"],
-        description="List of attributes that can be used for filtering"
-    )
+class MeiliAsyncRAG(MeiliBase):
+    #WORK IN PROGRESS
+    #it will be future fixure
 
-    # Primary key field for documents
-    primary_key: str = Field(default="hash", description="Primary key field for documents")
-
-     # Private fields for internal state
-    model_name: Optional[str] = Field(default=None, exclude=True)
     index_async: Optional[AsyncIndex] = Field(default=None, exclude=True)
-    sentence_transformer: Optional[SentenceTransformer] = Field(default=None, exclude=True) #we have to decide if we do embedding here
-
-  
-    def model_post_init(self, __context) -> None:
-        """Initialize clients and configure index after model initialization"""
-        if self.init_callback is not None:
-            self.init_callback(self)
-        model_value = self.model.value
-        self.embedding_model_params = load_sentence_transformer_params_from_enum(self.model)
-        self.sentence_transformer = load_sentence_transformer_from_enum(self.model)
-        self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
-        
-        super().model_post_init(__context)
-
-        self.index_async = self.run_async(
-            self._init_index_async(self.create_index_if_not_exists, self.recreate_index)
-        )
-        self.run_async(self._configure_index())
-        
-
-    @classmethod
-    def get_instance(cls, index_name: str, **kwargs):
-        """Get an existing MeiliRAG instance from the pool or create a new one.
-        
-        Args:
-            index_name: Name of the index
-            **kwargs: Additional arguments to pass to the constructor if creating a new instance
-            
-        Returns:
-            MeiliRAG: An existing or new MeiliRAG instance
-        """
-        global MEILIRAG_INSTANCES
-        
-        if index_name in MEILIRAG_INSTANCES:
-            return MEILIRAG_INSTANCES[index_name]
-        
-        # Create a new instance and store it in the pool
-        instance = cls(index_name=index_name, **kwargs)
-        MEILIRAG_INSTANCES[index_name] = instance
-        return instance
+    
 
     def get_loop(self):
         """Helper to get or create an event loop that works in all environments"""
@@ -219,6 +178,7 @@ class MeiliRAG(MeiliBase):
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
         return loop
+    
 
     def run_async(self, coro):
         """Helper method to run async code safely in all environments"""
@@ -235,9 +195,8 @@ class MeiliRAG(MeiliBase):
         else:
             return loop.run_until_complete(coro)
 
-    
 
-    @retry_decorator
+    @log_retry_errors
     async def _init_index_async(self, 
                          create_index_if_not_exists: bool = True, 
                          recreate_index: bool = False) -> AsyncIndex:
@@ -280,48 +239,193 @@ class MeiliRAG(MeiliBase):
             return await self.client_async.get_index(self.index_name)
 
 
-        
-    @retry_decorator
+    @log_retry_errors
     async def add_documents_async(self, documents: List[ArticleDocument | Document], compress: bool = False) -> int:
         """Add ArticleDocument objects to the index."""
         with start_action(action_type="add documents") as action:
             documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
             count = len(documents)
-            result =  await self.add_document_dicts_async(documents_dict, compress=compress)
-            #self.client.index(self.index_name).get_update_status(result.task_uid)
+            result = await self.index_async.add_documents(documents_dict, primary_key=self.primary_key, compress=compress)
             action.add_success_fields(
                 status=result.status,
                 count = count
             )
             return result
+
+    def model_post_init(self, __context) -> None:
+        """Initialize clients and configure index after model initialization"""
+        super().model_post_init(__context)
+        self.client_async = AsyncClient(base_url=f'http://{self.host}:{self.port}', api_key=self.api_key)
+        self.index_async = self.client_async.index(self.index_name)
+
+        #self.index_async = self.run_async(
+        #    self._init_index_async(self.create_index_if_not_exists, self.recreate_index)
+        #)
+        #self.run_async(self._configure_index())
+
+    @log_retry_errors
+    async def delete_index_async(self):
+        return await self.client_async.delete_index_if_exists(self.index_name)
+      
+    @log_retry_errors
+    async def _configure_async_index(self):
+        embedder = UserProvidedEmbedder(
+            dimensions=1024,
+            source="userProvided"
+        )
+        embedders = {
+            self.model_name: embedder
+        }
+        settings = MeilisearchSettings(embedders=embedders, searchable_attributes=self.searchable_attributes)
+        return await self.index_async.update_settings(settings)
+
+class MeiliRAG(MeiliBase):
+    
+    # RAG-specific fields
+    index_name: str = Field(description="Name of the Meilisearch index")
+    index: Optional[Index] = Field(default=None, exclude=True)
+    model: EmbeddingModel = Field(default=EmbeddingModel.JINA_EMBEDDINGS_V3, description="Embedding model to use for vector search")
+    embedding_model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams, description="Embedding model parameters")
+    create_index_if_not_exists: bool = Field(default=os.getenv("MEILISEARCH_CREATE_INDEX_IF_NOT_EXISTS", True), description="Create index if it doesn't exist")
+    recreate_index: bool = Field(default=os.getenv("MEILISEARCH_RECREATE_INDEX", False), description="Force recreate the index even if it exists")
+    searchable_attributes: List[str] = Field(
+        default=['title', 'abstract', 'text', 'content', 'source', "authors", "references"],
+        description="List of attributes that can be searched"
+    )
+    filterable_attributes: List[str] = Field(
+       default=['title', 'abstract', 'source', "authors", "references"],
+        description="List of attributes that can be used for filtering"
+    )
+
+    # Primary key field for documents
+    primary_key: str = Field(default="hash", description="Primary key field for documents")
+
+    # Private fields for internal state
+    model_name: Optional[str] = Field(default=None, exclude=True)
+    st_model: Optional[SentenceTransformer] = Field(default=None, exclude=True)
+    transformer_lock: ClassVar[threading.RLock] = threading.RLock()
+  
+    def model_post_init(self, __context) -> None:
+        """Initialize clients and configure index after model initialization"""
+        if self.init_callback is not None:
+            self.init_callback(self)
+        
+        model_value = self.model.value
+        self.embedding_model_params = load_sentence_transformer_params_from_enum(self.model)
+        self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
+        
+        super().model_post_init(__context)
+        # Instead of assigning, just call the method
+        self.index = self._init_index(self.create_index_if_not_exists, self.recreate_index)
+        self._configure_index()
+    
+    @property
+    def sentence_transformer(self) -> SentenceTransformer:
+        """Lazily load the sentence transformer model when it's first needed."""
+        if self.st_model is None:
+            with self.transformer_lock:
+                # Check again to avoid race condition
+                if self.st_model is None:
+                    with start_action(action_type="lazy_load_sentence_transformer") as action:
+                        action.log(
+                            message_type="loading_sentence_transformer",
+                            model=self.model.value
+                        )
+                        self.st_model = load_sentence_transformer_from_enum(self.model)
+                        action.add_success_fields(
+                            message_type="sentence_transformer_loaded",
+                            model=self.model.value
+                        )
+        return self.st_model
+
+    @classmethod
+    def get_instance(cls, index_name: str, **kwargs):
+        """Thread-safe method to get an existing MeiliRAG instance with reduced lock contention."""
+        global MEILIRAG_INSTANCES, INSTANCE_LOCK
+        
+        # First check without lock
+        if index_name in MEILIRAG_INSTANCES:
+            return MEILIRAG_INSTANCES[index_name]
+        
+        # If not found, acquire lock and check again
+        with INSTANCE_LOCK:
+            if index_name in MEILIRAG_INSTANCES:
+                return MEILIRAG_INSTANCES[index_name]
             
+            # Create a new instance and store it in the pool
+            instance = cls(index_name=index_name, **kwargs)
+            MEILIRAG_INSTANCES[index_name] = instance
+            return instance
+
+    @log_retry_errors
+    def _init_index(self, 
+                         create_index_if_not_exists: bool = True, 
+                         recreate_index: bool = False) -> Index:
+        with start_action(action_type="init_index_sync") as action:
+            try:
+                index = self.client.get_index(self.index_name)
+                if recreate_index:
+                    action.log(
+                        message_type="index_exists",
+                        index_name=self.index_name,
+                        recreate_index=True
+                    )
+                    self.client.delete_index_if_exists(self.index_name)
+                    index = self.client.create_index(self.index_name)
+                    return index
+                else:
+                    action.add_success_fields(
+                        message_type="index_exists",
+                        index_name=self.index_name,
+                        recreate_index=False
+                    )
+                    return index
+            except MeilisearchApiError:
+                if create_index_if_not_exists:
+                    action.add_success_fields(
+                        message_type="index_not_found",
+                        index_name=self.index_name,
+                        create_index_if_not_exists=True
+                    )
+                    index = self.client.create_index(self.index_name)
+                    index.update_searchable_attributes(self.searchable_attributes)
+                    index.update_filterable_attributes(self.filterable_attributes)
+                    return index
+                else:
+                    action.log(
+                        message_type="index_not_found",
+                        index_name=self.index_name,
+                        create_index_if_not_exists=False
+                    )
+            return self.client.get_index(self.index_name)
+
     def add_documents(self, documents: List[ArticleDocument | Document], compress: bool = False):
         """Add documents synchronously by running the async method in the event loop."""
-        result = self.run_async(
-            self.add_documents_async(documents, compress=compress)
-        )
-        return result
+        with start_action(action_type="add documents") as action:
+            documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
+            count = len(documents)
+            result = self.index.add_documents(documents_dict, primary_key=self.primary_key, compress=compress)
+            action.add_success_fields(
+                status=result.status,
+                count = count
+            )
+            return result
+        
     
     def delete_by_source(self, source:str):
         """Delete documents by their sources from the MeiliRAG index."""
         self.index.delete_documents_by_filter(filters=f"source={source}")
 
 
-    @retry_decorator
+    @log_retry_errors
     def get_documents(self, limit: int = 100, offset: int = 0):
         with start_action(action_type="get_documents") as action:
             result = self.index.get_documents(offset=offset, limit=limit)
             action.log(message_type="documents_retrieved", count=len(result.results))
             return result
 
-    @retry_decorator
-    async def add_document_dicts_async(self, documents: List[Dict[str, Any]], compress: bool = False) -> TaskInfo:
-        with start_action(action_type="add_document_dicts_async") as action:
-            test = documents[0]
-            result = await self.index_async.add_documents(documents, primary_key=self.primary_key, compress=compress)
-            return result
         
-    @retry_decorator
+    @log_retry_errors
     def search(self, 
             query: str | None = None,
             vector: Optional[Union[List[float], 'numpy.ndarray']] = None,
@@ -377,7 +481,7 @@ class MeiliRAG(MeiliBase):
                           query_text=query, 
                           limit=limit,
                           semantic_ratio=semanticRatio)
-                results = self.index.search( query,
+                results = self.index.search(query,
                     offset=offset,
                     limit=limit,
                     filter=filter,
@@ -401,40 +505,52 @@ class MeiliRAG(MeiliBase):
                     ranking_score_threshold=ranking_score_threshold,
                     locales=locales)
                 return results
-        # Only vectorize if semanticRatio > 0
-        elif vector is None:
-            sentence_transformer = self.sentence_transformer if sentence_transformer is None else sentence_transformer
-            if sentence_transformer is not None:
-                kwargs.update(self.embedding_model_params.retrival_query)
-                with start_action(action_type="encode_query") as action:
-                    # Check if CUDA is available and being used
+        
+        # Only initialize sentence_transformer and generate vectors if semanticRatio > 0
+        if vector is None:
+            if sentence_transformer is None:
+                sentence_transformer = self.st_model if self.st_model is not None else self.sentence_transformer
+            
+            kwargs.update(self.embedding_model_params.retrival_query)
+            with start_action(action_type="encode_query") as action:
+                # Check if CUDA is available and being used
+                try:
                     import torch
                     device = next(sentence_transformer.parameters()).device
                     is_cuda = device.type == 'cuda'
                     cuda_device_name = torch.cuda.get_device_name(device) if is_cuda else "N/A"
-                    
+                except Exception as e:
+                    # Handle the error gracefully
                     action.log(
-                        message_type="encoding_query_start", 
-                        query_length=len(query) if query else 0,
-                        device_type=device.type,
-                        is_cuda=is_cuda,
-                        cuda_device=cuda_device_name if is_cuda else None
+                        message_type="cuda_detection_error",
+                        error_type=str(type(e).__name__),
+                        error=str(e)
                     )
-                    
-                    start_time = time.time()
-                    vector = sentence_transformer.encode(query, **kwargs).tolist()
-                    encoding_time = time.time() - start_time
-                    # Format time as minutes:seconds
-                    minutes = int(encoding_time // 60)
-                    seconds = encoding_time % 60
-                    time_formatted = f"{minutes}:{seconds:.2f}"
-                    action.add_success_fields(
-                        message_type="encoding_query_complete",
-                        encoding_time=time_formatted,
-                        encoding_time_seconds=encoding_time,
-                        vector_dimensions=len(vector) if vector else 0,
-                        device_type=device.type
-                    )
+                    is_cuda = False
+                    cuda_device_name = "N/A"
+                
+                action.log(
+                    message_type="encoding_query_start", 
+                    query_length=len(query) if query else 0,
+                    device_type=device.type,
+                    is_cuda=is_cuda,
+                    cuda_device=cuda_device_name if is_cuda else None
+                )
+                
+                start_time = time.time()
+                vector = sentence_transformer.encode(query, **kwargs).tolist()
+                encoding_time = time.time() - start_time
+                # Format time as minutes:seconds
+                minutes = int(encoding_time // 60)
+                seconds = encoding_time % 60
+                time_formatted = f"{minutes}:{seconds:.2f}"
+                action.add_success_fields(
+                    message_type="encoding_query_complete",
+                    encoding_time=time_formatted,
+                    encoding_time_seconds=encoding_time,
+                    vector_dimensions=len(vector) if vector else 0,
+                    device_type=device.type
+                )
         
         hybrid = Hybrid(
             embedder=self.model_name,
@@ -491,8 +607,8 @@ class MeiliRAG(MeiliBase):
             
             return results
 
-    @retry_decorator
-    async def _configure_index(self):
+    @log_retry_errors
+    def _configure_index(self):
         embedder = UserProvidedEmbedder(
             dimensions=1024,
             source="userProvided"
@@ -501,24 +617,8 @@ class MeiliRAG(MeiliBase):
             self.model_name: embedder
         }
         settings = MeilisearchSettings(embedders=embedders, searchable_attributes=self.searchable_attributes)
-        return await self.index_async.update_settings(settings)
-
-
-    @property
-    @retry_decorator
-    def index(self):
-        """Get the Meilisearch index.
+        return self.index.update_settings(settings)
         
-        Returns:
-            Index: Meilisearch index object
-            
-        Raises:
-            ValueError: If index not found
-        """
-        try:
-            return self.client.get_index(self.index_name)
-        except MeilisearchApiError as e:
-            raise ValueError(f"Index '{self.index_name}' not found: {e}")
     def index_folder(
         self,
         folder: Path,

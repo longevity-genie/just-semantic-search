@@ -24,7 +24,7 @@ RUN export POETRY_VERSION="2.1.1" && \
 ENV POETRY_HOME="/opt/poetry"
 ENV PATH="/opt/poetry/bin:$PATH"
 
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.4
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.5
 ARG JUST_AGENTS_WEB_VERSION=0.6.8
 
 # Create necessary directories
@@ -79,8 +79,8 @@ RUN TRANSFORMERS_CACHE="/app/model_cache" HF_HOME="/app/model_cache" python -m j
 # WebAgentConfig environment variables
 ENV APP_HOST="0.0.0.0"
 ENV APP_PORT=8091
-ENV AGENT_WORKERS=1
-ENV AGENT_TITLE="Just-Agent endpoint"
+ENV AGENT_WORKERS=4
+ENV AGENT_TITLE="Semantic Search Rag Agent Server REST API endpoint"
 ENV AGENT_SECTION=""
 ENV AGENT_PARENT_SECTION=""
 ENV AGENT_FAILFAST="true"
@@ -105,5 +105,5 @@ ENV JSON_FILE_PATTERN="[0123456789][0123456789]_*.json"
 # Keep running as root - let entrypoint handle user switching
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 #CMD ["python", "-m", "just_agents.web.run_agent", "run-chat-ui-server-command"]
-CMD ["python", "-m", "just_semantic_search.server.rag_server"]
+CMD python -m just_semantic_search.server.run_rag_server --workers $AGENT_WORKERS --host $APP_HOST --port $APP_PORT
 

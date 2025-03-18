@@ -9,8 +9,8 @@ def load_auto_model_tokenizer(model_name_or_path: str, trust_remote_code: bool =
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=trust_remote_code)
     return model, tokenizer
 
-def load_sentence_transformer_model(model_name_or_path: str, **model_kwargs) -> SentenceTransformer:
-    model = SentenceTransformer(model_name_or_path, trust_remote_code=True, **model_kwargs)
+def load_sentence_transformer_model(model_name_or_path: str, cache_folder: str = None, **model_kwargs) -> SentenceTransformer:
+    model = SentenceTransformer(model_name_or_path, trust_remote_code=True, cache_folder=cache_folder, **model_kwargs)
     
     # Try to apply PyTorch 2.0+ compilation if available
     #try:
