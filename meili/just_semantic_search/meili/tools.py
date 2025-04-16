@@ -28,7 +28,7 @@ def all_indexes(non_empty: bool = True, debug: bool = True) -> list[str]:
         return db.non_empty_indexes() if non_empty else db.all_indexes()
 
 
-def search_documents_raw(query: str, index: str, limit: Optional[int] = 8, semantic_ratio: Optional[float] = 0.5, debug: bool = True) -> SearchResults:
+def search_documents_raw(query: str, index: str, limit: Optional[int] = 8, semantic_ratio: Optional[float] = 0.5, debug: bool = True, remote_embedding: bool = False) -> SearchResults:
     """
     Search documents in MeiliSearch database. Giving search results in raw format.
     
@@ -50,6 +50,7 @@ def search_documents_raw(query: str, index: str, limit: Optional[int] = 8, seman
         - 'text': The content of the document.
         - 'token_count': The number of tokens in the document.
         - 'total_fragments': The total number of fragments in the document.
+        - 'remote_embedding': If True, the embedding was done remotely.
     """
     if semantic_ratio is None:
         semantic_ratio = os.getenv("MEILISEARCH_SEMANTIC_RATIO", 0.5)    
@@ -70,7 +71,7 @@ def search_documents_raw(query: str, index: str, limit: Optional[int] = 8, seman
             action.log(message_type="search_documents", host=host, port=port, model_str=model_str, semantic_ratio=semantic_ratio, index=index)
             # Create and return RAG instance with conditional recreate_index
             # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
-            result = rag.search(query, limit=limit, semantic_ratio=semantic_ratio)
+            result = rag.search(query, limit=limit, semantic_ratio=semantic_ratio, remote_embedding=remote_embedding)
             hits: list[dict] = result.hits
             action.log(message_type="search_documents_results_count", count=len(hits))
             return result
