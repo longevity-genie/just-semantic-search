@@ -181,6 +181,7 @@ class MeiliRAG(MeiliBase):
        default=['title', 'abstract', 'source', "authors", "references"],
         description="List of attributes that can be used for filtering"
     )
+    settings: MeilisearchSettings | None = Field(default=None, description="Meilisearch settings")
 
     # Primary key field for documents
     primary_key: str = Field(default="hash", description="Primary key field for documents")
@@ -201,7 +202,7 @@ class MeiliRAG(MeiliBase):
         
         super().model_post_init(__context)
         # Instead of assigning, just call the method
-        self.index = self._init_index(self.create_index_if_not_exists, self.recreate_index)
+        self.index = self._init_index(self.create_index_if_not_exists, self.recreate_index, settings=self.settings)
         self._configure_index()
     
     @property
@@ -245,7 +246,9 @@ class MeiliRAG(MeiliBase):
     @log_retry_errors
     def _init_index(self, 
                          create_index_if_not_exists: bool = True, 
-                         recreate_index: bool = False) -> Index:
+                         recreate_index: bool = False,
+                         settings: MeilisearchSettings | None = None,
+                         ) -> Index:
         with start_action(action_type="init_index_sync") as action:
             try:
                 index = self.client.get_index(self.index_name)
@@ -272,7 +275,7 @@ class MeiliRAG(MeiliBase):
                         index_name=self.index_name,
                         create_index_if_not_exists=True
                     )
-                    index = self.client.create_index(self.index_name)
+                    index = self.client.create_index(self.index_name, settings=settings)
                     index.update_searchable_attributes(self.searchable_attributes)
                     index.update_filterable_attributes(self.filterable_attributes)
                     return index

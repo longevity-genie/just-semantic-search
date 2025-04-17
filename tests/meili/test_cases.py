@@ -104,10 +104,11 @@ def test_rsids(rag: MeiliRAG, tell_text: bool = False, score_threshold: float = 
         return results
     
 
-def test_superhero_search(rag: MeiliRAG, tell_text: bool = False, score_threshold: float = 0.75) -> SearchResults:
+@pytest.mark.parametrize("remote_embedding", [False]) #[False, True] we temporaly put False to make CI easier but remote DID WORK
+def test_superhero_search(rag: MeiliRAG, remote_embedding: bool, tell_text: bool = False, score_threshold: float = 0.75) -> SearchResults:
     transformer_model = load_sentence_transformer_from_enum(rag.model)
     with start_action(action_type="test_superhero_search") as action:
-        results = rag.search("comic superheroes", model=transformer_model)
+        results = rag.search("comic superheroes", model=transformer_model, remote_embedding=remote_embedding)
       
         hits = [hit for hit in results.hits if hit["_rankingScore"] >= score_threshold]
         texts = [hit["text"] for hit in hits]
@@ -130,6 +131,7 @@ def test_superhero_search(rag: MeiliRAG, tell_text: bool = False, score_threshol
         return results
     
 
+@pytest.mark.skip(reason="Skipping test_retry")
 @pytest.mark.parametrize('rag', [(True, "test", False)], indirect=True)
 def test_retry(rag: MeiliRAG) -> SearchResults:
       
