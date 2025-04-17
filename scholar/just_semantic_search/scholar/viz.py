@@ -65,13 +65,14 @@ def visualize_embedding_correlations(
         
         plt.tight_layout(pad=2.0)
         
-        # Show the figure
+        # Save figure BEFORE showing it
+        print(f"Saving to {output_path}")
+        plt.savefig(output_path, format=format.lower(), bbox_inches='tight', dpi=100)
+            
+        # Show the figure after saving
         if show:
             plt.show()
             
-        # Save based on format
-        print(f"Saving to {output_path}")
-        plt.savefig(output_path, format=format.lower(), bbox_inches='tight', dpi=100)
         plt.close()
 
 app = typer.Typer()
