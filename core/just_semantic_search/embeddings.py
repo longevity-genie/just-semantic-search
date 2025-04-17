@@ -53,8 +53,24 @@ def load_model_from_enum(model: EmbeddingModel, float16: bool = True) -> Union[S
     """
     if model in [EmbeddingModel.MEDCPT_QUERY, EmbeddingModel.MEDCPT_ARTICLE]:
         return load_auto_model_tokenizer(model.value)
-    model_kwargs = {"torch_dtype": "float16"} if float16 else {}
-    return load_sentence_transformer_model(model.value, **model_kwargs)
+    
+    # Load the model first
+    st_model = load_sentence_transformer_model(model.value)
+    
+    # Apply half precision if requested
+    if float16:
+        try:
+            import torch
+            # Convert the underlying transformer model to half precision
+            for submodule in st_model.modules():
+                if hasattr(submodule, 'auto_model'):
+                    submodule.auto_model = submodule.auto_model.half()
+                    print(f"Converted model to half precision (float16)")
+                    break
+        except Exception as e:
+            print(f"Warning: Could not convert model to half precision: {e}")
+    
+    return st_model
 
 
 class EmbeddingModelParams(BaseModel):

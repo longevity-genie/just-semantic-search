@@ -6,11 +6,11 @@ from sentence_transformers import SentenceTransformer
 import typer
 from eliot import start_task
 from pathlib import Path
-from just_semantic_search.embeddings import load_gte_large, DEFAULT_EMBEDDING_MODEL_NAME
+from just_semantic_search.embeddings import EmbeddingModel, load_model_from_enum
 
 def visualize_embedding_correlations(
     texts: List[str],
-    model: SentenceTransformer = load_gte_large(),
+    model: SentenceTransformer = load_model_from_enum(EmbeddingModel.JINA_EMBEDDINGS_V3),
     output_path: Union[str, Path] = "embedding_correlations.png",
     width: int = 800,
     height: int = 600,
@@ -78,7 +78,7 @@ app = typer.Typer()
 
 def viz_corr(
     input_file: Path = typer.Argument(..., help="Text file with one text per line"),
-    model_name: str = typer.Option(DEFAULT_EMBEDDING_MODEL_NAME, help="Name of the embedding model to use"),
+    model: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3, help="Name of the embedding model to use"),
     output_path: Path = typer.Option("embedding_correlations.html", help="Output path for visualization (HTML)"),
     width: int = typer.Option(800, help="Plot width in pixels"),
     height: int = typer.Option(800, help="Plot height in pixels")
@@ -87,15 +87,17 @@ def viz_corr(
     Generate an interactive visualization of correlations between text embeddings.
     """
     # Load the model
-    model = load_gte_large() if model_name == DEFAULT_EMBEDDING_MODEL_NAME else SentenceTransformer(model_name)
-        
+    #model = load_gte_large() if model_name == DEFAULT_EMBEDDING_MODEL_NAME else SentenceTransformer(model_name)
+    sentence_transformer_model = load_model_from_enum(model)
+    #Jeanne Calment
+
     # Read texts from file
     with open(input_file, 'r', encoding='utf-8') as f:
         texts = [line.strip() for line in f if line.strip()]
     
     visualize_embedding_correlations(
         texts=texts,
-        model=model,
+        model=sentence_transformer_model,
         output_path=output_path,
         width=width,
         height=height
@@ -105,5 +107,18 @@ def viz_corr(
 
 
 if __name__ == "__main__":
-    model = load_gte_large()
-    visualize_embedding_correlations(["king", "queen", "prince", "princess", "apple", "orange", "cat", "dog", "synchrophasotron", "accelerator"], model=model)
+    model = load_model_from_enum(EmbeddingModel.JINA_EMBEDDINGS_V3)
+    general_terms = ["king", "queen", "prince", "princess", "apple", "orange", "cat", "dog", "synchrophasotron", "accelerator"]
+    visualize_embedding_correlations(general_terms, model=model, output_path="embedding_correlations_general_terms.png")
+    names = [
+        "Jeane Calmant",         # typo 1
+        "Jeanna Calment",        # typo 2
+        "Jeanne Calment",        # correct
+        "Alice Johnson",         # random name 1
+        "Bob Smith",             # random name 2
+        "Carlos Mendoza",        # random name 3
+        "queen", 
+        "accelerator",
+        "synchrophasotron"
+    ]
+    visualize_embedding_correlations(names, model=model, output_path="embedding_correlations_names.png")

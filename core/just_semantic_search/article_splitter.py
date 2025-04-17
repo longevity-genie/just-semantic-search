@@ -49,7 +49,8 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
     def split(self, text: str, embed: bool = True, 
               title: str | None = None,
               abstract: str | None = None,
-              source: str | None = None,  
+              source: str | None = None,
+              metadata: Optional[dict] = None,  
               **kwargs) -> List[Document]:
         """
         Split text into chunks based on token length.
@@ -86,7 +87,8 @@ class ArticleSplitter(TextSplitter[ArticleDocument]):
                 source=source,
                 fragment_num=i + 1,
                 total_fragments=len(text_chunks),
-                token_count=token_counts[i] if self.write_token_counts else None
+                token_count=token_counts[i] if self.write_token_counts else None,
+                metadata=metadata if metadata is not None else {}
             ).with_vector(self.model_name, self.model.encode(chunk) if embed else None)
             for i, chunk in enumerate(text_chunks)
         ]

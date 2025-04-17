@@ -197,7 +197,7 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
 
     
     
-    def split(self, text: str, embed: bool = True, source: str | None = None, **kwargs) -> List[IDocument]:
+    def split(self, text: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, **kwargs) -> List[IDocument]:
         
         
         # Get the tokenizer from the model
@@ -218,7 +218,8 @@ class TextSplitter(AbstractSplitter[str, IDocument], Generic[IDocument]):
             Document(
                 text=text, 
                 vectors={self.model_name: vec} if vec is not None else {}, 
-                source=source
+                source=source,
+                metadata=metadata if metadata is not None else {}
             ) for text, vec in zip(
                 text_chunks, 
                 self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
@@ -288,7 +289,7 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
     6. Chunks maintain a minimum size for meaningful analysis
     """
 
-    def split(self, content: str, embed: bool = True, source: str | None = None, **kwargs) -> List[Document]:
+    def split(self, content: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, **kwargs) -> List[Document]:
         # Get parameters from kwargs or use defaults
         max_seq_length = kwargs.get('max_seq_length', self.max_seq_length)
         similarity_threshold = kwargs.get('similarity_threshold', self.similarity_threshold)
@@ -305,7 +306,8 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
             Document(
                 text=text, 
                 vectors={self.model_name: vec} if vec is not None else {}, 
-                source=source
+                source=source,
+                metadata=metadata if metadata is not None else {}
             ) for text, vec in zip(
                 text_chunks, 
                 self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
@@ -327,7 +329,7 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
         self,
         text: str,
         max_chunk_size: int | None = None,
-        similarity_threshold: Optional[float] = None,
+        similarity_threshold: Optional[float] = None
     ) -> List[str]:
         """
         Splits text into semantically coherent chunks, handling edge cases like
@@ -509,6 +511,7 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         source: str = None,
         title: str = None,
         abstract: str = None,
+        metadata: Optional[dict] = None,
         **kwargs
     ) -> List[ArticleDocument]:
         # Get parameters and calculate adjusted chunk size as before
@@ -551,7 +554,8 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
                 abstract=abstract,
                 source=source,
                 fragment_num=i + 1,
-                total_fragments=len(all_chunks)
+                total_fragments=len(all_chunks),
+                metadata=metadata if metadata is not None else {}
             )
             # Add token count if enabled
             if self.write_token_counts:

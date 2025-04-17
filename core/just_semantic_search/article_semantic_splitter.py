@@ -21,6 +21,7 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
         source: str = None,
         title: str = None,
         abstract: str = None,
+        metadata: Optional[dict] = None,
         **kwargs
     ) -> List[ArticleDocument]:
         # Get parameters and calculate adjusted chunk size as before
@@ -62,7 +63,8 @@ class ArticleSemanticSplitter(SemanticSplitter[ArticleDocument]):
                 abstract=abstract,
                 source=source,
                 fragment_num=i + 1,
-                total_fragments=len(all_chunks)
+                total_fragments=len(all_chunks),
+                metadata=metadata if metadata is not None else {}
             )
             # Add token count if enabled
             if self.write_token_counts:
