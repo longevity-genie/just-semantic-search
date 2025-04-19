@@ -2,13 +2,13 @@
 from enum import Enum, auto
 from typing import Union
 from sentence_transformers import SentenceTransformer
-from just_semantic_search.text_splitters import (
+from just_semantic_search.splitters.text_splitters import (
     TextSplitter, 
     SemanticSplitter
 )
-from just_semantic_search.article_splitter import ArticleSplitter
-from just_semantic_search.article_semantic_splitter import ArticleSemanticSplitter
-from just_semantic_search.paragraph_splitters import (
+from just_semantic_search.splitters.article_splitter import ArticleSplitter
+from just_semantic_search.splitters.article_semantic_splitter import ArticleSemanticSplitter
+from just_semantic_search.splitters.paragraph_splitters import (
     ParagraphTextSplitter,
     ParagraphSemanticSplitter,
     ArticleParagraphSplitter,

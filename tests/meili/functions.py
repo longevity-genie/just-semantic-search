@@ -4,7 +4,7 @@ import sys
 import threading
 sys.path.append(str(Path(__file__).parent.parent.parent)) #stupid bug fix
 
-from just_semantic_search.text_splitters import *
+from just_semantic_search.splitters.text_splitters import *
 from just_semantic_search.embeddings import *
 from just_semantic_search.utils.tokens import *
 from pathlib import Path
@@ -19,7 +19,7 @@ from eliot._output import *
 
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from tests.config import *
-from just_semantic_search.splitter_factory import SplitterType, create_splitter
+from just_semantic_search.splitters.splitter_factory import SplitterType, create_splitter
 from rich.pretty import pprint
 
 

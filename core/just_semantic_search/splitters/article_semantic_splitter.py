@@ -6,7 +6,7 @@ from pathlib import Path
 from just_semantic_search.document import ArticleDocument
 import torch
 from transformers import PreTrainedTokenizer
-from just_semantic_search.text_splitters import *
+from just_semantic_search.splitters.text_splitters import *
 import re
 
 

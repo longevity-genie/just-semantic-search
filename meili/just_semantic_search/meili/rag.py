@@ -1,12 +1,12 @@
 from pathlib import Path
 from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_from_enum, load_sentence_transformer_params_from_enum
-from just_semantic_search.splitter_factory import create_splitter, SplitterType
+from just_semantic_search.splitters.splitter_factory import create_splitter, SplitterType
 from just_semantic_search.document import ArticleDocument, Document
 from typing import List, Dict, Any, Literal, Optional, Union
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
 import os
-from just_semantic_search.utils.remote import jina_embed_query
+from just_semantic_search.remote.jina import jina_embed_query
 
 from meilisearch_python_sdk import AsyncClient, AsyncIndex, Client, Index
 from meilisearch_python_sdk.errors import MeilisearchApiError
@@ -24,7 +24,7 @@ import inspect
 import time
 import threading
 from typing import ClassVar
-from just_semantic_search.utils.remote import jina_embed_query
+from just_semantic_search.remote.jina import jina_embed_query
 
 
 # Define a retry decorator with exponential backoff using environment variables

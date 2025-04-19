@@ -13,10 +13,10 @@ from eliot import start_task
 from pathlib import Path
 import typer
 import uvicorn
-from just_semantic_search.server.indexing import Indexing
+from just_semantic_search.server.agentic_indexing import AgenticIndexing
 from pathlib import Path
 from just_semantic_search.server.utils import load_environment_files
-from fastapi import routing
+from fastapi import routing, UploadFile
 from starlette.middleware import Middleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.responses import RedirectResponse
@@ -37,6 +37,11 @@ class RAGServerConfig(ChatUIAgentConfig):
     embedding_model: EmbeddingModel = Field(
         default=EmbeddingModel.JINA_EMBEDDINGS_V3,
         description="Embedding model to use"
+    )
+    
+    api_key: Optional[str] = Field(
+        default=None,
+        description="API key for securing indexing operations"
     )
 
     def set_general_port(self, port: int):
@@ -59,10 +64,47 @@ class SearchAgentRequest(BaseModel):
     index: Optional[str] = Field(default=None, example="glucosedao")
     additional_instructions: Optional[str] = Field(default=None, example="You must always provide quotes from evidence followed by the sources (not in the end but immediately after the quote)")
 
+class DeleteBySourceRequest(BaseModel):
+    """Request model for deleting documents by source"""
+    index_name: str = Field(example="glucosedao")
+    source: str = Field(example="paper1.md")
+    api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+
+class IndexMarkdownFolderRequest(BaseModel):
+    """Request model for indexing a markdown folder"""
+    folder: str = Field(example="/path/to/folder")
+    index_name: str = Field(example="glucosedao")
+    api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+
+class IndexFileRequest(BaseModel):
+    """Request model for indexing a file (shared fields)"""
+    index_name: str = Field(example="glucosedao")
+    max_seq_length: Optional[int] = Field(default=3600, example=3600)
+    abstract: Optional[str] = Field(default=None, example="This is a summary of the document")
+    title: Optional[str] = Field(default=None, example="Document Title")
+    source: Optional[str] = Field(default=None, example="source.txt")
+    autoannotate: bool = Field(default=False, example=True)
+    api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+
+class IndexPDFRequest(IndexFileRequest):
+    """Request model for indexing a PDF file"""
+    mistral_api_key: Optional[str] = Field(default=None, description="API key for Mistral OCR service")
+
+class IndexJsonFilesRequest(BaseModel):
+    """Request model for indexing JSON files with fully custom fields"""
+    folder: str = Field(example="/path/to/json_files")
+    index_name: str = Field(example="custom_docs")
+    content_field: str = Field(example="content", description="Field name in JSON containing the document content (required for splitting)")
+    max_seq_length: Optional[int] = Field(default=3600, example=3600, description="Maximum sequence length for chunks")
+    extension: str = Field(default=".json", example=".json", description="File extension to look for")
+    depth: int = Field(default=-1, example=-1, description="Depth of folder traversal (-1 for unlimited)")
+    required_fields: Optional[List[str]] = Field(default=None, example=["id", "type"], description="Optional list of field names that must be present in each document")
+    api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+
 class RAGServer(ChatUIAgentRestAPI):
     """Extended REST API implementation that adds RAG (Retrieval-Augmented Generation) capabilities"""
 
-    indexing: Indexing
+    indexing: AgenticIndexing
 
     @cached_property
     def rag_agent(self):
@@ -106,7 +148,7 @@ class RAGServer(ChatUIAgentRestAPI):
             description=description,
             *args, **kwargs
         )
-        self.indexing = Indexing(
+        self.indexing = AgenticIndexing(
             annotation_agent=self.annotation_agent,
             embedding_model=config.embedding_model
         )
@@ -179,20 +221,81 @@ class RAGServer(ChatUIAgentRestAPI):
             self.post("/list_indexes", description="Get all indexes")(self.list_indexes)
         
         if "/index_markdown_folder" not in route_paths:
-            self.post("/index_markdown_folder", description="Index a folder with markdown files")(self.indexing.index_markdown_folder)
+            @self.post("/index_markdown_folder", description="Index a folder with markdown files")
+            def index_markdown_folder(request: IndexMarkdownFolderRequest):
+                return self.indexing.index_markdown_folder(
+                    folder=request.folder, 
+                    index_name=request.index_name,
+                    api_key=request.api_key
+                )
         
         if "/upload_markdown_folder" not in route_paths:
-            self.post("/upload_markdown_folder", description="Upload a folder with markdown files")(self.indexing.index_upload_markdown_folder)
+            @self.post("/upload_markdown_folder", description="Upload a folder with markdown files")
+            async def upload_markdown_folder(uploaded_file: UploadFile, index_name: str, api_key: Optional[str] = None):
+                return self.indexing.index_upload_markdown_folder(
+                    uploaded_file=uploaded_file,
+                    index_name=index_name,
+                    api_key=api_key
+                )
         
         # Add new routes for PDF and text file upload
         if "/upload_pdf" not in route_paths:
-            self.post("/upload_pdf", description="Upload and index a PDF file")(self.indexing.index_pdf_file)
+            @self.post("/upload_pdf", description="Upload and index a PDF file")
+            async def upload_pdf(
+                file: UploadFile, 
+                request: IndexPDFRequest
+            ):
+                return self.indexing.index_pdf_file(
+                    file=file,
+                    index_name=request.index_name,
+                    max_seq_length=request.max_seq_length,
+                    abstract=request.abstract,
+                    title=request.title,
+                    source=request.source,
+                    autoannotate=request.autoannotate,
+                    mistral_api_key=request.mistral_api_key,
+                    api_key=request.api_key
+                )
         
         if "/upload_text" not in route_paths:
-            self.post("/upload_text", description="Upload and index a text file")(self.indexing.index_text_file)
+            @self.post("/upload_text", description="Upload and index a text file")
+            async def upload_text(
+                file: UploadFile, 
+                request: IndexFileRequest
+            ):
+                return self.indexing.index_text_file(
+                    file=file,
+                    index_name=request.index_name,
+                    max_seq_length=request.max_seq_length,
+                    abstract=request.abstract,
+                    title=request.title,
+                    source=request.source,
+                    autoannotate=request.autoannotate,
+                    api_key=request.api_key
+                )
 
         if "/delete_by_source" not in route_paths:
-            self.post("/delete_by_source", description="Delete documents by their sources")(self.indexing.delete_by_source)
+            @self.post("/delete_by_source", description="Delete documents by their sources")
+            def delete_by_source(request: DeleteBySourceRequest):
+                return self.indexing.delete_by_source(
+                    index_name=request.index_name,
+                    source=request.source,
+                    api_key=request.api_key
+                )
+
+        if "/index_json_files" not in route_paths:
+            @self.post("/index_json_files", description="Index JSON files with custom fields")
+            def index_json_files(request: IndexJsonFilesRequest):
+                return self.indexing.index_json_files(
+                    folder=request.folder,
+                    index_name=request.index_name,
+                    content_field=request.content_field,
+                    max_seq_length=request.max_seq_length,
+                    api_key=request.api_key,
+                    extension=request.extension,
+                    depth=request.depth,
+                    required_fields=request.required_fields
+                )
 
     
 
@@ -282,12 +385,23 @@ def run_rag_server(
     section: Optional[str] = None,
     parent_section: Optional[str] = None,
     debug: bool = True,
-    agents: Optional[Dict[str, BaseAgent]] = None
+    agents: Optional[Dict[str, BaseAgent]] = None,
+    api_key: Optional[str] = None
 ) -> None:
     """Run the RAG server with the given configuration."""
     # Initialize the API class with the updated configuration
     config = RAGServerConfig()
     config.set_general_port(port)
+    
+    # Set the API key from parameter or environment variable
+    if api_key:
+        config.api_key = api_key
+    else:
+        config.api_key = os.getenv("INDEXING_API_KEY")
+    
+    # If API key is provided, set it in environment for other components
+    if config.api_key:
+        os.environ["INDEXING_API_KEY"] = config.api_key
 
     api = RAGServer(
         agent_profiles=agent_profiles,

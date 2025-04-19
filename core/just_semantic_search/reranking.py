@@ -3,8 +3,7 @@ from enum import Enum
 from sentence_transformers import CrossEncoder
 from typing import Optional, Union
 from pydantic import BaseModel, Field
-from just_semantic_search.utils.remote import jina_rerank, RerankResult
-
+from just_semantic_search.remote.jina_reranker import jina_rerank, RerankResult
 
 
 class RerankingModel(str, Enum):
@@ -157,51 +156,3 @@ class Reranker(AbstractReranker):
         """
         rankings = self.cross_encoder.rank(query, documents, return_documents=self.return_documents, convert_to_tensor=self.convert_to_tensor, top_k=top_n)
         return [RerankResult(index=result["corpus_id"], relevance_score=result["score"], document=result["text"]) for result in rankings]
-
-
-
-if __name__ == "__main__":
-
-    convert_to_tensor = False
-    local_reranker = Reranker(
-        model=RerankingModel.JINA_RERANKER_V2_BASE_MULTILINGUAL,
-        convert_to_tensor=convert_to_tensor
-    )
-
-    remote_reranker = RemoteJinaReranker(
-        model=RerankingModel.JINA_RERANKER_V2_BASE_MULTILINGUAL,
-        convert_to_tensor=convert_to_tensor,
-        return_documents=True
-    )
-    
-    
-    # Example query and documents
-    query = "Organic skincare products for sensitive skin"
-    documents = [
-        "Organic skincare for sensitive skin with aloe vera and chamomile.",
-        "New makeup trends focus on bold colors and innovative techniques",
-        "Bio-Hautpflege für empfindliche Haut mit Aloe Vera und Kamille",
-        "Neue Make-up-Trends setzen auf kräftige Farben und innovative Techniken",
-        "Cuidado de la piel orgánico para piel sensible con aloe vera y manzanilla",
-        "Las nuevas tendencias de maquillaje se centran en colores vivos y técnicas innovadoras",
-        "针对敏感肌专门设计的天然有机护肤产品",
-        "新的化妆趋势注重鲜艳的颜色和创新的技巧",
-        "敏感肌のために特別に設計された天然有機スキンケア製品",
-        "新しいメイクのトレンドは鮮やかな色と革新的な技術に焦点を当てています",
-    ]
-    
-    # Score documents
-    #scores = local_reranker.score(query, documents)
-    #print(scores)
-    #scores_2 = remote_reranker.score(query, documents)
-    #print(scores_2)
-    rankings = local_reranker.rank(query, documents)
-    print(f"Query: {query}")
-    for ranking in rankings:
-        print(ranking)
-    
-    print("=======================================================")
-    rankings = remote_reranker.rank(query, documents)
-    for ranking in rankings:
-        print(ranking)
-    

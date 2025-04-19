@@ -2,7 +2,7 @@ from just_semantic_search.reranking import RemoteJinaReranker, Reranker, Reranki
 import pytest
 import random
 import concurrent.futures
-from just_semantic_search.splitter_factory import SplitterType
+from just_semantic_search.splitters.splitter_factory import SplitterType
 from just_semantic_search.meili.rag import MeiliRAG, SearchResults
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from eliot import start_action
@@ -10,7 +10,7 @@ from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
 from pycomfort.logging import to_nice_stdout
 from tests.meili.functions import index_file, simulate_meilisearch_disconnection
-from just_semantic_search.utils.remote import RerankResult
+from just_semantic_search.remote.jina_reranker import RerankResult
 
 to_nice_stdout()
 
