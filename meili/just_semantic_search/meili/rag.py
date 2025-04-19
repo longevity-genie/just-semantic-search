@@ -1,8 +1,10 @@
 from pathlib import Path
 from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams, load_sentence_transformer_from_enum, load_sentence_transformer_params_from_enum
+from just_semantic_search.reranking import RerankingModel, load_reranker
 from just_semantic_search.splitters.splitter_factory import create_splitter, SplitterType
 from just_semantic_search.document import ArticleDocument, Document
 from typing import List, Dict, Any, Literal, Optional, Union
+from just_semantic_search.splitters.text_splitters import TextSplitter
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
 import os
@@ -170,6 +172,7 @@ class MeiliRAG(MeiliBase):
     index_name: str = Field(description="Name of the Meilisearch index")
     index: Optional[Index] = Field(default=None, exclude=True)
     model: EmbeddingModel = Field(default=EmbeddingModel.JINA_EMBEDDINGS_V3, description="Embedding model to use for vector search")
+    reranking_model: Optional[RerankingModel] = Field(default=None, description="Reranking model to use for reranking")
     embedding_model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams, description="Embedding model parameters")
     create_index_if_not_exists: bool = Field(default=os.getenv("MEILISEARCH_CREATE_INDEX_IF_NOT_EXISTS", True), description="Create index if it doesn't exist")
     recreate_index: bool = Field(default=os.getenv("MEILISEARCH_RECREATE_INDEX", False), description="Force recreate the index even if it exists")
@@ -201,6 +204,11 @@ class MeiliRAG(MeiliBase):
         self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
         
         super().model_post_init(__context)
+        if self.reranking_model is not None:
+            self.reranking_model = load_reranker(self.reranking_model)
+        else:
+            if os.getenv("RERANKING_MODEL") is not None:
+                self.reranking_model = load_reranker(os.getenv("RERANKING_MODEL"))
         # Instead of assigning, just call the method
         self.index = self._init_index(self.create_index_if_not_exists, self.recreate_index, settings=self.settings)
         self._configure_index()
@@ -287,9 +295,17 @@ class MeiliRAG(MeiliBase):
                     )
             return self.client.get_index(self.index_name)
 
-    def add_documents(self, documents: List[ArticleDocument | Document], compress: bool = False):
+    def add_documents(self, documents: List[ArticleDocument | Document], compress: bool = False, splitter: Optional[SplitterType | TextSplitter] = None):
         """Add documents synchronously by running the async method in the event loop."""
         with start_action(action_type="add documents") as action:
+            if splitter is not None:
+                action.log(
+                    message_type="splitting_documents",
+                    splitter=splitter
+                )
+                if isinstance(splitter, SplitterType):
+                    splitter = create_splitter(splitter, self.sentence_transformer)
+                documents = splitter.split_documents(documents)
             documents_dict = [doc.model_dump(by_alias=True) for doc in documents]
             count = len(documents)
             result = self.index.add_documents(documents_dict, primary_key=self.primary_key, compress=compress)
@@ -340,8 +356,8 @@ class MeiliRAG(MeiliBase):
             show_ranking_score_details: bool = os.getenv("MEILISEARCH_SHOW_RANKING_SCORE_DETAILS", True),
             ranking_score_threshold: float | None = os.getenv("MEILISEARCH_RANKING_SCORE_THRESHOLD", None),
             locales: list[str] | None = None,
-            sentence_transformer: Optional[SentenceTransformer] = None, 
             remote_embedding: bool = False,
+            rerank_limit: int = os.getenv("RERANK_LIMIT", 10), # TODO: MAKE IT WORK, SO FAR NOT USED YET
             **kwargs
         ) -> SearchResults:
         """Search for documents in the index.
@@ -399,8 +415,7 @@ class MeiliRAG(MeiliBase):
         
         # Only initialize sentence_transformer and generate vectors if semanticRatio > 0
         if vector is None:
-            if sentence_transformer is None:
-                sentence_transformer = self.st_model if self.st_model is not None else self.sentence_transformer
+            sentence_transformer = self.st_model if self.st_model is not None else self.sentence_transformer
             
             kwargs.update(self.embedding_model_params.retrival_query)
             with start_action(action_type="encode_query") as action:
@@ -455,7 +470,7 @@ class MeiliRAG(MeiliBase):
                       semantic_ratio=semanticRatio)
             search_start_time = time.time()
             
-            results = self.index.search(
+            results: SearchResults = self.index.search(
                 query,
                 offset=offset,
                 limit=limit,

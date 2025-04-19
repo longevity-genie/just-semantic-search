@@ -47,7 +47,7 @@ class EmbeddingModel(Enum):
         other._name_ = f"OTHER_{model_path.replace('/', '_')}"
         return other
 
-def load_model_from_enum(model: EmbeddingModel, float16: bool = True) -> Union[SentenceTransformer, Tuple[PreTrainedModel, PreTrainedTokenizer]]:
+def load_model_from_enum(model: EmbeddingModel, float16: bool = False) -> Union[SentenceTransformer, Tuple[PreTrainedModel, PreTrainedTokenizer]]:
     """
     Factory function to load a model based on the EmbeddingModel enum
     """

@@ -8,27 +8,8 @@ from just_semantic_search.remote.jina_reranker import jina_rerank, RerankResult
 
 class RerankingModel(str, Enum):
     JINA_RERANKER_V2_BASE_MULTILINGUAL = "jinaai/jina-reranker-v2-base-multilingual"
+    REMOTE_JINA_RERANKER_V2_BASE_MULTILINGUAL = "jinaai/jina-reranker-v2-base-multilingual_remote"
     
-
-def load_reranking_model(model: Union[RerankingModel, str]) -> CrossEncoder:
-    """
-    Loads a CrossEncoder model for reranking tasks.
-
-    Args:
-        model: The identifier of the model to load. Can be a RerankingModel enum member
-               or a string representing the model name (e.g., from Hugging Face Hub).
-
-    Returns:
-        An instance of the CrossEncoder model.
-    """
-    model_id = model.value if isinstance(model, RerankingModel) else model
-    return CrossEncoder(
-        model_id,
-        model_kwargs={
-            "torch_dtype": "auto"
-        },
-        trust_remote_code=True,
-    )
 
 class AbstractReranker(BaseModel, ABC):
     """
@@ -51,6 +32,32 @@ class AbstractReranker(BaseModel, ABC):
         Reranks a list of documents based on their relevance to a given query.
         """
         raise NotImplementedError("Subclasses must implement this method.")
+    
+
+def load_reranker(model: Union[RerankingModel, str]) -> AbstractReranker:
+    """
+    Loads a CrossEncoder model for reranking tasks.
+
+    Args:
+        model: The identifier of the model to load. Can be a RerankingModel enum member
+               or a string representing the model name (e.g., from Hugging Face Hub).
+
+    Returns:
+        An instance of the CrossEncoder model.
+    """
+    if model == RerankingModel.REMOTE_JINA_RERANKER_V2_BASE_MULTILINGUAL:
+        return RemoteJinaReranker()
+    else: 
+        model_id = model.value if isinstance(model, RerankingModel) else model
+        cross_encoder = CrossEncoder(
+            model_id.replace("_remote", ""),
+            model_kwargs={
+                "torch_dtype": "auto"
+            },
+            trust_remote_code=True,
+        )
+        return CrossEncoderReranker(cross_encoder=cross_encoder)
+    
     
 class RemoteJinaReranker(AbstractReranker):
     """
@@ -102,17 +109,12 @@ class RemoteJinaReranker(AbstractReranker):
 
     
 
-class Reranker(AbstractReranker):
+class CrossEncoderReranker(AbstractReranker):
     """
     Reranks a list of documents based on their relevance to a given query using a Jina reranker model.
     """
-    model: RerankingModel = Field(default=RerankingModel.JINA_RERANKER_V2_BASE_MULTILINGUAL)
-    cross_encoder: Optional[CrossEncoder] = Field(default=None)
-    return_documents: bool = Field(default=True)
+    cross_encoder: Optional[CrossEncoder] = Field(exclude=True)
     
-    def model_post_init(self, __context):
-        if self.cross_encoder is None:
-            self.cross_encoder = load_reranking_model(self.model)
 
     def score(self, query: str, documents: list[str]) -> list[float]:
         """

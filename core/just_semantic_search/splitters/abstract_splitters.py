@@ -231,6 +231,9 @@ class AbstractTextSplitter(AbstractSplitter[str, IDocument]):
             )
         ]
     
+    def split_documents(self, documents: List[IDocument], embed: bool = True, **kwargs) -> List[IDocument]:
+        return [self.split(doc.text, embed=embed, source=doc.source, metadata=doc.metadata) for doc in documents]
+
 
     def _content_from_path(self, file_path: Path) -> str:
         return file_path.read_text(encoding="utf-8")

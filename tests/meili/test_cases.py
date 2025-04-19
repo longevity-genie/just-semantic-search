@@ -1,4 +1,4 @@
-from just_semantic_search.reranking import RemoteJinaReranker, Reranker, RerankingModel
+from just_semantic_search.reranking import RerankingModel
 import pytest
 import random
 import concurrent.futures
@@ -10,7 +10,7 @@ from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
 from pycomfort.logging import to_nice_stdout
 from tests.meili.functions import index_file, simulate_meilisearch_disconnection
-from just_semantic_search.remote.jina_reranker import RerankResult
+from just_semantic_search.reranking import RerankingModel
 
 to_nice_stdout()
 
