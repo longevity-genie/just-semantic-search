@@ -12,7 +12,7 @@ jobs:
 
     services:
       meilisearch:
-        image: getmeili/meilisearch:v1.13.0-rc.0
+        image: getmeili/meilisearch:v1.14.0
         env:
           MEILI_MASTER_KEY: fancy_master_key
           MEILI_NO_ANALYTICS: true
@@ -61,3 +61,4 @@ jobs:
       env:
         MEILI_MASTER_KEY: fancy_master_key
         MEILI_URL: http://localhost:7700
+        JINA_API_KEY: ${{ secrets.JINA_API_KEY }}

@@ -1,8 +1,8 @@
 # IMPORTANT: to make proper cpu/gpu resolution you must apply poetry config installer.re-resolve false
 [tool.poetry]
-name = "just-semantic-search-cuda"
+name = "just-semantic-search"
 version = "0.0.0"
-description = "Core interfaces for hybrid search implementations (CUDA version)"
+description = "Core interfaces for hybrid search implementations (CPU version)"
 authors = ["Alex Karmazin <karmazinalex@gmail.com>", "Anton Kulaga <antonkulaga@gmail.com>", "Newton Winter <isoutthere@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
@@ -44,7 +44,7 @@ eliot = ">=1.17.5"
 eliot-tree = ">=24.0.0"
 
 # CPU version (default) - explicitly from CPU source
-torch = { version = "2.6.0+cu124", source = "torch-gpu" }
+torch = { version = "2.6.0", source = "torch-cpu" }
 
 # CUDA dependencies - completely optional
 triton = { version = ">=3.2.0" }

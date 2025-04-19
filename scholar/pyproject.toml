@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "just-semantic-search-scholar-cuda"
+name = "just-semantic-search-scholar"
 version = "0.0.0"
-description = "Core interfaces for hybrid search implementations (CUDA version)"
+description = "Core interfaces for hybrid search implementations (CPU version)"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-keywords = ["python", "llm", "gpu", "cuda", "cpu", "science", "review", "hybrid search", "semantic search", "cpu"]
+keywords = ["python", "llm", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "science", "review", "hybrid search", "semantic search", "cpu"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -35,7 +35,7 @@ typer = ">=0.9.0"
 semanticscholar = ">=0.10.0"
 polars = ">=1.25.2"
 pyfunctional = ">=1.5.0"
-just-semantic-search-meili-cuda = "*"
+just-semantic-search-meili = "*"
 patito = ">=0.8.3"
 seaborn = ">=0.13.2"
 
