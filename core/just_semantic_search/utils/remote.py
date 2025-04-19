@@ -37,7 +37,7 @@ class JinaEmbeddingResponse(BaseModel):
 
 # Removed JinaDocument Model
 
-class JinaRerankResult(BaseModel):
+class RerankResult(BaseModel):
     index: int
     relevance_score: float
     document: Optional[str] = None # Changed type back to str
@@ -53,7 +53,7 @@ class JinaRerankResult(BaseModel):
 class JinaRerankResponse(BaseModel):
     model: str
     usage: JinaUsage
-    results: List[JinaRerankResult]
+    results: List[RerankResult]
 
 
 def jina_embed_raw(text: str | list[str], model: str = "jina-embeddings-v3", task: str = "retrieval.query") -> JinaEmbeddingResponse:
@@ -99,10 +99,11 @@ def jina_rerank_raw(query: str, documents: list[str],
     data = {
         "model": model,
         "query": query,
-        "top_n": top_n,
         "documents": documents,
         "return_documents": return_documents
     }
+    if top_n is not None:
+        data["top_n"] = top_n
 
     response = requests.post(url, headers=headers, json=data)
     response.raise_for_status() # Added status check
@@ -112,15 +113,9 @@ def jina_rerank_raw(query: str, documents: list[str],
 def jina_rerank(query: str, documents: list[str],
                 model: str = "jina-reranker-v2-base-multilingual",
                 top_n: Optional[int] = None,
-                return_documents: bool = True) -> list[str] | list[JinaRerankResult]: # Return type depends on return_documents
+                return_documents: bool = True) -> list[str] | list[RerankResult]: # Return type depends on return_documents
     response = jina_rerank_raw(query, documents, model, top_n, return_documents)
-
-    if return_documents:
-        # Access the document string directly
-        return [result.document for result in response.results if result.document is not None]
-    else:
-        # Return the results list containing index and score if documents are not requested
-        return response.results
+    return response.results
 
 
 if __name__ == "__main__":

@@ -13,84 +13,27 @@ if ! command -v poetry &> /dev/null; then
     exit 1
 fi
 
+# Check if switch.sh exists
+if [ ! -f "$SCRIPT_DIR/switch.sh" ]; then
+    echo "Error: $SCRIPT_DIR/switch.sh not found!"
+    echo "Make sure the switch.sh script is available in the bin directory."
+    exit 1
+fi
+
 # Initialize error flag
 HAS_ERRORS=0
-
-# Function to clean up backup files
-cleanup_backups() {
-    local dir=$1
-    cd "$SCRIPT_DIR/../$dir"
-    rm -f *.bak pyproject.toml.orig
-}
 
 # Function to build and publish a package
 publish_package() {
     local dir=$1
-    local is_cuda=$2
-    local original_name=""
-    local cuda_suffix=""
     
     cd "$SCRIPT_DIR/../$dir"
-    
-    # If CUDA version, modify pyproject.toml
-    if [ "$is_cuda" = true ]; then
-        cuda_suffix="-cuda"
-        
-        # Get the original package name and modify it for CUDA
-        original_name=$(grep 'name = ' pyproject.toml | head -1 | sed 's/name = //; s/"//g; s/^[[:space:]]*//; s/[[:space:]]*$//')
-        cuda_name="$original_name$cuda_suffix"
-        
-        # Backup the original file
-        cp pyproject.toml pyproject.toml.orig
-        
-        # Replace the package name in pyproject.toml
-        sed -i.bak "s/name = \"$original_name\"/name = \"$cuda_name\"/" pyproject.toml
-        
-        # Update the description to indicate CUDA version
-        sed -i.bak 's/description = ".*"/description = "Core interfaces for hybrid search implementations (CUDA version)"/' pyproject.toml
-        
-        # Update keywords to indicate CUDA support
-        sed -i.bak 's/"python", "llm"/"python", "llm", "gpu", "cuda"/' pyproject.toml
-        
-        # Extract torch CPU version from pyproject.toml dynamically
-        TORCH_CPU_VERSION=$(grep -oP 'torch = \{ version = "\K[^\"]+' pyproject.toml)
-        if [ -z "$TORCH_CPU_VERSION" ]; then
-            echo "Could not detect torch version in pyproject.toml"
-            HAS_ERRORS=1
-        else
-            TORCH_CUDA_VERSION="${TORCH_CPU_VERSION}+cu124"
-            sed -i.bak "s/torch = { version = \"$TORCH_CPU_VERSION\", source = \"torch-cpu\" }/torch = { version = \"$TORCH_CUDA_VERSION\", source = \"torch-gpu\" }/" pyproject.toml
-        fi
-        
-        # Make triton a direct dependency for CUDA version
-        sed -i.bak 's/triton = { version = ">=2.3.0", optional = true, markers = "extra == '\''cuda'\''" }/triton = { version = ">=2.3.0" }/' pyproject.toml
-        
-        # Update dependencies to use CUDA versions
-        if [ "$dir" != "core" ]; then
-            # Update just-semantic-search dependency to use CUDA version
-            sed -i.bak 's/just-semantic-search = "\*"/just-semantic-search-cuda = "\*"/' pyproject.toml
-            
-            # For scholar and server, update meili dependency to use CUDA version
-            if [ "$dir" = "scholar" ] || [ "$dir" = "server" ]; then
-                sed -i.bak 's/just-semantic-search-meili = "\*"/just-semantic-search-meili-cuda = "\*"/' pyproject.toml
-            fi
-            
-            # For server, update scholar dependency to use CUDA version
-            if [ "$dir" = "server" ]; then
-                sed -i.bak 's/just-semantic-search-scholar = "\*"/just-semantic-search-scholar-cuda = "\*"/' pyproject.toml
-            fi
-        fi
-        
-        echo "Publishing CUDA version as $cuda_name..."
-    else
-        echo "Publishing CPU version..."
-    fi
     
     # Debug: Show dynamic versioning configuration from pyproject.toml
     echo "=== Dynamic versioning section before build ==="
     grep -A 5 "\[tool.poetry-dynamic-versioning\]" pyproject.toml
 
-    # (Optional) Show current git tag description for debugging:
+    # Show current git tag description for debugging
     echo "Git describe:"
     git describe --tags --always
     
@@ -99,22 +42,18 @@ publish_package() {
     if [ $? -ne 0 ]; then
         echo "Package build failed!"
         HAS_ERRORS=1
+        return 1
     else
         poetry publish
         if [ $? -ne 0 ]; then
             echo "Package publish failed!"
             HAS_ERRORS=1
+            return 1
         else
             echo "Package built and published successfully!"
+            return 0
         fi
     fi
-    
-    # Restore original pyproject.toml if it exists and clean up backup files
-    if [ -f "pyproject.toml.orig" ]; then
-        mv pyproject.toml.orig pyproject.toml
-        echo "Restored original pyproject.toml for $dir"
-    fi
-    cleanup_backups "$dir"
 }
 
 # List of packages to build and publish
@@ -124,12 +63,36 @@ packages=("core" "meili" "scholar" "server")
 for pkg in "${packages[@]}"; do
     echo "Processing $pkg package..."
     
-    # Publish CPU version (default)
-    publish_package "$pkg" false
+    # Switch to CPU mode
+    echo "Switching to CPU mode for $pkg..."
+    "$SCRIPT_DIR/switch.sh" cpu
+    if [ $? -ne 0 ]; then
+        echo "Failed to switch to CPU mode for $pkg!"
+        HAS_ERRORS=1
+        continue
+    fi
     
-    # Publish CUDA version
-    publish_package "$pkg" true
+    # Publish CPU version
+    echo "Publishing CPU version of $pkg..."
+    publish_package "$pkg"
+    
+    # Switch to GPU mode
+    echo "Switching to GPU mode for $pkg..."
+    "$SCRIPT_DIR/switch.sh" gpu
+    if [ $? -ne 0 ]; then
+        echo "Failed to switch to GPU mode for $pkg!"
+        HAS_ERRORS=1
+        continue
+    fi
+    
+    # Publish GPU version
+    echo "Publishing GPU version of $pkg..."
+    publish_package "$pkg"
 done
+
+# Switch back to CPU mode at the end
+echo "Switching back to CPU mode..."
+"$SCRIPT_DIR/switch.sh" cpu
 
 # Final error status
 if [ $HAS_ERRORS -ne 0 ]; then

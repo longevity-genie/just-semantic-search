@@ -83,6 +83,31 @@ For meilisearch backend you need to install:
 pip install just-semantic-search-meili  # Meilisearch backend
 ```
 
+### GPU and CPU Versions
+
+All subprojects within just-semantic-search are published in two flavors:
+- Standard CPU version (e.g., `just-semantic-search`, `just-semantic-search-meili`)
+- CUDA-enabled GPU version (e.g., `just-semantic-search-cuda`, `just-semantic-search-meili-cuda`)
+
+If you don't have CUDA-compatible hardware or don't need GPU acceleration, use the standard CPU versions. For those with compatible GPUs who want to leverage hardware acceleration, choose the CUDA-enabled versions.
+
+#### Switching Between Versions
+
+When developing with the library from source, you can easily switch between CPU and GPU versions using the provided script:
+
+```bash
+# Switch to CPU mode
+./bin/switch.sh cpu
+
+# Switch to GPU/CUDA mode
+./bin/switch.sh gpu
+
+# After switching, update your environment
+poetry install
+```
+
+This will update all subprojects and dependencies to use either the CPU or GPU versions, allowing you to choose the best configuration for your hardware.
+
 ### Using Poetry
 
 ```bash
@@ -193,6 +218,22 @@ The library uses Jina embeddings v3 by default, which automatically optimizes em
 - Text matching for similarity comparisons
 - Classification for categorization tasks
 - Separation for clustering and reranking
+
+### Remote and Local Embeddings
+
+The library supports both local and remote embeddings processing:
+- **Local embeddings**: Runs on your machine with CPU or GPU acceleration (if available)
+- **Remote embeddings**: Uses cloud-based API services for potentially better performance without local resource consumption
+- **Reranking support**: For Jina models, enabling more accurate search result ordering
+
+To use remote embeddings, you need to configure your API key in the environment:
+
+```bash
+# For remote embeddings
+export JINAAI_API_KEY="your_api_key_here"
+```
+
+Without an API key, the library will default to local embedding processing.
 
 Other available models include:
 - `EmbeddingModel.GTE_LARGE` - General Text Embeddings (large)

@@ -3,7 +3,7 @@ from enum import Enum
 from sentence_transformers import CrossEncoder
 from typing import Optional, Union
 from pydantic import BaseModel, Field
-from just_semantic_search.utils.remote import jina_rerank
+from just_semantic_search.utils.remote import jina_rerank, RerankResult
 
 
 
@@ -156,7 +156,7 @@ class Reranker(AbstractReranker):
             If `return_documents` is False, it's a list of scores.
         """
         rankings = self.cross_encoder.rank(query, documents, return_documents=self.return_documents, convert_to_tensor=self.convert_to_tensor, top_k=top_n)
-        return rankings
+        return [RerankResult(index=result["corpus_id"], relevance_score=result["score"], document=result["text"]) for result in rankings]
 
 
 
@@ -191,22 +191,17 @@ if __name__ == "__main__":
     ]
     
     # Score documents
-    scores = local_reranker.score(query, documents)
-    print(scores)
-    scores_2 = remote_reranker.score(query, documents)
-    print(scores_2)
-    """
-    # Rank documents
+    #scores = local_reranker.score(query, documents)
+    #print(scores)
+    #scores_2 = remote_reranker.score(query, documents)
+    #print(scores_2)
     rankings = local_reranker.rank(query, documents)
     print(f"Query: {query}")
     for ranking in rankings:
         print(ranking)
     
     print("=======================================================")
-    
-   
     rankings = remote_reranker.rank(query, documents)
     for ranking in rankings:
         print(ranking)
-    """
     

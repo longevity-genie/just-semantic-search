@@ -1,0 +1,271 @@
+#!/bin/bash
+
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Navigate to the project root directory
+cd "$SCRIPT_DIR/.."
+
+# Check if a mode is specified
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 [cpu|gpu]"
+    echo "  cpu: Switch to CPU mode"
+    echo "  gpu: Switch to GPU/CUDA mode"
+    exit 1
+fi
+
+MODE="$1"
+if [ "$MODE" != "cpu" ] && [ "$MODE" != "gpu" ]; then
+    echo "Error: Mode must be either 'cpu' or 'gpu'"
+    exit 1
+fi
+
+# Initialize error flag
+HAS_ERRORS=0
+
+# Function to clean up backup files
+cleanup_backups() {
+    local dir=$1
+    cd "$SCRIPT_DIR/../$dir"
+    rm -f *.bak
+}
+
+# Function to check if already in the requested mode
+check_current_mode() {
+    local dir=$1
+    local requested_mode=$2
+    local is_cuda=false
+    
+    cd "$SCRIPT_DIR/../$dir"
+    
+    # Check package name suffix
+    if grep -q 'name = ".*-cuda"' pyproject.toml; then
+        is_cuda=true
+    fi
+    
+    # For core package, also check torch source
+    if [ "$dir" = "core" ]; then
+        if grep -q 'torch = { version = ".*", source = "torch-gpu" }' pyproject.toml; then
+            is_cuda=true
+        elif grep -q 'torch = { version = ".*", source = "torch-cpu" }' pyproject.toml; then
+            is_cuda=false
+        fi
+        
+        # Check triton dependency
+        if grep -q 'triton = { version = "[^"]*", optional = true' pyproject.toml; then
+            is_cuda=false
+        elif grep -q 'triton = { version = "[^"]*" }' pyproject.toml; then
+            is_cuda=true
+        fi
+    fi
+    
+    # For non-core packages, check dependencies
+    if [ "$dir" != "core" ]; then
+        if grep -q 'just-semantic-search-cuda = "\*"' pyproject.toml; then
+            is_cuda=true
+        elif grep -q 'just-semantic-search = "\*"' pyproject.toml; then
+            is_cuda=false
+        fi
+    fi
+    
+    if [ "$requested_mode" = "gpu" ] && [ "$is_cuda" = true ]; then
+        echo "Package in $dir is already in GPU mode."
+        return 1
+    elif [ "$requested_mode" = "cpu" ] && [ "$is_cuda" = false ]; then
+        echo "Package in $dir is already in CPU mode."
+        return 1
+    fi
+    
+    # Force mode change if mode detection is ambiguous
+    echo "Forcing mode change for $dir to $requested_mode mode..."
+    return 0
+}
+
+# Function to update root project dependencies
+update_root_dependencies() {
+    local to_cuda=$1
+    cd "$SCRIPT_DIR/.."
+    
+    # Backup the original file
+    cp pyproject.toml pyproject.toml.bak
+    
+    if [ "$to_cuda" = true ]; then
+        # Switch to CUDA mode
+        echo "Updating root project dependencies to GPU mode..."
+        
+        # Replace the dependencies in the main pyproject.toml
+        sed -i.bak 's/just-semantic-search = { path/just-semantic-search-cuda = { path/g' pyproject.toml
+        sed -i.bak 's/just-semantic-search-meili = { path/just-semantic-search-meili-cuda = { path/g' pyproject.toml
+        sed -i.bak 's/just-semantic-search-scholar = { path/just-semantic-search-scholar-cuda = { path/g' pyproject.toml
+        sed -i.bak 's/just-semantic-search-server = { path/just-semantic-search-server-cuda = { path/g' pyproject.toml
+    else
+        # Switch to CPU mode
+        echo "Updating root project dependencies to CPU mode..."
+        
+        # Replace the dependencies in the main pyproject.toml
+        sed -i.bak 's/just-semantic-search-cuda = { path/just-semantic-search = { path/g' pyproject.toml
+        sed -i.bak 's/just-semantic-search-meili-cuda = { path/just-semantic-search-meili = { path/g' pyproject.toml
+        sed -i.bak 's/just-semantic-search-scholar-cuda = { path/just-semantic-search-scholar = { path/g' pyproject.toml
+        sed -i.bak 's/just-semantic-search-server-cuda = { path/just-semantic-search-server = { path/g' pyproject.toml
+    fi
+    
+    # Clean up backup files
+    rm -f *.bak
+}
+
+# Function to switch package mode
+switch_package_mode() {
+    local dir=$1
+    local to_cuda=$2
+    local original_name=""
+    local cuda_suffix="-cuda"
+    
+    cd "$SCRIPT_DIR/../$dir"
+    
+    # Check if we need to switch
+    check_current_mode "$dir" $([ "$to_cuda" = true ] && echo "gpu" || echo "cpu")
+    if [ $? -ne 0 ]; then
+        return 0
+    fi
+    
+    # Get the original package name
+    original_name=$(grep 'name = ' pyproject.toml | head -1 | sed 's/name = //; s/"//g; s/^[[:space:]]*//; s/[[:space:]]*$//' | sed 's/-cuda$//')
+    
+    if [ "$to_cuda" = true ]; then
+        # Switch to CUDA mode
+        cuda_name="$original_name$cuda_suffix"
+        
+        echo "Switching $dir to GPU mode..."
+        
+        # Replace the package name if it doesn't already have the CUDA suffix
+        if ! grep -q "name = \"$cuda_name\"" pyproject.toml; then
+            sed -i.bak "s/name = \"$original_name\"/name = \"$cuda_name\"/" pyproject.toml
+        fi
+        
+        # Update the description to indicate CUDA version
+        sed -i.bak 's/description = ".*"/description = "Core interfaces for hybrid search implementations (CUDA version)"/' pyproject.toml
+        
+        # Update keywords to include CUDA support
+        if ! grep -q '"python", "llm", "gpu", "cuda"' pyproject.toml; then
+            sed -i.bak 's/"python", "llm"/"python", "llm", "gpu", "cuda"/' pyproject.toml
+        fi
+        
+        # Handle torch version only in core package
+        if [ "$dir" = "core" ]; then
+            # Extract just the version number without quotes
+            TORCH_CPU_VERSION=$(grep -oP 'torch = \{ version = "\K[^"]+' pyproject.toml)
+            if [ -z "$TORCH_CPU_VERSION" ]; then
+                echo "Could not detect torch version in core/pyproject.toml"
+                HAS_ERRORS=1
+            else
+                # Remove +cu124 suffix if it already exists (to avoid adding it twice)
+                CLEAN_VERSION=$(echo "$TORCH_CPU_VERSION" | sed 's/+cu124//')
+                
+                # Add cu124 suffix
+                TORCH_CUDA_VERSION="$CLEAN_VERSION+cu124"
+                
+                # Perform the replacement with proper quoting
+                sed -i.bak "s/torch = { version = \"[^\"]*\", source = \"torch-cpu\" }/torch = { version = \"$TORCH_CUDA_VERSION\", source = \"torch-gpu\" }/" pyproject.toml
+            fi
+            
+            # Make triton a direct dependency for CUDA version
+            sed -i.bak 's/triton = { version = ">=2.3.0", optional = true, markers = "extra == '\''cuda'\''" }/triton = { version = ">=2.3.0" }/' pyproject.toml
+        fi
+        
+        # Update dependencies to use CUDA versions
+        if [ "$dir" != "core" ]; then
+            # Update just-semantic-search dependency to use CUDA version
+            sed -i.bak 's/just-semantic-search = "\*"/just-semantic-search-cuda = "\*"/' pyproject.toml
+            
+            # For scholar and server, update meili dependency to use CUDA version
+            if [ "$dir" = "scholar" ] || [ "$dir" = "server" ]; then
+                sed -i.bak 's/just-semantic-search-meili = "\*"/just-semantic-search-meili-cuda = "\*"/' pyproject.toml
+            fi
+            
+            # For server, update scholar dependency to use CUDA version
+            if [ "$dir" = "server" ]; then
+                sed -i.bak 's/just-semantic-search-scholar = "\*"/just-semantic-search-scholar-cuda = "\*"/' pyproject.toml
+            fi
+        fi
+    else
+        # Switch to CPU mode
+        echo "Switching $dir to CPU mode..."
+        
+        # Replace the package name (remove -cuda suffix)
+        sed -i.bak "s/name = \"$original_name$cuda_suffix\"/name = \"$original_name\"/" pyproject.toml
+        
+        # Update the description to remove CUDA indication
+        sed -i.bak 's/description = ".*"/description = "Core interfaces for hybrid search implementations (CPU version)"/' pyproject.toml
+        
+        # Update keywords to remove CUDA support
+        sed -i.bak 's/"python", "llm", "gpu", "cuda"/"python", "llm", "cpu"/' pyproject.toml
+        
+        # Handle torch version only in core package
+        if [ "$dir" = "core" ]; then
+            # Extract just the version number without quotes
+            TORCH_CUDA_VERSION=$(grep -oP 'torch = \{ version = "\K[^"]+' pyproject.toml)
+            if [ -z "$TORCH_CUDA_VERSION" ]; then
+                echo "Could not detect torch version in core/pyproject.toml"
+                HAS_ERRORS=1
+            else
+                # Remove +cu124 suffix
+                TORCH_CPU_VERSION=$(echo "$TORCH_CUDA_VERSION" | sed 's/+cu124//')
+                
+                # Perform the replacement with proper quoting
+                sed -i.bak "s/torch = { version = \"[^\"]*\", source = \"torch-gpu\" }/torch = { version = \"$TORCH_CPU_VERSION\", source = \"torch-cpu\" }/" pyproject.toml
+            fi
+            
+            # Change triton back to optional dependency
+            sed -i.bak 's/triton = { version = ">=2.3.0" }/triton = { version = ">=2.3.0", optional = true, markers = "extra == '\''cuda'\''" }/' pyproject.toml
+        fi
+        
+        # Update dependencies to use CPU versions
+        if [ "$dir" != "core" ]; then
+            # Update just-semantic-search dependency to use CPU version
+            sed -i.bak 's/just-semantic-search-cuda = "\*"/just-semantic-search = "\*"/' pyproject.toml
+            
+            # For scholar and server, update meili dependency to use CPU version
+            if [ "$dir" = "scholar" ] || [ "$dir" = "server" ]; then
+                sed -i.bak 's/just-semantic-search-meili-cuda = "\*"/just-semantic-search-meili = "\*"/' pyproject.toml
+            fi
+            
+            # For server, update scholar dependency to use CPU version
+            if [ "$dir" = "server" ]; then
+                sed -i.bak 's/just-semantic-search-scholar-cuda = "\*"/just-semantic-search-scholar = "\*"/' pyproject.toml
+            fi
+        fi
+    fi
+    
+    # Clean up backup files
+    cleanup_backups "$dir"
+}
+
+# List of packages to switch
+packages=("core" "meili" "scholar" "server")
+
+# Determine mode to switch to
+if [ "$MODE" = "gpu" ]; then
+    echo "Switching to GPU/CUDA mode..."
+    for pkg in "${packages[@]}"; do
+        switch_package_mode "$pkg" true
+    done
+    # Update root project dependencies
+    update_root_dependencies true
+else
+    echo "Switching to CPU mode..."
+    for pkg in "${packages[@]}"; do
+        switch_package_mode "$pkg" false
+    done
+    # Update root project dependencies
+    update_root_dependencies false
+fi
+
+# Final status
+if [ $HAS_ERRORS -ne 0 ]; then
+    echo "Completed with errors!"
+    exit 1
+else
+    echo "All packages successfully switched to $MODE mode."
+    echo "Run 'poetry install' to update your local environment."
+    exit 0
+fi 
