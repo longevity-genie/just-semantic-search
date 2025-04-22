@@ -4,6 +4,20 @@ import requests
 from pydantic import BaseModel, field_validator
 from typing import List, Literal, Optional, Any, Dict, Tuple
 from enum import Enum
+import numpy as np
+
+
+class EmbeddingTransformerModel(BaseModel):
+    """
+    TODO: makke it work properly
+    """
+
+    def embed_content(self, content: str, **kwargs) -> np.ndarray:
+        pass
+
+    def tokenize(self, content: str, **kwargs) -> List[str]:
+        pass
+
 
 
 class JinaTask(str, Enum):
@@ -126,6 +140,23 @@ def jina_tokenize(content: str, return_tokens: bool = True, return_chunks: bool 
     response.raise_for_status()
     
     return JinaTokenizeResponse.model_validate(response.json())
+
+
+class JinaEmbeddingTransformerModel(EmbeddingTransformerModel):
+    """
+    TODO: makke it work properly
+    """
+
+    def embed_content(self, content: str, **kwargs) -> np.ndarray:
+        query = jina_embed_query(content, **kwargs)
+        pass
+
+    def tokenize(self, content: str, **kwargs) -> List[str]:
+        response = jina_tokenize(content, **kwargs)
+        response.chunks
+        pass
+
+
 
 if __name__ == "__main__":
     response = jina_tokenize("Hello, world!", return_tokens=True, return_chunks=True)

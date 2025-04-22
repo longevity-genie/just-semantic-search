@@ -1,7 +1,7 @@
 from enum import Enum, auto
-from typing import Union
+from typing import Optional, Union
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
-from just_semantic_search.splitters.structural_splitters import DictionarySplitter
+from just_semantic_search.splitters.structural_splitters import DictionarySplitter, RemoteDictionarySplitter
 from sentence_transformers import SentenceTransformer
 from just_semantic_search.splitters.text_splitters import (
     TextSplitter, 
@@ -28,6 +28,7 @@ class SplitterType(Enum):
     ARTICLE_PARAGRAPH = auto()
     ARTICLE_PARAGRAPH_SEMANTIC = auto()
     FLAT_JSON = auto()
+    FLAT_JSON_REMOTE = auto()
     
 
 def create_splitter(
@@ -36,7 +37,8 @@ def create_splitter(
     batch_size: int = 32,
     normalize_embeddings: bool = False,
     similarity_threshold: float = 0.8,
-    min_token_count: int = 500
+    min_token_count: int = 500,
+    max_seq_length: Optional[int] = None
 ) -> Union[
     TextSplitter,
     SemanticSplitter,
@@ -46,8 +48,8 @@ def create_splitter(
     ParagraphSemanticSplitter,
     ArticleParagraphSplitter,
     ArticleSemanticParagraphSplitter,
-    DictionarySplitter
-]:
+    DictionarySplitter,
+    RemoteDictionarySplitter]:
     """
     Factory function to create document splitters based on type.
     
@@ -70,6 +72,9 @@ def create_splitter(
         "normalize_embeddings": normalize_embeddings
     }
     
+    if max_seq_length is not None:
+        common_kwargs["max_seq_length"] = max_seq_length
+    
     semantic_kwargs = {
         **common_kwargs,
         "similarity_threshold": similarity_threshold,
@@ -84,7 +89,9 @@ def create_splitter(
         SplitterType.PARAGRAPH: lambda: ParagraphTextSplitter(**common_kwargs),
         SplitterType.PARAGRAPH_SEMANTIC: lambda: ParagraphSemanticSplitter(**semantic_kwargs),
         SplitterType.ARTICLE_PARAGRAPH: lambda: ArticleParagraphSplitter(**common_kwargs),
-        SplitterType.ARTICLE_PARAGRAPH_SEMANTIC: lambda: ArticleSemanticParagraphSplitter(**semantic_kwargs)
+        SplitterType.ARTICLE_PARAGRAPH_SEMANTIC: lambda: ArticleSemanticParagraphSplitter(**semantic_kwargs),
+        SplitterType.FLAT_JSON: lambda: DictionarySplitter(**common_kwargs),
+        SplitterType.FLAT_JSON_REMOTE: lambda: RemoteDictionarySplitter(**common_kwargs)
     }
     
     return splitters[splitter_type]()

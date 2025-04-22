@@ -96,6 +96,13 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     
     @abstractmethod
     def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
+        # will be used to embed content with corresponding model. Maybe we need to make a model wrapper class?
+        pass
+
+    @abstractmethod
+    def get_tokens_and_chunks(self, content: CONTENT) -> tuple[List[str], List[str]]:
+        # used to tokenize content and also get chunks
+        # often resolved from mixings
         pass
 
     @log_call(
@@ -201,15 +208,18 @@ class SentenceTransformerMixin(BaseModel):
             model_value = get_sentence_transformer_model_name(self.model)
             self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
 
-    def get_token_and_text_chunks(self, text: str) -> tuple[List[str], List[str]]:
+    def get_tokens_and_chunks(self, text: str, metadata_overhead: int = 0) -> tuple[List[str], List[str]]:
         # Get the tokenizer from the model
         tokenizer = self.model.tokenizer
 
         # Tokenize the entire text
         tokens = tokenizer.tokenize(text)
 
-        # Split tokens into chunks of max_seq_length
-        token_chunks = [tokens[i:i + self.max_seq_length] for i in range(0, len(tokens), self.max_seq_length)]
+        # Adjust max_seq_length for metadata overhead
+        effective_max_length = self.max_seq_length - metadata_overhead
+
+        # Split tokens into chunks of effective_max_length
+        token_chunks = [tokens[i:i + effective_max_length] for i in range(0, len(tokens), effective_max_length)]
         
         # Convert token chunks back to text
         text_chunks = [tokenizer.convert_tokens_to_string(chunk) for chunk in token_chunks]

@@ -25,20 +25,26 @@ class AbstractTextSplitter(AbstractSplitter[str, IDocument]):
         pass
     
     
-    def split(self, text: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, **kwargs) -> List[IDocument]:
+    def split(self, text: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, max_chunk_size: int | None = None, **kwargs) -> List[IDocument]:
         
         token_chunks, text_chunks = self.get_token_and_text_chunks(text)
+        total_fragments = len(text_chunks)
+        
         # Generate embeddings and create documents in one go
         return [
             Document(
                 text=text, 
                 vectors={self.model_name: vec} if vec is not None else {}, 
                 source=source,
-                metadata=metadata if metadata is not None else {}
-            ) for text, vec in zip(
-                text_chunks, 
+                metadata=metadata if metadata is not None else {},
+                token_count=len(token_chunk) if token_chunk else None,
+                fragment_num=i + 1,
+                total_fragments=total_fragments
+            ) for i, (text, token_chunk, vec) in enumerate(zip(
+                text_chunks,
+                token_chunks,
                 self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
-            )
+            ))
         ]
     
     def split_documents(self, documents: List[IDocument], embed: bool = True, **kwargs) -> List[IDocument]:
@@ -121,17 +127,22 @@ class SemanticSplitter(TextSplitter[IDocument], Generic[IDocument]):
             similarity_threshold=similarity_threshold
         )
         
+        total_fragments = len(text_chunks)
+        
         # Generate embeddings and create documents in one go
         return [
             Document(
                 text=text, 
                 vectors={self.model_name: vec} if vec is not None else {}, 
                 source=source,
-                metadata=metadata if metadata is not None else {}
-            ) for text, vec in zip(
+                metadata=metadata if metadata is not None else {},
+                token_count=len(self.tokenizer.tokenize(text)) if self.tokenizer else None,
+                fragment_num=i + 1,
+                total_fragments=total_fragments
+            ) for i, (text, vec) in enumerate(zip(
                 text_chunks, 
                 self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
-            )
+            ))
         ]
 
 
