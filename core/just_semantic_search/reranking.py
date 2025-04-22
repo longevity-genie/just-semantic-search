@@ -114,6 +114,7 @@ class CrossEncoderReranker(AbstractReranker):
     Reranks a list of documents based on their relevance to a given query using a Jina reranker model.
     """
     cross_encoder: Optional[CrossEncoder] = Field(exclude=True)
+    return_documents: bool = Field(default=True)
     
 
     def score(self, query: str, documents: list[str]) -> list[float]:

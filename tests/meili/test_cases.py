@@ -1,4 +1,5 @@
-from just_semantic_search.reranking import RerankingModel
+from just_semantic_search.remote.jina_reranker import RerankResult
+from just_semantic_search.reranking import CrossEncoderReranker, RemoteJinaReranker, RerankingModel, load_reranker
 import pytest
 import random
 import concurrent.futures
@@ -10,7 +11,6 @@ from tests.config import *
 from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
 from pycomfort.logging import to_nice_stdout
 from tests.meili.functions import index_file, simulate_meilisearch_disconnection
-from just_semantic_search.reranking import RerankingModel
 
 to_nice_stdout()
 
@@ -302,7 +302,7 @@ def test_concurrent_search_resilience(rag: MeiliRAG) -> None:
 def test_reranking():
     """Test both local and remote rerankers to ensure they correctly rank documents."""
     # Create local reranker
-    local_reranker = Reranker(model=RerankingModel.JINA_RERANKER_V2_BASE_MULTILINGUAL)
+    local_reranker = load_reranker(RerankingModel.JINA_RERANKER_V2_BASE_MULTILINGUAL)
     
     # Example query and documents
     query = "Organic skincare products for sensitive skin"
@@ -367,7 +367,7 @@ def test_reranking():
     assert any(doc in makeup_docs for doc in bottom_docs), "Expected at least one makeup document in bottom 3"
     
     # Test with remote reranker
-    remote_reranker = RemoteJinaReranker(model=RerankingModel.JINA_RERANKER_V2_BASE_MULTILINGUAL)
+    remote_reranker = load_reranker(RerankingModel.REMOTE_JINA_RERANKER_V2_BASE_MULTILINGUAL)
     try:
         # Test with remote RerankResult objects
         remote_results = remote_reranker.rank(query, documents)

@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "just-semantic-search-meili"
+name = "just-semantic-search-meili-cuda"
 version = "0.0.0"
-description = "Core interfaces for hybrid search implementations (CPU version)"
+description = "Core interfaces for hybrid search implementations (CUDA version)"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-keywords = ["python", "llm", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "science", "review", "hybrid search", "semantic search", "cpu"]
+keywords = ["python", "llm", "gpu", "cuda", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "science", "review", "hybrid search", "semantic search", "cpu"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -39,7 +39,7 @@ typer = ">=0.9.0"
 rich = ">=14.0.0"
 tenacity = ">=9.1.2"
 
-just-semantic-search = "*"
+just-semantic-search-cuda = "*"
 
 [build-system]
 requires = ["poetry-core>=2.1.1,<3.0.0", "poetry-dynamic-versioning>=1.4.1,<2.0.0"]
@@ -53,5 +53,5 @@ pattern = "v?(?P<base>\\d+\\.\\d+\\.\\d+)"
 format-jinja = "{{base}}"
 
 [tool.poetry.group.dev.dependencies]
-just-semantic-search = { path = "../core", develop = true }
+just-semantic-search-cuda = { path = "../core", develop = true }
 

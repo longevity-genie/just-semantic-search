@@ -1,4 +1,5 @@
-from just_semantic_search.splitters.abstract_splitters import AbstractTextSplitter, SentenceTransformerSplitter
+from abc import abstractmethod
+from just_semantic_search.splitters.abstract_splitters import AbstractSplitter, SentenceTransformerMixin
 from typing import List, TypeAlias, Generic, Optional
 import numpy as np
 from pathlib import Path
@@ -15,25 +16,44 @@ from pathlib import Path
 
 
 
-class TextSplitter(SentenceTransformerSplitter[str, IDocument], AbstractTextSplitter):
-    """Implementation of AbstractSplitter for text content that works with any Document type."""
 
+class AbstractTextSplitter(AbstractSplitter[str, IDocument]):
+    
+
+    @abstractmethod
     def get_token_and_text_chunks(self, text: str) -> tuple[List[str], List[str]]:
-        # Get the tokenizer from the model
-        tokenizer = self.model.tokenizer
-
-        # Tokenize the entire text
-        tokens = tokenizer.tokenize(text)
-
-        # Split tokens into chunks of max_seq_length
-        token_chunks = [tokens[i:i + self.max_seq_length] for i in range(0, len(tokens), self.max_seq_length)]
+        pass
+    
+    
+    def split(self, text: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, **kwargs) -> List[IDocument]:
         
-        # Convert token chunks back to text
-        text_chunks = [tokenizer.convert_tokens_to_string(chunk) for chunk in token_chunks]
-        return token_chunks, text_chunks
+        token_chunks, text_chunks = self.get_token_and_text_chunks(text)
+        # Generate embeddings and create documents in one go
+        return [
+            Document(
+                text=text, 
+                vectors={self.model_name: vec} if vec is not None else {}, 
+                source=source,
+                metadata=metadata if metadata is not None else {}
+            ) for text, vec in zip(
+                text_chunks, 
+                self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
+            )
+        ]
+    
+    def split_documents(self, documents: List[IDocument], embed: bool = True, **kwargs) -> List[IDocument]:
+        return [self.split(doc.text, embed=embed, source=doc.source, metadata=doc.metadata) for doc in documents]
+
+
+    def _content_from_path(self, file_path: Path) -> str:
+        return file_path.read_text(encoding="utf-8")
+    
+
+class TextSplitter(AbstractTextSplitter[IDocument], SentenceTransformerMixin):
+    """Implementation of AbstractSplitter for text content that uses SentenceTransformerMixin for embeddings."""
 
 # Option 1: Type alias
-DocumentTextSplitter: TypeAlias = TextSplitter[Document]
+DocumentTextSplitter: TypeAlias = TextSplitter
 
 
 # Add at the top of the file, after imports

@@ -1,5 +1,5 @@
-from just_semantic_search.splitters.abstract_splitters import SentenceTransformerSplitter
-from just_semantic_search.splitters.text_splitters import DEFAULT_MINIMAL_TOKENS, DEFAULT_SIMILARITY_THRESHOLD
+from just_semantic_search.splitters.abstract_splitters import AbstractSplitter, SentenceTransformerMixin
+from just_semantic_search.splitters.text_splitters import DEFAULT_MINIMAL_TOKENS, DEFAULT_SIMILARITY_THRESHOLD, AbstractTextSplitter
 from typing import List, TypeAlias, Generic
 from pathlib import Path
 from just_semantic_search.document import ArticleDocument, Document, IDocument
@@ -7,7 +7,7 @@ from pydantic import Field
 from sentence_transformers import util
 
 
-class ParagraphTextSplitter(SentenceTransformerSplitter[List[str], IDocument], Generic[IDocument]):
+class ParagraphTextSplitter(AbstractSplitter[List[str], IDocument], SentenceTransformerMixin):
     """Implementation of AbstractSplitter for lists of paragraphs that works with any Document type."""
     
 

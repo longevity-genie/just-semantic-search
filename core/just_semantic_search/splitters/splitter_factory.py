@@ -1,11 +1,13 @@
-
 from enum import Enum, auto
 from typing import Union
+from just_semantic_search.embeddings import EmbeddingModel, load_sentence_transformer_from_enum
+from just_semantic_search.splitters.structural_splitters import DictionarySplitter
 from sentence_transformers import SentenceTransformer
 from just_semantic_search.splitters.text_splitters import (
     TextSplitter, 
     SemanticSplitter
 )
+
 from just_semantic_search.splitters.article_splitter import ArticleSplitter
 from just_semantic_search.splitters.article_semantic_splitter import ArticleSemanticSplitter
 from just_semantic_search.splitters.paragraph_splitters import (
@@ -25,10 +27,12 @@ class SplitterType(Enum):
     PARAGRAPH_SEMANTIC = auto()
     ARTICLE_PARAGRAPH = auto()
     ARTICLE_PARAGRAPH_SEMANTIC = auto()
+    FLAT_JSON = auto()
+    
 
 def create_splitter(
     splitter_type: SplitterType,
-    model: SentenceTransformer,
+    model: SentenceTransformer | EmbeddingModel,
     batch_size: int = 32,
     normalize_embeddings: bool = False,
     similarity_threshold: float = 0.8,
@@ -41,7 +45,8 @@ def create_splitter(
     ParagraphTextSplitter,
     ParagraphSemanticSplitter,
     ArticleParagraphSplitter,
-    ArticleSemanticParagraphSplitter
+    ArticleSemanticParagraphSplitter,
+    DictionarySplitter
 ]:
     """
     Factory function to create document splitters based on type.
@@ -57,6 +62,7 @@ def create_splitter(
     Returns:
         Configured splitter instance of the requested type
     """
+    model: SentenceTransformer = load_sentence_transformer_from_enum(model) if isinstance(model, EmbeddingModel) else model
     
     common_kwargs = {
         "model": model,

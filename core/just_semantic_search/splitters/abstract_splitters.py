@@ -98,31 +98,6 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
     def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
         pass
 
-
-class SentenceTransformerSplitter(AbstractSplitter[CONTENT, IDocument], Generic[CONTENT, IDocument]):
-    """
-    Abstract base class for splitters that use SentenceTransformer for embedding.
-    """
-    model: SentenceTransformer
-
-    tokenizer: Optional[PreTrainedTokenizer | Any] = None
-    model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams)
-   
-    
-    def model_post_init(self, __context) -> None:
-        if self.tokenizer is None:
-            self.tokenizer = self.model.tokenizer
-        if self.max_seq_length is None:
-            self.max_seq_length = self.model.max_seq_length
-        if self.model_name is None:
-            model_value = get_sentence_transformer_model_name(self.model)
-            self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
-
-    def embed_content(self, content: CONTENT, **kwargs) -> np.ndarray:
-        kwargs.update(self.model_params.retrival_passage)
-        return self.model.encode(content, convert_to_numpy=True, **kwargs)
-    
-
     @log_call(
         action_type="split_folder_with_batches", 
         include_args=["batch_size", "embed", "path_as_source", "num_processes"],
@@ -204,36 +179,43 @@ class SentenceTransformerSplitter(AbstractSplitter[CONTENT, IDocument], Generic[
         )
             
         return batches
+
+
+class SentenceTransformerMixin(BaseModel):
+    """
+    Mixin class providing SentenceTransformer embedding functionality.
+    Can be combined with different splitter implementations.
+    """
+    model: SentenceTransformer
+    tokenizer: Optional[PreTrainedTokenizer | Any] = None
+    model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams)
     
-
-
-class AbstractTextSplitter(AbstractSplitter[str, IDocument]):
+    model_config = ConfigDict(arbitrary_types_allowed=True)  # Needed for SentenceTransformer type
     
+    def model_post_init(self, __context) -> None:
+        if self.tokenizer is None:
+            self.tokenizer = self.model.tokenizer
+        if hasattr(self, 'max_seq_length') and self.max_seq_length is None:
+            self.max_seq_length = self.model.max_seq_length
+        if hasattr(self, 'model_name') and self.model_name is None:
+            model_value = get_sentence_transformer_model_name(self.model)
+            self.model_name = model_value.split("/")[-1].split("\\")[-1] if "/" in model_value or "\\" in model_value else model_value
 
-    @abstractmethod
     def get_token_and_text_chunks(self, text: str) -> tuple[List[str], List[str]]:
-        pass
-    
-    
-    def split(self, text: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, **kwargs) -> List[IDocument]:
+        # Get the tokenizer from the model
+        tokenizer = self.model.tokenizer
+
+        # Tokenize the entire text
+        tokens = tokenizer.tokenize(text)
+
+        # Split tokens into chunks of max_seq_length
+        token_chunks = [tokens[i:i + self.max_seq_length] for i in range(0, len(tokens), self.max_seq_length)]
         
-        token_chunks, text_chunks = self.get_token_and_text_chunks(text)
-        # Generate embeddings and create documents in one go
-        return [
-            Document(
-                text=text, 
-                vectors={self.model_name: vec} if vec is not None else {}, 
-                source=source,
-                metadata=metadata if metadata is not None else {}
-            ) for text, vec in zip(
-                text_chunks, 
-                self.embed_content(text_chunks, batch_size=self.batch_size, normalize_embeddings=self.normalize_embeddings, **kwargs) if embed else [None] * len(text_chunks)
-            )
-        ]
+        # Convert token chunks back to text
+        text_chunks = [tokenizer.convert_tokens_to_string(chunk) for chunk in token_chunks]
+        return token_chunks, text_chunks
     
-    def split_documents(self, documents: List[IDocument], embed: bool = True, **kwargs) -> List[IDocument]:
-        return [self.split(doc.text, embed=embed, source=doc.source, metadata=doc.metadata) for doc in documents]
 
-
-    def _content_from_path(self, file_path: Path) -> str:
-        return file_path.read_text(encoding="utf-8")
+    def embed_content(self, content: str, **kwargs) -> np.ndarray:
+        kwargs.update(self.model_params.retrival_passage)
+        return self.model.encode(content, convert_to_numpy=True, **kwargs)
