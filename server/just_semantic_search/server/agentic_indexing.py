@@ -1,11 +1,11 @@
 from eliot import start_task
 from fastapi import UploadFile
 from just_agents.base_agent import BaseAgent
-from just_semantic_search.article_splitter import ArticleSplitter
+from just_semantic_search.splitters.article_splitter import ArticleSplitter
 from just_semantic_search.embeddings import EmbeddingModel
 from just_semantic_search.meili.rag import Document, EmbeddingModel, List, MeiliRAG, Path, os
 from just_semantic_search.server.indexing import Annotation, Indexing
-from just_semantic_search.text_splitters import Document, List, Path
+from just_semantic_search.splitters.text_splitters import Document, List, Path
 from pycomfort import files
 
 

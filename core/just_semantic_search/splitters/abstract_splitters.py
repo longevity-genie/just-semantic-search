@@ -1,6 +1,6 @@
 from just_semantic_search.embeddings import EmbeddingModelParams
 from sentence_transformers import SentenceTransformer
-from typing import List, TypeAlias, TypeVar, Generic, Optional, Any
+from typing import List, TypeAlias, TypeVar, Generic, Optional, Any, Callable
 import numpy as np
 from pathlib import Path
 import re
@@ -68,8 +68,16 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
             action.add_success_fields(num_documents=len(documents))
             return documents
 
-    def split_folder(self, folder_path: Path | str, embed: bool = True, path_as_source: bool = True, **kwargs) -> List[IDocument]:
-        """Split all files in a folder into documents."""
+    def split_folder(self, folder_path: Path | str, embed: bool = True, path_as_source: bool = True, filter: Optional[Callable[[Path], bool]] = None, **kwargs) -> List[IDocument]:
+        """Split all files in a folder into documents.
+        
+        Args:
+            folder_path: Path to the folder containing files to split
+            embed: Whether to embed the documents
+            path_as_source: Whether to use the file path as the source
+            filter: Optional function that takes a file path and returns True if the file should be processed
+            **kwargs: Additional arguments to pass to split_file
+        """
         with start_action(action_type="split_folder", folder_path=str(folder_path.absolute()), embed=embed, path_as_source=path_as_source) as action:
             start_time = time.time()
             folder_path = Path(folder_path) if isinstance(folder_path, str) else folder_path
@@ -82,7 +90,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
 
             documents = []
             for file_path in folder_path.iterdir():
-                if file_path.is_file():
+                if file_path.is_file() and (filter is None or filter(file_path)):
                     documents.extend(self.split_file(file_path, embed, path_as_source, **kwargs))
             
             elapsed_time = time.time() - start_time
@@ -117,6 +125,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
         embed: bool = True, 
         path_as_source: bool = True,
         num_processes: Optional[int] = None,
+        filter: Optional[Callable[[Path], bool]] = None,
         **kwargs
     ) -> List[List[IDocument]]:
         """
@@ -142,7 +151,7 @@ class AbstractSplitter(ABC, BaseModel, Generic[CONTENT, IDocument]):
             raise ValueError("num_processes must be at least 1.")
             
         # Collect and process files
-        file_paths = [f for f in folder_path.iterdir() if f.is_file()]
+        file_paths = [f for f in folder_path.iterdir() if f.is_file() and (filter is None or filter(f))]
         if not file_paths:
             return []
             

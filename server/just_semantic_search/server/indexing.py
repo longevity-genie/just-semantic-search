@@ -1,11 +1,10 @@
 from fastapi import UploadFile
-from just_semantic_search.article_splitter import ArticleSplitter
+from just_semantic_search.splitters.article_splitter import ArticleSplitter
 from typing import List, Optional
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
-from just_semantic_search.server.agentic_indexing import AgenticIndexing
 from just_semantic_search.server.utils import default_annotation_agent, get_project_directories, load_environment_files
 from pydantic import BaseModel, Field
-from just_semantic_search.text_splitters import *
+from just_semantic_search.splitters.text_splitters import *
 from just_semantic_search.embeddings import *
 
 from just_semantic_search.utils.tokens import *
@@ -39,7 +38,35 @@ class Annotation(BaseModel):
 
 class Indexing(BaseModel):
     
-    
+    def delete_index(self, index_name: str, api_key: Optional[str] = None) -> str:
+        """Delete an entire index from MeiliSearch.
+        
+        Args:
+            index_name: Name of the index to delete
+            api_key: Optional API key for authentication - used to secure the endpoint
+                    (defaults to environment variable INDEXING_API_KEY if not provided)
+            
+        Returns:
+            str: Message describing the deletion results
+        """
+        with start_task(action_type="rag_server_delete_index", index_name=index_name) as action:
+            try:
+                # Verify API key if it's set in the environment
+                env_api_key = os.getenv("INDEXING_API_KEY")
+                if env_api_key and (not api_key or api_key != env_api_key):
+                    return "Error: Invalid or missing API key for indexing operations"
+                
+                # Delete the index using MeiliBase
+                from just_semantic_search.meili.rag import MeiliBase
+                base = MeiliBase()
+                base.client.delete_index_if_exists(index_name)
+                
+                return f"Successfully deleted index '{index_name}'"
+            except Exception as e:
+                error_msg = f"Error deleting index: {str(e)}"
+                action.log(message_type="error", error=error_msg, error_type=str(type(e).__name__))
+                return error_msg
+
     def delete_by_source(self, index_name: str, source: str, api_key: Optional[str] = None) -> str:
         """Delete documents by their sources from the MeiliRAG index.
         
@@ -152,36 +179,6 @@ class Indexing(BaseModel):
                 source = annotation.source or filename
 
         return title, abstract, source
-    
-    def _process_and_index_document(self, text_content: str, title: str, abstract: str, source: str,
-                                  rag: MeiliRAG, max_seq_length: int, action_log: callable) -> List[dict]:
-        """Process and index a document.
-        
-        Args:
-            text_content: The text content to process
-            title: Title for the document
-            abstract: Abstract for the document
-            source: Source attribution for the document
-            rag: MeiliRAG instance for indexing
-            max_seq_length: Maximum sequence length for chunks
-            action_log: Logging function for the current task
-            
-        Returns:
-            List[dict]: The indexed document chunks
-        """
-        with start_task(message_type="processing_document") as processing_task:
-            # Create document splitter
-            splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
-            
-            # Split the document
-            docs = splitter_instance.split(text_content, title=title, abstract=abstract, source=source)
-            processing_task.log(message_type="document_split", chunks_count=len(docs))
-            
-            # Add documents to RAG
-            rag.add_documents(docs)
-            processing_task.log(message_type="document_indexed", chunks_count=len(docs))
-            
-            return docs
 
     def index_text_file(self, file: UploadFile, index_name: str, max_seq_length: Optional[int] = 3600,
                         abstract: Optional[str] = None, title: Optional[str] = None, source: Optional[str] = None,
@@ -308,7 +305,7 @@ class Indexing(BaseModel):
                 action.log(message_type="error", error=error_msg, error_type=str(type(e).__name__))
                 return error_msg
             
-    def index_markdown_folder(self, folder: str | Path, index_name: str, api_key: Optional[str] = None) -> str:
+    def index_folder(self, folder: str | Path, index_name: str, api_key: Optional[str] = None, extensions: Optional[List[str]] = None, splitter: Optional[SplitterType] = SplitterType.ARTICLE) -> str:
         """
         Indexes a folder with markdown files. The server should have access to the folder.
         Uses defensive checks for documents that might be either dicts or Document instances.
@@ -320,6 +317,8 @@ class Indexing(BaseModel):
             api_key: Optional API key for authentication - used to secure the endpoint
                     (defaults to environment variable INDEXING_API_KEY if not provided)
         """
+        if extensions is None:
+            extensions = [".md", ".txt"]
 
         with start_task(action_type="rag_server_index_markdown_folder", folder=folder, index_name=index_name) as action:
             # Verify API key if it's set in the environment

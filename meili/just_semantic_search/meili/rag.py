@@ -3,7 +3,7 @@ from just_semantic_search.embeddings import EmbeddingModel, EmbeddingModelParams
 from just_semantic_search.reranking import RerankingModel, load_reranker
 from just_semantic_search.splitters.splitter_factory import create_splitter, SplitterType
 from just_semantic_search.document import ArticleDocument, Document
-from typing import List, Dict, Any, Literal, Optional, Union
+from typing import Callable, List, Dict, Any, Literal, Optional, Union
 from just_semantic_search.splitters.text_splitters import TextSplitter
 from pydantic import BaseModel, Field, ConfigDict
 import numpy
@@ -528,13 +528,14 @@ class MeiliRAG(MeiliBase):
     def index_folder(
         self,
         folder: Path,
-        splitter: SplitterType = SplitterType.TEXT
+        splitter: SplitterType = SplitterType.TEXT,
+        filter: Optional[Callable[[Path], bool]] = None
     ) -> None:
         """Index documents from a folder using the provided MeiliRAG instance."""
         with start_action(message_type="index_folder", folder=str(folder)) as action:
             sentence_transformer_model = load_sentence_transformer_from_enum(self.model)
             splitter_instance = create_splitter(splitter, sentence_transformer_model)
-            documents = splitter_instance.split_folder(folder)
+            documents = splitter_instance.split_folder(folder, filter=filter)
             result = self.add_documents(documents)
             action.add_success_fields(
                 message_type="index_folder_complete",

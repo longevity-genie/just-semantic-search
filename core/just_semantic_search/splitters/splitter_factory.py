@@ -17,18 +17,18 @@ from just_semantic_search.splitters.paragraph_splitters import (
     ArticleSemanticParagraphSplitter
 )
 
-class SplitterType(Enum):
+class SplitterType(str, Enum):
     """Enum for different types of document splitters"""
-    TEXT = auto()
-    SEMANTIC = auto()
-    ARTICLE = auto()
-    ARTICLE_SEMANTIC = auto()
-    PARAGRAPH = auto()
-    PARAGRAPH_SEMANTIC = auto()
-    ARTICLE_PARAGRAPH = auto()
-    ARTICLE_PARAGRAPH_SEMANTIC = auto()
-    FLAT_JSON = auto()
-    FLAT_JSON_REMOTE = auto()
+    TEXT = "text"
+    SEMANTIC = "semantic"
+    ARTICLE = "article"
+    ARTICLE_SEMANTIC = "article_semantic"
+    PARAGRAPH = "paragraph"
+    PARAGRAPH_SEMANTIC = "paragraph_semantic"
+    ARTICLE_PARAGRAPH = "article_paragraph"
+    ARTICLE_PARAGRAPH_SEMANTIC = "article_paragraph_semantic"
+    FLAT_JSON = "flat_json"
+    FLAT_JSON_REMOTE = "flat_json_remote"
     
 
 def create_splitter(

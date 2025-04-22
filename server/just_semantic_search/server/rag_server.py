@@ -6,7 +6,9 @@ from just_semantic_search.embeddings import EmbeddingModel
 from just_semantic_search.meili.rag import MeiliRAG
 from just_semantic_search.meili.tools import search_documents, all_indexes
 from just_semantic_search.server.rag_agent import default_annotation_agent, default_rag_agent
+from just_semantic_search.splitters.splitter_factory import SplitterType
 from pydantic import BaseModel, Field
+from fastapi import Body, UploadFile
 from just_agents.base_agent import BaseAgent
 from just_agents.web.chat_ui_rest_api import ChatUIAgentRestAPI, ChatUIAgentConfig
 from eliot import start_task
@@ -16,7 +18,6 @@ import uvicorn
 from just_semantic_search.server.agentic_indexing import AgenticIndexing
 from pathlib import Path
 from just_semantic_search.server.utils import load_environment_files
-from fastapi import routing, UploadFile
 from starlette.middleware import Middleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.responses import RedirectResponse
@@ -56,6 +57,19 @@ class SearchRequest(BaseModel):
     index: str = Field(example="glucosedao")
     limit: int = Field(default=10, ge=1, example=30)
     semantic_ratio: float = Field(default=0.5, ge=0.0, le=1.0, example=0.5)
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "query": "Glucose predictions models for CGM",
+                    "index": "glucosedao",
+                    "limit": 30,
+                    "semantic_ratio": 0.5
+                }
+            ]
+        }
+    }
    
 
 class SearchAgentRequest(BaseModel):
@@ -63,18 +77,68 @@ class SearchAgentRequest(BaseModel):
     query: str = Field(example="Glucose predictions models for CGM")
     index: Optional[str] = Field(default=None, example="glucosedao")
     additional_instructions: Optional[str] = Field(default=None, example="You must always provide quotes from evidence followed by the sources (not in the end but immediately after the quote)")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "query": "Glucose predictions models for CGM",
+                    "index": "glucosedao",
+                    "additional_instructions": "You must always provide quotes from evidence followed by the sources (not in the end but immediately after the quote)"
+                },
+                {
+                    "query": "Time series forecasting for glucose",
+                    "index": None,
+                    "additional_instructions": None
+                }
+            ]
+        }
+    }
 
 class DeleteBySourceRequest(BaseModel):
     """Request model for deleting documents by source"""
     index_name: str = Field(example="glucosedao")
     source: str = Field(example="paper1.md")
     api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "index_name": "glucosedao",
+                    "source": "paper1.md",
+                    "api_key": None
+                }
+            ]
+        }
+    }
 
-class IndexMarkdownFolderRequest(BaseModel):
+class IndexFolderRequest(BaseModel):
     """Request model for indexing a markdown folder"""
     folder: str = Field(example="/path/to/folder")
     index_name: str = Field(example="glucosedao")
+    extensions: Optional[List[str]] = Field(default=None, example=[".md", ".txt"])
     api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+    splitter: Optional[SplitterType] = Field(default=SplitterType.ARTICLE, description="Splitter to use for indexing")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "folder": "/data/glucosedao",
+                    "index_name": "glucosedao",
+                    "extensions": [".md", ".txt"],
+                    "splitter": "article"
+                },
+                {
+                    "folder": "/data/lifespan_json/posts_flat_blog",
+                    "index_name": "lifespan",
+                    "extensions": [".json"],
+                    "splitter": "flat_json"
+                }
+            ]
+        }
+    }
 
 class IndexFileRequest(BaseModel):
     """Request model for indexing a file (shared fields)"""
@@ -85,10 +149,43 @@ class IndexFileRequest(BaseModel):
     source: Optional[str] = Field(default=None, example="source.txt")
     autoannotate: bool = Field(default=False, example=True)
     api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "index_name": "glucosedao",
+                    "max_seq_length": 3600,
+                    "abstract": "This is a summary of the document",
+                    "title": "Document Title",
+                    "source": "source.txt",
+                    "autoannotate": True,
+                    "api_key": None
+                }
+            ]
+        }
+    }
 
 class IndexPDFRequest(IndexFileRequest):
     """Request model for indexing a PDF file"""
     mistral_api_key: Optional[str] = Field(default=None, description="API key for Mistral OCR service")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "index_name": "glucosedao",
+                    "max_seq_length": 3600,
+                    "abstract": "This is a summary of the PDF document",
+                    "title": "PDF Document Title",
+                    "source": "document.pdf",
+                    "autoannotate": True,
+                    "mistral_api_key": None,
+                    "api_key": None
+                }
+            ]
+        }
+    }
 
 class IndexJsonFilesRequest(BaseModel):
     """Request model for indexing JSON files with fully custom fields"""
@@ -100,6 +197,39 @@ class IndexJsonFilesRequest(BaseModel):
     depth: int = Field(default=-1, example=-1, description="Depth of folder traversal (-1 for unlimited)")
     required_fields: Optional[List[str]] = Field(default=None, example=["id", "type"], description="Optional list of field names that must be present in each document")
     api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "folder": "/data/lifespan_json/posts_flat_blog",
+                    "index_name": "lifespan",
+                    "content_field": "content",
+                    "max_seq_length": 3600,
+                    "extension": ".json",
+                    "depth": -1,
+                    "required_fields": ["id", "type"],
+                    "api_key": None
+                }
+            ]
+        }
+    }
+
+class DeleteIndexRequest(BaseModel):
+    """Request model for deleting an entire index"""
+    index_name: str = Field(example="glucosedao", description="Name of the index to delete")
+    api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "index_name": "test",
+                    "api_key": None
+                }
+            ]
+        }
+    }
 
 class RAGServer(ChatUIAgentRestAPI):
     """Extended REST API implementation that adds RAG (Retrieval-Augmented Generation) capabilities"""
@@ -212,25 +342,27 @@ class RAGServer(ChatUIAgentRestAPI):
         # We'll handle it directly in __init__
         
         if "/search" not in route_paths:
-            self.post("/search", description="Perform semantic search")(self.search)
+            self.post("/search", tags=["Search Operations"], description="Perform semantic search")(self.search)
         
         if "/search_agent" not in route_paths:
-            self.post("/search_agent", description="Perform advanced RAG-based search")(self.search_agent)
+            self.post("/search_agent", tags=["Search Operations"], description="Perform advanced RAG-based search")(self.search_agent)
         
         if "/list_indexes" not in route_paths:
-            self.post("/list_indexes", description="Get all indexes")(self.list_indexes)
+            self.post("/list_indexes", tags=["Indexes Operations"], description="Get all indexes")(self.list_indexes)
         
-        if "/index_markdown_folder" not in route_paths:
-            @self.post("/index_markdown_folder", description="Index a folder with markdown files")
-            def index_markdown_folder(request: IndexMarkdownFolderRequest):
-                return self.indexing.index_markdown_folder(
+        if "/index_folder" not in route_paths:
+            @self.post("/index_folder", tags=["Upload Operations"], description="Index a folder, by default indexes md and txt files")
+            def index_folder(request: IndexFolderRequest = Body()):
+                return self.indexing.index_folder(
                     folder=request.folder, 
                     index_name=request.index_name,
-                    api_key=request.api_key
+                    api_key=request.api_key,
+                    extensions=request.extensions,
+                    splitter=request.splitter
                 )
         
         if "/upload_markdown_folder" not in route_paths:
-            @self.post("/upload_markdown_folder", description="Upload a folder with markdown files")
+            @self.post("/upload_markdown_folder", tags=["Upload Operations"], description="Upload a folder with markdown files")
             async def upload_markdown_folder(uploaded_file: UploadFile, index_name: str, api_key: Optional[str] = None):
                 return self.indexing.index_upload_markdown_folder(
                     uploaded_file=uploaded_file,
@@ -240,7 +372,7 @@ class RAGServer(ChatUIAgentRestAPI):
         
         # Add new routes for PDF and text file upload
         if "/upload_pdf" not in route_paths:
-            @self.post("/upload_pdf", description="Upload and index a PDF file")
+            @self.post("/upload_pdf", tags=["Upload Operations"], description="Upload and index a PDF file")
             async def upload_pdf(
                 file: UploadFile, 
                 request: IndexPDFRequest
@@ -258,7 +390,7 @@ class RAGServer(ChatUIAgentRestAPI):
                 )
         
         if "/upload_text" not in route_paths:
-            @self.post("/upload_text", description="Upload and index a text file")
+            @self.post("/upload_text", tags=["Upload Operations"], description="Upload and index a text file")
             async def upload_text(
                 file: UploadFile, 
                 request: IndexFileRequest
@@ -275,7 +407,7 @@ class RAGServer(ChatUIAgentRestAPI):
                 )
 
         if "/delete_by_source" not in route_paths:
-            @self.post("/delete_by_source", description="Delete documents by their sources")
+            @self.post("/delete_by_source", tags=["Delete Operations"], description="Delete documents by their sources")
             def delete_by_source(request: DeleteBySourceRequest):
                 return self.indexing.delete_by_source(
                     index_name=request.index_name,
@@ -283,8 +415,16 @@ class RAGServer(ChatUIAgentRestAPI):
                     api_key=request.api_key
                 )
 
+        if "/delete_index" not in route_paths:
+            @self.post("/delete_index", tags=["Indexes Operations", "Delete Operations"], description="Delete an entire index")
+            def delete_index(request: DeleteIndexRequest):
+                return self.indexing.delete_index(
+                    index_name=request.index_name,
+                    api_key=request.api_key
+                )
+
         if "/index_json_files" not in route_paths:
-            @self.post("/index_json_files", description="Index JSON files with custom fields")
+            @self.post("/index_json_files", tags=["Upload Operations"], description="Index JSON files with custom fields")
             def index_json_files(request: IndexJsonFilesRequest):
                 return self.indexing.index_json_files(
                     folder=request.folder,
