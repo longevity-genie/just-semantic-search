@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "just-semantic-search-server-cuda"
+name = "just-semantic-search-server"
 version = "0.0.0"
-description = "Core interfaces for hybrid search implementations (CUDA version)"
+description = "Core interfaces for hybrid search implementations (CPU version)"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-keywords = ["python", "llm", "gpu", "cuda", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "science", "review", "hybrid search", "semantic search", "agent"]
+keywords = ["python", "llm", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "science", "review", "hybrid search", "semantic search", "agent"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -46,8 +46,8 @@ parse-papers = "just_semantic_search.server.scripts:parse_papers"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
-just-semantic-search-scholar-cuda = "*"
-just-semantic-search-meili-cuda = "*"
+just-semantic-search-scholar = "*"
+just-semantic-search-meili = "*"
 just-agents-web = ">=0.7.0"
 mistral-ocr-parser = ">=0.1.0" #for PDF parsing
 python-multipart = ">=0.0.20" #for file uploads
@@ -65,6 +65,6 @@ format-jinja = "{{base}}"
 
 
 [tool.poetry.group.dev.dependencies]
-just-semantic-search-meili-cuda = { path = "../meili", develop = true }
-just-semantic-search-scholar-cuda = { path = "../scholar", develop = true }
-just-semantic-search-cuda = { path = "../core", develop = true }
+just-semantic-search-meili = { path = "../meili", develop = true }
+just-semantic-search-scholar = { path = "../scholar", develop = true }
+just-semantic-search = { path = "../core", develop = true }
