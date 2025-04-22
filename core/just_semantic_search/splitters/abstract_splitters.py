@@ -1,6 +1,6 @@
 from just_semantic_search.embeddings import EmbeddingModelParams
 from sentence_transformers import SentenceTransformer
-from typing import List, TypeAlias, TypeVar, Generic, Optional, Any, Callable
+from typing import List, TypeAlias, TypeVar, Generic, Optional, Any, Callable, Union
 import numpy as np
 from pathlib import Path
 import re
@@ -203,7 +203,7 @@ class SentenceTransformerMixin(BaseModel):
     Can be combined with different splitter implementations.
     """
     model: SentenceTransformer
-    tokenizer: Optional[PreTrainedTokenizer | Any] = None
+    tokenizer: Optional[Union[PreTrainedTokenizer, object]] = None
     model_params: EmbeddingModelParams = Field(default_factory=EmbeddingModelParams)
     
     model_config = ConfigDict(arbitrary_types_allowed=True)  # Needed for SentenceTransformer type

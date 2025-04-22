@@ -1,9 +1,9 @@
 from fastapi import UploadFile
 from just_semantic_search.splitters.article_splitter import ArticleSplitter
-from typing import List, Optional
+from typing import List, Optional, Callable, Type, Any, Union, Tuple
 from just_semantic_search.meili.utils.services import ensure_meili_is_running
 from just_semantic_search.server.utils import default_annotation_agent, get_project_directories, load_environment_files
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, SkipValidation
 from just_semantic_search.splitters.text_splitters import *
 from just_semantic_search.embeddings import *
 
@@ -33,7 +33,9 @@ class Annotation(BaseModel):
     
     model_config = {
         "extra": "forbid",
-        "arbitrary_types_allowed": True
+        "arbitrary_types_allowed": True,
+        "validate_assignment": False,
+        "ignored_types": (Callable, Type)
     }
 
 class Indexing(BaseModel):
@@ -119,10 +121,17 @@ class Indexing(BaseModel):
     def annotate_metadata(self, text_content: str, filename: str,
                         title: Optional[str], abstract: Optional[str], source: Optional[str],
                         autoannotate: bool, characters_for_abstract: int,
-                        action_log: callable) -> Annotation:
+                        action_log: Callable) -> Annotation:
         """Process document metadata with optional auto-annotation.
         Args:
             text_content: Document text content
+            filename: Original filename
+            title: Optional title for the document
+            abstract: Optional abstract for the document
+            source: Optional source attribution for the document
+            autoannotate: Whether to use AI to extract metadata
+            characters_for_abstract: Number of characters to use for annotation
+            action_log: Logging function for the current task
         """
         if autoannotate == False:
             return Annotation(
@@ -136,7 +145,7 @@ class Indexing(BaseModel):
     def _process_metadata(self, text_content: str, filename: str,
                         title: Optional[str], abstract: Optional[str], source: Optional[str],
                         autoannotate: bool, characters_for_abstract: int,
-                        action_log: callable) -> tuple:
+                        action_log: Callable) -> tuple:
         """Process document metadata with optional auto-annotation.
 
         Args:
@@ -180,9 +189,11 @@ class Indexing(BaseModel):
 
         return title, abstract, source
 
+
+
     def index_text_file(self, file: UploadFile, index_name: str, max_seq_length: Optional[int] = 3600,
                         abstract: Optional[str] = None, title: Optional[str] = None, source: Optional[str] = None,
-                        autoannotate: bool = False, api_key: Optional[str] = None) -> str:
+                        autoannotate: bool = False, api_key: Optional[str] = None, splitter: Optional[SplitterType] = SplitterType.ARTICLE) -> str:
         """
         Accepts a text file upload and indexes it into the search database.
 
@@ -233,11 +244,10 @@ class Indexing(BaseModel):
                     autoannotate, characters_for_abstract, action.log
                 )
 
-                # Process and index the document
-                docs = self._process_and_index_document(
-                    text_content, title, abstract, source,
-                    rag, max_seq_length, action.log
-                )
+                
+                splitter_instance: ArticleSplitter = create_splitter(splitter, rag.sentence_transformer)
+                docs = splitter_instance.split(text_content, source=source, title=title, abstract=abstract)
+                rag.add_documents(docs)
 
                 return f"Successfully indexed document '{title}' with {len(docs)} chunks into index '{index_name}'"
 
@@ -544,3 +554,38 @@ class Indexing(BaseModel):
                 error_msg = f"Error processing JSON files: {str(e)}"
                 action.log(message_type="error", error=error_msg, error_type=str(type(e).__name__))
                 return error_msg
+
+    def index_md_txt(self, rag: MeiliRAG, folder: Path, 
+                max_seq_length: int, characters_for_abstract: int) -> List[dict]:
+        """Index markdown/text files from a folder.
+        
+        Args:
+            rag: MeiliRAG instance for indexing
+            folder: Path to folder containing markdown/text files
+            max_seq_length: Maximum sequence length for chunks
+            characters_for_abstract: Number of characters to use for abstracts
+            
+        Returns:
+            List[dict]: List of document chunks that were indexed
+        """
+        from just_semantic_search.meili.utils.services import ensure_meili_is_running
+        
+        # Ensure MeiliSearch is running
+        ensure_meili_is_running()
+        
+        # Create a splitter
+        splitter = ArticleSplitter(
+            model=rag.sentence_transformer,
+            max_seq_length=max_seq_length
+        )
+        
+        # Split and index the documents
+        documents = splitter.split_folder(
+            folder_path=folder,
+            embed=True
+        )
+        
+        # Add the documents to the index
+        rag.add_documents(documents)
+        
+        return documents

@@ -13,7 +13,7 @@ import os
 import tempfile
 import zipfile
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Callable
 
 
 class OCRMixin:
@@ -33,6 +33,7 @@ class OCRMixin:
         from mistral_ocr import MistralOCRParser
         
         with start_task(message_type="parsing_pdf") as parsing_task:
+            # No need to wrap log function with SkipValidation
             # Initialize the OCR parser with the provided API key
             parser = MistralOCRParser(api_key=api_key)
             
@@ -65,6 +66,7 @@ class AgenticIndexing(Indexing, OCRMixin):
         with start_task(message_type="process_paper", file=str(f.name)) as file_task:
             text = f.read_text()
             
+            # No need to wrap log function with SkipValidation
             # Process metadata using parent method
             title, abstract, source = self._process_metadata(
                 text_content=text,
@@ -95,7 +97,7 @@ class AgenticIndexing(Indexing, OCRMixin):
     def annotate_metadata(self, text_content: str, filename: str,
                         title: Optional[str], abstract: Optional[str], source: Optional[str],
                         autoannotate: bool, characters_for_abstract: int,
-                        action_log: callable) -> Annotation:
+                        action_log: Callable) -> Annotation:
         """Process document metadata with agent annotation.
 
         Args:
@@ -159,6 +161,8 @@ class AgenticIndexing(Indexing, OCRMixin):
         with start_task(message_type="index_markdown", folder=str(folder)) as task:
             fs = files.traverse(folder, lambda x: x.suffix in extensions, depth=depth)
             documents = []
+            
+            # No need to wrap task.log with SkipValidation
 
             for f in fs:
                 try:
@@ -259,7 +263,8 @@ class AgenticIndexing(Indexing, OCRMixin):
 
                     # Create RAG instance
                     rag = self._create_rag_instance(index_name)
-
+                    
+                    # No need to wrap the log function with SkipValidation
                     # Process metadata
                     title, abstract, source = self._process_metadata(
                         text_content, filename, title, abstract, source,

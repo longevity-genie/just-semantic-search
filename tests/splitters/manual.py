@@ -175,7 +175,7 @@ def run_splitter_folder(
 
 @app.command()
 def index_json_folder(
-    folder_path: Path = typer.Option("data/lifespan_json", "--folder-path", "-f", help="Path to folder containing JSON files"),
+    folder_path: Path = typer.Option("data/lifespan_json/posts_flat_blog", "--folder-path", "-f", help="Path to folder containing JSON files"),
     index_name: str = typer.Option("lifespan", "--index-name", "-n", help="Name of the Meilisearch index"),
     model_name: EmbeddingModel = typer.Option(EmbeddingModel.JINA_EMBEDDINGS_V3.value, "--model", "-m", help="Embedding model to use"),
     host: str = typer.Option("127.0.0.1", "--host", help="Meilisearch host"),
@@ -224,9 +224,6 @@ def index_json_folder(
                 splitter=SplitterType.FLAT_JSON,
                 filter=lambda x: x.suffix == ".json"
             )
-            
-            task.log(message_type="indexing_complete", documents_added=len(result) if result else 0)
-            typer.echo(f"Indexing complete. Added documents to index '{index_name}'")
             
         except Exception as e:
             task.log(message_type="indexing_error", error=str(e))

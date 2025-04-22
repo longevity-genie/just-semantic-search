@@ -97,8 +97,8 @@ class MeiliBase(BaseModel):
     
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    # Modify this field to use SkipValidation
-    init_callback: Optional[Union[callable, pydantic.SkipValidation]] = Field(default=None, description="Optional callback function to run after initialization")
+    # Fix for SkipValidation issue
+    init_callback: Optional[Callable] = Field(default=None, description="Optional callback function to run after initialization")
 
     @property
     def headers(self) -> Dict[str, str]:
