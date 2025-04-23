@@ -7,7 +7,7 @@ authors = ["Alex Karmazin <karmazinalex@gmail.com>", "Anton Kulaga <antonkulaga@
 license = "Apache-2.0"
 readme = "README.md"
 packages = [{include = "just_semantic_search"}]
-keywords = ["python", "llm", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "gpu", "science", "review", "hybrid search", "semantic search", "gpu", "cuda"]
+keywords = ["python", "llm", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "gpu", "science", "review", "hybrid search", "semantic search", "gpu", "cuda"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
