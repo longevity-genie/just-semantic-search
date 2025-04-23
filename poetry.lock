@@ -1373,7 +1373,7 @@ uvicorn = ">=0.34.0"
 
 [[package]]
 name = "just-semantic-search"
-version = "0.3.8"
+version = "0.3.9"
 description = "Core interfaces for hybrid search implementations (CPU version)"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1401,7 +1401,7 @@ url = "core"
 
 [[package]]
 name = "just-semantic-search-meili"
-version = "0.3.8"
+version = "0.3.9"
 description = "Core interfaces for hybrid search implementations (CPU version)"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1422,7 +1422,7 @@ url = "meili"
 
 [[package]]
 name = "just-semantic-search-scholar"
-version = "0.3.8"
+version = "0.3.9"
 description = "Core interfaces for hybrid search implementations (CPU version)"
 optional = false
 python-versions = ">=3.10,<3.15"
@@ -1445,7 +1445,7 @@ url = "scholar"
 
 [[package]]
 name = "just-semantic-search-server"
-version = "0.3.8"
+version = "0.3.9"
 description = "Core interfaces for hybrid search implementations (CPU version)"
 optional = false
 python-versions = ">=3.10,<3.15"

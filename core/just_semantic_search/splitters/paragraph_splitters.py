@@ -7,7 +7,7 @@ from pydantic import Field
 from sentence_transformers import util
 
 
-class ParagraphTextSplitter(AbstractSplitter[List[str], IDocument], SentenceTransformerMixin):
+class ParagraphTextSplitter(SentenceTransformerMixin, AbstractSplitter[List[str], IDocument], Generic[IDocument]):
     """Implementation of AbstractSplitter for lists of paragraphs that works with any Document type."""
     
 

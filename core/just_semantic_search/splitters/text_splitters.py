@@ -21,13 +21,13 @@ class AbstractTextSplitter(AbstractSplitter[str, IDocument]):
     
 
     @abstractmethod
-    def get_token_and_text_chunks(self, text: str) -> tuple[List[str], List[str]]:
+    def get_tokens_and_chunks(self, text: str) -> tuple[List[str], List[str]]:
         pass
     
     
     def split(self, text: str, embed: bool = True, source: str | None = None, metadata: Optional[dict] = None, max_chunk_size: int | None = None, **kwargs) -> List[IDocument]:
         
-        token_chunks, text_chunks = self.get_token_and_text_chunks(text)
+        token_chunks, text_chunks = self.get_tokens_and_chunks(text)
         total_fragments = len(text_chunks)
         
         # Generate embeddings and create documents in one go
@@ -55,11 +55,11 @@ class AbstractTextSplitter(AbstractSplitter[str, IDocument]):
         return file_path.read_text(encoding="utf-8")
     
 
-class TextSplitter(AbstractTextSplitter[IDocument], SentenceTransformerMixin):
+class TextSplitter(SentenceTransformerMixin, AbstractTextSplitter[IDocument], Generic[IDocument]):
     """Implementation of AbstractSplitter for text content that uses SentenceTransformerMixin for embeddings."""
 
 # Option 1: Type alias
-DocumentTextSplitter: TypeAlias = TextSplitter
+DocumentTextSplitter: TypeAlias = TextSplitter[Document]
 
 
 # Add at the top of the file, after imports

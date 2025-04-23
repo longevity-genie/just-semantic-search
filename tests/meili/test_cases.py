@@ -152,7 +152,7 @@ def test_retry(rag: MeiliRAG) -> SearchResults:
     assert any("the human aging-related gene set presents" in doc["text"] for doc in docs), "No element satisfies the condition"
 
 
-@pytest.mark.parametrize('rag', [(False, "robi-tacutu", False)], indirect=True)
+@pytest.mark.parametrize('rag', [(False, "robi-tacutu", True)], indirect=True)
 def test_concurrent_search_resilience(rag: MeiliRAG) -> None:
     """Test the resilience of MeiliRAG singleton pattern in concurrent multi-worker scenarios."""
     with start_action(action_type="test_concurrent_search_resilience") as action:
