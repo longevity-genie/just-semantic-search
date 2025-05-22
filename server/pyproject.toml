@@ -48,7 +48,7 @@ parse-papers = "just_semantic_search.server.scripts:parse_papers"
 python = ">=3.10,<3.15"
 just-semantic-search-scholar = "*"
 just-semantic-search-meili = "*"
-just-agents-web = ">=0.7.0"
+just-agents-web = ">=0.7.3"
 mistral-ocr-parser = ">=0.1.0" #for PDF parsing
 python-multipart = ">=0.0.20" #for file uploads
 
