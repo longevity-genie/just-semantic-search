@@ -11,7 +11,7 @@ services:
       - MEILI_DB_PATH=/data.ms
       - MEILI_EXPERIMENTAL_ENABLE_METRICS=true
       - MEILI_EXPERIMENTAL_ENABLE_VECTORS=true
-      - MEILI_EXPERIMENTAL_DUMPESS_UPGRADE=true
+      - MEILI_EXPERIMENTAL_DUMPLESS_UPGRADE=true
     ports:
       - 7700:7700
     command: "meilisearch --experimental-dumpless-upgrade"

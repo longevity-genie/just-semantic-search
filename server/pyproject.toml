@@ -5,7 +5,7 @@ description = "Core interfaces for hybrid search implementations (CPU version)"
 authors = ["Anton Kulaga <antonkulaga@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search", "agent"]
+keywords = ["python", "llm", "cpu", "science", "review", "hybrid search", "semantic search", "agent", "server"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",

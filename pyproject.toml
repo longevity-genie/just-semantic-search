@@ -17,7 +17,7 @@ readme = "README.md"
 packages = [
     { include = "tests"}
 ]
-keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search", "search", "vector search", "hybrid search"]
+keywords = ["python", "llm", "science", "review", "hybrid search", "semantic search", "search", "vector search"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",

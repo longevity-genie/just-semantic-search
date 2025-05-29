@@ -76,10 +76,10 @@ def search_documents_raw(query: str, index: str, limit: Optional[int] = 8, seman
             action.log(message_type="search_documents_results_count", count=len(hits))
             return result
     else:
-        result = rag.search(query, limit=limit, semantic_ratio=semantic_ratio)
+        result = rag.search(query, limit=limit, semantic_ratio=semantic_ratio, remote_embedding=remote_embedding)
         return result 
 
-def search_documents(query: str, index: str, limit: Optional[int] = 8, semantic_ratio: Optional[float] = 0.5, debug: bool = True) -> list[str]:
+def search_documents(query: str, index: str, limit: Optional[int] = 8, semantic_ratio: Optional[float] = 0.5, debug: bool = True, remote_embedding: bool = False) -> list[str]:
     """
     Search documents in MeiliSearch database.
     
@@ -90,9 +90,10 @@ def search_documents(query: str, index: str, limit: Optional[int] = 8, semantic_
         limit (int): The number of documents to return. 8 by default.
         semantic_ratio (float): The ratio of semantic search. 0.5 by default.
         debug (bool): If True, print debug information. True by default.
+        remote_embedding (bool): If True and JINA_API_KEY is set, the embedding is done remotely.
     Returns:
         list[str]: A list of strings containing the document text followed by the source.
-        Each string contains the document content and its source separated by "\n SOURCE: ".
+        Each string contains the document content and its source separated by '\n SOURCE: '.
 
     Example:
         Example result:
@@ -102,7 +103,14 @@ def search_documents(query: str, index: str, limit: Optional[int] = 8, semantic_
         ]
     """
     result = []
-    for h in search_documents_raw(query, index, limit, semantic_ratio=semantic_ratio, debug=debug).hits:
+    for h in search_documents_raw(
+            query,
+            index,
+            limit,
+            semantic_ratio=semantic_ratio,
+            debug=debug,
+            remote_embedding=remote_embedding and os.getenv("JINA_API_KEY", None)
+    ).hits:
         doc_info = h["text"]
         # Add title if it exists
         if "title" in h:

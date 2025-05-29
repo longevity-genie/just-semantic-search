@@ -1,13 +1,13 @@
 # IMPORTANT: to make proper cpu/gpu resolution you must apply poetry config installer.re-resolve false
 [tool.poetry]
 name = "just-semantic-search"
-version = "0.4.1"
+version = "0.0.0"
 description = "Core interfaces for hybrid search implementations (CPU version)"
 authors = ["Alex Karmazin <karmazinalex@gmail.com>", "Anton Kulaga <antonkulaga@gmail.com>", "Newton Winter <isoutthere@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 packages = [{include = "just_semantic_search"}]
-keywords = ["python", "llm", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "gpu", "science", "review", "hybrid search", "semantic search", "gpu", "cuda"]
+keywords = ["python", "llm", "cpu", "gpu", "cuda", "science", "review", "hybrid search", "semantic search", "core"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -57,7 +57,7 @@ requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.4.1"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry-dynamic-versioning]
-enable = false
+enable = true
 vcs = "git"
 style = "semver"
 pattern = "v?(?P<base>\\d+\\.\\d+\\.\\d+)"

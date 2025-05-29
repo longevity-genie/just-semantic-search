@@ -170,12 +170,22 @@ switch_package_mode() {
         sed -i.bak 's/description = ".*"/description = "Core interfaces for hybrid search implementations (CUDA version)"/' pyproject.toml
         
         # Update keywords to include CUDA support
-        if ! grep -q '"python", "llm", "gpu", "cuda"' pyproject.toml; then
-            sed -i.bak 's/"python", "llm"/"python", "llm", "gpu", "cuda"/' pyproject.toml
-            # If that didn't work, try an alternative pattern
-            if ! grep -q '"python", "llm", "gpu", "cuda"' pyproject.toml; then
-                sed -i.bak 's/"python", "llm", "cpu"/"python", "llm", "gpu", "cuda"/' pyproject.toml
+        if ! grep -q '"gpu"' pyproject.toml || ! grep -q '"cuda"' pyproject.toml; then
+            # Create a proper keyword replacement that avoids duplicates
+            # First get the current keywords line
+            current_keywords=$(grep 'keywords = ' pyproject.toml)
+            
+            # Replace cpu with gpu and cuda, ensuring no duplicates
+            if echo "$current_keywords" | grep -q '"cpu"'; then
+                # Replace cpu with gpu and cuda
+                sed -i.bak 's/"cpu"/"gpu", "cuda"/g' pyproject.toml
+            else
+                # Add gpu and cuda after llm if they don't exist
+                sed -i.bak 's/"llm"/"llm", "gpu", "cuda"/g' pyproject.toml
             fi
+            
+            # Remove any duplicate consecutive keywords that might have been created
+            sed -i.bak 's/, "gpu", "gpu"/, "gpu"/g; s/, "cuda", "cuda"/, "cuda"/g' pyproject.toml
         fi
         
         # Handle torch version only in core package
@@ -235,7 +245,16 @@ switch_package_mode() {
         sed -i.bak 's/description = ".*"/description = "Core interfaces for hybrid search implementations (CPU version)"/' pyproject.toml
         
         # Update keywords to remove CUDA support
-        sed -i.bak 's/"python", "llm", "gpu", "cuda"/"python", "llm", "cpu"/' pyproject.toml
+        # Replace gpu and cuda with cpu, ensuring no duplicates
+        if grep -q '"gpu"' pyproject.toml || grep -q '"cuda"' pyproject.toml; then
+            # First replace gpu and cuda with cpu
+            sed -i.bak 's/"gpu", "cuda"/"cpu"/g' pyproject.toml
+            # Then handle individual cases
+            sed -i.bak 's/"gpu"/"cpu"/g' pyproject.toml
+            sed -i.bak 's/"cuda"/"cpu"/g' pyproject.toml
+            # Remove any duplicate cpu entries that might have been created
+            sed -i.bak 's/, "cpu", "cpu"/, "cpu"/g' pyproject.toml
+        fi
         
         # Handle torch version only in core package
         if [ "$dir" = "core" ]; then
