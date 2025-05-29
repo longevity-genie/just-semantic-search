@@ -24,7 +24,6 @@ url = "https://download.pytorch.org/whl/cpu"
 priority = "explicit"
 
 [tool.poetry.dependencies]
-just-agents = '>=0.7.3'
 langfuse = '>=2.59.2'
 opik = '>=1.4.12'
 pandas = '>=2.2'

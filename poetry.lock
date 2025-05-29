@@ -1534,7 +1534,7 @@ files = []
 develop = true
 
 [package.dependencies]
-just-agents-web = ">=0.7.3"
+just-agents-web = ">=0.7.4"
 just-semantic-search-meili = "*"
 just-semantic-search-scholar = "*"
 mistral-ocr-parser = ">=0.1.0"

@@ -24,8 +24,8 @@ RUN export POETRY_VERSION="2.1.1" && \
 ENV POETRY_HOME="/opt/poetry"
 ENV PATH="/opt/poetry/bin:$PATH"
 
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.3.7
-ARG JUST_AGENTS_WEB_VERSION=0.7.4
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.4.2
+ARG JUST_AGENTS_VERSION=0.7.4
 
 # Create necessary directories
 RUN export CONTAINER_DIRS="/app /app/models.d /app/agent_tools /app/scripts /app/data /app/meili /app/logs /app/tmp /app/env" && \
@@ -45,7 +45,7 @@ COPY ./README.md /app/README.md
 #    && poetry add --no-cache --verbose --source pytorch_cpu torch>=2.6
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-cache
-RUN poetry add --no-cache --verbose just-agents>=$JUST_AGENTS_WEB_VERSION just-semantic-search-server>=$JUST_SEMANTIC_SEARCH_VERSION && \
+RUN poetry add --no-cache --verbose "just-agents>=$JUST_AGENTS_VERSION" "just-agents-core>=$JUST_AGENTS_VERSION" "just-semantic-search-server>=$JUST_SEMANTIC_SEARCH_VERSION" && \
     poetry install --no-interaction --no-cache --compile && \
     poetry show --tree
 
@@ -105,5 +105,4 @@ ENV JSON_FILE_PATTERN="[0123456789][0123456789]_*.json"
 # Keep running as root - let entrypoint handle user switching
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 #CMD ["python", "-m", "just_agents.web.run_agent", "run-chat-ui-server-command"]
-CMD python -m just_semantic_search.server.run_rag_server --workers $AGENT_WORKERS --host $APP_HOST --port $APP_PORT
-
+CMD  ["python", "-m", "just_semantic_search.server.run_rag_server", "--workers", "$AGENT_WORKERS", "--host", "$APP_HOST", "--port", "$APP_PORT"]
