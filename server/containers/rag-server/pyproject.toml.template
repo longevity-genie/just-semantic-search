@@ -24,7 +24,7 @@ url = "https://download.pytorch.org/whl/cpu"
 priority = "explicit"
 
 [tool.poetry.dependencies]
-langfuse = '>=2.59.2'
+langfuse = '<3.0.0'
 opik = '>=1.4.12'
 pandas = '>=2.2'
 # CPU version (default) - explicitly from CPU source
