@@ -9,7 +9,11 @@ keywords = ["python", "llm", "cpu", "science", "review", "hybrid search", "seman
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Operating System :: Unix",
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
@@ -34,9 +38,9 @@ meili-exec = "just_semantic_search.meili.meili_exec:app"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
-meilisearch-python-sdk = ">=4.6.0"
-typer = ">=0.9.0"
-rich = ">=14.0.0"
+meilisearch-python-sdk = ">=4.9.0"
+typer = ">=0.17.3"
+rich = ">=14.1.0"
 tenacity = ">=9.1.2"
 
 just-semantic-search = "*"
