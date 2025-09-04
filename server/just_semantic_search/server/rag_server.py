@@ -8,7 +8,7 @@ from just_semantic_search.meili.tools import search_documents, all_indexes
 from just_semantic_search.server.rag_agent import default_annotation_agent, default_rag_agent
 from just_semantic_search.splitters.splitter_factory import SplitterType
 from pydantic import BaseModel, Field
-from fastapi import Body, UploadFile
+from fastapi import Body, UploadFile, Form
 from just_agents.base_agent import BaseAgent
 from just_agents.web.chat_ui_rest_api import ChatUIAgentRestAPI, ChatUIAgentConfig
 from eliot import start_task
@@ -23,6 +23,11 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.responses import RedirectResponse
 from starlette.requests import Request
 from starlette.responses import Response
+
+
+def get_default_index() -> str:
+    """Get the default index from environment variable"""
+    return os.getenv("MEILI_DEFAULT_INDEX", "glucosedao")
 
 
 class RAGServerConfig(ChatUIAgentConfig):
@@ -143,11 +148,11 @@ class IndexFolderRequest(BaseModel):
 class IndexFileRequest(BaseModel):
     """Request model for indexing a file (shared fields)"""
     index_name: str = Field(example="glucosedao")
-    max_seq_length: Optional[int] = Field(default=3600, example=3600)
+    max_seq_length: Optional[int] = Field(default=5000, example=5000)
     abstract: Optional[str] = Field(default=None, example="This is a summary of the document")
     title: Optional[str] = Field(default=None, example="Document Title")
     source: Optional[str] = Field(default=None, example="source.txt")
-    autoannotate: bool = Field(default=False, example=True)
+    autoannotate: bool = Field(default=True, example=True)
     api_key: Optional[str] = Field(default=None, description="API key for securing indexing operations")
     
     model_config = {
@@ -155,7 +160,7 @@ class IndexFileRequest(BaseModel):
             "examples": [
                 {
                     "index_name": "glucosedao",
-                    "max_seq_length": 3600,
+                    "max_seq_length": 5000,
                     "abstract": "This is a summary of the document",
                     "title": "Document Title",
                     "source": "source.txt",
@@ -175,7 +180,7 @@ class IndexPDFRequest(IndexFileRequest):
             "examples": [
                 {
                     "index_name": "glucosedao",
-                    "max_seq_length": 3600,
+                    "max_seq_length": 5000,
                     "abstract": "This is a summary of the PDF document",
                     "title": "PDF Document Title",
                     "source": "document.pdf",
@@ -192,7 +197,7 @@ class IndexJsonFilesRequest(BaseModel):
     folder: str = Field(example="/path/to/json_files")
     index_name: str = Field(example="custom_docs")
     content_field: str = Field(example="content", description="Field name in JSON containing the document content (required for splitting)")
-    max_seq_length: Optional[int] = Field(default=3600, example=3600, description="Maximum sequence length for chunks")
+    max_seq_length: Optional[int] = Field(default=5000, example=5000, description="Maximum sequence length for chunks")
     extension: str = Field(default=".json", example=".json", description="File extension to look for")
     depth: int = Field(default=-1, example=-1, description="Depth of folder traversal (-1 for unlimited)")
     required_fields: Optional[List[str]] = Field(default=None, example=["id", "type"], description="Optional list of field names that must be present in each document")
@@ -205,7 +210,7 @@ class IndexJsonFilesRequest(BaseModel):
                     "folder": "/data/lifespan_json/posts_flat_blog",
                     "index_name": "lifespan",
                     "content_field": "content",
-                    "max_seq_length": 3600,
+                    "max_seq_length": 5000,
                     "extension": ".json",
                     "depth": -1,
                     "required_fields": ["id", "type"],
@@ -295,8 +300,8 @@ class RAGServer(ChatUIAgentRestAPI):
         # Add the middleware to the application
         self.add_middleware(RootRedirectMiddleware) #ugly way to redirect to docs as other ways failed
         
-        default_index = os.getenv("DEFAULT_INDEX")
-        if default_index is not None:
+        default_index = get_default_index()
+        if default_index:
             with start_task(action_type="rag_server_set_default_index") as action:
                 action.log("preloading default index", index=default_index)
                 rag = MeiliRAG.get_instance(index_name=default_index)
@@ -363,7 +368,11 @@ class RAGServer(ChatUIAgentRestAPI):
         
         if "/upload_markdown_folder" not in route_paths:
             @self.post("/upload_markdown_folder", tags=["Upload Operations"], description="Upload a folder with markdown files")
-            async def upload_markdown_folder(uploaded_file: UploadFile, index_name: str, api_key: Optional[str] = None):
+            async def upload_markdown_folder(
+                uploaded_file: UploadFile, 
+                index_name: str = Form(default=get_default_index(), description="Name of the index to store the documents"), 
+                api_key: Optional[str] = Form(default="", description="API key for authentication (optional)")
+            ):
                 return self.indexing.index_upload_markdown_folder(
                     uploaded_file=uploaded_file,
                     index_name=index_name,
@@ -374,36 +383,49 @@ class RAGServer(ChatUIAgentRestAPI):
         if "/upload_pdf" not in route_paths:
             @self.post("/upload_pdf", tags=["Upload Operations"], description="Upload and index a PDF file")
             async def upload_pdf(
-                file: UploadFile, 
-                request: IndexPDFRequest
+                file: UploadFile,
+                index_name: str = Form(default=get_default_index(), description="Name of the index to store the document"),
+                max_seq_length: Optional[int] = Form(default=5000, description="Maximum sequence length for text chunks"),
+                abstract: Optional[str] = Form(default="", description="Optional abstract/summary of the document"),
+                title: Optional[str] = Form(default="", description="Optional title for the document"),
+                source: Optional[str] = Form(default="", description="Optional source identifier for the document"),
+                autoannotate: bool = Form(default=True, description="Whether to automatically annotate the document"),
+                mistral_api_key: Optional[str] = Form(default="", description="API key for Mistral OCR service (optional)"),
+                api_key: Optional[str] = Form(default="", description="API key for authentication (optional)")
             ):
                 return self.indexing.index_pdf_file(
                     file=file,
-                    index_name=request.index_name,
-                    max_seq_length=request.max_seq_length,
-                    abstract=request.abstract,
-                    title=request.title,
-                    source=request.source,
-                    autoannotate=request.autoannotate,
-                    mistral_api_key=request.mistral_api_key,
-                    api_key=request.api_key
+                    index_name=index_name,
+                    max_seq_length=max_seq_length,
+                    abstract=abstract,
+                    title=title,
+                    source=source,
+                    autoannotate=autoannotate,
+                    mistral_api_key=mistral_api_key,
+                    api_key=api_key
                 )
         
         if "/upload_text" not in route_paths:
             @self.post("/upload_text", tags=["Upload Operations"], description="Upload and index a text file")
             async def upload_text(
-                file: UploadFile, 
-                request: IndexFileRequest
+                file: UploadFile,
+                index_name: str = Form(default=get_default_index(), description="Name of the index to store the document"),
+                max_seq_length: Optional[int] = Form(default=5000, description="Maximum sequence length for text chunks"),
+                abstract: Optional[str] = Form(default="", description="Optional abstract/summary of the document"),
+                title: Optional[str] = Form(default="", description="Optional title for the document"),
+                source: Optional[str] = Form(default="", description="Optional source identifier for the document"),
+                autoannotate: bool = Form(default=False, description="Whether to automatically annotate the document"),
+                api_key: Optional[str] = Form(default="", description="API key for authentication (optional)")
             ):
                 return self.indexing.index_text_file(
                     file=file,
-                    index_name=request.index_name,
-                    max_seq_length=request.max_seq_length,
-                    abstract=request.abstract,
-                    title=request.title,
-                    source=request.source,
-                    autoannotate=request.autoannotate,
-                    api_key=request.api_key
+                    index_name=index_name,
+                    max_seq_length=max_seq_length,
+                    abstract=abstract,
+                    title=title,
+                    source=source,
+                    autoannotate=autoannotate,
+                    api_key=api_key
                 )
 
         if "/delete_by_source" not in route_paths:

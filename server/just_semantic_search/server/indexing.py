@@ -39,6 +39,37 @@ class Annotation(BaseModel):
     }
 
 class Indexing(BaseModel):
+
+    def _process_and_index_document(self, text_content: str, title: str, abstract: str, source: str,
+                                rag: MeiliRAG, max_seq_length: int) -> List[dict]:
+        """Process and index a document.
+        
+        Args:
+            text_content: The text content to process
+            title: Title for the document
+            abstract: Abstract for the document
+            source: Source attribution for the document
+            rag: MeiliRAG instance for indexing
+            max_seq_length: Maximum sequence length for chunks
+            action_log: Logging function for the current task
+            
+        Returns:
+            List[dict]: The indexed document chunks
+        """
+        with start_task(message_type="processing_document") as processing_task:
+            # Create document splitter
+            splitter_instance = ArticleSplitter(model=rag.sentence_transformer, max_seq_length=max_seq_length)
+            
+            # Split the document
+            docs = splitter_instance.split(text_content, title=title, abstract=abstract, source=source)
+            processing_task.log(message_type="document_split", chunks_count=len(docs))
+            
+            # Add documents to RAG
+            rag.add_documents(docs)
+            processing_task.log(message_type="document_indexed", chunks_count=len(docs))
+            
+            return docs
+
     
     def delete_index(self, index_name: str, api_key: Optional[str] = None) -> str:
         """Delete an entire index from MeiliSearch.
@@ -346,8 +377,8 @@ class Indexing(BaseModel):
                 model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
                 model = EmbeddingModel(model_str)
 
-                max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
-                characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000)
+                max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 5000)
+                characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 20000)
                 config_task.log(message_type="config_loaded", model=model_str, max_seq_length=max_seq_length)
 
             # Create and return RAG instance with conditional recreate_index

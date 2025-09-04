@@ -13,9 +13,19 @@ from typing import Optional, Dict
 import typer
 import uvicorn
 from eliot import start_task
+from dotenv import load_dotenv
 from just_agents.base_agent import BaseAgent
 from just_semantic_search.server.rag_server import RAGServer, RAGServerConfig
 from just_semantic_search.server.rag_agent import default_rag_agent, default_annotation_agent
+from just_semantic_search.server.utils import load_environment_files
+
+# Load environment variables from .env file at startup
+with start_task(action_type="startup_env_loading") as action:
+    action.log(f"Current working directory: {os.getcwd()}")
+    action.log("Loading .env files...")
+    env_loaded = load_environment_files()
+    action.log(f"Environment files loaded: {env_loaded}")
+    action.log(f"MISTRAL_API_KEY loaded: {'Yes' if os.getenv('MISTRAL_API_KEY') else 'No'}")
 
 # Create a global application instance that can be imported by Uvicorn
 # Will be populated by the create_app function
@@ -140,6 +150,15 @@ def get_app():
     Function that returns the app instance for workers
     This is called by Uvicorn when using the module:app format
     """
+    # Load environment variables from .env file for worker processes
+    with start_task(action_type="worker_env_loading") as action:
+        action.log(f"Worker process - Current working directory: {os.getcwd()}")
+        action.log("Worker process - Loading .env files...")
+        from just_semantic_search.server.utils import load_environment_files
+        env_loaded = load_environment_files()
+        action.log(f"Worker process - Environment files loaded: {env_loaded}")
+        action.log(f"Worker process - MISTRAL_API_KEY loaded: {'Yes' if os.getenv('MISTRAL_API_KEY') else 'No'}")
+    
     # Read configuration from environment variables
     port = int(os.environ.get("JUST_SERVER_PORT", "8091"))
     host = os.environ.get("JUST_SERVER_HOST", "0.0.0.0")

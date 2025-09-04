@@ -86,8 +86,7 @@ class AgenticIndexing(Indexing, OCRMixin):
                 abstract=abstract,
                 source=source,
                 rag=rag,
-                max_seq_length=max_seq_length,
-                action_log=file_task.log
+                max_seq_length=max_seq_length
             )
             
             file_task.log(message_type="process_paper.indexed", document_count=len(docs))
@@ -144,8 +143,8 @@ class AgenticIndexing(Indexing, OCRMixin):
 
 
     def index_md_txt(self, rag: MeiliRAG, folder: Path,
-                     max_seq_length: Optional[int] = 3600,
-                     characters_for_abstract: int = 10000, depth: int = -1, extensions: List[str] = [".md", ".txt"]
+                     max_seq_length: Optional[int] = 10000,
+                     characters_for_abstract: int = 20000, depth: int = -1, extensions: List[str] = [".md", ".txt"]
                      ) -> List[dict]:
         """
         Index markdown files from a folder into MeiliSearch.
@@ -187,8 +186,8 @@ class AgenticIndexing(Indexing, OCRMixin):
         model_str = os.getenv("EMBEDDING_MODEL", EmbeddingModel.JINA_EMBEDDINGS_V3.value)
         model = EmbeddingModel(model_str)
 
-        max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 3600)
-        characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 5000)
+        max_seq_length: Optional[int] = os.getenv("INDEX_MAX_SEQ_LENGTH", 5000)
+        characters_for_abstract: int = os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 20000)
 
         # Create and return RAG instance with conditional recreate_index
         # It should use default environment variables for host, port, api_key, create_index_if_not_exists, recreate_index
@@ -234,7 +233,23 @@ class AgenticIndexing(Indexing, OCRMixin):
                     return "Error: Invalid or missing API key for indexing operations"
 
                 # Get API key from parameter or environment variable
-                ocr_api_key = mistral_api_key or os.getenv("MISTRAL_API_KEY")
+                def mask_api_key(key: str) -> str:
+                    """Mask API key for logging purposes"""
+                    if not key or key.strip() == "" or key in ["string", "bool", "int"]:
+                        return "None/empty"
+                    return f"{key[:4]}...{key[-4:]}" if len(key) > 8 else "***"
+                
+                action.log(f"mistral_api_key parameter: {mask_api_key(mistral_api_key)}")
+                action.log(f"MISTRAL_API_KEY from env: {mask_api_key(os.getenv('MISTRAL_API_KEY'))}")
+                action.log(f"Current working directory: {os.getcwd()}")
+                
+                # Use environment variable if parameter is None, empty, or a default type string
+                if not mistral_api_key or mistral_api_key.strip() == "" or mistral_api_key in ["string", "bool", "int"]:
+                    ocr_api_key = os.getenv("MISTRAL_API_KEY")
+                else:
+                    ocr_api_key = mistral_api_key
+                    
+                action.log(f"Final ocr_api_key: {mask_api_key(ocr_api_key)}")
                 if not ocr_api_key:
                     return "Error: Mistral API key is required for PDF processing. Please provide it as a parameter or set the MISTRAL_API_KEY environment variable."
 
@@ -257,7 +272,7 @@ class AgenticIndexing(Indexing, OCRMixin):
 
                     # Configure parameters
                     if max_seq_length is None:
-                        max_seq_length = int(os.getenv("INDEX_MAX_SEQ_LENGTH", 3600))
+                        max_seq_length = int(os.getenv("INDEX_MAX_SEQ_LENGTH", 5000))
 
                     characters_for_abstract = int(os.getenv("INDEX_CHARACTERS_FOR_ABSTRACT", 10000))
 
@@ -274,7 +289,7 @@ class AgenticIndexing(Indexing, OCRMixin):
                     # Process and index the document
                     docs = self._process_and_index_document(
                         text_content, title, abstract, source,
-                        rag, max_seq_length, action.log
+                        rag, max_seq_length
                     )
 
                     return f"Successfully indexed PDF document '{title}' with {len(docs)} chunks into index '{index_name}'"

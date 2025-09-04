@@ -3,6 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from typing import Optional, List
 import time
+from eliot import start_action
 from just_agents import llm_options
 from just_agents.llm_options import LLAMA3_3
 from just_agents.web.chat_ui_agent import ChatUIAgent
@@ -19,44 +20,78 @@ def load_environment_files(env_path=None):
     Returns:
         bool: Whether any environment file was successfully loaded
     """
-    # Define possible env file names to check
-    env_file_names = [".env.keys", ".env.local", ".env"]
-    env_loaded = False
-    
-    # Try to load from the configured path first if provided
-    if env_path:
-        env_path = Path(env_path).resolve().absolute()
-        if env_path.exists():
-            load_dotenv(env_path, override=True)
-            env_loaded = True
-    
-    if not env_loaded:
-        # Get the current directory and check for env files
-        current_dir = Path(__file__).parent.resolve().absolute()
+    with start_action(action_type="load_environment_files", env_path=env_path) as action:
+        # Define possible env file names to check
+        env_file_names = [".env.keys", ".env.local", ".env"]
+        env_loaded = False
         
-        # Check directories in order: current directory, parent, parent's parent
-        directories_to_check = [
-            current_dir,
-            current_dir.parent,
-            current_dir.parent.parent
-        ]
-        
-        for directory in directories_to_check:
-            if env_loaded:
-                break
+        # Try to load from the configured path first if provided
+        if env_path:
+            env_path = Path(env_path).resolve().absolute()
+            if env_path.exists():
+                load_dotenv(env_path, override=True)
+                env_loaded = True
+                action.log(f"Loaded env file from configured path: {env_path}")
+            else:
+                # If the configured path doesn't exist, try to find it in parent directories
+                current_dir = Path(__file__).parent.resolve().absolute()
+                directories_to_check = [
+                    current_dir,
+                    current_dir.parent,
+                    current_dir.parent.parent
+                ]
                 
-            for env_name in env_file_names:
-                potential_env_file = directory / env_name
-                if potential_env_file.exists():
-                    load_dotenv(potential_env_file, override=True)
-                    env_loaded = True
-                    break
-    
-    # If no specific env file was found, fall back to default behavior
-    if not env_loaded:
-        load_dotenv(override=True)
+                for directory in directories_to_check:
+                    potential_env_file = directory / env_path.name
+                    if potential_env_file.exists():
+                        load_dotenv(potential_env_file, override=True)
+                        env_loaded = True
+                        action.log(f"Loaded env file from parent directory: {potential_env_file}")
+                        break
+                
+                # If still not found and we're looking for .env.keys, try to fallback to .env
+                if not env_loaded and env_path.name == ".env.keys":
+                    action.log("env.keys not found, trying fallback to .env")
+                    for directory in directories_to_check:
+                        fallback_env_file = directory / ".env"
+                        if fallback_env_file.exists():
+                            action.log(f"Found fallback .env file at: {fallback_env_file}")
+                            load_dotenv(fallback_env_file, override=True)
+                            env_loaded = True
+                            break
         
-    return env_loaded
+        if not env_loaded:
+            # Get the current directory and check for env files
+            current_dir = Path(__file__).parent.resolve().absolute()
+            
+            # Check directories in order: current directory, parent, parent's parent
+            directories_to_check = [
+                current_dir,
+                current_dir.parent,
+                current_dir.parent.parent
+            ]
+            
+            for directory in directories_to_check:
+                if env_loaded:
+                    break
+                    
+                for env_name in env_file_names:
+                    potential_env_file = directory / env_name
+                    if potential_env_file.exists():
+                        load_dotenv(potential_env_file, override=True)
+                        env_loaded = True
+                        action.log(f"Loaded env file: {potential_env_file}")
+                        break
+        
+        # If no specific env file was found, fall back to default behavior
+        if not env_loaded:
+            action.log("No env file found, using default load_dotenv()")
+            load_dotenv(override=True)
+            
+        action.log(f"Environment loading completed", 
+                  env_loaded=env_loaded, 
+                  mistral_api_key_loaded=bool(os.getenv('MISTRAL_API_KEY')))
+        return env_loaded
 
 def get_project_directories():
     """
@@ -93,7 +128,7 @@ def default_rag_agent():
     call_indexes = "YOU DO NOT search documents until you will retrive all the indexes in the database. When you search you are only alllowed to select from the indexes that you retrived, do not invent indexes!"
     
     return ChatUIAgent(
-        llm_options=LLAMA3_3, #llm_options.GEMINI_2_FLASH,
+        llm_options=llm_options.GEMINI_2_5_FLASH,
         tools=[search_documents, all_indexes],
         system_prompt=f"""
         You are a helpful assistant that can search for documents in a MeiliSearch database. 

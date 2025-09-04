@@ -50,6 +50,7 @@ just-semantic-search-scholar = "*"
 just-semantic-search-meili = "*"
 just-agents-web = ">=0.8.3"
 python-multipart = ">=0.0.20" #for file uploads
+mistral-ocr-parser = ">=0.1.0"
 
 [build-system]
 requires = ["poetry-core>=2.1.1", "poetry-dynamic-versioning>=1.4.1"]

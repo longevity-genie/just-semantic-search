@@ -52,7 +52,7 @@ def load_reranker(model: Union[RerankingModel, str]) -> AbstractReranker:
         cross_encoder = CrossEncoder(
             model_id.replace("_remote", ""),
             model_kwargs={
-                "torch_dtype": "auto"
+                "dtype": "auto"
             },
             trust_remote_code=True,
         )
