@@ -24,8 +24,8 @@ RUN export POETRY_VERSION="2.1.4" && \
 ENV POETRY_HOME="/opt/poetry"
 ENV PATH="/opt/poetry/bin:$PATH"
 
-ARG JUST_SEMANTIC_SEARCH_VERSION=0.4.6
-ARG JUST_AGENTS_VERSION=0.8.7
+ARG JUST_SEMANTIC_SEARCH_VERSION=0.4.7
+ARG JUST_AGENTS_VERSION=0.8.9
 
 # Create necessary directories
 RUN export CONTAINER_DIRS="/app /app/models.d /app/agent_tools /app/scripts /app/data /app/meili /app/logs /app/tmp /app/env" && \
@@ -70,11 +70,10 @@ RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')" || 
 RUN mkdir -p /app/model_cache && chmod 777 /app/model_cache
 
 # Set the Hugging Face cache directory
-ENV TRANSFORMERS_CACHE="/app/model_cache"
 ENV HF_HOME="/app/model_cache"
 
 # Preload models with the correct cache location
-RUN TRANSFORMERS_CACHE="/app/model_cache" HF_HOME="/app/model_cache" python -m just_semantic_search.embeddings 2>&1
+RUN HF_HOME="/app/model_cache" python -m just_semantic_search.embeddings 2>&1
 
 # WebAgentConfig environment variables
 ENV APP_HOST="0.0.0.0"
